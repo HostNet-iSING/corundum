@@ -1,0 +1,22 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Wed Jul 12 20:28:41 2023
+# Process ID: 20169
+# Current directory: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_dlmb_0_synth_1
+# Command line: vivado -log bd_fb99_dlmb_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source bd_fb99_dlmb_0.tcl
+# Log file: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_dlmb_0_synth_1/bd_fb99_dlmb_0.vds
+# Journal file: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_dlmb_0_synth_1/vivado.jou
+# Running On: desktop02, OS: Linux, CPU Frequency: 1652.621 MHz, CPU Physical cores: 16, Host memory: 540764 MB
+#-----------------------------------------------------------
+source bd_fb99_dlmb_0.tcl -notrace
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: bd_fb99_dlmb_0
+INFO: [IP_Flow 19-6922] IPCACHE: Exporting cached entry cfbda9dfefcc8deb to dir: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_dlmb_0_synth_1
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.cache/ip/2022.2/c/f/cfbda9dfefcc8deb/bd_fb99_ilmb_0_sim_netlist.v to /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_dlmb_0_synth_1/bd_fb99_dlmb_0_sim_netlist.v.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.cache/ip/2022.2/c/f/cfbda9dfefcc8deb/bd_fb99_ilmb_0_sim_netlist.vhdl to /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_dlmb_0_synth_1/bd_fb99_dlmb_0_sim_netlist.vhdl.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.cache/ip/2022.2/c/f/cfbda9dfefcc8deb/bd_fb99_ilmb_0_stub.v to /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_dlmb_0_synth_1/bd_fb99_dlmb_0_stub.v.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.cache/ip/2022.2/c/f/cfbda9dfefcc8deb/bd_fb99_ilmb_0.dcp to /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_dlmb_0_synth_1/bd_fb99_dlmb_0.dcp.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.cache/ip/2022.2/c/f/cfbda9dfefcc8deb/bd_fb99_ilmb_0_stub.vhdl to /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_dlmb_0_synth_1/bd_fb99_dlmb_0_stub.vhdl.
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP bd_fb99_dlmb_0, cache-ID = cfbda9dfefcc8deb.
+INFO: [Common 17-206] Exiting Vivado at Wed Jul 12 20:28:50 2023...

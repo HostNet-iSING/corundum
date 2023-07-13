@@ -1,0 +1,588 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Wed Jul 12 20:28:56 2023
+# Process ID: 20488
+# Current directory: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_lmb_bram_if_cntlr_0_synth_1
+# Command line: vivado -log bd_fb99_lmb_bram_if_cntlr_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source bd_fb99_lmb_bram_if_cntlr_0.tcl
+# Log file: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_lmb_bram_if_cntlr_0_synth_1/bd_fb99_lmb_bram_if_cntlr_0.vds
+# Journal file: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_lmb_bram_if_cntlr_0_synth_1/vivado.jou
+# Running On: desktop02, OS: Linux, CPU Frequency: 2517.584 MHz, CPU Physical cores: 16, Host memory: 540764 MB
+#-----------------------------------------------------------
+source bd_fb99_lmb_bram_if_cntlr_0.tcl -notrace
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: bd_fb99_lmb_bram_if_cntlr_0
+Command: synth_design -top bd_fb99_lmb_bram_if_cntlr_0 -part xcu250-figd2104-2-e -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Device 21-403] Loading part xcu250-figd2104-2-e
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 20762
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/home/ubuntu/XilinxTools/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2923.711 ; gain = 372.734 ; free physical = 421037 ; free virtual = 461996
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2142.325; parent = 1995.727; children = 146.599
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 3915.383; parent = 2927.684; children = 987.699
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'bd_fb99_lmb_bram_if_cntlr_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_22/synth/bd_fb99_lmb_bram_if_cntlr_0.vhd:95]
+WARNING: [Synth 8-3819] Generic 'FPGA_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'FW_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'FW_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'BOARD_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'BOARD_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'BUILD_DATE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'GIT_HASH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RELEASE_INFO' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'IF_COUNT' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PORTS_PER_IF' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'SCHED_PER_IF' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PORT_MASK' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CLK_PERIOD_NS_NUM' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CLK_PERIOD_NS_DENOM' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_CLOCK_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_CLOCK_CDC_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_PORT_CDC_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_PEROUT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_PEROUT_COUNT' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'EVENT_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CPL_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_CPL_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'EVENT_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CPL_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_CPL_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'EVENT_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CPL_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_CPL_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_DESC_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_DESC_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_INDIR_TBL_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_SCHEDULER_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_SCHEDULER_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TDMA_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_TS_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CPL_FIFO_DEPTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CHECKSUM_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_HASH_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_CHECKSUM_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_FIFO_DEPTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_FIFO_DEPTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'MAX_TX_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'MAX_RX_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_RAM_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_RAM_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DDR_CH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DDR_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXI_DDR_ID_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXI_DDR_MAX_BURST_LEN' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_CTRL_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_DMA_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_AXIS_DIRECT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_AXIS_SYNC_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_AXIS_IF_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_STAT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_IMM_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_IMM_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_LEN_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_TAG_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RAM_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RAM_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'IRQ_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_CTRL_DATA_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_CTRL_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_APP_CTRL_DATA_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_APP_CTRL_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_TX_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_TX_FIFO_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_TX_TS_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_RX_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_RX_FIFO_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_DMA_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_PCIE_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_INC_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_ID_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_PCIE_DATA_WIDTH' not present in instantiated entity will be ignored
+	Parameter C_FAMILY bound to: virtexuplus - type: string 
+	Parameter C_HIGHADDR bound to: 64'b0000000000000000000000000000000011110000000000011111111111111111 
+	Parameter C_BASEADDR bound to: 64'b0000000000000000000000000000000011110000000000000000000000000000 
+	Parameter C_NUM_LMB bound to: 2 - type: integer 
+	Parameter C_MASK bound to: 64'b0000000000000000000000000000000000000000000100000000000000000000 
+	Parameter C_MASK1 bound to: 64'b0000000000000000000000000000000000010000000000000000000000000000 
+	Parameter C_MASK2 bound to: 64'b0000000000000000000000000000000000000000100000000000000000000000 
+	Parameter C_MASK3 bound to: 64'b0000000000000000000000000000000000000000100000000000000000000000 
+	Parameter C_LMB_AWIDTH bound to: 32 - type: integer 
+	Parameter C_LMB_DWIDTH bound to: 32 - type: integer 
+	Parameter C_LMB_PROTOCOL bound to: 0 - type: integer 
+	Parameter C_ECC bound to: 0 - type: integer 
+	Parameter C_INTERCONNECT bound to: 0 - type: integer 
+	Parameter C_FAULT_INJECT bound to: 0 - type: integer 
+	Parameter C_CE_FAILING_REGISTERS bound to: 0 - type: integer 
+	Parameter C_UE_FAILING_REGISTERS bound to: 0 - type: integer 
+	Parameter C_ECC_STATUS_REGISTERS bound to: 0 - type: integer 
+	Parameter C_ECC_ONOFF_REGISTER bound to: 0 - type: integer 
+	Parameter C_ECC_ONOFF_RESET_VALUE bound to: 1 - type: integer 
+	Parameter C_CE_COUNTER_WIDTH bound to: 0 - type: integer 
+	Parameter C_WRITE_ACCESS bound to: 2 - type: integer 
+	Parameter C_BRAM_AWIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_CTRL_ADDR_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_CTRL_DATA_WIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-3491] module 'lmb_bram_if_cntlr' declared at '/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:4514' bound to instance 'U0' of component 'lmb_bram_if_cntlr' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_22/synth/bd_fb99_lmb_bram_if_cntlr_0.vhd:249]
+INFO: [Synth 8-638] synthesizing module 'lmb_bram_if_cntlr' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:4639]
+	Parameter C_TARGET bound to: 7 - type: integer 
+	Parameter C_BASEADDR bound to: 64'b0000000000000000000000000000000011110000000000000000000000000000 
+	Parameter C_MASK bound to: 64'b0000000000000000000000000000000000000000000100000000000000000000 
+	Parameter C_MASK1 bound to: 64'b0000000000000000000000000000000000010000000000000000000000000000 
+	Parameter C_MASK2 bound to: 64'b0000000000000000000000000000000000000000100000000000000000000000 
+	Parameter C_MASK3 bound to: 64'b0000000000000000000000000000000000000000100000000000000000000000 
+	Parameter C_LMB_AWIDTH bound to: 32 - type: integer 
+	Parameter C_LMB_DWIDTH bound to: 32 - type: integer 
+	Parameter C_ECC_WIDTH bound to: 7 - type: integer 
+	Parameter C_ECC bound to: 0 - type: integer 
+	Parameter C_NUM_LMB bound to: 2 - type: integer 
+	Parameter C_LMB_PROTOCOL bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'lmb_mux' declared at '/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:3893' bound to instance 'lmb_mux_I' of component 'lmb_mux' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:4908]
+INFO: [Synth 8-638] synthesizing module 'lmb_mux' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:3981]
+	Parameter C_AW bound to: 32 - type: integer 
+	Parameter C_BAR bound to: 64'b0000000000000000000000000000000011110000000000000000000000000000 
+	Parameter C_MASK bound to: 64'b0000000000000000000000000000000000000000000100000000000000000000 
+INFO: [Synth 8-3491] module 'pselect_mask' declared at '/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:3476' bound to instance 'pselect_mask_lmb' of component 'pselect_mask' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:4286]
+INFO: [Synth 8-638] synthesizing module 'pselect_mask' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:3491]
+INFO: [Synth 8-256] done synthesizing module 'pselect_mask' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:3491]
+	Parameter C_AW bound to: 32 - type: integer 
+	Parameter C_BAR bound to: 64'b0000000000000000000000000000000011110000000000000000000000000000 
+	Parameter C_MASK bound to: 64'b0000000000000000000000000000000000010000000000000000000000000000 
+INFO: [Synth 8-3491] module 'pselect_mask' declared at '/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:3476' bound to instance 'pselect_mask_lmb' of component 'pselect_mask' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:4286]
+INFO: [Synth 8-638] synthesizing module 'pselect_mask__parameterized1' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:3491]
+INFO: [Synth 8-256] done synthesizing module 'pselect_mask__parameterized1' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:3491]
+INFO: [Synth 8-256] done synthesizing module 'lmb_mux' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:3981]
+INFO: [Synth 8-256] done synthesizing module 'lmb_bram_if_cntlr' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:4639]
+INFO: [Synth 8-256] done synthesizing module 'bd_fb99_lmb_bram_if_cntlr_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_22/synth/bd_fb99_lmb_bram_if_cntlr_0.vhd:95]
+WARNING: [Synth 8-3301] Unused top level parameter/generic FPGA_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic FW_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic FW_VER
+WARNING: [Synth 8-3301] Unused top level parameter/generic BOARD_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic BOARD_VER
+WARNING: [Synth 8-3301] Unused top level parameter/generic BUILD_DATE
+WARNING: [Synth 8-3301] Unused top level parameter/generic GIT_HASH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RELEASE_INFO
+WARNING: [Synth 8-3301] Unused top level parameter/generic IF_COUNT
+WARNING: [Synth 8-3301] Unused top level parameter/generic PORTS_PER_IF
+WARNING: [Synth 8-3301] Unused top level parameter/generic SCHED_PER_IF
+WARNING: [Synth 8-3301] Unused top level parameter/generic PORT_MASK
+WARNING: [Synth 8-3301] Unused top level parameter/generic CLK_PERIOD_NS_NUM
+WARNING: [Synth 8-3301] Unused top level parameter/generic CLK_PERIOD_NS_DENOM
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_CLOCK_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_CLOCK_CDC_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_PORT_CDC_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_PEROUT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_PEROUT_COUNT
+WARNING: [Synth 8-3301] Unused top level parameter/generic EVENT_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CPL_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic EVENT_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CPL_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic EVENT_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CPL_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_DESC_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_DESC_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_INDIR_TBL_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_SCHEDULER_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_SCHEDULER_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TDMA_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_TS_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_FIFO_DEPTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CHECKSUM_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_HASH_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CHECKSUM_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_FIFO_DEPTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_FIFO_DEPTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic MAX_TX_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic MAX_RX_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_RAM_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_RAM_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic DDR_CH
+WARNING: [Synth 8-3301] Unused top level parameter/generic DDR_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXI_DDR_ID_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXI_DDR_MAX_BURST_LEN
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_CTRL_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_DMA_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_AXIS_DIRECT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_AXIS_SYNC_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_AXIS_IF_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_STAT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_IMM_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_IMM_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_LEN_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_TAG_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RAM_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RAM_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic IRQ_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_CTRL_DATA_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_CTRL_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_APP_CTRL_DATA_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_APP_CTRL_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_TX_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_TX_FIFO_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_TX_TS_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_RX_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_RX_FIFO_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_DMA_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_PCIE_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_INC_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_ID_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_PCIE_DATA_WIDTH
+WARNING: [Synth 8-6014] Unused sequential element more_than_one_lmb.ongoing_QQ_reg was removed.  [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/a177/hdl/lmb_bram_if_cntlr_v4_0_vh_rfs.vhd:4380]
+WARNING: [Synth 8-7129] Port A[0] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[1] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[2] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[4] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[5] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[6] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[7] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[8] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[9] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[10] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[11] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[12] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[13] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[14] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[15] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[16] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[17] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[18] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[19] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[20] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[21] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[22] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[23] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[24] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[25] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[26] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[27] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[28] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[29] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[30] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[31] in module pselect_mask__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[0] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[1] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[2] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[3] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[4] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[5] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[6] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[7] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[8] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[9] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[10] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[12] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[13] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[14] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[15] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[16] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[17] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[18] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[19] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[20] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[21] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[22] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[23] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[24] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[25] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[26] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[27] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[28] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[29] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[30] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port A[31] in module pselect_mask is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[0] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[1] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[2] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[3] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[4] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[5] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[6] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[7] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[8] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[9] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[10] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[11] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[12] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[13] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[14] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[15] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[16] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[17] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[18] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[19] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[20] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[21] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[22] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[23] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[24] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[25] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[26] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[27] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[28] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[29] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[30] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_ABus[31] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_WriteDBus[0] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_WriteDBus[1] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_WriteDBus[2] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_WriteDBus[3] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_WriteDBus[4] in module lmb_mux is either unconnected or has no load
+WARNING: [Synth 8-7129] Port LMB2_WriteDBus[5] in module lmb_mux is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2999.648 ; gain = 448.672 ; free physical = 420992 ; free virtual = 461952
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2142.325; parent = 1995.727; children = 146.599
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 3987.352; parent = 2999.652; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 3017.461 ; gain = 466.484 ; free physical = 420937 ; free virtual = 461897
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2142.325; parent = 1995.727; children = 146.599
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4005.164; parent = 3017.465; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 3017.461 ; gain = 466.484 ; free physical = 420955 ; free virtual = 461915
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2142.325; parent = 1995.727; children = 146.599
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4005.164; parent = 3017.465; children = 987.699
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3017.461 ; gain = 0.000 ; free physical = 420937 ; free virtual = 461897
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_22/bd_fb99_lmb_bram_if_cntlr_0_ooc.xdc] for cell 'U0'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_22/bd_fb99_lmb_bram_if_cntlr_0_ooc.xdc] for cell 'U0'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_lmb_bram_if_cntlr_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_lmb_bram_if_cntlr_0_synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3199.078 ; gain = 0.000 ; free physical = 420236 ; free virtual = 461198
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.03 . Memory (MB): peak = 3199.078 ; gain = 0.000 ; free physical = 420243 ; free virtual = 461205
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/home/ubuntu/XilinxTools/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 3199.078 ; gain = 648.102 ; free physical = 420029 ; free virtual = 460986
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2178.333; parent = 2031.816; children = 148.555
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4186.781; parent = 3199.082; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu250-figd2104-2-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 3199.078 ; gain = 648.102 ; free physical = 420017 ; free virtual = 460974
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2178.333; parent = 2031.816; children = 148.555
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4186.781; parent = 3199.082; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for U0. (constraint file  /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_lmb_bram_if_cntlr_0_synth_1/dont_touch.xdc, line 6).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 3199.078 ; gain = 648.102 ; free physical = 420012 ; free virtual = 460969
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2178.333; parent = 2031.816; children = 148.555
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4186.781; parent = 3199.082; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 3199.078 ; gain = 648.102 ; free physical = 419945 ; free virtual = 460902
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2178.333; parent = 2031.816; children = 148.555
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4186.781; parent = 3199.082; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 4     
+	                7 Bit    Registers := 2     
+	                4 Bit    Registers := 2     
+	                1 Bit    Registers := 13    
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 6     
+	   2 Input    7 Bit        Muxes := 3     
+	   2 Input    4 Bit        Muxes := 3     
+	   2 Input    1 Bit        Muxes := 27    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 12288 (col length:96)
+BRAMs: 5376 (col length: RAMB18 384 RAMB36 192)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 3199.078 ; gain = 648.102 ; free physical = 419733 ; free virtual = 460695
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2178.333; parent = 2031.816; children = 148.555
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4186.781; parent = 3199.082; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:31 ; elapsed = 00:00:34 . Memory (MB): peak = 3415.422 ; gain = 864.445 ; free physical = 420734 ; free virtual = 461709
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2603.229; parent = 2456.466; children = 148.555
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4403.125; parent = 3415.426; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:31 ; elapsed = 00:00:34 . Memory (MB): peak = 3445.453 ; gain = 894.477 ; free physical = 420669 ; free virtual = 461644
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2616.667; parent = 2469.902; children = 148.555
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4433.156; parent = 3445.457; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:32 ; elapsed = 00:00:35 . Memory (MB): peak = 3453.461 ; gain = 902.484 ; free physical = 420648 ; free virtual = 461623
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2616.667; parent = 2469.902; children = 148.555
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4441.164; parent = 3453.465; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3456.430 ; gain = 905.453 ; free physical = 419972 ; free virtual = 460947
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2616.667; parent = 2469.902; children = 148.555
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4444.133; parent = 3456.434; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3456.430 ; gain = 905.453 ; free physical = 419936 ; free virtual = 460911
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2616.667; parent = 2469.902; children = 148.555
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4444.133; parent = 3456.434; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3456.430 ; gain = 905.453 ; free physical = 419895 ; free virtual = 460870
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2616.667; parent = 2469.902; children = 148.555
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4444.133; parent = 3456.434; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3456.430 ; gain = 905.453 ; free physical = 419856 ; free virtual = 460831
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2616.667; parent = 2469.902; children = 148.555
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4444.133; parent = 3456.434; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3456.430 ; gain = 905.453 ; free physical = 419815 ; free virtual = 460789
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2616.667; parent = 2469.902; children = 148.555
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4444.133; parent = 3456.434; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3456.430 ; gain = 905.453 ; free physical = 419783 ; free virtual = 460758
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2616.667; parent = 2469.902; children = 148.555
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4444.133; parent = 3456.434; children = 987.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-----+------+
+|      |Cell |Count |
++------+-----+------+
+|1     |LUT2 |     1|
+|2     |LUT3 |     7|
+|3     |LUT4 |     2|
+|4     |LUT5 |    67|
+|5     |LUT6 |     4|
+|6     |FDRE |    74|
++------+-----+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3456.430 ; gain = 905.453 ; free physical = 419759 ; free virtual = 460734
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2616.667; parent = 2469.902; children = 148.555
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4444.133; parent = 3456.434; children = 987.699
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 250 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:29 ; elapsed = 00:00:33 . Memory (MB): peak = 3456.430 ; gain = 723.836 ; free physical = 419722 ; free virtual = 460697
+Synthesis Optimization Complete : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 3456.438 ; gain = 905.453 ; free physical = 419702 ; free virtual = 460677
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3470.367 ; gain = 0.000 ; free physical = 419649 ; free virtual = 460624
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3563.887 ; gain = 0.000 ; free physical = 419575 ; free virtual = 460550
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: cf5bff6a
+INFO: [Common 17-83] Releasing license: Synthesis
+32 Infos, 272 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:51 ; elapsed = 00:00:52 . Memory (MB): peak = 3563.887 ; gain = 2124.344 ; free physical = 419765 ; free virtual = 460740
+INFO: [Common 17-1381] The checkpoint '/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_lmb_bram_if_cntlr_0_synth_1/bd_fb99_lmb_bram_if_cntlr_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP bd_fb99_lmb_bram_if_cntlr_0, cache-ID = a2c857b401dc5762
+INFO: [Coretcl 2-1174] Renamed 2 cell refs.
+INFO: [Common 17-1381] The checkpoint '/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_lmb_bram_if_cntlr_0_synth_1/bd_fb99_lmb_bram_if_cntlr_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file bd_fb99_lmb_bram_if_cntlr_0_utilization_synth.rpt -pb bd_fb99_lmb_bram_if_cntlr_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Wed Jul 12 20:30:01 2023...

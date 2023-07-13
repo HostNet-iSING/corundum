@@ -1,0 +1,433 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Wed Jul 12 20:23:33 2023
+# Process ID: 16364
+# Current directory: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_ilmb_0_synth_1
+# Command line: vivado -log bd_fb99_ilmb_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source bd_fb99_ilmb_0.tcl
+# Log file: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_ilmb_0_synth_1/bd_fb99_ilmb_0.vds
+# Journal file: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_ilmb_0_synth_1/vivado.jou
+# Running On: desktop02, OS: Linux, CPU Frequency: 1569.148 MHz, CPU Physical cores: 16, Host memory: 540764 MB
+#-----------------------------------------------------------
+source bd_fb99_ilmb_0.tcl -notrace
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: bd_fb99_ilmb_0
+Command: synth_design -top bd_fb99_ilmb_0 -part xcu250-figd2104-2-e -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Device 21-403] Loading part xcu250-figd2104-2-e
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 16570
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/home/ubuntu/XilinxTools/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2922.227 ; gain = 370.766 ; free physical = 411795 ; free virtual = 452776
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2108.731; parent = 1972.812; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 3945.906; parent = 2928.168; children = 1017.738
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'bd_fb99_ilmb_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_20/synth/bd_fb99_ilmb_0.vhd:89]
+WARNING: [Synth 8-3819] Generic 'FPGA_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'FW_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'FW_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'BOARD_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'BOARD_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'BUILD_DATE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'GIT_HASH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RELEASE_INFO' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'IF_COUNT' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PORTS_PER_IF' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'SCHED_PER_IF' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PORT_MASK' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CLK_PERIOD_NS_NUM' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CLK_PERIOD_NS_DENOM' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_CLOCK_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_CLOCK_CDC_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_PORT_CDC_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_PEROUT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_PEROUT_COUNT' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'EVENT_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CPL_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_CPL_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'EVENT_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CPL_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_CPL_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'EVENT_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CPL_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_CPL_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_DESC_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_DESC_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_INDIR_TBL_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_SCHEDULER_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_SCHEDULER_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TDMA_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_TS_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CPL_FIFO_DEPTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CHECKSUM_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_HASH_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_CHECKSUM_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_FIFO_DEPTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_FIFO_DEPTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'MAX_TX_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'MAX_RX_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_RAM_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_RAM_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DDR_CH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DDR_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXI_DDR_ID_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXI_DDR_MAX_BURST_LEN' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_CTRL_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_DMA_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_AXIS_DIRECT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_AXIS_SYNC_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_AXIS_IF_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_STAT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_IMM_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_IMM_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_LEN_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_TAG_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RAM_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RAM_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'IRQ_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_CTRL_DATA_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_CTRL_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_APP_CTRL_DATA_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_APP_CTRL_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_TX_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_TX_FIFO_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_TX_TS_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_RX_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_RX_FIFO_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_DMA_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_PCIE_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_INC_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_ID_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_PCIE_DATA_WIDTH' not present in instantiated entity will be ignored
+	Parameter C_LMB_NUM_SLAVES bound to: 1 - type: integer 
+	Parameter C_LMB_DWIDTH bound to: 32 - type: integer 
+	Parameter C_LMB_AWIDTH bound to: 32 - type: integer 
+	Parameter C_LMB_PROTOCOL bound to: 0 - type: integer 
+	Parameter C_EXT_RESET_HIGH bound to: 1 - type: integer 
+INFO: [Synth 8-3491] module 'lmb_v10' declared at '/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/cd1d/hdl/lmb_v10_v3_0_vh_rfs.vhd:92' bound to instance 'U0' of component 'lmb_v10' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_20/synth/bd_fb99_ilmb_0.vhd:165]
+INFO: [Synth 8-638] synthesizing module 'lmb_v10' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/cd1d/hdl/lmb_v10_v3_0_vh_rfs.vhd:141]
+INFO: [Synth 8-3491] module 'FDS' declared at '/home/ubuntu/XilinxTools/Vivado/2022.2/scripts/rt/data/unisim_comp.v:38831' bound to instance 'POR_FF_I' of component 'FDS' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/cd1d/hdl/lmb_v10_v3_0_vh_rfs.vhd:171]
+INFO: [Synth 8-6157] synthesizing module 'FDS' [/home/ubuntu/XilinxTools/Vivado/2022.2/scripts/rt/data/unisim_comp.v:38831]
+INFO: [Synth 8-6155] done synthesizing module 'FDS' (0#1) [/home/ubuntu/XilinxTools/Vivado/2022.2/scripts/rt/data/unisim_comp.v:38831]
+INFO: [Synth 8-256] done synthesizing module 'lmb_v10' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/cd1d/hdl/lmb_v10_v3_0_vh_rfs.vhd:141]
+INFO: [Synth 8-256] done synthesizing module 'bd_fb99_ilmb_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_20/synth/bd_fb99_ilmb_0.vhd:89]
+WARNING: [Synth 8-3301] Unused top level parameter/generic FPGA_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic FW_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic FW_VER
+WARNING: [Synth 8-3301] Unused top level parameter/generic BOARD_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic BOARD_VER
+WARNING: [Synth 8-3301] Unused top level parameter/generic BUILD_DATE
+WARNING: [Synth 8-3301] Unused top level parameter/generic GIT_HASH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RELEASE_INFO
+WARNING: [Synth 8-3301] Unused top level parameter/generic IF_COUNT
+WARNING: [Synth 8-3301] Unused top level parameter/generic PORTS_PER_IF
+WARNING: [Synth 8-3301] Unused top level parameter/generic SCHED_PER_IF
+WARNING: [Synth 8-3301] Unused top level parameter/generic PORT_MASK
+WARNING: [Synth 8-3301] Unused top level parameter/generic CLK_PERIOD_NS_NUM
+WARNING: [Synth 8-3301] Unused top level parameter/generic CLK_PERIOD_NS_DENOM
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_CLOCK_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_CLOCK_CDC_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_PORT_CDC_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_PEROUT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_PEROUT_COUNT
+WARNING: [Synth 8-3301] Unused top level parameter/generic EVENT_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CPL_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic EVENT_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CPL_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic EVENT_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CPL_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_DESC_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_DESC_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_INDIR_TBL_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_SCHEDULER_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_SCHEDULER_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TDMA_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_TS_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_FIFO_DEPTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CHECKSUM_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_HASH_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CHECKSUM_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_FIFO_DEPTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_FIFO_DEPTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic MAX_TX_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic MAX_RX_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_RAM_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_RAM_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic DDR_CH
+WARNING: [Synth 8-3301] Unused top level parameter/generic DDR_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXI_DDR_ID_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXI_DDR_MAX_BURST_LEN
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_CTRL_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_DMA_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_AXIS_DIRECT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_AXIS_SYNC_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_AXIS_IF_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_STAT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_IMM_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_IMM_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_LEN_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_TAG_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RAM_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RAM_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic IRQ_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_CTRL_DATA_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_CTRL_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_APP_CTRL_DATA_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_APP_CTRL_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_TX_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_TX_FIFO_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_TX_TS_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_RX_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_RX_FIFO_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_DMA_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_PCIE_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_INC_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_ID_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_PCIE_DATA_WIDTH
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2995.133 ; gain = 443.672 ; free physical = 411522 ; free virtual = 452504
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2108.731; parent = 1972.812; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4012.875; parent = 2995.137; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 3009.977 ; gain = 458.516 ; free physical = 411598 ; free virtual = 452583
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2108.731; parent = 1972.812; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4027.719; parent = 3009.980; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 3009.977 ; gain = 458.516 ; free physical = 411627 ; free virtual = 452614
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2108.731; parent = 1972.812; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4027.719; parent = 3009.980; children = 1017.738
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3023.914 ; gain = 0.000 ; free physical = 411599 ; free virtual = 452582
+INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_20/bd_fb99_ilmb_0_ooc.xdc] for cell 'U0'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_20/bd_fb99_ilmb_0_ooc.xdc] for cell 'U0'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_ilmb_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_ilmb_0_synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3109.727 ; gain = 0.000 ; free physical = 410143 ; free virtual = 451127
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1 instances were transformed.
+  FDS => FDSE: 1 instance 
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3109.727 ; gain = 0.000 ; free physical = 410142 ; free virtual = 451126
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/home/ubuntu/XilinxTools/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 3109.727 ; gain = 558.266 ; free physical = 410354 ; free virtual = 451338
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2131.710; parent = 1996.866; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4127.469; parent = 3109.730; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu250-figd2104-2-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 3109.727 ; gain = 558.266 ; free physical = 410353 ; free virtual = 451338
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2131.710; parent = 1996.866; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4127.469; parent = 3109.730; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for U0. (constraint file  /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_ilmb_0_synth_1/dont_touch.xdc, line 6).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 3109.727 ; gain = 558.266 ; free physical = 410354 ; free virtual = 451338
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2131.710; parent = 1996.866; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4127.469; parent = 3109.730; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 3109.727 ; gain = 558.266 ; free physical = 410330 ; free virtual = 451320
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2131.710; parent = 1996.866; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4127.469; parent = 3109.730; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 12288 (col length:96)
+BRAMs: 5376 (col length: RAMB18 384 RAMB36 192)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 3109.727 ; gain = 558.266 ; free physical = 410332 ; free virtual = 451325
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2131.710; parent = 1996.866; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4127.469; parent = 3109.730; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:31 ; elapsed = 00:00:34 . Memory (MB): peak = 3385.789 ; gain = 834.328 ; free physical = 409375 ; free virtual = 450379
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2524.106; parent = 2389.306; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4403.531; parent = 3385.793; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:31 ; elapsed = 00:00:34 . Memory (MB): peak = 3385.789 ; gain = 834.328 ; free physical = 409372 ; free virtual = 450376
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2524.230; parent = 2389.430; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4403.531; parent = 3385.793; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:31 ; elapsed = 00:00:34 . Memory (MB): peak = 3404.820 ; gain = 853.359 ; free physical = 409371 ; free virtual = 450374
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2524.431; parent = 2389.630; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4422.562; parent = 3404.824; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:35 ; elapsed = 00:00:38 . Memory (MB): peak = 3410.758 ; gain = 859.297 ; free physical = 409264 ; free virtual = 450267
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2524.431; parent = 2389.630; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4428.500; parent = 3410.762; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:35 ; elapsed = 00:00:38 . Memory (MB): peak = 3410.758 ; gain = 859.297 ; free physical = 409257 ; free virtual = 450260
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2524.431; parent = 2389.630; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4428.500; parent = 3410.762; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:35 ; elapsed = 00:00:38 . Memory (MB): peak = 3410.758 ; gain = 859.297 ; free physical = 409252 ; free virtual = 450256
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2524.431; parent = 2389.630; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4428.500; parent = 3410.762; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:35 ; elapsed = 00:00:38 . Memory (MB): peak = 3410.758 ; gain = 859.297 ; free physical = 409224 ; free virtual = 450228
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2524.431; parent = 2389.630; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4428.500; parent = 3410.762; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:35 ; elapsed = 00:00:38 . Memory (MB): peak = 3410.758 ; gain = 859.297 ; free physical = 409215 ; free virtual = 450218
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2524.431; parent = 2389.630; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4428.500; parent = 3410.762; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:35 ; elapsed = 00:00:39 . Memory (MB): peak = 3410.758 ; gain = 859.297 ; free physical = 409194 ; free virtual = 450198
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2524.431; parent = 2389.630; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4428.500; parent = 3410.762; children = 1017.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-----+------+
+|      |Cell |Count |
++------+-----+------+
+|1     |FDS  |     1|
++------+-----+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:35 ; elapsed = 00:00:39 . Memory (MB): peak = 3410.758 ; gain = 859.297 ; free physical = 409189 ; free virtual = 450192
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2524.431; parent = 2389.630; children = 135.920
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4428.500; parent = 3410.762; children = 1017.738
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 3410.758 ; gain = 759.547 ; free physical = 409204 ; free virtual = 450207
+Synthesis Optimization Complete : Time (s): cpu = 00:00:35 ; elapsed = 00:00:39 . Memory (MB): peak = 3410.766 ; gain = 859.297 ; free physical = 409183 ; free virtual = 450186
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3410.766 ; gain = 0.000 ; free physical = 409178 ; free virtual = 450181
+INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3500.297 ; gain = 0.000 ; free physical = 408939 ; free virtual = 449943
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1 instances were transformed.
+  FDS => FDSE: 1 instance 
+
+Synth Design complete, checksum: 932a1432
+INFO: [Common 17-83] Releasing license: Synthesis
+29 Infos, 171 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:50 ; elapsed = 00:00:52 . Memory (MB): peak = 3500.297 ; gain = 2062.332 ; free physical = 409148 ; free virtual = 450151
+INFO: [Common 17-1381] The checkpoint '/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_ilmb_0_synth_1/bd_fb99_ilmb_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP bd_fb99_ilmb_0, cache-ID = cfbda9dfefcc8deb
+INFO: [Common 17-1381] The checkpoint '/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_ilmb_0_synth_1/bd_fb99_ilmb_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file bd_fb99_ilmb_0_utilization_synth.rpt -pb bd_fb99_ilmb_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Wed Jul 12 20:24:37 2023...

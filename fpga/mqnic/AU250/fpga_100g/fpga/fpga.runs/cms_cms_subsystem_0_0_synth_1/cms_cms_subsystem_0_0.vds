@@ -1,0 +1,840 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Wed Jul 12 20:30:52 2023
+# Process ID: 21936
+# Current directory: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1
+# Command line: vivado -log cms_cms_subsystem_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source cms_cms_subsystem_0_0.tcl
+# Log file: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/cms_cms_subsystem_0_0.vds
+# Journal file: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/vivado.jou
+# Running On: desktop02, OS: Linux, CPU Frequency: 800.390 MHz, CPU Physical cores: 16, Host memory: 540764 MB
+#-----------------------------------------------------------
+source cms_cms_subsystem_0_0.tcl -notrace
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: cms_cms_subsystem_0_0
+Command: synth_design -top cms_cms_subsystem_0_0 -part xcu250-figd2104-2-e -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Device 21-403] Loading part xcu250-figd2104-2-e
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 22028
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/home/ubuntu/XilinxTools/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2949.262 ; gain = 371.734 ; free physical = 425994 ; free virtual = 466974
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2282.824; parent = 2097.406; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 3974.945; parent = 2957.203; children = 1017.742
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'cms_cms_subsystem_0_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/synth/cms_cms_subsystem_0_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:9]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_bram_ctrl_firmware_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_bram_ctrl_firmware_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_bram_ctrl_firmware_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_bram_ctrl_firmware_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_bram_ctrl_regmap_cmc_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_bram_ctrl_regmap_cmc_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_bram_ctrl_regmap_cmc_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_bram_ctrl_regmap_cmc_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_bram_ctrl_regmap_host_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_bram_ctrl_regmap_host_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_bram_ctrl_regmap_host_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_bram_ctrl_regmap_host_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_gpio_cmc_mb_rst_n_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_cmc_mb_rst_n_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_gpio_cmc_mb_rst_n_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_cmc_mb_rst_n_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_gpio_hbm_temp_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_hbm_temp_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_gpio_hbm_temp_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_hbm_temp_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_gpio_mb_intr_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_mb_intr_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_gpio_mb_intr_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_mb_intr_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_gpio_mutex_cmc_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_mutex_cmc_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_gpio_mutex_cmc_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_mutex_cmc_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_gpio_mutex_host_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_mutex_host_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_gpio_mutex_host_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_mutex_host_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_gpio_timebase_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_timebase_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_gpio_timebase_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_timebase_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_gpio_wdt_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_wdt_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_gpio_wdt_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_wdt_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_ic_cmc_local_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1632]
+INFO: [Synth 8-6157] synthesizing module 'm00_couplers_imp_737AJ5' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:4374]
+INFO: [Synth 8-6155] done synthesizing module 'm00_couplers_imp_737AJ5' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:4374]
+INFO: [Synth 8-6157] synthesizing module 'm01_couplers_imp_17VVCCY' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:4652]
+INFO: [Synth 8-6155] done synthesizing module 'm01_couplers_imp_17VVCCY' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:4652]
+INFO: [Synth 8-6157] synthesizing module 'm02_couplers_imp_1L2JZKM' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5048]
+INFO: [Synth 8-6155] done synthesizing module 'm02_couplers_imp_1L2JZKM' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5048]
+INFO: [Synth 8-6157] synthesizing module 'm03_couplers_imp_KK1Z11' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5312]
+INFO: [Synth 8-6155] done synthesizing module 'm03_couplers_imp_KK1Z11' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5312]
+INFO: [Synth 8-6157] synthesizing module 'm04_couplers_imp_TJZDUM' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5576]
+INFO: [Synth 8-6155] done synthesizing module 'm04_couplers_imp_TJZDUM' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5576]
+INFO: [Synth 8-6157] synthesizing module 'm05_couplers_imp_1TSO7ML' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5854]
+INFO: [Synth 8-6155] done synthesizing module 'm05_couplers_imp_1TSO7ML' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5854]
+INFO: [Synth 8-6157] synthesizing module 'm06_couplers_imp_1GX1IXL' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5986]
+INFO: [Synth 8-6155] done synthesizing module 'm06_couplers_imp_1GX1IXL' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5986]
+INFO: [Synth 8-6157] synthesizing module 'm07_couplers_imp_FUKAJE' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6118]
+INFO: [Synth 8-6155] done synthesizing module 'm07_couplers_imp_FUKAJE' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6118]
+INFO: [Synth 8-6157] synthesizing module 'm08_couplers_imp_1YX8TCF' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6250]
+INFO: [Synth 8-6155] done synthesizing module 'm08_couplers_imp_1YX8TCF' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6250]
+INFO: [Synth 8-6157] synthesizing module 'm09_couplers_imp_XCWUZ0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6396]
+INFO: [Synth 8-6155] done synthesizing module 'm09_couplers_imp_XCWUZ0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6396]
+INFO: [Synth 8-6157] synthesizing module 'm10_couplers_imp_1WHW5WW' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6528]
+INFO: [Synth 8-6155] done synthesizing module 'm10_couplers_imp_1WHW5WW' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6528]
+INFO: [Synth 8-6157] synthesizing module 'm11_couplers_imp_VHFZCJ' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6660]
+INFO: [Synth 8-6155] done synthesizing module 'm11_couplers_imp_VHFZCJ' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6660]
+INFO: [Synth 8-6157] synthesizing module 's00_couplers_imp_1818BKD' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:7238]
+INFO: [Synth 8-6155] done synthesizing module 's00_couplers_imp_1818BKD' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:7238]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_xbar_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_xbar_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_xbar_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_xbar_0_stub.v:5]
+WARNING: [Synth 8-689] width (27) of port connection 'm_axi_arprot' does not match port width (36) of module 'bd_fb99_xbar_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:3341]
+WARNING: [Synth 8-689] width (27) of port connection 'm_axi_awprot' does not match port width (36) of module 'bd_fb99_xbar_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:3345]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_ic_cmc_local_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1632]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_ic_mgmt_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:3380]
+INFO: [Synth 8-6157] synthesizing module 'm00_couplers_imp_MYQ8N0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:4506]
+INFO: [Synth 8-6155] done synthesizing module 'm00_couplers_imp_MYQ8N0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:4506]
+INFO: [Synth 8-6157] synthesizing module 'm01_couplers_imp_1N7GF3Z' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:4784]
+INFO: [Synth 8-6155] done synthesizing module 'm01_couplers_imp_1N7GF3Z' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:4784]
+INFO: [Synth 8-6157] synthesizing module 'm02_couplers_imp_11G6YNV' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:4916]
+INFO: [Synth 8-6155] done synthesizing module 'm02_couplers_imp_11G6YNV' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:4916]
+INFO: [Synth 8-6157] synthesizing module 'm03_couplers_imp_DO9MG' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5180]
+INFO: [Synth 8-6155] done synthesizing module 'm03_couplers_imp_DO9MG' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5180]
+INFO: [Synth 8-6157] synthesizing module 'm04_couplers_imp_9DL8MR' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5444]
+INFO: [Synth 8-6155] done synthesizing module 'm04_couplers_imp_9DL8MR' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5444]
+INFO: [Synth 8-6157] synthesizing module 'm05_couplers_imp_1A6AKKW' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5708]
+INFO: [Synth 8-6155] done synthesizing module 'm05_couplers_imp_1A6AKKW' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:5708]
+INFO: [Synth 8-6157] synthesizing module 's00_couplers_imp_1NDE468' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:7384]
+INFO: [Synth 8-6155] done synthesizing module 's00_couplers_imp_1NDE468' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:7384]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_xbar_1' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_xbar_1_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_xbar_1' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_xbar_1_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_ic_mgmt_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:3380]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_intc_cmc_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_intc_cmc_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_intc_cmc_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_intc_cmc_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_intc_host_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_intc_host_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_intc_host_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_intc_host_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_timebase_wdt_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_timebase_wdt_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_timebase_wdt_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_timebase_wdt_0_stub.v:5]
+WARNING: [Synth 8-7071] port 'timebase_interrupt' of module 'bd_fb99_axi_timebase_wdt_0' is unconnected for instance 'axi_timebase_wdt' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1247]
+WARNING: [Synth 8-7023] instance 'axi_timebase_wdt' of module 'bd_fb99_axi_timebase_wdt_0' has 23 connections declared, but only 22 given [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1247]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_uartlite_satellite_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_uartlite_satellite_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_uartlite_satellite_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_uartlite_satellite_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_uartlite_usb_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_uartlite_usb_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_uartlite_usb_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_uartlite_usb_0_stub.v:5]
+WARNING: [Synth 8-7071] port 'tx' of module 'bd_fb99_axi_uartlite_usb_0' is unconnected for instance 'axi_uartlite_usb' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1293]
+WARNING: [Synth 8-7023] instance 'axi_uartlite_usb' of module 'bd_fb99_axi_uartlite_usb_0' has 22 connections declared, but only 21 given [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1293]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_build_info_cmc_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_build_info_cmc_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_build_info_cmc_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_build_info_cmc_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_build_info_host_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_build_info_host_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_build_info_host_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_build_info_host_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_concat_hbm_temp_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_32/synth/bd_fb99_concat_hbm_temp_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'xlconcat_v2_1_4_xlconcat' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/4b67/hdl/xlconcat_v2_1_vl_rfs.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'xlconcat_v2_1_4_xlconcat' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/4b67/hdl/xlconcat_v2_1_vl_rfs.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_concat_hbm_temp_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_32/synth/bd_fb99_concat_hbm_temp_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_concat_host_interrupts_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_33/synth/bd_fb99_concat_host_interrupts_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'xlconcat_v2_1_4_xlconcat__parameterized0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/4b67/hdl/xlconcat_v2_1_vl_rfs.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'xlconcat_v2_1_4_xlconcat__parameterized0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/4b67/hdl/xlconcat_v2_1_vl_rfs.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_concat_host_interrupts_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_33/synth/bd_fb99_concat_host_interrupts_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_concat_intr_cmc_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_31/synth/bd_fb99_concat_intr_cmc_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'xlconcat_v2_1_4_xlconcat__parameterized1' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/4b67/hdl/xlconcat_v2_1_vl_rfs.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'xlconcat_v2_1_4_xlconcat__parameterized1' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/4b67/hdl/xlconcat_v2_1_vl_rfs.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_concat_intr_cmc_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_31/synth/bd_fb99_concat_intr_cmc_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_freerun_counter_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_freerun_counter_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_freerun_counter_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_freerun_counter_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_gnd_bus_1_hbm_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_34/synth/bd_fb99_gnd_bus_1_hbm_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'xlconstant_v1_1_7_xlconstant' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/badb/hdl/xlconstant_v1_1_vl_rfs.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'xlconstant_v1_1_7_xlconstant' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/badb/hdl/xlconstant_v1_1_vl_rfs.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_gnd_bus_1_hbm_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_34/synth/bd_fb99_gnd_bus_1_hbm_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_gnd_bus_1_interrupts_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_36/synth/bd_fb99_gnd_bus_1_interrupts_0.v:53]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_gnd_bus_1_interrupts_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_36/synth/bd_fb99_gnd_bus_1_interrupts_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_gnd_bus_7_hbm_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_35/synth/bd_fb99_gnd_bus_7_hbm_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'xlconstant_v1_1_7_xlconstant__parameterized0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/badb/hdl/xlconstant_v1_1_vl_rfs.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'xlconstant_v1_1_7_xlconstant__parameterized0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/badb/hdl/xlconstant_v1_1_vl_rfs.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_gnd_bus_7_hbm_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_35/synth/bd_fb99_gnd_bus_7_hbm_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_microblaze_axi_vip_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_microblaze_axi_vip_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_microblaze_axi_vip_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_microblaze_axi_vip_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_microblaze_cmc_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_microblaze_cmc_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_microblaze_cmc_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_microblaze_cmc_0_stub.v:5]
+WARNING: [Synth 8-7071] port 'Dbg_TDO' of module 'bd_fb99_microblaze_cmc_0' is unconnected for instance 'microblaze_cmc' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1432]
+WARNING: [Synth 8-7023] instance 'microblaze_cmc' of module 'bd_fb99_microblaze_cmc_0' has 60 connections declared, but only 59 given [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1432]
+INFO: [Synth 8-6157] synthesizing module 'microblaze_local_memory_imp_K7QWLA' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6792]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_dlmb_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_dlmb_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_dlmb_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_dlmb_0_stub.v:5]
+WARNING: [Synth 8-7071] port 'LMB_Rst' of module 'bd_fb99_dlmb_0' is unconnected for instance 'dlmb' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6934]
+WARNING: [Synth 8-7023] instance 'dlmb' of module 'bd_fb99_dlmb_0' has 25 connections declared, but only 24 given [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6934]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_ilmb_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_ilmb_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_ilmb_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_ilmb_0_stub.v:5]
+WARNING: [Synth 8-7071] port 'LMB_Rst' of module 'bd_fb99_ilmb_0' is unconnected for instance 'ilmb' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6959]
+WARNING: [Synth 8-7023] instance 'ilmb' of module 'bd_fb99_ilmb_0' has 25 connections declared, but only 24 given [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6959]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_lmb_bram_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_lmb_bram_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_lmb_bram_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_lmb_bram_0_stub.v:5]
+WARNING: [Synth 8-7071] port 'rsta_busy' of module 'bd_fb99_lmb_bram_0' is unconnected for instance 'lmb_bram' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6984]
+WARNING: [Synth 8-7071] port 'rstb_busy' of module 'bd_fb99_lmb_bram_0' is unconnected for instance 'lmb_bram' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6984]
+WARNING: [Synth 8-7023] instance 'lmb_bram' of module 'bd_fb99_lmb_bram_0' has 16 connections declared, but only 14 given [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6984]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_lmb_bram_if_cntlr_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_lmb_bram_if_cntlr_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_lmb_bram_if_cntlr_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_lmb_bram_if_cntlr_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'microblaze_local_memory_imp_K7QWLA' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:6792]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_msp432_bsl_crc_gen_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_msp432_bsl_crc_gen_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_msp432_bsl_crc_gen_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_msp432_bsl_crc_gen_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_psreset_cmc_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_psreset_cmc_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_psreset_cmc_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_psreset_cmc_0_stub.v:5]
+WARNING: [Synth 8-7071] port 'peripheral_reset' of module 'bd_fb99_psreset_cmc_0' is unconnected for instance 'psreset_cmc' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1532]
+WARNING: [Synth 8-7023] instance 'psreset_cmc' of module 'bd_fb99_psreset_cmc_0' has 10 connections declared, but only 9 given [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1532]
+INFO: [Synth 8-6157] synthesizing module 'qsfp_gpio_hierarchy_imp_3EHBVA' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:7035]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_axi_gpio_qsfp_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_qsfp_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_axi_gpio_qsfp_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_axi_gpio_qsfp_0_stub.v:5]
+WARNING: [Synth 8-7071] port 'gpio_io_t' of module 'bd_fb99_axi_gpio_qsfp_0' is unconnected for instance 'axi_gpio_qsfp' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:7152]
+WARNING: [Synth 8-7071] port 'gpio2_io_t' of module 'bd_fb99_axi_gpio_qsfp_0' is unconnected for instance 'axi_gpio_qsfp' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:7152]
+WARNING: [Synth 8-7023] instance 'axi_gpio_qsfp' of module 'bd_fb99_axi_gpio_qsfp_0' has 26 connections declared, but only 24 given [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:7152]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_concat_1_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_39/synth/bd_fb99_concat_1_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'xlconcat_v2_1_4_xlconcat__parameterized2' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/4b67/hdl/xlconcat_v2_1_vl_rfs.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'xlconcat_v2_1_4_xlconcat__parameterized2' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/4b67/hdl/xlconcat_v2_1_vl_rfs.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_concat_1_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_39/synth/bd_fb99_concat_1_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_concat_2_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_40/synth/bd_fb99_concat_2_0.v:53]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_concat_2_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_40/synth/bd_fb99_concat_2_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_gnd_bus_1_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_41/synth/bd_fb99_gnd_bus_1_0.v:53]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_gnd_bus_1_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_41/synth/bd_fb99_gnd_bus_1_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_slice_gpio1_0_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_42/synth/bd_fb99_slice_gpio1_0_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'xlslice_v1_0_2_xlslice' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/11d0/hdl/xlslice_v1_0_vl_rfs.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'xlslice_v1_0_2_xlslice' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/11d0/hdl/xlslice_v1_0_vl_rfs.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_slice_gpio1_0_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_42/synth/bd_fb99_slice_gpio1_0_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_slice_gpio1_1_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_43/synth/bd_fb99_slice_gpio1_1_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'xlslice_v1_0_2_xlslice__parameterized0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/11d0/hdl/xlslice_v1_0_vl_rfs.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'xlslice_v1_0_2_xlslice__parameterized0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/11d0/hdl/xlslice_v1_0_vl_rfs.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_slice_gpio1_1_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_43/synth/bd_fb99_slice_gpio1_1_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_slice_gpio1_2_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_44/synth/bd_fb99_slice_gpio1_2_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'xlslice_v1_0_2_xlslice__parameterized1' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/11d0/hdl/xlslice_v1_0_vl_rfs.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'xlslice_v1_0_2_xlslice__parameterized1' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/11d0/hdl/xlslice_v1_0_vl_rfs.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_slice_gpio1_2_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_44/synth/bd_fb99_slice_gpio1_2_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_slice_gpio2_0_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_45/synth/bd_fb99_slice_gpio2_0_0.v:53]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_slice_gpio2_0_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_45/synth/bd_fb99_slice_gpio2_0_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_slice_gpio2_1_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_46/synth/bd_fb99_slice_gpio2_1_0.v:53]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_slice_gpio2_1_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_46/synth/bd_fb99_slice_gpio2_1_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_slice_gpio2_2_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_47/synth/bd_fb99_slice_gpio2_2_0.v:53]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_slice_gpio2_2_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_47/synth/bd_fb99_slice_gpio2_2_0.v:53]
+INFO: [Synth 8-6155] done synthesizing module 'qsfp_gpio_hierarchy_imp_3EHBVA' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:7035]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_reachout_axi_vip_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_reachout_axi_vip_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_reachout_axi_vip_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_reachout_axi_vip_0_stub.v:5]
+WARNING: [Synth 8-7071] port 's_axi_awready' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 's_axi_wready' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 's_axi_bresp' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 's_axi_bvalid' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 's_axi_arready' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 's_axi_rdata' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 's_axi_rresp' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 's_axi_rlast' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 's_axi_rvalid' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_awaddr' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_awlen' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_awsize' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_awburst' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_awlock' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_awcache' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_awprot' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_awregion' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_awqos' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_awvalid' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_wdata' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_wstrb' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_wlast' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_wvalid' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_bready' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_araddr' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_arlen' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_arsize' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_arburst' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_arlock' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_arcache' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_arprot' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_arregion' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_arqos' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_arvalid' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7071] port 'm_axi_rready' of module 'bd_fb99_reachout_axi_vip_0' is unconnected for instance 'reachout_axi_vip' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+WARNING: [Synth 8-7023] instance 'reachout_axi_vip' of module 'bd_fb99_reachout_axi_vip_0' has 72 connections declared, but only 37 given [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1573]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_reg_map_bram_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_reg_map_bram_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_reg_map_bram_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_reg_map_bram_0_stub.v:5]
+WARNING: [Synth 8-7071] port 'rsta_busy' of module 'bd_fb99_reg_map_bram_0' is unconnected for instance 'reg_map_bram' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1611]
+WARNING: [Synth 8-7071] port 'rstb_busy' of module 'bd_fb99_reg_map_bram_0' is unconnected for instance 'reg_map_bram' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1611]
+WARNING: [Synth 8-7023] instance 'reg_map_bram' of module 'bd_fb99_reg_map_bram_0' has 16 connections declared, but only 14 given [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:1611]
+INFO: [Synth 8-6157] synthesizing module 'reset_gen_imp_141SA20' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:7213]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_and_gate_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_and_gate_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_and_gate_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_and_gate_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_reset_inverter_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_reset_inverter_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_reset_inverter_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-21936-desktop02/realtime/bd_fb99_reset_inverter_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'reset_gen_imp_141SA20' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:7213]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'cms_cms_subsystem_0_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/synth/cms_cms_subsystem_0_0.v:53]
+WARNING: [Synth 8-3301] Unused top level parameter/generic FPGA_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic FW_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic FW_VER
+WARNING: [Synth 8-3301] Unused top level parameter/generic BOARD_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic BOARD_VER
+WARNING: [Synth 8-3301] Unused top level parameter/generic BUILD_DATE
+WARNING: [Synth 8-3301] Unused top level parameter/generic GIT_HASH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RELEASE_INFO
+WARNING: [Synth 8-3301] Unused top level parameter/generic IF_COUNT
+WARNING: [Synth 8-3301] Unused top level parameter/generic PORTS_PER_IF
+WARNING: [Synth 8-3301] Unused top level parameter/generic SCHED_PER_IF
+WARNING: [Synth 8-3301] Unused top level parameter/generic PORT_MASK
+WARNING: [Synth 8-3301] Unused top level parameter/generic CLK_PERIOD_NS_NUM
+WARNING: [Synth 8-3301] Unused top level parameter/generic CLK_PERIOD_NS_DENOM
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_CLOCK_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_CLOCK_CDC_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_PORT_CDC_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_PEROUT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_PEROUT_COUNT
+WARNING: [Synth 8-3301] Unused top level parameter/generic EVENT_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CPL_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic EVENT_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CPL_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic EVENT_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CPL_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_DESC_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_DESC_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_INDIR_TBL_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_SCHEDULER_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_SCHEDULER_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TDMA_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_TS_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_FIFO_DEPTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CHECKSUM_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_HASH_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CHECKSUM_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_FIFO_DEPTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_FIFO_DEPTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic MAX_TX_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic MAX_RX_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_RAM_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_RAM_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic DDR_CH
+WARNING: [Synth 8-3301] Unused top level parameter/generic DDR_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXI_DDR_ID_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXI_DDR_MAX_BURST_LEN
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_CTRL_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_DMA_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_AXIS_DIRECT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_AXIS_SYNC_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_AXIS_IF_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_STAT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_IMM_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_IMM_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_LEN_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_TAG_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RAM_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RAM_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic IRQ_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_CTRL_DATA_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_CTRL_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_APP_CTRL_DATA_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_APP_CTRL_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_TX_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_TX_FIFO_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_TX_TS_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_RX_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_RX_FIFO_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_DMA_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_PCIE_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_INC_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_ID_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_PCIE_DATA_WIDTH
+WARNING: [Synth 8-7129] Port Din[4] in module xlslice_v1_0_2_xlslice__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Din[3] in module xlslice_v1_0_2_xlslice__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Din[1] in module xlslice_v1_0_2_xlslice__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Din[0] in module xlslice_v1_0_2_xlslice__parameterized1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Din[4] in module xlslice_v1_0_2_xlslice__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Din[3] in module xlslice_v1_0_2_xlslice__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Din[2] in module xlslice_v1_0_2_xlslice__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Din[0] in module xlslice_v1_0_2_xlslice__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Din[4] in module xlslice_v1_0_2_xlslice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Din[3] in module xlslice_v1_0_2_xlslice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Din[2] in module xlslice_v1_0_2_xlslice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Din[1] in module xlslice_v1_0_2_xlslice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In5[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In6[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In7[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In8[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In9[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In10[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In11[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In12[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In13[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In14[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In15[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In16[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In17[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In18[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In19[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In20[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In21[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In22[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In23[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In24[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In25[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In26[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In27[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In28[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In29[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In30[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In31[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In32[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In33[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In34[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In35[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In36[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In37[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In38[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In39[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In40[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In41[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In42[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In43[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In44[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In45[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In46[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In47[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In48[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In49[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In50[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In51[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In52[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In53[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In54[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In55[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In56[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In57[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In58[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In59[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In60[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In61[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In62[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In63[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In64[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In65[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In66[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In67[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In68[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In69[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In70[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In71[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In72[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In73[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In74[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In75[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In76[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In77[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In78[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In79[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In80[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In81[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In82[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In83[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In84[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In85[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In86[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In87[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In88[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In89[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In90[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In91[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In92[0] in module xlconcat_v2_1_4_xlconcat__parameterized2 is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 3036.168 ; gain = 458.641 ; free physical = 426077 ; free virtual = 467058
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2282.824; parent = 2097.406; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4053.914; parent = 3036.172; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 3051.012 ; gain = 473.484 ; free physical = 426077 ; free virtual = 467058
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2282.824; parent = 2097.406; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4068.758; parent = 3051.016; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 3051.012 ; gain = 473.484 ; free physical = 426077 ; free virtual = 467058
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2282.824; parent = 2097.406; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4068.758; parent = 3051.016; children = 1017.742
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.05 . Memory (MB): peak = 3051.012 ; gain = 0.000 ; free physical = 426072 ; free virtual = 467053
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_0/bd_fb99_build_info_cmc_0/bd_fb99_build_info_cmc_0_in_context.xdc] for cell 'inst/build_info_cmc'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_0/bd_fb99_build_info_cmc_0/bd_fb99_build_info_cmc_0_in_context.xdc] for cell 'inst/build_info_cmc'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_1/bd_fb99_build_info_host_0/bd_fb99_build_info_host_0_in_context.xdc] for cell 'inst/build_info_host'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_1/bd_fb99_build_info_host_0/bd_fb99_build_info_host_0_in_context.xdc] for cell 'inst/build_info_host'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_2/bd_fb99_axi_gpio_timebase_0/bd_fb99_axi_gpio_timebase_0_in_context.xdc] for cell 'inst/axi_gpio_timebase'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_2/bd_fb99_axi_gpio_timebase_0/bd_fb99_axi_gpio_timebase_0_in_context.xdc] for cell 'inst/axi_gpio_timebase'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_3/bd_fb99_axi_gpio_cmc_mb_rst_n_0/bd_fb99_axi_gpio_wdt_0_in_context.xdc] for cell 'inst/axi_gpio_cmc_mb_rst_n'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_3/bd_fb99_axi_gpio_cmc_mb_rst_n_0/bd_fb99_axi_gpio_wdt_0_in_context.xdc] for cell 'inst/axi_gpio_cmc_mb_rst_n'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_4/bd_fb99_axi_gpio_hbm_temp_0/bd_fb99_axi_gpio_hbm_temp_0_in_context.xdc] for cell 'inst/axi_gpio_hbm_temp'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_4/bd_fb99_axi_gpio_hbm_temp_0/bd_fb99_axi_gpio_hbm_temp_0_in_context.xdc] for cell 'inst/axi_gpio_hbm_temp'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_5/bd_fb99_axi_gpio_wdt_0/bd_fb99_axi_gpio_wdt_0_in_context.xdc] for cell 'inst/axi_gpio_wdt'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_5/bd_fb99_axi_gpio_wdt_0/bd_fb99_axi_gpio_wdt_0_in_context.xdc] for cell 'inst/axi_gpio_wdt'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_6/bd_fb99_axi_gpio_mb_intr_0/bd_fb99_axi_gpio_mb_intr_0_in_context.xdc] for cell 'inst/axi_gpio_mb_intr'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_6/bd_fb99_axi_gpio_mb_intr_0/bd_fb99_axi_gpio_mb_intr_0_in_context.xdc] for cell 'inst/axi_gpio_mb_intr'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_7/bd_fb99_axi_gpio_mutex_cmc_0/bd_fb99_axi_gpio_mutex_cmc_0_in_context.xdc] for cell 'inst/axi_gpio_mutex_cmc'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_7/bd_fb99_axi_gpio_mutex_cmc_0/bd_fb99_axi_gpio_mutex_cmc_0_in_context.xdc] for cell 'inst/axi_gpio_mutex_cmc'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_8/bd_fb99_axi_gpio_mutex_host_0/bd_fb99_axi_gpio_mutex_host_0_in_context.xdc] for cell 'inst/axi_gpio_mutex_host'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_8/bd_fb99_axi_gpio_mutex_host_0/bd_fb99_axi_gpio_mutex_host_0_in_context.xdc] for cell 'inst/axi_gpio_mutex_host'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_9/bd_fb99_axi_intc_cmc_0/bd_fb99_axi_intc_cmc_0_in_context.xdc] for cell 'inst/axi_intc_cmc'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_9/bd_fb99_axi_intc_cmc_0/bd_fb99_axi_intc_cmc_0_in_context.xdc] for cell 'inst/axi_intc_cmc'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_10/bd_fb99_axi_intc_host_0/bd_fb99_axi_intc_host_0_in_context.xdc] for cell 'inst/axi_intc_host'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_10/bd_fb99_axi_intc_host_0/bd_fb99_axi_intc_host_0_in_context.xdc] for cell 'inst/axi_intc_host'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_11/bd_fb99_axi_timebase_wdt_0/bd_fb99_axi_timebase_wdt_0_in_context.xdc] for cell 'inst/axi_timebase_wdt'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_11/bd_fb99_axi_timebase_wdt_0/bd_fb99_axi_timebase_wdt_0_in_context.xdc] for cell 'inst/axi_timebase_wdt'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_12/bd_fb99_axi_uartlite_satellite_0/bd_fb99_axi_uartlite_satellite_0_in_context.xdc] for cell 'inst/axi_uartlite_satellite'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_12/bd_fb99_axi_uartlite_satellite_0/bd_fb99_axi_uartlite_satellite_0_in_context.xdc] for cell 'inst/axi_uartlite_satellite'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_13/bd_fb99_axi_uartlite_usb_0/bd_fb99_axi_uartlite_usb_0_in_context.xdc] for cell 'inst/axi_uartlite_usb'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_13/bd_fb99_axi_uartlite_usb_0/bd_fb99_axi_uartlite_usb_0_in_context.xdc] for cell 'inst/axi_uartlite_usb'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_15/bd_fb99_xbar_0/bd_fb99_xbar_0_in_context.xdc] for cell 'inst/axi_ic_cmc_local/xbar'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_15/bd_fb99_xbar_0/bd_fb99_xbar_0_in_context.xdc] for cell 'inst/axi_ic_cmc_local/xbar'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_17/bd_fb99_xbar_1/bd_fb99_xbar_1_in_context.xdc] for cell 'inst/axi_ic_mgmt/xbar'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_17/bd_fb99_xbar_1/bd_fb99_xbar_1_in_context.xdc] for cell 'inst/axi_ic_mgmt/xbar'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_18/bd_fb99_axi_bram_ctrl_firmware_0/bd_fb99_axi_bram_ctrl_firmware_0_in_context.xdc] for cell 'inst/axi_bram_ctrl_firmware'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_18/bd_fb99_axi_bram_ctrl_firmware_0/bd_fb99_axi_bram_ctrl_firmware_0_in_context.xdc] for cell 'inst/axi_bram_ctrl_firmware'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_19/bd_fb99_dlmb_0/bd_fb99_ilmb_0_in_context.xdc] for cell 'inst/microblaze_local_memory/dlmb'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_19/bd_fb99_dlmb_0/bd_fb99_ilmb_0_in_context.xdc] for cell 'inst/microblaze_local_memory/dlmb'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_20/bd_fb99_ilmb_0/bd_fb99_ilmb_0_in_context.xdc] for cell 'inst/microblaze_local_memory/ilmb'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_20/bd_fb99_ilmb_0/bd_fb99_ilmb_0_in_context.xdc] for cell 'inst/microblaze_local_memory/ilmb'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_21/bd_fb99_lmb_bram_0/bd_fb99_lmb_bram_0_in_context.xdc] for cell 'inst/microblaze_local_memory/lmb_bram'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_21/bd_fb99_lmb_bram_0/bd_fb99_lmb_bram_0_in_context.xdc] for cell 'inst/microblaze_local_memory/lmb_bram'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_22/bd_fb99_lmb_bram_if_cntlr_0/bd_fb99_lmb_bram_if_cntlr_0_in_context.xdc] for cell 'inst/microblaze_local_memory/lmb_bram_if_cntlr'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_22/bd_fb99_lmb_bram_if_cntlr_0/bd_fb99_lmb_bram_if_cntlr_0_in_context.xdc] for cell 'inst/microblaze_local_memory/lmb_bram_if_cntlr'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_23/bd_fb99_microblaze_cmc_0/bd_fb99_microblaze_cmc_0_in_context.xdc] for cell 'inst/microblaze_cmc'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_23/bd_fb99_microblaze_cmc_0/bd_fb99_microblaze_cmc_0_in_context.xdc] for cell 'inst/microblaze_cmc'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_24/bd_fb99_microblaze_axi_vip_0/bd_fb99_microblaze_axi_vip_0_in_context.xdc] for cell 'inst/microblaze_axi_vip'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_24/bd_fb99_microblaze_axi_vip_0/bd_fb99_microblaze_axi_vip_0_in_context.xdc] for cell 'inst/microblaze_axi_vip'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_25/bd_fb99_reachout_axi_vip_0/bd_fb99_reachout_axi_vip_0_in_context.xdc] for cell 'inst/reachout_axi_vip'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_25/bd_fb99_reachout_axi_vip_0/bd_fb99_reachout_axi_vip_0_in_context.xdc] for cell 'inst/reachout_axi_vip'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_26/bd_fb99_msp432_bsl_crc_gen_0/bd_fb99_msp432_bsl_crc_gen_0_in_context.xdc] for cell 'inst/msp432_bsl_crc_gen'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_26/bd_fb99_msp432_bsl_crc_gen_0/bd_fb99_msp432_bsl_crc_gen_0_in_context.xdc] for cell 'inst/msp432_bsl_crc_gen'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_27/bd_fb99_psreset_cmc_0/bd_fb99_psreset_cmc_0_in_context.xdc] for cell 'inst/psreset_cmc'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_27/bd_fb99_psreset_cmc_0/bd_fb99_psreset_cmc_0_in_context.xdc] for cell 'inst/psreset_cmc'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_28/bd_fb99_reg_map_bram_0/bd_fb99_reg_map_bram_0_in_context.xdc] for cell 'inst/reg_map_bram'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_28/bd_fb99_reg_map_bram_0/bd_fb99_reg_map_bram_0_in_context.xdc] for cell 'inst/reg_map_bram'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_29/bd_fb99_axi_bram_ctrl_regmap_cmc_0/bd_fb99_axi_bram_ctrl_regmap_cmc_0_in_context.xdc] for cell 'inst/axi_bram_ctrl_regmap_cmc'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_29/bd_fb99_axi_bram_ctrl_regmap_cmc_0/bd_fb99_axi_bram_ctrl_regmap_cmc_0_in_context.xdc] for cell 'inst/axi_bram_ctrl_regmap_cmc'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_30/bd_fb99_axi_bram_ctrl_regmap_host_0/bd_fb99_axi_bram_ctrl_regmap_host_0_in_context.xdc] for cell 'inst/axi_bram_ctrl_regmap_host'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_30/bd_fb99_axi_bram_ctrl_regmap_host_0/bd_fb99_axi_bram_ctrl_regmap_host_0_in_context.xdc] for cell 'inst/axi_bram_ctrl_regmap_host'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_37/bd_fb99_freerun_counter_0/bd_fb99_freerun_counter_0_in_context.xdc] for cell 'inst/freerun_counter'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_37/bd_fb99_freerun_counter_0/bd_fb99_freerun_counter_0_in_context.xdc] for cell 'inst/freerun_counter'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_38/bd_fb99_axi_gpio_qsfp_0/bd_fb99_axi_gpio_qsfp_0_in_context.xdc] for cell 'inst/qsfp_gpio_hierarchy/axi_gpio_qsfp'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_38/bd_fb99_axi_gpio_qsfp_0/bd_fb99_axi_gpio_qsfp_0_in_context.xdc] for cell 'inst/qsfp_gpio_hierarchy/axi_gpio_qsfp'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_48/bd_fb99_and_gate_0/bd_fb99_and_gate_0_in_context.xdc] for cell 'inst/reset_gen/and_gate'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_48/bd_fb99_and_gate_0/bd_fb99_and_gate_0_in_context.xdc] for cell 'inst/reset_gen/and_gate'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_49/bd_fb99_reset_inverter_0/bd_fb99_reset_inverter_0_in_context.xdc] for cell 'inst/reset_gen/reset_inverter'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_49/bd_fb99_reset_inverter_0/bd_fb99_reset_inverter_0_in_context.xdc] for cell 'inst/reset_gen/reset_inverter'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/synth/cms_cms_subsystem_0_0_ooc.xdc] for cell 'inst'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/synth/cms_cms_subsystem_0_0_ooc.xdc] for cell 'inst'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3150.754 ; gain = 0.000 ; free physical = 425949 ; free virtual = 466930
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.09 ; elapsed = 00:00:00.03 . Memory (MB): peak = 3150.754 ; gain = 0.000 ; free physical = 425948 ; free virtual = 466929
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/home/ubuntu/XilinxTools/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 3150.754 ; gain = 573.227 ; free physical = 426057 ; free virtual = 467039
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2332.020; parent = 2146.776; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4168.500; parent = 3150.758; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu250-figd2104-2-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 3150.754 ; gain = 573.227 ; free physical = 426057 ; free virtual = 467039
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2332.020; parent = 2146.776; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4168.500; parent = 3150.758; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for inst. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/build_info_cmc. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/build_info_host. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_gpio_timebase. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_gpio_cmc_mb_rst_n. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_gpio_hbm_temp. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_gpio_wdt. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_gpio_mb_intr. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_gpio_mutex_cmc. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_gpio_mutex_host. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_intc_cmc. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_intc_host. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_timebase_wdt. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_uartlite_satellite. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_uartlite_usb. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_ic_cmc_local/xbar. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_ic_cmc_local. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_ic_mgmt/xbar. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_ic_mgmt. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_bram_ctrl_firmware. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/microblaze_local_memory/dlmb. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/microblaze_local_memory/ilmb. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/microblaze_local_memory/lmb_bram. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/microblaze_local_memory/lmb_bram_if_cntlr. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/microblaze_cmc. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/microblaze_axi_vip. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/reachout_axi_vip. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/msp432_bsl_crc_gen. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/psreset_cmc. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/reg_map_bram. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_bram_ctrl_regmap_cmc. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/axi_bram_ctrl_regmap_host. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/concat_intr_cmc. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/concat_hbm_temp. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/concat_host_interrupts. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/gnd_bus_1_hbm. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/gnd_bus_7_hbm. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/gnd_bus_1_interrupts. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/freerun_counter. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/qsfp_gpio_hierarchy/axi_gpio_qsfp. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/qsfp_gpio_hierarchy/concat_1. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/qsfp_gpio_hierarchy/concat_2. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/qsfp_gpio_hierarchy/gnd_bus_1. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/qsfp_gpio_hierarchy/slice_gpio1_0. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/qsfp_gpio_hierarchy/slice_gpio1_1. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/qsfp_gpio_hierarchy/slice_gpio1_2. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/qsfp_gpio_hierarchy/slice_gpio2_0. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/qsfp_gpio_hierarchy/slice_gpio2_1. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/qsfp_gpio_hierarchy/slice_gpio2_2. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/reset_gen/and_gate. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/reset_gen/reset_inverter. (constraint file  auto generated constraint).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 3150.754 ; gain = 573.227 ; free physical = 426057 ; free virtual = 467039
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2332.020; parent = 2146.776; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4168.500; parent = 3150.758; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 3150.754 ; gain = 573.227 ; free physical = 426056 ; free virtual = 467038
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2332.020; parent = 2146.776; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4168.500; parent = 3150.758; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 12288 (col length:96)
+BRAMs: 5376 (col length: RAMB18 384 RAMB36 192)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:21 . Memory (MB): peak = 3150.754 ; gain = 573.227 ; free physical = 426042 ; free virtual = 467029
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2332.020; parent = 2146.776; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4168.500; parent = 3150.758; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:32 ; elapsed = 00:00:34 . Memory (MB): peak = 3432.754 ; gain = 855.227 ; free physical = 425564 ; free virtual = 466551
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2735.406; parent = 2550.270; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4450.500; parent = 3432.758; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:34 . Memory (MB): peak = 3433.754 ; gain = 856.227 ; free physical = 425563 ; free virtual = 466550
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2736.521; parent = 2551.386; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4451.500; parent = 3433.758; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:32 ; elapsed = 00:00:35 . Memory (MB): peak = 3453.793 ; gain = 876.266 ; free physical = 425560 ; free virtual = 466548
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2737.752; parent = 2552.616; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4471.539; parent = 3453.797; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3459.730 ; gain = 882.203 ; free physical = 425560 ; free virtual = 466548
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2738.253; parent = 2553.117; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4477.477; parent = 3459.734; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3459.730 ; gain = 882.203 ; free physical = 425560 ; free virtual = 466548
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2738.253; parent = 2553.117; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4477.477; parent = 3459.734; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3459.730 ; gain = 882.203 ; free physical = 425560 ; free virtual = 466548
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2738.394; parent = 2553.258; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4477.477; parent = 3459.734; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3459.730 ; gain = 882.203 ; free physical = 425560 ; free virtual = 466548
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2738.394; parent = 2553.258; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4477.477; parent = 3459.734; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3459.730 ; gain = 882.203 ; free physical = 425560 ; free virtual = 466548
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2738.394; parent = 2553.258; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4477.477; parent = 3459.734; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3459.730 ; gain = 882.203 ; free physical = 425560 ; free virtual = 466548
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2738.394; parent = 2553.258; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4477.477; parent = 3459.734; children = 1017.742
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+------------------------------------+----------+
+|      |BlackBox name                       |Instances |
++------+------------------------------------+----------+
+|1     |bd_fb99_xbar_0                      |         1|
+|2     |bd_fb99_xbar_1                      |         1|
+|3     |bd_fb99_axi_bram_ctrl_firmware_0    |         1|
+|4     |bd_fb99_axi_bram_ctrl_regmap_cmc_0  |         1|
+|5     |bd_fb99_axi_bram_ctrl_regmap_host_0 |         1|
+|6     |bd_fb99_axi_gpio_cmc_mb_rst_n_0     |         1|
+|7     |bd_fb99_axi_gpio_hbm_temp_0         |         1|
+|8     |bd_fb99_axi_gpio_mb_intr_0          |         1|
+|9     |bd_fb99_axi_gpio_mutex_cmc_0        |         1|
+|10    |bd_fb99_axi_gpio_mutex_host_0       |         1|
+|11    |bd_fb99_axi_gpio_timebase_0         |         1|
+|12    |bd_fb99_axi_gpio_wdt_0              |         1|
+|13    |bd_fb99_axi_intc_cmc_0              |         1|
+|14    |bd_fb99_axi_intc_host_0             |         1|
+|15    |bd_fb99_axi_timebase_wdt_0          |         1|
+|16    |bd_fb99_axi_uartlite_satellite_0    |         1|
+|17    |bd_fb99_axi_uartlite_usb_0          |         1|
+|18    |bd_fb99_build_info_cmc_0            |         1|
+|19    |bd_fb99_build_info_host_0           |         1|
+|20    |bd_fb99_freerun_counter_0           |         1|
+|21    |bd_fb99_microblaze_axi_vip_0        |         1|
+|22    |bd_fb99_microblaze_cmc_0            |         1|
+|23    |bd_fb99_msp432_bsl_crc_gen_0        |         1|
+|24    |bd_fb99_psreset_cmc_0               |         1|
+|25    |bd_fb99_reachout_axi_vip_0          |         1|
+|26    |bd_fb99_reg_map_bram_0              |         1|
+|27    |bd_fb99_dlmb_0                      |         1|
+|28    |bd_fb99_ilmb_0                      |         1|
+|29    |bd_fb99_lmb_bram_0                  |         1|
+|30    |bd_fb99_lmb_bram_if_cntlr_0         |         1|
+|31    |bd_fb99_axi_gpio_qsfp_0             |         1|
+|32    |bd_fb99_and_gate_0                  |         1|
+|33    |bd_fb99_reset_inverter_0            |         1|
++------+------------------------------------+----------+
+
+Report Cell Usage: 
++------+----------------------------------+------+
+|      |Cell                              |Count |
++------+----------------------------------+------+
+|1     |bd_fb99_and_gate                  |     1|
+|2     |bd_fb99_axi_bram_ctrl_firmware    |     1|
+|3     |bd_fb99_axi_bram_ctrl_regmap_cmc  |     1|
+|4     |bd_fb99_axi_bram_ctrl_regmap_host |     1|
+|5     |bd_fb99_axi_gpio_cmc_mb_rst_n     |     1|
+|6     |bd_fb99_axi_gpio_hbm_temp         |     1|
+|7     |bd_fb99_axi_gpio_mb_intr          |     1|
+|8     |bd_fb99_axi_gpio_mutex_cmc        |     1|
+|9     |bd_fb99_axi_gpio_mutex_host       |     1|
+|10    |bd_fb99_axi_gpio_qsfp             |     1|
+|11    |bd_fb99_axi_gpio_timebase         |     1|
+|12    |bd_fb99_axi_gpio_wdt              |     1|
+|13    |bd_fb99_axi_intc_cmc              |     1|
+|14    |bd_fb99_axi_intc_host             |     1|
+|15    |bd_fb99_axi_timebase_wdt          |     1|
+|16    |bd_fb99_axi_uartlite_satellite    |     1|
+|17    |bd_fb99_axi_uartlite_usb          |     1|
+|18    |bd_fb99_build_info_cmc            |     1|
+|19    |bd_fb99_build_info_host           |     1|
+|20    |bd_fb99_dlmb                      |     1|
+|21    |bd_fb99_freerun_counter           |     1|
+|22    |bd_fb99_ilmb                      |     1|
+|23    |bd_fb99_lmb_bram                  |     1|
+|24    |bd_fb99_lmb_bram_if_cntlr         |     1|
+|25    |bd_fb99_microblaze_axi_vip        |     1|
+|26    |bd_fb99_microblaze_cmc            |     1|
+|27    |bd_fb99_msp432_bsl_crc_gen        |     1|
+|28    |bd_fb99_psreset_cmc               |     1|
+|29    |bd_fb99_reachout_axi_vip          |     1|
+|30    |bd_fb99_reg_map_bram              |     1|
+|31    |bd_fb99_reset_inverter            |     1|
+|32    |bd_fb99_xbar                      |     2|
++------+----------------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3459.730 ; gain = 882.203 ; free physical = 425560 ; free virtual = 466548
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2738.409; parent = 2553.273; children = 185.418
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4477.477; parent = 3459.734; children = 1017.742
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 65 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 3459.730 ; gain = 782.461 ; free physical = 425587 ; free virtual = 466575
+Synthesis Optimization Complete : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3459.738 ; gain = 882.203 ; free physical = 425587 ; free virtual = 466575
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3459.738 ; gain = 0.000 ; free physical = 425692 ; free virtual = 466679
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Generating merged BMM file for the design top 'cms_cms_subsystem_0_0'...
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3552.730 ; gain = 0.000 ; free physical = 425578 ; free virtual = 466565
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: 26c8ee08
+INFO: [Common 17-83] Releasing license: Synthesis
+186 Infos, 246 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:51 ; elapsed = 00:00:52 . Memory (MB): peak = 3564.699 ; gain = 2122.121 ; free physical = 425780 ; free virtual = 466767
+INFO: [Common 17-1381] The checkpoint '/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/cms_cms_subsystem_0_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP cms_cms_subsystem_0_0, cache-ID = 560b1d92a8237437
+INFO: [Coretcl 2-1174] Renamed 49 cell refs.
+INFO: [Common 17-1381] The checkpoint '/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/cms_cms_subsystem_0_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file cms_cms_subsystem_0_0_utilization_synth.rpt -pb cms_cms_subsystem_0_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Wed Jul 12 20:31:59 2023...

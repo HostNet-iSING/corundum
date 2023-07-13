@@ -1,0 +1,617 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Wed Jul 12 20:18:59 2023
+# Process ID: 12554
+# Current directory: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_reg_map_bram_0_synth_1
+# Command line: vivado -log bd_fb99_reg_map_bram_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source bd_fb99_reg_map_bram_0.tcl
+# Log file: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_reg_map_bram_0_synth_1/bd_fb99_reg_map_bram_0.vds
+# Journal file: /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_reg_map_bram_0_synth_1/vivado.jou
+# Running On: desktop02, OS: Linux, CPU Frequency: 1742.959 MHz, CPU Physical cores: 16, Host memory: 540764 MB
+#-----------------------------------------------------------
+source bd_fb99_reg_map_bram_0.tcl -notrace
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: bd_fb99_reg_map_bram_0
+Command: synth_design -top bd_fb99_reg_map_bram_0 -part xcu250-figd2104-2-e -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Device 21-403] Loading part xcu250-figd2104-2-e
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 12773
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/home/ubuntu/XilinxTools/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2924.336 ; gain = 372.734 ; free physical = 419856 ; free virtual = 460600
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2137.366; parent = 1994.105; children = 143.261
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 3939.043; parent = 2927.309; children = 1011.734
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'bd_fb99_reg_map_bram_0' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_28/synth/bd_fb99_reg_map_bram_0.vhd:80]
+WARNING: [Synth 8-3819] Generic 'FPGA_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'FW_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'FW_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'BOARD_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'BOARD_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'BUILD_DATE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'GIT_HASH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RELEASE_INFO' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'IF_COUNT' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PORTS_PER_IF' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'SCHED_PER_IF' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PORT_MASK' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CLK_PERIOD_NS_NUM' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CLK_PERIOD_NS_DENOM' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_CLOCK_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_CLOCK_CDC_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_PORT_CDC_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_PEROUT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_PEROUT_COUNT' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'EVENT_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CPL_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_CPL_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'EVENT_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CPL_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_CPL_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'EVENT_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CPL_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_CPL_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_DESC_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_DESC_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_INDIR_TBL_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_SCHEDULER_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_SCHEDULER_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TDMA_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_TS_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CPL_FIFO_DEPTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CHECKSUM_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_HASH_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_CHECKSUM_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_FIFO_DEPTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_FIFO_DEPTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'MAX_TX_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'MAX_RX_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_RAM_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_RAM_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DDR_CH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DDR_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXI_DDR_ID_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXI_DDR_MAX_BURST_LEN' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_CTRL_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_DMA_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_AXIS_DIRECT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_AXIS_SYNC_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_AXIS_IF_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_STAT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_IMM_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_IMM_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_LEN_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_TAG_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RAM_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RAM_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'IRQ_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_CTRL_DATA_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_CTRL_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_APP_CTRL_DATA_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_APP_CTRL_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_TX_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_TX_FIFO_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_TX_TS_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_RX_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_RX_FIFO_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_DMA_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_PCIE_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_INC_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_ID_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_PCIE_DATA_WIDTH' not present in instantiated entity will be ignored
+	Parameter C_FAMILY bound to: virtexuplus - type: string 
+	Parameter C_XDEVICEFAMILY bound to: virtexuplus - type: string 
+	Parameter C_ELABORATION_DIR bound to: ./ - type: string 
+	Parameter C_INTERFACE_TYPE bound to: 0 - type: integer 
+	Parameter C_AXI_TYPE bound to: 1 - type: integer 
+	Parameter C_AXI_SLAVE_TYPE bound to: 0 - type: integer 
+	Parameter C_USE_BRAM_BLOCK bound to: 1 - type: integer 
+	Parameter C_ENABLE_32BIT_ADDRESS bound to: 1 - type: integer 
+	Parameter C_CTRL_ECC_ALGO bound to: NONE - type: string 
+	Parameter C_HAS_AXI_ID bound to: 0 - type: integer 
+	Parameter C_AXI_ID_WIDTH bound to: 4 - type: integer 
+	Parameter C_MEM_TYPE bound to: 2 - type: integer 
+	Parameter C_BYTE_SIZE bound to: 8 - type: integer 
+	Parameter C_ALGORITHM bound to: 1 - type: integer 
+	Parameter C_PRIM_TYPE bound to: 1 - type: integer 
+	Parameter C_LOAD_INIT_FILE bound to: 0 - type: integer 
+	Parameter C_INIT_FILE_NAME bound to: no_coe_file_loaded - type: string 
+	Parameter C_INIT_FILE bound to: bd_fb99_reg_map_bram_0.mem - type: string 
+	Parameter C_USE_DEFAULT_DATA bound to: 0 - type: integer 
+	Parameter C_DEFAULT_DATA bound to: 0 - type: string 
+	Parameter C_HAS_RSTA bound to: 1 - type: integer 
+	Parameter C_RST_PRIORITY_A bound to: CE - type: string 
+	Parameter C_RSTRAM_A bound to: 0 - type: integer 
+	Parameter C_INITA_VAL bound to: 0 - type: string 
+	Parameter C_HAS_ENA bound to: 1 - type: integer 
+	Parameter C_HAS_REGCEA bound to: 0 - type: integer 
+	Parameter C_USE_BYTE_WEA bound to: 1 - type: integer 
+	Parameter C_WEA_WIDTH bound to: 4 - type: integer 
+	Parameter C_WRITE_MODE_A bound to: WRITE_FIRST - type: string 
+	Parameter C_WRITE_WIDTH_A bound to: 32 - type: integer 
+	Parameter C_READ_WIDTH_A bound to: 32 - type: integer 
+	Parameter C_WRITE_DEPTH_A bound to: 2048 - type: integer 
+	Parameter C_READ_DEPTH_A bound to: 2048 - type: integer 
+	Parameter C_ADDRA_WIDTH bound to: 32 - type: integer 
+	Parameter C_HAS_RSTB bound to: 1 - type: integer 
+	Parameter C_RST_PRIORITY_B bound to: CE - type: string 
+	Parameter C_RSTRAM_B bound to: 0 - type: integer 
+	Parameter C_INITB_VAL bound to: 0 - type: string 
+	Parameter C_HAS_ENB bound to: 1 - type: integer 
+	Parameter C_HAS_REGCEB bound to: 0 - type: integer 
+	Parameter C_USE_BYTE_WEB bound to: 1 - type: integer 
+	Parameter C_WEB_WIDTH bound to: 4 - type: integer 
+	Parameter C_WRITE_MODE_B bound to: WRITE_FIRST - type: string 
+	Parameter C_WRITE_WIDTH_B bound to: 32 - type: integer 
+	Parameter C_READ_WIDTH_B bound to: 32 - type: integer 
+	Parameter C_WRITE_DEPTH_B bound to: 2048 - type: integer 
+	Parameter C_READ_DEPTH_B bound to: 2048 - type: integer 
+	Parameter C_ADDRB_WIDTH bound to: 32 - type: integer 
+	Parameter C_HAS_MEM_OUTPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_MEM_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_HAS_MUX_OUTPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_MUX_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_MUX_PIPELINE_STAGES bound to: 0 - type: integer 
+	Parameter C_HAS_SOFTECC_INPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_SOFTECC_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_USE_SOFTECC bound to: 0 - type: integer 
+	Parameter C_USE_ECC bound to: 0 - type: integer 
+	Parameter C_EN_ECC_PIPE bound to: 0 - type: integer 
+	Parameter C_READ_LATENCY_A bound to: 1 - type: integer 
+	Parameter C_READ_LATENCY_B bound to: 1 - type: integer 
+	Parameter C_HAS_INJECTERR bound to: 0 - type: integer 
+	Parameter C_SIM_COLLISION_CHECK bound to: ALL - type: string 
+	Parameter C_COMMON_CLK bound to: 1 - type: integer 
+	Parameter C_DISABLE_WARN_BHV_COLL bound to: 0 - type: integer 
+	Parameter C_EN_SLEEP_PIN bound to: 0 - type: integer 
+	Parameter C_USE_URAM bound to: 0 - type: integer 
+	Parameter C_EN_RDADDRA_CHG bound to: 0 - type: integer 
+	Parameter C_EN_RDADDRB_CHG bound to: 0 - type: integer 
+	Parameter C_EN_DEEPSLEEP_PIN bound to: 0 - type: integer 
+	Parameter C_EN_SHUTDOWN_PIN bound to: 0 - type: integer 
+	Parameter C_EN_SAFETY_CKT bound to: 1 - type: integer 
+	Parameter C_DISABLE_WARN_BHV_RANGE bound to: 0 - type: integer 
+	Parameter C_COUNT_36K_BRAM bound to: 2 - type: string 
+	Parameter C_COUNT_18K_BRAM bound to: 0 - type: string 
+	Parameter C_EST_POWER_SUMMARY bound to: Estimated Power for IP     :     7.734465 mW - type: string 
+INFO: [Synth 8-3491] module 'blk_mem_gen_v8_4_5' declared at '/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/25a8/hdl/blk_mem_gen_v8_4_vhsyn_rfs.vhd:195321' bound to instance 'U0' of component 'blk_mem_gen_v8_4_5' [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_28/synth/bd_fb99_reg_map_bram_0.vhd:255]
+INFO: [Synth 8-256] done synthesizing module 'bd_fb99_reg_map_bram_0' (0#1) [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_28/synth/bd_fb99_reg_map_bram_0.vhd:80]
+WARNING: [Synth 8-3301] Unused top level parameter/generic FPGA_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic FW_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic FW_VER
+WARNING: [Synth 8-3301] Unused top level parameter/generic BOARD_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic BOARD_VER
+WARNING: [Synth 8-3301] Unused top level parameter/generic BUILD_DATE
+WARNING: [Synth 8-3301] Unused top level parameter/generic GIT_HASH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RELEASE_INFO
+WARNING: [Synth 8-3301] Unused top level parameter/generic IF_COUNT
+WARNING: [Synth 8-3301] Unused top level parameter/generic PORTS_PER_IF
+WARNING: [Synth 8-3301] Unused top level parameter/generic SCHED_PER_IF
+WARNING: [Synth 8-3301] Unused top level parameter/generic PORT_MASK
+WARNING: [Synth 8-3301] Unused top level parameter/generic CLK_PERIOD_NS_NUM
+WARNING: [Synth 8-3301] Unused top level parameter/generic CLK_PERIOD_NS_DENOM
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_CLOCK_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_CLOCK_CDC_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_PORT_CDC_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_PEROUT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_PEROUT_COUNT
+WARNING: [Synth 8-3301] Unused top level parameter/generic EVENT_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CPL_QUEUE_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic EVENT_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CPL_QUEUE_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic EVENT_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CPL_QUEUE_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_DESC_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_DESC_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_INDIR_TBL_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_SCHEDULER_OP_TABLE_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_SCHEDULER_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TDMA_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic PTP_TS_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CPL_FIFO_DEPTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_CHECKSUM_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_HASH_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_CHECKSUM_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_FIFO_DEPTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_FIFO_DEPTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic MAX_TX_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic MAX_RX_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic TX_RAM_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic RX_RAM_SIZE
+WARNING: [Synth 8-3301] Unused top level parameter/generic DDR_CH
+WARNING: [Synth 8-3301] Unused top level parameter/generic DDR_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXI_DDR_ID_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXI_DDR_MAX_BURST_LEN
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_ID
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_CTRL_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_DMA_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_AXIS_DIRECT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_AXIS_SYNC_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_AXIS_IF_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic APP_STAT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_IMM_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_IMM_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_LEN_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic DMA_TAG_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RAM_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic RAM_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic IRQ_INDEX_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_CTRL_DATA_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_CTRL_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_APP_CTRL_DATA_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIL_APP_CTRL_ADDR_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_TX_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_TX_FIFO_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_TX_TS_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_RX_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_ETH_RX_FIFO_PIPELINE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_DMA_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_PCIE_ENABLE
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_INC_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic STAT_ID_WIDTH
+WARNING: [Synth 8-3301] Unused top level parameter/generic AXIS_PCIE_DATA_WIDTH
+WARNING: [Synth 8-7129] Port CLKB in module blk_mem_output_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SBITERR_I in module blk_mem_output_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DBITERR_I in module blk_mem_output_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[10] in module blk_mem_output_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[9] in module blk_mem_output_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[8] in module blk_mem_output_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[7] in module blk_mem_output_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[6] in module blk_mem_output_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[5] in module blk_mem_output_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[4] in module blk_mem_output_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[3] in module blk_mem_output_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[2] in module blk_mem_output_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[1] in module blk_mem_output_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port RDADDRECC_I[0] in module blk_mem_output_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SBITERR in module blk_mem_gen_prim_wrapper__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DBITERR in module blk_mem_gen_prim_wrapper__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SSRA in module blk_mem_gen_prim_wrapper__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SSRB in module blk_mem_gen_prim_wrapper__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port INJECTSBITERR in module blk_mem_gen_prim_wrapper__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port INJECTDBITERR in module blk_mem_gen_prim_wrapper__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ECCPIPECE in module blk_mem_gen_prim_wrapper__parameterized0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SBITERR in module blk_mem_gen_prim_wrapper is either unconnected or has no load
+WARNING: [Synth 8-7129] Port DBITERR in module blk_mem_gen_prim_wrapper is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SSRA in module blk_mem_gen_prim_wrapper is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SSRB in module blk_mem_gen_prim_wrapper is either unconnected or has no load
+WARNING: [Synth 8-7129] Port INJECTSBITERR in module blk_mem_gen_prim_wrapper is either unconnected or has no load
+WARNING: [Synth 8-7129] Port INJECTDBITERR in module blk_mem_gen_prim_wrapper is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ECCPIPECE in module blk_mem_gen_prim_wrapper is either unconnected or has no load
+WARNING: [Synth 8-7129] Port REGCEA[0] in module blk_mem_gen_generic_cstr is either unconnected or has no load
+WARNING: [Synth 8-7129] Port REGCEB[0] in module blk_mem_gen_generic_cstr is either unconnected or has no load
+WARNING: [Synth 8-7129] Port INJECTSBITERR in module blk_mem_gen_generic_cstr is either unconnected or has no load
+WARNING: [Synth 8-7129] Port INJECTDBITERR in module blk_mem_gen_generic_cstr is either unconnected or has no load
+WARNING: [Synth 8-7129] Port REGCEA in module blk_mem_input_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port REGCEB in module blk_mem_input_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port INJECTDBITERR in module blk_mem_input_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port INJECTSBITERR in module blk_mem_input_block is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[31] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[30] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[29] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[28] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[27] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[26] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[25] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[24] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[23] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[22] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[21] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[20] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[19] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[18] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[17] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[16] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[15] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[14] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[13] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[1] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRA[0] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port CLKB in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[31] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[30] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[29] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[28] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[27] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[26] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[25] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[24] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[23] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[22] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[21] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[20] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[19] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[18] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[17] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[16] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[15] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[14] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[13] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[1] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ADDRB[0] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AClk in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_ARESETN in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWID[3] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWID[2] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWID[1] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWID[0] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[31] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[30] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[29] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[28] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[27] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[26] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[25] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[24] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[23] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[22] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[21] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[20] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[19] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[18] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWADDR[17] in module blk_mem_gen_v8_4_5_synth is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 3180.211 ; gain = 628.609 ; free physical = 420218 ; free virtual = 460986
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2351.696; parent = 2208.588; children = 143.261
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4191.949; parent = 3180.215; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 3183.180 ; gain = 631.578 ; free physical = 420220 ; free virtual = 460988
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2351.696; parent = 2208.588; children = 143.261
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4194.918; parent = 3183.184; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 3183.180 ; gain = 631.578 ; free physical = 420219 ; free virtual = 460987
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2351.696; parent = 2208.588; children = 143.261
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4194.918; parent = 3183.184; children = 1011.734
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3194.148 ; gain = 0.000 ; free physical = 420228 ; free virtual = 460996
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_28/bd_fb99_reg_map_bram_0_ooc.xdc] for cell 'U0'
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_28/bd_fb99_reg_map_bram_0_ooc.xdc] for cell 'U0'
+Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_reg_map_bram_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_reg_map_bram_0_synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3276.078 ; gain = 0.000 ; free physical = 419933 ; free virtual = 460729
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 3276.078 ; gain = 0.000 ; free physical = 419929 ; free virtual = 460724
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/home/ubuntu/XilinxTools/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 3276.078 ; gain = 724.477 ; free physical = 419572 ; free virtual = 460388
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2351.696; parent = 2208.588; children = 143.261
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4287.816; parent = 3276.082; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu250-figd2104-2-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 3276.078 ; gain = 724.477 ; free physical = 419571 ; free virtual = 460387
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2351.696; parent = 2208.588; children = 143.261
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4287.816; parent = 3276.082; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for U0. (constraint file  /home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_reg_map_bram_0_synth_1/dont_touch.xdc, line 6).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 3276.078 ; gain = 724.477 ; free physical = 419570 ; free virtual = 460386
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2351.696; parent = 2208.588; children = 143.261
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4287.816; parent = 3276.082; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 3276.078 ; gain = 724.477 ; free physical = 419556 ; free virtual = 460373
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2351.696; parent = 2208.588; children = 143.261
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4287.816; parent = 3276.082; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 4     
++---Registers : 
+	                5 Bit    Registers := 4     
+	                1 Bit    Registers := 16    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 12288 (col length:96)
+BRAMs: 5376 (col length: RAMB18 384 RAMB36 192)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:27 ; elapsed = 00:00:29 . Memory (MB): peak = 3276.078 ; gain = 724.477 ; free physical = 419519 ; free virtual = 460344
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2351.696; parent = 2208.588; children = 143.261
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4287.816; parent = 3276.082; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 3411.984 ; gain = 860.383 ; free physical = 418988 ; free virtual = 459836
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2603.015; parent = 2447.550; children = 155.465
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4423.723; parent = 3411.988; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 3422.000 ; gain = 870.398 ; free physical = 418986 ; free virtual = 459834
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2603.406; parent = 2448.028; children = 155.465
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4433.738; parent = 3422.004; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 3431.016 ; gain = 879.414 ; free physical = 418992 ; free virtual = 459835
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2603.953; parent = 2448.489; children = 155.465
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4442.754; parent = 3431.020; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:43 ; elapsed = 00:00:46 . Memory (MB): peak = 3436.953 ; gain = 885.352 ; free physical = 425751 ; free virtual = 466584
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2717.217; parent = 2530.951; children = 186.266
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4448.691; parent = 3436.957; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:43 ; elapsed = 00:00:46 . Memory (MB): peak = 3436.953 ; gain = 885.352 ; free physical = 425751 ; free virtual = 466583
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2717.217; parent = 2530.966; children = 186.266
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4448.691; parent = 3436.957; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:43 ; elapsed = 00:00:46 . Memory (MB): peak = 3436.953 ; gain = 885.352 ; free physical = 425742 ; free virtual = 466575
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2717.357; parent = 2531.112; children = 186.266
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4448.691; parent = 3436.957; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:43 ; elapsed = 00:00:47 . Memory (MB): peak = 3436.953 ; gain = 885.352 ; free physical = 425746 ; free virtual = 466579
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2717.396; parent = 2531.130; children = 186.267
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4448.691; parent = 3436.957; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:43 ; elapsed = 00:00:47 . Memory (MB): peak = 3436.953 ; gain = 885.352 ; free physical = 425750 ; free virtual = 466583
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2717.396; parent = 2531.130; children = 186.267
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4448.691; parent = 3436.957; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:43 ; elapsed = 00:00:47 . Memory (MB): peak = 3436.953 ; gain = 885.352 ; free physical = 425747 ; free virtual = 466580
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2717.396; parent = 2531.130; children = 186.267
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4448.691; parent = 3436.957; children = 1011.734
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name        | RTL Name                                                                                                                               | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|blk_mem_gen_v8_4_5 | inst_blk_mem_gen/gnbram.gnative_mem_map_bmg.native_mem_map_blk_mem_gen/valid.cstr/ramloop[1].ram.r/SAFETY_CKT_GEN.RSTA_SHFT_REG_reg[4] | 4      | 1     | NO           | NO                 | YES               | 1      | 0       | 
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |LUT2     |     5|
+|2     |LUT4     |     2|
+|3     |RAMB36E2 |     2|
+|4     |SRL16E   |     1|
+|5     |FDRE     |     9|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:43 ; elapsed = 00:00:47 . Memory (MB): peak = 3436.953 ; gain = 885.352 ; free physical = 425743 ; free virtual = 466576
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2717.396; parent = 2531.130; children = 186.267
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4448.691; parent = 3436.957; children = 1011.734
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 195 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 3436.953 ; gain = 792.453 ; free physical = 425770 ; free virtual = 466603
+Synthesis Optimization Complete : Time (s): cpu = 00:00:43 ; elapsed = 00:00:47 . Memory (MB): peak = 3436.961 ; gain = 885.352 ; free physical = 425767 ; free virtual = 466600
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3436.961 ; gain = 0.000 ; free physical = 425759 ; free virtual = 466592
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3550.551 ; gain = 0.000 ; free physical = 425685 ; free virtual = 466518
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: 580abe1e
+INFO: [Common 17-83] Releasing license: Synthesis
+21 Infos, 271 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:59 ; elapsed = 00:01:00 . Memory (MB): peak = 3550.551 ; gain = 2110.914 ; free physical = 425820 ; free virtual = 466653
+INFO: [Common 17-1381] The checkpoint '/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_reg_map_bram_0_synth_1/bd_fb99_reg_map_bram_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP bd_fb99_reg_map_bram_0, cache-ID = e56a0bada09afa68
+INFO: [Coretcl 2-1174] Renamed 8 cell refs.
+INFO: [Common 17-1381] The checkpoint '/home/ubuntu/git_repos/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_fb99_reg_map_bram_0_synth_1/bd_fb99_reg_map_bram_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file bd_fb99_reg_map_bram_0_utilization_synth.rpt -pb bd_fb99_reg_map_bram_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Wed Jul 12 20:20:11 2023...
