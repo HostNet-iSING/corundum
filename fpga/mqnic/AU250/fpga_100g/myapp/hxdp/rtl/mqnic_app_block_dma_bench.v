@@ -145,7 +145,7 @@ module mqnic_app_block #
     // hXDP parameters
     parameter AXIS_HXDP_IN_DATA_WIDTH = 256,
     parameter AXIS_HXDP_IN_KEEP_WIDTH = 32,
-    // parameter AXIS_HXDP_IN_TX_USER_WIDTH = 256,
+    parameter AXIS_HXDP_IN_TX_USER_WIDTH = 128,
     parameter AXIS_HXDP_IN_RX_USER_WIDTH = 128,
     parameter DIFF_AXIS_HXDP_USER = AXIS_HXDP_IN_RX_USER_WIDTH > AXIS_SYNC_RX_USER_WIDTH ? AXIS_HXDP_IN_RX_USER_WIDTH - AXIS_SYNC_RX_USER_WIDTH : AXIS_SYNC_RX_USER_WIDTH - AXIS_HXDP_IN_RX_USER_WIDTH,
     parameter AXIS_HXDP_OUT_DATA_WIDTH = 256,
@@ -835,12 +835,12 @@ wire [PORT_COUNT-1:0]                                       axis_rx_hxdp_out_tre
 wire [PORT_COUNT-1:0]                                       axis_rx_hxdp_out_tlast;
 wire [PORT_COUNT*AXIS_HXDP_IN_RX_USER_WIDTH-1:0]            axis_rx_hxdp_out_tuser;
 // DEBUG
-assign axis_rx_hxdp_out_tdata = axis_rx_hxdp_in_tdata;
-assign axis_rx_hxdp_out_tkeep = axis_rx_hxdp_in_tkeep;
-assign axis_rx_hxdp_out_tvalid = axis_rx_hxdp_in_tvalid;
-assign axis_rx_hxdp_out_tready = axis_rx_hxdp_in_tready;
-assign axis_rx_hxdp_out_tlast = axis_rx_hxdp_in_tlast;
-assign axis_rx_hxdp_out_tuser = axis_rx_hxdp_in_tuser;
+// assign axis_rx_hxdp_out_tdata = axis_rx_hxdp_in_tdata;
+// assign axis_rx_hxdp_out_tkeep = axis_rx_hxdp_in_tkeep;
+// assign axis_rx_hxdp_out_tvalid = axis_rx_hxdp_in_tvalid;
+// assign axis_rx_hxdp_out_tready = axis_rx_hxdp_in_tready;
+// assign axis_rx_hxdp_out_tlast = axis_rx_hxdp_in_tlast;
+// assign axis_rx_hxdp_out_tuser = axis_rx_hxdp_in_tuser;
 
 /* ---------------hXDP--------------- */
 genvar n;
@@ -895,62 +895,62 @@ for (n = 0; n < PORT_COUNT; n = n + 1) begin : hxdp
         .status_good_frame()
     );
 
-    // ebpf4fpga_datapath #(
-    //     // Structural configuration
-    //     .IF_COUNT(IF_COUNT),
-    //     .PORTS_PER_IF(PORTS_PER_IF),
-    //     .SCHED_PER_IF(SCHED_PER_IF),
-    //     .PORT_COUNT(PORT_COUNT),
+    ebpf4fpga_datapath #(
+        // Structural configuration
+        .IF_COUNT(IF_COUNT),
+        .PORTS_PER_IF(PORTS_PER_IF),
+        .SCHED_PER_IF(SCHED_PER_IF),
+        .PORT_COUNT(PORT_COUNT),
 
-    //     // Clock configuration
-    //     .CLK_PERIOD_NS_NUM(CLK_PERIOD_NS_NUM),
-    //     .CLK_PERIOD_NS_DENOM(CLK_PERIOD_NS_DENOM),
+        // Clock configuration
+        .CLK_PERIOD_NS_NUM(CLK_PERIOD_NS_NUM),
+        .CLK_PERIOD_NS_DENOM(CLK_PERIOD_NS_DENOM),
         
-    //     // Ethernet interface configuration (direct, sync)
-    //     .AXIS_SYNC_DATA_WIDTH(AXIS_HXDP_IN_DATA_WIDTH - 1),
-    //     .AXIS_SYNC_KEEP_WIDTH(AXIS_HXDP_IN_KEEP_WIDTH - 1),
-    //     .AXIS_SYNC_TX_USER_WIDTH(AXIS_HXDP_IN_TX_USER_WIDTH - 1),
-    //     .AXIS_SYNC_RX_USER_WIDTH(AXIS_HXDP_IN_RX_USER_WIDTH - 1),
-    // )
-    // hxdp_core (
-    //     .clk(clk),
-    //     .reset(rst),
+        // Ethernet interface configuration (direct, sync)
+        .AXIS_SYNC_DATA_WIDTH(AXIS_HXDP_IN_DATA_WIDTH - 1),
+        .AXIS_SYNC_KEEP_WIDTH(AXIS_HXDP_IN_KEEP_WIDTH - 1),
+        .AXIS_SYNC_TX_USER_WIDTH(AXIS_HXDP_IN_TX_USER_WIDTH - 1),
+        .AXIS_SYNC_RX_USER_WIDTH(AXIS_HXDP_IN_RX_USER_WIDTH - 1)
+    )
+    hxdp_core (
+        .clk(clk),
+        .reset(rst),
 
-    //     // Packet input
-    //     .s0_axis_tvalid (s_axis_sync_rx_tvalid  [n] ),          
-    //     .s0_axis_tdata  (s_axis_sync_rx_tdata   [n*AXIS_DATA_WIDTH +: AXIS_DATA_WIDTH]  ),     
-    //     .s0_axis_tkeep  (s_axis_sync_rx_tkeep   [n*AXIS_SYNC_KEEP_WIDTH +: AXIS_SYNC_KEEP_WIDTH]    ),         
-    //     .s0_axis_tuser  (s_axis_sync_rx_tuser   [n*AXIS_SYNC_RX_USER_WIDTH +: AXIS_SYNC_RX_USER_WIDTH]  ),     
-    //     .s0_axis_tlast  (s_axis_sync_rx_tlast   [n] ),  
-    //     .s0_axis_tready (s_axis_sync_rx_tready  [n] ),   
-    //     // Packet output
-    //     .m0_axis_tvalid  (m_axis_sync_rx_tvalid [n] ),    
-    //     .m0_axis_tdata   (m_axis_sync_rx_tdata  [n*AXIS_DATA_WIDTH +: AXIS_DATA_WIDTH]  ) ,   
-    //     .m0_axis_tkeep   (m_axis_sync_rx_tkeep  [n*AXIS_SYNC_KEEP_WIDTH +: AXIS_SYNC_KEEP_WIDTH]    ) ,  
-    //     .m0_axis_tuser   (m_axis_sync_rx_tuser  [n*AXIS_SYNC_RX_USER_WIDTH +: AXIS_SYNC_RX_USER_WIDTH]  ) ,    
-    //     .m0_axis_tlast   (m_axis_sync_rx_tlast  [n] ) ,
-    //     .m0_axis_tready  (m_axis_sync_rx_tready [n] ),       
-    //     // Control from Host
-    //     .S_AXI_ACLK       (),  
-    //     .S_AXI_ARESETN    (),  
-    //     .S_AXI_AWADDR     (),   //: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0;     
-    //     .S_AXI_AWVALID    (),   //: in std_logic; 
-    //     .S_AXI_WDATA      (),  //: in std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0; 
-    //     .S_AXI_WSTRB      (),   //: in std_logic_vector(C_S00_AXI_DATA_WIDTH/8-1 downto 0;   
-    //     .S_AXI_WVALID     (),    //: in std_logic;                                    
-    //     .S_AXI_BREADY     (),   //: in std_logic;                                    
-    //     .S_AXI_ARADDR     (),   //: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0;
-    //     .S_AXI_ARVALID    (),     //: in std_logic;                                     
-    //     .S_AXI_RREADY     (),   //: in std_logic;                                     
-    //     .S_AXI_ARREADY    (),    //: out std_logic;             
-    //     .S_AXI_RDATA      (),     //: out std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0;
-    //     .S_AXI_RRESP      (),     //: out std_logic_vector(1 downto 0;
-    //     .S_AXI_RVALID     (),  //: out std_logic;                                   
-    //     .S_AXI_WREADY     (),    //: out std_logic; 
-    //     .S_AXI_BRESP      (),       //: out std_logic_vector(1 downto 0;                         
-    //     .S_AXI_BVALID     (),   //: out std_logic;                                    
-    //     .S_AXI_AWREADY    ()      //: out std_logic
-    // );
+        // Packet input
+        .s0_axis_tvalid (axis_rx_hxdp_in_tvalid  [n] ),          
+        .s0_axis_tdata  (axis_rx_hxdp_in_tdata   [n*AXIS_HXDP_IN_DATA_WIDTH +: AXIS_HXDP_IN_DATA_WIDTH]  ),     
+        .s0_axis_tkeep  (axis_rx_hxdp_in_tkeep   [n*AXIS_HXDP_IN_KEEP_WIDTH +: AXIS_HXDP_IN_KEEP_WIDTH]    ),         
+        .s0_axis_tuser  (axis_rx_hxdp_in_tuser   [n*AXIS_HXDP_IN_RX_USER_WIDTH +: AXIS_HXDP_IN_RX_USER_WIDTH]  ),     
+        .s0_axis_tlast  (axis_rx_hxdp_in_tlast   [n] ),  
+        .s0_axis_tready (axis_rx_hxdp_in_tready  [n] ),   
+        // Packet output
+        .m0_axis_tvalid  (axis_rx_hxdp_out_tvalid   [n] ),    
+        .m0_axis_tdata   (axis_rx_hxdp_out_tdata    [n*AXIS_HXDP_IN_DATA_WIDTH +: AXIS_HXDP_IN_DATA_WIDTH]  ) ,   
+        .m0_axis_tkeep   (axis_rx_hxdp_out_tkeep    [n*AXIS_HXDP_IN_KEEP_WIDTH +: AXIS_HXDP_IN_KEEP_WIDTH]    ) ,  
+        .m0_axis_tuser   (axis_rx_hxdp_out_tuser    [n*AXIS_HXDP_IN_RX_USER_WIDTH +: AXIS_HXDP_IN_RX_USER_WIDTH]  ) ,    
+        .m0_axis_tlast   (axis_rx_hxdp_out_tlast    [n] ) ,
+        .m0_axis_tready  (axis_rx_hxdp_out_tready   [n] ),       
+        // Control from Host
+        .S_AXI_ACLK       (),  
+        .S_AXI_ARESETN    (),  
+        .S_AXI_AWADDR     (),   //: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0;     
+        .S_AXI_AWVALID    (),   //: in std_logic; 
+        .S_AXI_WDATA      (),  //: in std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0; 
+        .S_AXI_WSTRB      (),   //: in std_logic_vector(C_S00_AXI_DATA_WIDTH/8-1 downto 0;   
+        .S_AXI_WVALID     (),    //: in std_logic;                                    
+        .S_AXI_BREADY     (),   //: in std_logic;                                    
+        .S_AXI_ARADDR     (),   //: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0;
+        .S_AXI_ARVALID    (),     //: in std_logic;                                     
+        .S_AXI_RREADY     (),   //: in std_logic;                                     
+        .S_AXI_ARREADY    (),    //: out std_logic;             
+        .S_AXI_RDATA      (),     //: out std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0;
+        .S_AXI_RRESP      (),     //: out std_logic_vector(1 downto 0;
+        .S_AXI_RVALID     (),  //: out std_logic;                                   
+        .S_AXI_WREADY     (),    //: out std_logic; 
+        .S_AXI_BRESP      (),       //: out std_logic_vector(1 downto 0;                         
+        .S_AXI_BVALID     (),   //: out std_logic;                                    
+        .S_AXI_AWREADY    ()      //: out std_logic
+    );
 
     // hxdp out --> app out
     axis_fifo_adapter #(

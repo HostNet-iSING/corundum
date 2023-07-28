@@ -19,7 +19,7 @@ entity axis_to_xdp is
         AXIS_SYNC_DATA_WIDTH		: integer ;
         AXIS_SYNC_KEEP_WIDTH		: integer ;
         AXIS_SYNC_TX_USER_WIDTH		: integer ;
-        AXIS_SYNC_RX_USER_WIDTH		: integer ;
+        AXIS_SYNC_RX_USER_WIDTH		: integer 
 	);
 
 	port (
