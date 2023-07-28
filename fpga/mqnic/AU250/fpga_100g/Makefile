@@ -2,7 +2,8 @@
 TARGETS:=
 
 # Subdirectories
-SUBDIRS = fpga
+# SUBDIRS = fpga
+SUBDIRS = fpga_app_dma_bench
 SUBDIRS_CLEAN = $(patsubst %,%.clean,$(SUBDIRS))
 
 # Rules

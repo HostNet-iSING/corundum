@@ -118,10 +118,59 @@ SYN_FILES += lib/pcie/rtl/pcie_us_if_cc.v
 SYN_FILES += lib/pcie/rtl/pcie_us_if_cq.v
 SYN_FILES += lib/pcie/rtl/pcie_us_cfg.v
 SYN_FILES += lib/pcie/rtl/pulse_merge.v
-# APP SYN
+# hXDP SYN
 SYN_FILES += myapp/hxdp/rtl/mqnic_app_block_dma_bench.v
 SYN_FILES += myapp/hxdp/rtl/dma_bench.v
 SYN_FILES += myapp/hxdp/rtl/dram_test_ch.v
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/src/ebpf4fpga.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/src/HF_bpf_get_smp_processor_id.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/src/HF_bpf_redirect_map.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/src/HF_map_access.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/src/HF_top.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/src/SPH_axis_input_fifo.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/src/SPH_axis_xdp.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/src/SPH_skb_xdp.vhd
+# hXDP multiported RAM
+SYN_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/multiported_ram/config.vh
+SYN_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/multiported_ram/dpram.v
+SYN_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/multiported_ram/lvt_1ht.v
+SYN_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/multiported_ram/lvt_bin.v
+SYN_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/multiported_ram/lvt_reg.v
+SYN_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/multiported_ram/mpram_gen.v
+SYN_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/multiported_ram/mpram_lvt_1ht.v
+SYN_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/multiported_ram/mpram_lvt_bin.v
+SYN_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/multiported_ram/mpram_lvt_reg.v
+SYN_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/multiported_ram/mpram_reg.v
+SYN_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/multiported_ram/mpram_wrp.v
+SYN_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/multiported_ram/mpram_xor.v
+SYN_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/multiported_ram/mpram.v
+SYN_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/multiported_ram/mrram.v
+SYN_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/multiported_ram/utils.vh
+
+# hXDP hardware maps
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/src/pkg/marcux_pkg.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/src/HM_bram.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/src/HM_configurator.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/src/HM_top.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/hxdp/hw/hardware_maps/src/hXDP_maps_subsystem.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/AXI4tomem.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/PMP_common_pkg.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/PMP_core.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/PMP_data_RAM.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/PMP_decode_stage.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/PMP_exe_stage_ctrl.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/PMP_exe_stage_noctrl.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/PMP_fetch_stage.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/PMP_instruction_mem.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/PMP_lane_ctrl.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/PMP_lane_noctrl.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/PMP_pipe.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/PMP_program_counter.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/PMP_register_file.vhd
+SYN_VHDL_FILES += myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/SPH_stack.vhd
+
+
+
 
 # XDC files
 XDC_FILES = fpga.xdc

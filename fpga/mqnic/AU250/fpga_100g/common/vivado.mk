@@ -41,6 +41,7 @@ FPGA_TOP ?= fpga
 PROJECT ?= $(FPGA_TOP)
 
 SYN_FILES_REL = $(foreach p,$(SYN_FILES),$(if $(filter /% ./%,$p),$p,../$p))
+SYN_VHDL_FILES_REL = $(foreach p,$(SYN_VHDL_FILES),$(if $(filter /% ./%,$p),$p,../$p))
 INC_FILES_REL = $(foreach p,$(INC_FILES),$(if $(filter /% ./%,$p),$p,../$p))
 XCI_FILES_REL = $(foreach p,$(XCI_FILES),$(if $(filter /% ./%,$p),$p,../$p))
 IP_TCL_FILES_REL = $(foreach p,$(IP_TCL_FILES),$(if $(filter /% ./%,$p),$p,../$p))
@@ -88,13 +89,15 @@ create_project.tcl: Makefile $(XCI_FILES_REL) $(IP_TCL_FILES_REL)
 	for x in $(DEFS); do echo '`define' $$x >> defines.v; done
 	echo "create_project -force -part $(FPGA_PART) $(PROJECT)" > $@
 	echo "add_files -fileset sources_1 defines.v $(SYN_FILES_REL)" >> $@
+	echo "add_files -fileset sources_1 defines.v $(SYN_VHDL_FILES_REL)" >> $@
 	echo "set_property top $(FPGA_TOP) [current_fileset]" >> $@
 	echo "add_files -fileset constrs_1 $(XDC_FILES_REL)" >> $@
+	for x in $(SYN_VHDL_FILES_REL); do echo "set_property FILE_TYPE {VHDL 2008} [get_files $$x]" >> $@; done
 	for x in $(XCI_FILES_REL); do echo "import_ip $$x" >> $@; done
 	for x in $(IP_TCL_FILES_REL); do echo "source $$x" >> $@; done
 	for x in $(CONFIG_TCL_FILES_REL); do echo "source $$x" >> $@; done
 
-update_config.tcl: $(CONFIG_TCL_FILES_REL) $(SYN_FILES_REL) $(INC_FILES_REL) $(XDC_FILES_REL)
+update_config.tcl: $(CONFIG_TCL_FILES_REL) $(SYN_FILES_REL) $(SYN_VHDL_FILES_REL) $(INC_FILES_REL) $(XDC_FILES_REL)
 	echo "open_project -quiet $(PROJECT).xpr" > $@
 	for x in $(CONFIG_TCL_FILES_REL); do echo "source $$x" >> $@; done
 
@@ -102,10 +105,10 @@ $(PROJECT).xpr: create_project.tcl update_config.tcl
 	vivado -nojournal -nolog -mode batch $(foreach x,$?,-source $x)
 
 # synthesis run
-$(PROJECT).runs/synth_1/$(PROJECT).dcp: $(PROJECT).xpr $(SYN_FILES_REL) $(INC_FILES_REL) $(XDC_FILES_REL)
+$(PROJECT).runs/synth_1/$(PROJECT).dcp: $(PROJECT).xpr $(SYN_FILES_REL) $(SYN_VHDL_FILES_REL) $(INC_FILES_REL) $(XDC_FILES_REL)
 	echo "open_project $(PROJECT).xpr" > run_synth.tcl
 	echo "reset_run synth_1" >> run_synth.tcl
-	echo "launch_runs -jobs 4 synth_1" >> run_synth.tcl
+	echo "launch_runs -jobs 16 synth_1" >> run_synth.tcl
 	echo "wait_on_run synth_1" >> run_synth.tcl
 	vivado -nojournal -nolog -mode batch -source run_synth.tcl
 
@@ -113,7 +116,7 @@ $(PROJECT).runs/synth_1/$(PROJECT).dcp: $(PROJECT).xpr $(SYN_FILES_REL) $(INC_FI
 $(PROJECT).runs/impl_1/$(PROJECT)_routed.dcp: $(PROJECT).runs/synth_1/$(PROJECT).dcp
 	echo "open_project $(PROJECT).xpr" > run_impl.tcl
 	echo "reset_run impl_1" >> run_impl.tcl
-	echo "launch_runs -jobs 4 impl_1" >> run_impl.tcl
+	echo "launch_runs -jobs 16 impl_1" >> run_impl.tcl
 	echo "wait_on_run impl_1" >> run_impl.tcl
 	echo "open_run impl_1" >> run_impl.tcl
 	echo "report_utilization -file $(PROJECT)_utilization.rpt" >> run_impl.tcl
