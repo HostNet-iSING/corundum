@@ -144,7 +144,9 @@ dict set params AXIL_CTRL_ADDR_WIDTH "24"
 
 # AXI lite interface configuration (application control)
 dict set params AXIL_APP_CTRL_DATA_WIDTH [dict get $params AXIL_CTRL_DATA_WIDTH]
-dict set params AXIL_APP_CTRL_ADDR_WIDTH "24"
+# dict set params AXIL_APP_CTRL_ADDR_WIDTH "24"
+# hXDP modified
+dict set params AXIL_APP_CTRL_ADDR_WIDTH "32"       
 
 # Ethernet interface configuration
 dict set params AXIS_ETH_TX_PIPELINE "4"
