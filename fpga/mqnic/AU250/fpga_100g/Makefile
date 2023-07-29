@@ -3,7 +3,7 @@ TARGETS:=
 
 # Subdirectories
 # SUBDIRS = fpga
-SUBDIRS = fpga_app_dma_bench
+SUBDIRS = singnic
 
 SUBDIRS_CLEAN = $(patsubst %,%.clean,$(SUBDIRS))
 

@@ -96,8 +96,7 @@ begin
 					when others =>
 
 						done           <= '0';      
-						R0             <= (others => '0');
-						mb_value_to_map <= R3;        -- DEBUG from hxy   
+						R0             <= (others => '0'); 
 						write_enable_R0 <= '0';      
 						mb_value_to_map  <= (others => '0');    
 						mb_wrt_en      <= '0';       

@@ -893,7 +893,8 @@ wire [PORT_COUNT*AXIS_HXDP_IN_RX_USER_WIDTH-1:0]            axis_rx_hxdp_out_tus
 
 /* ---------------hXDP--------------- */
 genvar n;
-for (n = 0; n < PORT_COUNT; n = n + 1) begin : hxdp
+//for (n = 0; n < PORT_COUNT; n = n + 1) begin : hxdp
+for (n = 0; n < 1; n = n + 1) begin : hxdp
     // app input --> hxdp input
     axis_fifo_adapter #(
         .DEPTH(1024),
