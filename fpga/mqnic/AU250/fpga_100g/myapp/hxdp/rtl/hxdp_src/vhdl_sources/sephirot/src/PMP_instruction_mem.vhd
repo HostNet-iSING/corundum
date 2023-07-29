@@ -8,7 +8,7 @@ use ieee.std_logic_unsigned.all;
 entity i_mem is
 
     --generic (init_file: string:="/home/marco/projects/sephirot/roms/xdp1_steps.bin");
-    generic (init_file: string:="/home/ubuntu/git_repos/hXDP-Artifacts/vivado_proj/OSDI20_hXDP/OSDI20_hXDP.ip_user_files/mem_init_files/XDP_DROP_early_exit.bin");
+    generic (init_file: string:="/home/ubuntu/git_repos/bmc-cache/test_xdp_files/xdp_load_and_stats_kern.bin.out");
     --generic (init_file: string:="/home/marco/hdl_sources/sephirot/roms/call_test.bin");
 
     

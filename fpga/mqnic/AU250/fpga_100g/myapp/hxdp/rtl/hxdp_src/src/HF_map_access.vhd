@@ -47,7 +47,7 @@ begin
 
 	mb_map_index <= R1(3 downto 0);
 	mb_key <= R2;
-	mb_value_to_map <= R3;
+--	mb_value_to_map <= R3;     -- DEBUG from hxy
 
 	process (clk)
 	begin
@@ -96,7 +96,8 @@ begin
 					when others =>
 
 						done           <= '0';      
-						R0             <= (others => '0');      
+						R0             <= (others => '0');
+						mb_value_to_map <= R3;        -- DEBUG from hxy   
 						write_enable_R0 <= '0';      
 						mb_value_to_map  <= (others => '0');    
 						mb_wrt_en      <= '0';       
@@ -105,7 +106,6 @@ begin
 						mb_ht_remove   <= '0';       
 
 				end case;
-
 			end if;
 
 		end if;

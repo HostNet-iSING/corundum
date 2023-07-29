@@ -770,6 +770,55 @@ wire [REG_DATA_WIDTH-1:0]  ctrl_reg_rd_data;
 wire                       ctrl_reg_rd_wait;
 wire                       ctrl_reg_rd_ack;
 
+// axil_reg_if #(
+//     .DATA_WIDTH(REG_DATA_WIDTH),
+//     .ADDR_WIDTH(REG_ADDR_WIDTH),
+//     .STRB_WIDTH(REG_STRB_WIDTH),
+//     .TIMEOUT(8)
+// )
+// axil_reg_if_inst (
+//     .clk(clk),
+//     .rst(rst),
+
+//     /*
+//      * AXI-Lite slave interface
+//      */
+//     .s_axil_awaddr(s_axil_app_ctrl_awaddr),
+//     .s_axil_awprot(s_axil_app_ctrl_awprot),
+//     .s_axil_awvalid(s_axil_app_ctrl_awvalid),
+//     .s_axil_awready(s_axil_app_ctrl_awready),
+//     .s_axil_wdata(s_axil_app_ctrl_wdata),
+//     .s_axil_wstrb(s_axil_app_ctrl_wstrb),
+//     .s_axil_wvalid(s_axil_app_ctrl_wvalid),
+//     .s_axil_wready(s_axil_app_ctrl_wready),
+//     .s_axil_bresp(s_axil_app_ctrl_bresp),
+//     .s_axil_bvalid(s_axil_app_ctrl_bvalid),
+//     .s_axil_bready(s_axil_app_ctrl_bready),
+//     .s_axil_araddr(s_axil_app_ctrl_araddr),
+//     .s_axil_arprot(s_axil_app_ctrl_arprot),
+//     .s_axil_arvalid(s_axil_app_ctrl_arvalid),
+//     .s_axil_arready(s_axil_app_ctrl_arready),
+//     .s_axil_rdata(s_axil_app_ctrl_rdata),
+//     .s_axil_rresp(s_axil_app_ctrl_rresp),
+//     .s_axil_rvalid(s_axil_app_ctrl_rvalid),
+//     .s_axil_rready(s_axil_app_ctrl_rready),
+
+//     /*
+//      * Register interface
+//      */
+//     .reg_wr_addr(ctrl_reg_wr_addr),
+//     .reg_wr_data(ctrl_reg_wr_data),
+//     .reg_wr_strb(ctrl_reg_wr_strb),
+//     .reg_wr_en(ctrl_reg_wr_en),
+//     .reg_wr_wait(ctrl_reg_wr_wait),
+//     .reg_wr_ack(ctrl_reg_wr_ack),
+//     .reg_rd_addr(ctrl_reg_rd_addr),
+//     .reg_rd_en(ctrl_reg_rd_en),
+//     .reg_rd_data(ctrl_reg_rd_data),
+//     .reg_rd_wait(ctrl_reg_rd_wait),
+//     .reg_rd_ack(ctrl_reg_rd_ack)
+// );
+
 axil_reg_if #(
     .DATA_WIDTH(REG_DATA_WIDTH),
     .ADDR_WIDTH(REG_ADDR_WIDTH),
@@ -783,25 +832,25 @@ axil_reg_if_inst (
     /*
      * AXI-Lite slave interface
      */
-    .s_axil_awaddr(s_axil_app_ctrl_awaddr),
-    .s_axil_awprot(s_axil_app_ctrl_awprot),
-    .s_axil_awvalid(s_axil_app_ctrl_awvalid),
-    .s_axil_awready(s_axil_app_ctrl_awready),
-    .s_axil_wdata(s_axil_app_ctrl_wdata),
-    .s_axil_wstrb(s_axil_app_ctrl_wstrb),
-    .s_axil_wvalid(s_axil_app_ctrl_wvalid),
-    .s_axil_wready(s_axil_app_ctrl_wready),
-    .s_axil_bresp(s_axil_app_ctrl_bresp),
-    .s_axil_bvalid(s_axil_app_ctrl_bvalid),
-    .s_axil_bready(s_axil_app_ctrl_bready),
-    .s_axil_araddr(s_axil_app_ctrl_araddr),
-    .s_axil_arprot(s_axil_app_ctrl_arprot),
-    .s_axil_arvalid(s_axil_app_ctrl_arvalid),
-    .s_axil_arready(s_axil_app_ctrl_arready),
-    .s_axil_rdata(s_axil_app_ctrl_rdata),
-    .s_axil_rresp(s_axil_app_ctrl_rresp),
-    .s_axil_rvalid(s_axil_app_ctrl_rvalid),
-    .s_axil_rready(s_axil_app_ctrl_rready),
+    .s_axil_awaddr(),
+    .s_axil_awprot(),
+    .s_axil_awvalid(),
+    .s_axil_awready(),
+    .s_axil_wdata(),
+    .s_axil_wstrb(),
+    .s_axil_wvalid(),
+    .s_axil_wready(),
+    .s_axil_bresp(),
+    .s_axil_bvalid(),
+    .s_axil_bready(),
+    .s_axil_araddr(),
+    .s_axil_arprot(),
+    .s_axil_arvalid(),
+    .s_axil_arready(),
+    .s_axil_rdata(),
+    .s_axil_rresp(),
+    .s_axil_rvalid(),
+    .s_axil_rready(),
 
     /*
      * Register interface
@@ -931,25 +980,25 @@ for (n = 0; n < PORT_COUNT; n = n + 1) begin : hxdp
         .m0_axis_tlast   (axis_rx_hxdp_out_tlast    [n] ) ,
         .m0_axis_tready  (axis_rx_hxdp_out_tready   [n] ),       
         // Control from Host
-        .S_AXI_ACLK       (),  
-        .S_AXI_ARESETN    (),  
-        .S_AXI_AWADDR     (),   //: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0;     
-        .S_AXI_AWVALID    (),   //: in std_logic; 
-        .S_AXI_WDATA      (),  //: in std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0; 
-        .S_AXI_WSTRB      (),   //: in std_logic_vector(C_S00_AXI_DATA_WIDTH/8-1 downto 0;   
-        .S_AXI_WVALID     (),    //: in std_logic;                                    
-        .S_AXI_BREADY     (),   //: in std_logic;                                    
-        .S_AXI_ARADDR     (),   //: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0;
-        .S_AXI_ARVALID    (),     //: in std_logic;                                     
-        .S_AXI_RREADY     (),   //: in std_logic;                                     
-        .S_AXI_ARREADY    (),    //: out std_logic;             
-        .S_AXI_RDATA      (),     //: out std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0;
-        .S_AXI_RRESP      (),     //: out std_logic_vector(1 downto 0;
-        .S_AXI_RVALID     (),  //: out std_logic;                                   
-        .S_AXI_WREADY     (),    //: out std_logic; 
-        .S_AXI_BRESP      (),       //: out std_logic_vector(1 downto 0;                         
-        .S_AXI_BVALID     (),   //: out std_logic;                                    
-        .S_AXI_AWREADY    ()      //: out std_logic
+        .S_AXI_ACLK       (clk),  
+        .S_AXI_ARESETN    (rst),  
+        .S_AXI_AWADDR     (s_axil_app_ctrl_awaddr),   //: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0;     
+        .S_AXI_AWVALID    (s_axil_app_ctrl_awvalid),   //: in std_logic; 
+        .S_AXI_WDATA      (s_axil_app_ctrl_wdata),  //: in std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0; 
+        .S_AXI_WSTRB      (s_axil_app_ctrl_wstrb),   //: in std_logic_vector(C_S00_AXI_DATA_WIDTH/8-1 downto 0;   
+        .S_AXI_WVALID     (s_axil_app_ctrl_wvalid),    //: in std_logic;                                    
+        .S_AXI_BREADY     (s_axil_app_ctrl_bready),   //: in std_logic;                                    
+        .S_AXI_ARADDR     (s_axil_app_ctrl_araddr),   //: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0;
+        .S_AXI_ARVALID    (s_axil_app_ctrl_arvalid),     //: in std_logic;                                     
+        .S_AXI_RREADY     (s_axil_app_ctrl_rready),   //: in std_logic;                                     
+        .S_AXI_ARREADY    (s_axil_app_ctrl_arready),    //: out std_logic;             
+        .S_AXI_RDATA      (s_axil_app_ctrl_rdata),     //: out std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0;
+        .S_AXI_RRESP      (s_axil_app_ctrl_rresp),     //: out std_logic_vector(1 downto 0;
+        .S_AXI_RVALID     (s_axil_app_ctrl_rvalid),  //: out std_logic;                                   
+        .S_AXI_WREADY     (s_axil_app_ctrl_wready),    //: out std_logic; 
+        .S_AXI_BRESP      (s_axil_app_ctrl_bresp),       //: out std_logic_vector(1 downto 0;                         
+        .S_AXI_BVALID     (s_axil_app_ctrl_bvalid),   //: out std_logic;                                    
+        .S_AXI_AWREADY    (s_axil_app_ctrl_awready)      //: out std_logic
     );
 
     // hxdp out --> app out
