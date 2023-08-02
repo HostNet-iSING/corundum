@@ -192,6 +192,7 @@ XDC_FILES += ../../../common/syn/vivado/cmac_gty_wrapper.tcl
 XDC_FILES += ../../../common/syn/vivado/cmac_gty_ch_wrapper.tcl
 # APP XDC
 XDC_FILES += myapp/hxdp/syn/vivado/dram_test_ch.tcl
+XDC_FILES += myapp/hxdp/syn/vivado/hxdp.tcl
 
 # IP
 IP_TCL_FILES = ip/pcie4_uscale_plus_0.tcl
