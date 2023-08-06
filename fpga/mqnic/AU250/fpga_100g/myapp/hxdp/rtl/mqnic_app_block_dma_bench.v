@@ -869,6 +869,25 @@ axil_reg_if_inst (
 );
 
 /* ---------------hXDP wires--------------- */
+// hxdp_reset signal
+wire hxdp_reset;
+(* shreg_extract = "no" *)
+reg hxdp_reset_reg_1 = 1'b1;
+(* shreg_extract = "no" *)
+reg hxdp_reset_reg_2 = 1'b1;
+
+always @(posedge clk) begin
+    hxdp_reset_reg_1 <= rst;
+    hxdp_reset_reg_2 <= hxdp_reset_reg_1;
+end
+
+// local rst signal
+BUFG
+pcie_user_reset_bufg_inst (
+    .I(hxdp_reset_reg_2),
+    .O(hxdp_reset)
+);
+
 // input fifo to hxdp
 wire [PORT_COUNT*AXIS_HXDP_IN_DATA_WIDTH-1:0]               axis_rx_hxdp_in_tdata;
 wire [PORT_COUNT*AXIS_HXDP_IN_KEEP_WIDTH-1:0]               axis_rx_hxdp_in_tkeep;
@@ -897,7 +916,7 @@ genvar n;
 for (n = 0; n < 1; n = n + 1) begin : hxdp
     // app input --> hxdp input
     axis_fifo_adapter #(
-        .DEPTH(1024),
+        .DEPTH(256),
         .S_DATA_WIDTH(AXIS_SYNC_DATA_WIDTH),
         .S_KEEP_ENABLE(AXIS_SYNC_KEEP_WIDTH > 1),
         .S_KEEP_WIDTH(AXIS_SYNC_KEEP_WIDTH),
@@ -917,7 +936,7 @@ for (n = 0; n < 1; n = n + 1) begin : hxdp
     )
     hxdp_in_sync_fifo (
         .clk(clk),
-        .rst(rst),
+        .rst(hxdp_reset),
 
         // AXI input
         .s_axis_tdata(s_axis_sync_rx_tdata   [n*AXIS_DATA_WIDTH +: AXIS_DATA_WIDTH]),
@@ -964,7 +983,7 @@ for (n = 0; n < 1; n = n + 1) begin : hxdp
     )
     hxdp_core (
         .clk(clk),
-        .reset(rst),
+        .reset(hxdp_reset),
 
         // Packet input
         .s0_axis_tvalid (axis_rx_hxdp_in_tvalid  [n] ),          
@@ -982,7 +1001,7 @@ for (n = 0; n < 1; n = n + 1) begin : hxdp
         .m0_axis_tready  (axis_rx_hxdp_out_tready   [n] ),       
         // Control from Host
         .S_AXI_ACLK       (clk),  
-        .S_AXI_ARESETN    (rst),  
+        .S_AXI_ARESETN    (hxdp_reset),  
         .S_AXI_AWADDR     (s_axil_app_ctrl_awaddr),   //: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0;     
         .S_AXI_AWVALID    (s_axil_app_ctrl_awvalid),   //: in std_logic; 
         .S_AXI_WDATA      (s_axil_app_ctrl_wdata),  //: in std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0; 
@@ -1004,7 +1023,7 @@ for (n = 0; n < 1; n = n + 1) begin : hxdp
 
     // hxdp out --> app out
     axis_fifo_adapter #(
-        .DEPTH(1024),
+        .DEPTH(256),
         .S_DATA_WIDTH(AXIS_HXDP_IN_DATA_WIDTH),
         .S_KEEP_ENABLE(AXIS_HXDP_IN_KEEP_WIDTH > 1),
         .S_KEEP_WIDTH(AXIS_HXDP_IN_KEEP_WIDTH),
@@ -1024,7 +1043,7 @@ for (n = 0; n < 1; n = n + 1) begin : hxdp
     )
     hxdp_out_sync_fifo (
         .clk(clk),
-        .rst(rst),
+        .rst(hxdp_reset),
 
         // AXI input
         .s_axis_tdata(axis_rx_hxdp_out_tdata    [n*AXIS_HXDP_IN_DATA_WIDTH +: AXIS_HXDP_IN_DATA_WIDTH]),
