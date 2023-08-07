@@ -1,0 +1,35 @@
+{
+	"version": "1.0",
+	"modules": {
+		"cms": {
+			"proto_instances": {
+				"/cms_subsystem_0/s_axi_ctrl": {
+					"interface": "xilinx.com:interface:aximm:1.0",
+					"ports": {
+						"ACLK": { "actual": "aclk_ctrl"},
+						"ARADDR": { "actual": "s_axi_ctrl_araddr"},
+						"ARESETN": { "actual": "aresetn_ctrl"},
+						"ARPROT": { "actual": "s_axi_ctrl_arprot"},
+						"ARREADY": { "actual": "s_axi_ctrl_arready"},
+						"ARVALID": { "actual": "s_axi_ctrl_arvalid"},
+						"AWADDR": { "actual": "s_axi_ctrl_awaddr"},
+						"AWPROT": { "actual": "s_axi_ctrl_awprot"},
+						"AWREADY": { "actual": "s_axi_ctrl_awready"},
+						"AWVALID": { "actual": "s_axi_ctrl_awvalid"},
+						"BREADY": { "actual": "s_axi_ctrl_bready"},
+						"BRESP": { "actual": "s_axi_ctrl_bresp"},
+						"BVALID": { "actual": "s_axi_ctrl_bvalid"},
+						"RDATA": { "actual": "s_axi_ctrl_rdata"},
+						"RREADY": { "actual": "s_axi_ctrl_rready"},
+						"RRESP": { "actual": "s_axi_ctrl_rresp"},
+						"RVALID": { "actual": "s_axi_ctrl_rvalid"},
+						"WDATA": { "actual": "s_axi_ctrl_wdata"},
+						"WREADY": { "actual": "s_axi_ctrl_wready"},
+						"WSTRB": { "actual": "s_axi_ctrl_wstrb"},
+						"WVALID": { "actual": "s_axi_ctrl_wvalid"}
+					}
+				}
+			}
+		}
+	}
+}
