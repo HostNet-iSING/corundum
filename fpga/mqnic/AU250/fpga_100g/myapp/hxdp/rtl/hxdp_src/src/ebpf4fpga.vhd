@@ -29,6 +29,13 @@ entity ebpf4fpga_datapath is
         AXIS_SYNC_TX_USER_WIDTH		: integer ;
         AXIS_SYNC_RX_USER_WIDTH		: integer ;
 
+		-- Register interface configuration
+		REG_ADDR_WIDTH		: integer ;
+		REG_DATA_WIDTH		: integer ;
+		REG_STRB_WIDTH		: integer ;
+		RB_BASE_ADDR		: integer ;
+		RB_NEXT_PTR			: integer ;
+
 		-- Original parameters
 		RESET_ACTIVE_LOW : boolean := true;
 
@@ -61,26 +68,41 @@ entity ebpf4fpga_datapath is
 		S0_AXIS_TKEEP   : in std_logic_vector (AXIS_SYNC_KEEP_WIDTH downto 0);
 		S0_AXIS_TLAST   : in std_logic;
 
-	-- Ports of Axi Slave Bus Interface S_AXI
+		-- Register interface
+		reg_wr_addr		: in std_logic_vector(REG_ADDR_WIDTH-1 downto 0);
+		reg_wr_data		: in std_logic_vector(REG_DATA_WIDTH-1 downto 0);
+		reg_wr_strb		: in std_logic_vector(REG_STRB_WIDTH-1 downto 0);
+		reg_wr_en		: in std_logic;
+		reg_wr_wait		: out std_logic;
+		reg_wr_ack		: out std_logic;
+		reg_rd_addr		: in std_logic_vector(REG_ADDR_WIDTH-1 downto 0);
+		reg_rd_en		: in std_logic;
+		reg_rd_data		: out std_logic_vector(REG_DATA_WIDTH-1 downto 0);
+		reg_rd_wait		: out std_logic;
+		reg_rd_ack		: out std_logic;
 		S_AXI_ACLK        : in  std_logic;  
-		S_AXI_ARESETN     : in  std_logic;                                     
-		S_AXI_AWADDR      : in  std_logic_vector(31 downto 0);     
-		S_AXI_AWVALID     : in  std_logic; 
-		S_AXI_WDATA       : in  std_logic_vector(31 downto 0); 
-		S_AXI_WSTRB       : in  std_logic_vector(3 downto 0);   
-		S_AXI_WVALID      : in  std_logic;                                    
-		S_AXI_BREADY      : in  std_logic;                                    
-		S_AXI_ARADDR      : in  std_logic_vector(31 downto 0);
-		S_AXI_ARVALID     : in  std_logic;                                     
-		S_AXI_RREADY      : in  std_logic;                                     
-		S_AXI_ARREADY     : out std_logic;             
-		S_AXI_RDATA       : out std_logic_vector(31 downto 0);
-		S_AXI_RRESP       : out std_logic_vector(1 downto 0);
-		S_AXI_RVALID      : out std_logic;                                   
-		S_AXI_WREADY      : out std_logic; 
-		S_AXI_BRESP       : out std_logic_vector(1 downto 0);                         
-		S_AXI_BVALID      : out std_logic;                                    
-		S_AXI_AWREADY     : out std_logic
+		S_AXI_ARESETN     : in  std_logic
+		 
+	-- Ports of Axi Slave Bus Interface S_AXI
+		-- S_AXI_ACLK        : in  std_logic;  
+		-- S_AXI_ARESETN     : in  std_logic;                                     
+		-- S_AXI_AWADDR      : in  std_logic_vector(31 downto 0);     
+		-- S_AXI_AWVALID     : in  std_logic; 
+		-- S_AXI_WDATA       : in  std_logic_vector(31 downto 0); 
+		-- S_AXI_WSTRB       : in  std_logic_vector(3 downto 0);   
+		-- S_AXI_WVALID      : in  std_logic;                                    
+		-- S_AXI_BREADY      : in  std_logic;                                    
+		-- S_AXI_ARADDR      : in  std_logic_vector(31 downto 0);
+		-- S_AXI_ARVALID     : in  std_logic;                                     
+		-- S_AXI_RREADY      : in  std_logic;                                     
+		-- S_AXI_ARREADY     : out std_logic;             
+		-- S_AXI_RDATA       : out std_logic_vector(31 downto 0);
+		-- S_AXI_RRESP       : out std_logic_vector(1 downto 0);
+		-- S_AXI_RVALID      : out std_logic;                                   
+		-- S_AXI_WREADY      : out std_logic; 
+		-- S_AXI_BRESP       : out std_logic_vector(1 downto 0);                         
+		-- S_AXI_BVALID      : out std_logic;                                    
+		-- S_AXI_AWREADY     : out std_logic
 	);
 
 end ebpf4fpga_datapath;
@@ -592,7 +614,15 @@ begin
 
 	);
 
-	AXI_IO_IFACE : entity work.AXI4tomem port map 
+	AXI_IO_IFACE : entity work.AXI4tomem
+	generic map (
+		REG_ADDR_WIDTH		=>		REG_ADDR_WIDTH,
+		REG_DATA_WIDTH		=>		REG_DATA_WIDTH,
+		REG_STRB_WIDTH		=>		REG_STRB_WIDTH,
+		RB_BASE_ADDR		=>		RB_BASE_ADDR,
+		RB_NEXT_PTR			=>		RB_NEXT_PTR
+	) 
+	port map 
 	(
 		we_INSTR => instruction_mem_we,
 		we_MAPS => maps_we,
@@ -606,25 +636,41 @@ begin
 		imem_data_in => instruction_mem_axi_data_out,
 		maps_data_out => maps_axi_data_in,
 		maps_data_in => maps_axi_data_out,
-		S_AXI_ACLK    => S_AXI_ACLK     ,
-		S_AXI_ARESETN => S_AXI_ARESETN  ,
-		S_AXI_AWADDR  => S_AXI_AWADDR   ,
-		S_AXI_AWVALID => S_AXI_AWVALID  ,
-		S_AXI_WDATA   => S_AXI_WDATA    ,
-		S_AXI_WSTRB   => S_AXI_WSTRB    ,
-		S_AXI_WVALID  => S_AXI_WVALID   ,
-		S_AXI_BREADY  => S_AXI_BREADY   ,
-		S_AXI_ARADDR  => S_AXI_ARADDR   ,
-		S_AXI_ARVALID => S_AXI_ARVALID  ,
-		S_AXI_RREADY  => S_AXI_RREADY   ,
-		S_AXI_ARREADY => S_AXI_ARREADY  ,
-		S_AXI_RDATA   => S_AXI_RDATA    ,
-		S_AXI_RRESP   => S_AXI_RRESP    ,
-		S_AXI_RVALID  => S_AXI_RVALID   ,
-		S_AXI_WREADY  => S_AXI_WREADY   ,
-		S_AXI_BRESP   => S_AXI_BRESP    ,
-		S_AXI_BVALID  => S_AXI_BVALID   ,
-		S_AXI_AWREADY => S_AXI_AWREADY  
+		-- Register Interface
+		reg_wr_addr		=> reg_wr_addr,
+		reg_wr_data		=> reg_wr_data,
+		reg_wr_strb		=> reg_wr_strb,
+		reg_wr_en		=> reg_wr_en,
+		reg_wr_wait		=> reg_wr_wait,
+		reg_wr_ack		=> reg_wr_ack,
+		reg_rd_addr		=> reg_rd_addr,
+		reg_rd_en		=> reg_rd_en,
+		reg_rd_data		=> reg_rd_data,
+		reg_rd_wait		=> reg_rd_wait,
+		reg_rd_ack		=> reg_rd_ack,
+		-- clk % rst
+		clk 			=> S_AXI_ACLK,
+		rst				=> S_AXI_ARESETN
+
+		-- S_AXI_ACLK    => S_AXI_ACLK     ,
+		-- S_AXI_ARESETN => S_AXI_ARESETN  ,
+		-- S_AXI_AWADDR  => S_AXI_AWADDR   ,
+		-- S_AXI_AWVALID => S_AXI_AWVALID  ,
+		-- S_AXI_WDATA   => S_AXI_WDATA    ,
+		-- S_AXI_WSTRB   => S_AXI_WSTRB    ,
+		-- S_AXI_WVALID  => S_AXI_WVALID   ,
+		-- S_AXI_BREADY  => S_AXI_BREADY   ,
+		-- S_AXI_ARADDR  => S_AXI_ARADDR   ,
+		-- S_AXI_ARVALID => S_AXI_ARVALID  ,
+		-- S_AXI_RREADY  => S_AXI_RREADY   ,
+		-- S_AXI_ARREADY => S_AXI_ARREADY  ,
+		-- S_AXI_RDATA   => S_AXI_RDATA    ,
+		-- S_AXI_RRESP   => S_AXI_RRESP    ,
+		-- S_AXI_RVALID  => S_AXI_RVALID   ,
+		-- S_AXI_WREADY  => S_AXI_WREADY   ,
+		-- S_AXI_BRESP   => S_AXI_BRESP    ,
+		-- S_AXI_BVALID  => S_AXI_BVALID   ,
+		-- S_AXI_AWREADY => S_AXI_AWREADY  
 
 	);
 	--      ---------------

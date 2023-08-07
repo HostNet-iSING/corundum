@@ -770,55 +770,6 @@ wire [REG_DATA_WIDTH-1:0]  ctrl_reg_rd_data;
 wire                       ctrl_reg_rd_wait;
 wire                       ctrl_reg_rd_ack;
 
-// axil_reg_if #(
-//     .DATA_WIDTH(REG_DATA_WIDTH),
-//     .ADDR_WIDTH(REG_ADDR_WIDTH),
-//     .STRB_WIDTH(REG_STRB_WIDTH),
-//     .TIMEOUT(8)
-// )
-// axil_reg_if_inst (
-//     .clk(clk),
-//     .rst(rst),
-
-//     /*
-//      * AXI-Lite slave interface
-//      */
-//     .s_axil_awaddr(s_axil_app_ctrl_awaddr),
-//     .s_axil_awprot(s_axil_app_ctrl_awprot),
-//     .s_axil_awvalid(s_axil_app_ctrl_awvalid),
-//     .s_axil_awready(s_axil_app_ctrl_awready),
-//     .s_axil_wdata(s_axil_app_ctrl_wdata),
-//     .s_axil_wstrb(s_axil_app_ctrl_wstrb),
-//     .s_axil_wvalid(s_axil_app_ctrl_wvalid),
-//     .s_axil_wready(s_axil_app_ctrl_wready),
-//     .s_axil_bresp(s_axil_app_ctrl_bresp),
-//     .s_axil_bvalid(s_axil_app_ctrl_bvalid),
-//     .s_axil_bready(s_axil_app_ctrl_bready),
-//     .s_axil_araddr(s_axil_app_ctrl_araddr),
-//     .s_axil_arprot(s_axil_app_ctrl_arprot),
-//     .s_axil_arvalid(s_axil_app_ctrl_arvalid),
-//     .s_axil_arready(s_axil_app_ctrl_arready),
-//     .s_axil_rdata(s_axil_app_ctrl_rdata),
-//     .s_axil_rresp(s_axil_app_ctrl_rresp),
-//     .s_axil_rvalid(s_axil_app_ctrl_rvalid),
-//     .s_axil_rready(s_axil_app_ctrl_rready),
-
-//     /*
-//      * Register interface
-//      */
-//     .reg_wr_addr(ctrl_reg_wr_addr),
-//     .reg_wr_data(ctrl_reg_wr_data),
-//     .reg_wr_strb(ctrl_reg_wr_strb),
-//     .reg_wr_en(ctrl_reg_wr_en),
-//     .reg_wr_wait(ctrl_reg_wr_wait),
-//     .reg_wr_ack(ctrl_reg_wr_ack),
-//     .reg_rd_addr(ctrl_reg_rd_addr),
-//     .reg_rd_en(ctrl_reg_rd_en),
-//     .reg_rd_data(ctrl_reg_rd_data),
-//     .reg_rd_wait(ctrl_reg_rd_wait),
-//     .reg_rd_ack(ctrl_reg_rd_ack)
-// );
-
 axil_reg_if #(
     .DATA_WIDTH(REG_DATA_WIDTH),
     .ADDR_WIDTH(REG_ADDR_WIDTH),
@@ -832,25 +783,25 @@ axil_reg_if_inst (
     /*
      * AXI-Lite slave interface
      */
-    .s_axil_awaddr(),
-    .s_axil_awprot(),
-    .s_axil_awvalid(),
-    .s_axil_awready(),
-    .s_axil_wdata(),
-    .s_axil_wstrb(),
-    .s_axil_wvalid(),
-    .s_axil_wready(),
-    .s_axil_bresp(),
-    .s_axil_bvalid(),
-    .s_axil_bready(),
-    .s_axil_araddr(),
-    .s_axil_arprot(),
-    .s_axil_arvalid(),
-    .s_axil_arready(),
-    .s_axil_rdata(),
-    .s_axil_rresp(),
-    .s_axil_rvalid(),
-    .s_axil_rready(),
+    .s_axil_awaddr(s_axil_app_ctrl_awaddr),
+    .s_axil_awprot(s_axil_app_ctrl_awprot),
+    .s_axil_awvalid(s_axil_app_ctrl_awvalid),
+    .s_axil_awready(s_axil_app_ctrl_awready),
+    .s_axil_wdata(s_axil_app_ctrl_wdata),
+    .s_axil_wstrb(s_axil_app_ctrl_wstrb),
+    .s_axil_wvalid(s_axil_app_ctrl_wvalid),
+    .s_axil_wready(s_axil_app_ctrl_wready),
+    .s_axil_bresp(s_axil_app_ctrl_bresp),
+    .s_axil_bvalid(s_axil_app_ctrl_bvalid),
+    .s_axil_bready(s_axil_app_ctrl_bready),
+    .s_axil_araddr(s_axil_app_ctrl_araddr),
+    .s_axil_arprot(s_axil_app_ctrl_arprot),
+    .s_axil_arvalid(s_axil_app_ctrl_arvalid),
+    .s_axil_arready(s_axil_app_ctrl_arready),
+    .s_axil_rdata(s_axil_app_ctrl_rdata),
+    .s_axil_rresp(s_axil_app_ctrl_rresp),
+    .s_axil_rvalid(s_axil_app_ctrl_rvalid),
+    .s_axil_rready(s_axil_app_ctrl_rready),
 
     /*
      * Register interface
@@ -867,6 +818,55 @@ axil_reg_if_inst (
     .reg_rd_wait(ctrl_reg_rd_wait),
     .reg_rd_ack(ctrl_reg_rd_ack)
 );
+
+// axil_reg_if #(
+//     .DATA_WIDTH(REG_DATA_WIDTH),
+//     .ADDR_WIDTH(REG_ADDR_WIDTH),
+//     .STRB_WIDTH(REG_STRB_WIDTH),
+//     .TIMEOUT(8)
+// )
+// axil_reg_if_inst (
+//     .clk(clk),
+//     .rst(rst),
+
+//     /*
+//      * AXI-Lite slave interface
+//      */
+//     .s_axil_awaddr(),
+//     .s_axil_awprot(),
+//     .s_axil_awvalid(),
+//     .s_axil_awready(),
+//     .s_axil_wdata(),
+//     .s_axil_wstrb(),
+//     .s_axil_wvalid(),
+//     .s_axil_wready(),
+//     .s_axil_bresp(),
+//     .s_axil_bvalid(),
+//     .s_axil_bready(),
+//     .s_axil_araddr(),
+//     .s_axil_arprot(),
+//     .s_axil_arvalid(),
+//     .s_axil_arready(),
+//     .s_axil_rdata(),
+//     .s_axil_rresp(),
+//     .s_axil_rvalid(),
+//     .s_axil_rready(),
+
+//     /*
+//      * Register interface
+//      */
+//     .reg_wr_addr(ctrl_reg_wr_addr),
+//     .reg_wr_data(ctrl_reg_wr_data),
+//     .reg_wr_strb(ctrl_reg_wr_strb),
+//     .reg_wr_en(ctrl_reg_wr_en),
+//     .reg_wr_wait(ctrl_reg_wr_wait),
+//     .reg_wr_ack(ctrl_reg_wr_ack),
+//     .reg_rd_addr(ctrl_reg_rd_addr),
+//     .reg_rd_en(ctrl_reg_rd_en),
+//     .reg_rd_data(ctrl_reg_rd_data),
+//     .reg_rd_wait(ctrl_reg_rd_wait),
+//     .reg_rd_ack(ctrl_reg_rd_ack)
+// );
 
 /* ---------------hXDP wires--------------- */
 // hxdp_reset signal
@@ -979,7 +979,14 @@ for (n = 0; n < 1; n = n + 1) begin : hxdp
         .AXIS_SYNC_DATA_WIDTH(AXIS_HXDP_IN_DATA_WIDTH - 1),
         .AXIS_SYNC_KEEP_WIDTH(AXIS_HXDP_IN_KEEP_WIDTH - 1),
         .AXIS_SYNC_TX_USER_WIDTH(AXIS_HXDP_IN_TX_USER_WIDTH - 1),
-        .AXIS_SYNC_RX_USER_WIDTH(AXIS_HXDP_IN_RX_USER_WIDTH - 1)
+        .AXIS_SYNC_RX_USER_WIDTH(AXIS_HXDP_IN_RX_USER_WIDTH - 1),
+
+        // Register interface configuration
+        .REG_ADDR_WIDTH(REG_ADDR_WIDTH),
+        .REG_DATA_WIDTH(REG_DATA_WIDTH),
+        .REG_STRB_WIDTH(REG_STRB_WIDTH),
+        .RB_BASE_ADDR(DMA_BENCH_RB_BASE_ADDR),
+        .RB_NEXT_PTR((DDR_ENABLE || HBM_ENABLE) ? DRAM_CH_RB_BASE_ADDR : 0)
     )
     hxdp_core (
         .clk(clk),
@@ -998,27 +1005,45 @@ for (n = 0; n < 1; n = n + 1) begin : hxdp
         .m0_axis_tkeep   (axis_rx_hxdp_out_tkeep    [n*AXIS_HXDP_IN_KEEP_WIDTH +: AXIS_HXDP_IN_KEEP_WIDTH]    ) ,  
         .m0_axis_tuser   (axis_rx_hxdp_out_tuser    [n*AXIS_HXDP_IN_RX_USER_WIDTH +: AXIS_HXDP_IN_RX_USER_WIDTH]  ) ,    
         .m0_axis_tlast   (axis_rx_hxdp_out_tlast    [n] ) ,
-        .m0_axis_tready  (axis_rx_hxdp_out_tready   [n] ),       
-        // Control from Host
+        .m0_axis_tready  (axis_rx_hxdp_out_tready   [n] ),    
+
+        /*
+        * Register interface
+        */
+        .reg_wr_addr(ctrl_reg_wr_addr),
+        .reg_wr_data(ctrl_reg_wr_data),
+        .reg_wr_strb(ctrl_reg_wr_strb),
+        .reg_wr_en(ctrl_reg_wr_en),
+        .reg_wr_wait(dma_bench_ctrl_reg_wr_wait),
+        .reg_wr_ack(dma_bench_ctrl_reg_wr_ack),
+        .reg_rd_addr(ctrl_reg_rd_addr),
+        .reg_rd_en(ctrl_reg_rd_en),
+        .reg_rd_data(dma_bench_ctrl_reg_rd_data),
+        .reg_rd_wait(dma_bench_ctrl_reg_rd_wait),
+        .reg_rd_ack(dma_bench_ctrl_reg_rd_ack),
         .S_AXI_ACLK       (clk),  
-        .S_AXI_ARESETN    (hxdp_reset),  
-        .S_AXI_AWADDR     (s_axil_app_ctrl_awaddr),   //: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0;     
-        .S_AXI_AWVALID    (s_axil_app_ctrl_awvalid),   //: in std_logic; 
-        .S_AXI_WDATA      (s_axil_app_ctrl_wdata),  //: in std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0; 
-        .S_AXI_WSTRB      (s_axil_app_ctrl_wstrb),   //: in std_logic_vector(C_S00_AXI_DATA_WIDTH/8-1 downto 0;   
-        .S_AXI_WVALID     (s_axil_app_ctrl_wvalid),    //: in std_logic;                                    
-        .S_AXI_BREADY     (s_axil_app_ctrl_bready),   //: in std_logic;                                    
-        .S_AXI_ARADDR     (s_axil_app_ctrl_araddr),   //: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0;
-        .S_AXI_ARVALID    (s_axil_app_ctrl_arvalid),     //: in std_logic;                                     
-        .S_AXI_RREADY     (s_axil_app_ctrl_rready),   //: in std_logic;                                     
-        .S_AXI_ARREADY    (s_axil_app_ctrl_arready),    //: out std_logic;             
-        .S_AXI_RDATA      (s_axil_app_ctrl_rdata),     //: out std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0;
-        .S_AXI_RRESP      (s_axil_app_ctrl_rresp),     //: out std_logic_vector(1 downto 0;
-        .S_AXI_RVALID     (s_axil_app_ctrl_rvalid),  //: out std_logic;                                   
-        .S_AXI_WREADY     (s_axil_app_ctrl_wready),    //: out std_logic; 
-        .S_AXI_BRESP      (s_axil_app_ctrl_bresp),       //: out std_logic_vector(1 downto 0;                         
-        .S_AXI_BVALID     (s_axil_app_ctrl_bvalid),   //: out std_logic;                                    
-        .S_AXI_AWREADY    (s_axil_app_ctrl_awready)      //: out std_logic
+        .S_AXI_ARESETN    (hxdp_reset)  
+
+        // Control from Host
+        // .S_AXI_ACLK       (clk),  
+        // .S_AXI_ARESETN    (hxdp_reset),  
+        // .S_AXI_AWADDR     (s_axil_app_ctrl_awaddr),   //: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0;     
+        // .S_AXI_AWVALID    (s_axil_app_ctrl_awvalid),   //: in std_logic; 
+        // .S_AXI_WDATA      (s_axil_app_ctrl_wdata),  //: in std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0; 
+        // .S_AXI_WSTRB      (s_axil_app_ctrl_wstrb),   //: in std_logic_vector(C_S00_AXI_DATA_WIDTH/8-1 downto 0;   
+        // .S_AXI_WVALID     (s_axil_app_ctrl_wvalid),    //: in std_logic;                                    
+        // .S_AXI_BREADY     (s_axil_app_ctrl_bready),   //: in std_logic;                                    
+        // .S_AXI_ARADDR     (s_axil_app_ctrl_araddr),   //: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0;
+        // .S_AXI_ARVALID    (s_axil_app_ctrl_arvalid),     //: in std_logic;                                     
+        // .S_AXI_RREADY     (s_axil_app_ctrl_rready),   //: in std_logic;                                     
+        // .S_AXI_ARREADY    (s_axil_app_ctrl_arready),    //: out std_logic;             
+        // .S_AXI_RDATA      (s_axil_app_ctrl_rdata),     //: out std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0;
+        // .S_AXI_RRESP      (s_axil_app_ctrl_rresp),     //: out std_logic_vector(1 downto 0;
+        // .S_AXI_RVALID     (s_axil_app_ctrl_rvalid),  //: out std_logic;                                   
+        // .S_AXI_WREADY     (s_axil_app_ctrl_wready),    //: out std_logic; 
+        // .S_AXI_BRESP      (s_axil_app_ctrl_bresp),       //: out std_logic_vector(1 downto 0;                         
+        // .S_AXI_BVALID     (s_axil_app_ctrl_bvalid),   //: out std_logic;                                    
+        // .S_AXI_AWREADY    (s_axil_app_ctrl_awready)      //: out std_logic
     );
 
     // hxdp out --> app out
@@ -1117,103 +1142,103 @@ always @* begin
 end
 
 // DMA benchmark
-dma_bench #(
-    // DMA interface configuration
-    .DMA_ADDR_WIDTH(DMA_ADDR_WIDTH),
-    .DMA_IMM_ENABLE(DMA_IMM_ENABLE),
-    .DMA_IMM_WIDTH(DMA_IMM_WIDTH),
-    .DMA_LEN_WIDTH(DMA_LEN_WIDTH),
-    .DMA_TAG_WIDTH(DMA_TAG_WIDTH),
-    .RAM_SEL_WIDTH(RAM_SEL_WIDTH),
-    .RAM_ADDR_WIDTH(RAM_ADDR_WIDTH),
-    .RAM_SEG_COUNT(RAM_SEG_COUNT),
-    .RAM_SEG_DATA_WIDTH(RAM_SEG_DATA_WIDTH),
-    .RAM_SEG_BE_WIDTH(RAM_SEG_BE_WIDTH),
-    .RAM_SEG_ADDR_WIDTH(RAM_SEG_ADDR_WIDTH),
-    .RAM_PIPELINE(RAM_PIPELINE),
+// dma_bench #(
+//     // DMA interface configuration
+//     .DMA_ADDR_WIDTH(DMA_ADDR_WIDTH),
+//     .DMA_IMM_ENABLE(DMA_IMM_ENABLE),
+//     .DMA_IMM_WIDTH(DMA_IMM_WIDTH),
+//     .DMA_LEN_WIDTH(DMA_LEN_WIDTH),
+//     .DMA_TAG_WIDTH(DMA_TAG_WIDTH),
+//     .RAM_SEL_WIDTH(RAM_SEL_WIDTH),
+//     .RAM_ADDR_WIDTH(RAM_ADDR_WIDTH),
+//     .RAM_SEG_COUNT(RAM_SEG_COUNT),
+//     .RAM_SEG_DATA_WIDTH(RAM_SEG_DATA_WIDTH),
+//     .RAM_SEG_BE_WIDTH(RAM_SEG_BE_WIDTH),
+//     .RAM_SEG_ADDR_WIDTH(RAM_SEG_ADDR_WIDTH),
+//     .RAM_PIPELINE(RAM_PIPELINE),
 
-    // Register interface
-    .REG_ADDR_WIDTH(REG_ADDR_WIDTH),
-    .REG_DATA_WIDTH(REG_DATA_WIDTH),
-    .REG_STRB_WIDTH(REG_STRB_WIDTH),
-    .RB_BASE_ADDR(DMA_BENCH_RB_BASE_ADDR),
-    .RB_NEXT_PTR((DDR_ENABLE || HBM_ENABLE) ? DRAM_CH_RB_BASE_ADDR : 0)
-)
-dma_bench_inst (
-    .clk(clk),
-    .rst(rst),
+//     // Register interface
+//     .REG_ADDR_WIDTH(REG_ADDR_WIDTH),
+//     .REG_DATA_WIDTH(REG_DATA_WIDTH),
+//     .REG_STRB_WIDTH(REG_STRB_WIDTH),
+//     .RB_BASE_ADDR(DMA_BENCH_RB_BASE_ADDR),
+//     .RB_NEXT_PTR((DDR_ENABLE || HBM_ENABLE) ? DRAM_CH_RB_BASE_ADDR : 0)
+// )
+// dma_bench_inst (
+//     .clk(clk),
+//     .rst(rst),
 
-    /*
-     * Register interface
-     */
-    .reg_wr_addr(ctrl_reg_wr_addr),
-    .reg_wr_data(ctrl_reg_wr_data),
-    .reg_wr_strb(ctrl_reg_wr_strb),
-    .reg_wr_en(ctrl_reg_wr_en),
-    .reg_wr_wait(dma_bench_ctrl_reg_wr_wait),
-    .reg_wr_ack(dma_bench_ctrl_reg_wr_ack),
-    .reg_rd_addr(ctrl_reg_rd_addr),
-    .reg_rd_en(ctrl_reg_rd_en),
-    .reg_rd_data(dma_bench_ctrl_reg_rd_data),
-    .reg_rd_wait(dma_bench_ctrl_reg_rd_wait),
-    .reg_rd_ack(dma_bench_ctrl_reg_rd_ack),
+//     /*
+//      * Register interface
+//      */
+//     .reg_wr_addr(ctrl_reg_wr_addr),
+//     .reg_wr_data(ctrl_reg_wr_data),
+//     .reg_wr_strb(ctrl_reg_wr_strb),
+//     .reg_wr_en(ctrl_reg_wr_en),
+//     .reg_wr_wait(dma_bench_ctrl_reg_wr_wait),
+//     .reg_wr_ack(dma_bench_ctrl_reg_wr_ack),
+//     .reg_rd_addr(ctrl_reg_rd_addr),
+//     .reg_rd_en(ctrl_reg_rd_en),
+//     .reg_rd_data(dma_bench_ctrl_reg_rd_data),
+//     .reg_rd_wait(dma_bench_ctrl_reg_rd_wait),
+//     .reg_rd_ack(dma_bench_ctrl_reg_rd_ack),
 
-    /*
-     * DMA read descriptor output
-     */
-    .m_axis_dma_read_desc_dma_addr(m_axis_data_dma_read_desc_dma_addr),
-    .m_axis_dma_read_desc_ram_sel(m_axis_data_dma_read_desc_ram_sel),
-    .m_axis_dma_read_desc_ram_addr(m_axis_data_dma_read_desc_ram_addr),
-    .m_axis_dma_read_desc_len(m_axis_data_dma_read_desc_len),
-    .m_axis_dma_read_desc_tag(m_axis_data_dma_read_desc_tag),
-    .m_axis_dma_read_desc_valid(m_axis_data_dma_read_desc_valid),
-    .m_axis_dma_read_desc_ready(m_axis_data_dma_read_desc_ready),
+//     /*
+//      * DMA read descriptor output
+//      */
+//     .m_axis_dma_read_desc_dma_addr(m_axis_data_dma_read_desc_dma_addr),
+//     .m_axis_dma_read_desc_ram_sel(m_axis_data_dma_read_desc_ram_sel),
+//     .m_axis_dma_read_desc_ram_addr(m_axis_data_dma_read_desc_ram_addr),
+//     .m_axis_dma_read_desc_len(m_axis_data_dma_read_desc_len),
+//     .m_axis_dma_read_desc_tag(m_axis_data_dma_read_desc_tag),
+//     .m_axis_dma_read_desc_valid(m_axis_data_dma_read_desc_valid),
+//     .m_axis_dma_read_desc_ready(m_axis_data_dma_read_desc_ready),
 
-    /*
-     * DMA read descriptor status input
-     */
-    .s_axis_dma_read_desc_status_tag(s_axis_data_dma_read_desc_status_tag),
-    .s_axis_dma_read_desc_status_error(s_axis_data_dma_read_desc_status_error),
-    .s_axis_dma_read_desc_status_valid(s_axis_data_dma_read_desc_status_valid),
+//     /*
+//      * DMA read descriptor status input
+//      */
+//     .s_axis_dma_read_desc_status_tag(s_axis_data_dma_read_desc_status_tag),
+//     .s_axis_dma_read_desc_status_error(s_axis_data_dma_read_desc_status_error),
+//     .s_axis_dma_read_desc_status_valid(s_axis_data_dma_read_desc_status_valid),
 
-    /*
-     * DMA write descriptor output
-     */
-    .m_axis_dma_write_desc_dma_addr(m_axis_data_dma_write_desc_dma_addr),
-    .m_axis_dma_write_desc_ram_sel(m_axis_data_dma_write_desc_ram_sel),
-    .m_axis_dma_write_desc_ram_addr(m_axis_data_dma_write_desc_ram_addr),
-    .m_axis_dma_write_desc_imm(m_axis_data_dma_write_desc_imm),
-    .m_axis_dma_write_desc_imm_en(m_axis_data_dma_write_desc_imm_en),
-    .m_axis_dma_write_desc_len(m_axis_data_dma_write_desc_len),
-    .m_axis_dma_write_desc_tag(m_axis_data_dma_write_desc_tag),
-    .m_axis_dma_write_desc_valid(m_axis_data_dma_write_desc_valid),
-    .m_axis_dma_write_desc_ready(m_axis_data_dma_write_desc_ready),
+//     /*
+//      * DMA write descriptor output
+//      */
+//     .m_axis_dma_write_desc_dma_addr(m_axis_data_dma_write_desc_dma_addr),
+//     .m_axis_dma_write_desc_ram_sel(m_axis_data_dma_write_desc_ram_sel),
+//     .m_axis_dma_write_desc_ram_addr(m_axis_data_dma_write_desc_ram_addr),
+//     .m_axis_dma_write_desc_imm(m_axis_data_dma_write_desc_imm),
+//     .m_axis_dma_write_desc_imm_en(m_axis_data_dma_write_desc_imm_en),
+//     .m_axis_dma_write_desc_len(m_axis_data_dma_write_desc_len),
+//     .m_axis_dma_write_desc_tag(m_axis_data_dma_write_desc_tag),
+//     .m_axis_dma_write_desc_valid(m_axis_data_dma_write_desc_valid),
+//     .m_axis_dma_write_desc_ready(m_axis_data_dma_write_desc_ready),
 
-    /*
-     * DMA write descriptor status input
-     */
-    .s_axis_dma_write_desc_status_tag(s_axis_data_dma_write_desc_status_tag),
-    .s_axis_dma_write_desc_status_error(s_axis_data_dma_write_desc_status_error),
-    .s_axis_dma_write_desc_status_valid(s_axis_data_dma_write_desc_status_valid),
+//     /*
+//      * DMA write descriptor status input
+//      */
+//     .s_axis_dma_write_desc_status_tag(s_axis_data_dma_write_desc_status_tag),
+//     .s_axis_dma_write_desc_status_error(s_axis_data_dma_write_desc_status_error),
+//     .s_axis_dma_write_desc_status_valid(s_axis_data_dma_write_desc_status_valid),
 
-    /*
-     * DMA RAM interface
-     */
-    .dma_ram_wr_cmd_sel(data_dma_ram_wr_cmd_sel),
-    .dma_ram_wr_cmd_be(data_dma_ram_wr_cmd_be),
-    .dma_ram_wr_cmd_addr(data_dma_ram_wr_cmd_addr),
-    .dma_ram_wr_cmd_data(data_dma_ram_wr_cmd_data),
-    .dma_ram_wr_cmd_valid(data_dma_ram_wr_cmd_valid),
-    .dma_ram_wr_cmd_ready(data_dma_ram_wr_cmd_ready),
-    .dma_ram_wr_done(data_dma_ram_wr_done),
-    .dma_ram_rd_cmd_sel(data_dma_ram_rd_cmd_sel),
-    .dma_ram_rd_cmd_addr(data_dma_ram_rd_cmd_addr),
-    .dma_ram_rd_cmd_valid(data_dma_ram_rd_cmd_valid),
-    .dma_ram_rd_cmd_ready(data_dma_ram_rd_cmd_ready),
-    .dma_ram_rd_resp_data(data_dma_ram_rd_resp_data),
-    .dma_ram_rd_resp_valid(data_dma_ram_rd_resp_valid),
-    .dma_ram_rd_resp_ready(data_dma_ram_rd_resp_ready)
-);
+//     /*
+//      * DMA RAM interface
+//      */
+//     .dma_ram_wr_cmd_sel(data_dma_ram_wr_cmd_sel),
+//     .dma_ram_wr_cmd_be(data_dma_ram_wr_cmd_be),
+//     .dma_ram_wr_cmd_addr(data_dma_ram_wr_cmd_addr),
+//     .dma_ram_wr_cmd_data(data_dma_ram_wr_cmd_data),
+//     .dma_ram_wr_cmd_valid(data_dma_ram_wr_cmd_valid),
+//     .dma_ram_wr_cmd_ready(data_dma_ram_wr_cmd_ready),
+//     .dma_ram_wr_done(data_dma_ram_wr_done),
+//     .dma_ram_rd_cmd_sel(data_dma_ram_rd_cmd_sel),
+//     .dma_ram_rd_cmd_addr(data_dma_ram_rd_cmd_addr),
+//     .dma_ram_rd_cmd_valid(data_dma_ram_rd_cmd_valid),
+//     .dma_ram_rd_cmd_ready(data_dma_ram_rd_cmd_ready),
+//     .dma_ram_rd_resp_data(data_dma_ram_rd_resp_data),
+//     .dma_ram_rd_resp_valid(data_dma_ram_rd_resp_valid),
+//     .dma_ram_rd_resp_ready(data_dma_ram_rd_resp_ready)
+// );
 
 // DRAM test
 generate
