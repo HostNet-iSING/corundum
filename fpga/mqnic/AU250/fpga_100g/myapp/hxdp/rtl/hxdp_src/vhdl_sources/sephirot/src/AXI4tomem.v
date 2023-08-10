@@ -4,7 +4,6 @@
 
 module AXI4tomem #
 (
-
     // Register interface
     parameter REG_ADDR_WIDTH = 7,
     parameter REG_DATA_WIDTH = 32,
