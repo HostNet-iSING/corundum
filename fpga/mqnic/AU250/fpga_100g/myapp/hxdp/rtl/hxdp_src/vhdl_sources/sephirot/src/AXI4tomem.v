@@ -76,7 +76,7 @@ end
 */
 // control registers
 reg reg_wr_ack_reg = 1'b0, reg_wr_ack_next;
-reg [REG_DATA_WIDTH-1:0] reg_rd_data_reg = 0, reg_rd_data_next;
+reg [REG_DATA_WIDTH-1:0] reg_rd_data_reg = 0, reg_rd_data_next, reg_wr_test = 0;
 reg reg_rd_ack_reg = 1'b0, reg_rd_ack_next;
 // mem addr reg
 reg [31:0] address_out_reg = 0, address_out_next;
@@ -128,6 +128,7 @@ always @* begin
                 RBB+8'h00: reg_rd_data_next = 32'h12348101;  // Type
                 RBB+8'h04: reg_rd_data_next = 32'h00000100;  // Version
                 RBB+8'h08: reg_rd_data_next = RB_NEXT_PTR;   // Next header
+                RBB+8'h0c: reg_rd_data_next = reg_wr_test;   // Test write reg
                 default: reg_rd_ack_next = 1'b0;
             endcase   
         end
@@ -173,6 +174,12 @@ always @* begin
     if (reg_wr_en && !reg_wr_ack_reg) begin
         // write operation
         reg_wr_ack_next = 1'b1;
+        if (reg_wr_addr[19:16] == 4'h0) begin
+            case ({reg_wr_addr >> 2, 2'b00})
+                RBB+8'h0c: reg_wr_test = reg_wr_data;
+                default: reg_wr_ack_next = 1'b0;
+            endcase
+        end
         if (reg_wr_addr[19:16] == 4'h1) begin
             // imem write
             case ({reg_wr_addr >> 2, 2'b00})

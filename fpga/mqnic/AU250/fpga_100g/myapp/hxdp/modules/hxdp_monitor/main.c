@@ -383,23 +383,45 @@ static int mqnic_app_dma_bench_probe(struct auxiliary_device *adev,
 	app->app_hw_addr = mdev->app_hw_addr;
 	app->ram_hw_addr = mdev->ram_hw_addr;
 
-	// read counters 
+	// app info
 	u32 type, version, active_read_count;
 	size_t offset;
 	type = ioread32(mdev->app_hw_addr + MQNIC_RB_REG_TYPE);
 	version = ioread32(mdev->app_hw_addr + MQNIC_RB_REG_VER);
 	offset = ioread32(mdev->app_hw_addr + MQNIC_RB_REG_NEXT_PTR);
-	// active_read_count = ioread32(mdev->app_hw_addr + 0x20);
 	dev_info(dev, " type 0x%08x (v %d.%d.%d.%d)", type, version >> 24,
 			(version >> 16) & 0xff, (version >> 8) & 0xff, version & 0xff);
-	// dev_info(dev, "active read count: %d", active_read_count);
-	// u32 received_pkts, transmit_pkts, dropped_pkts;
-	// received_pkts = ioread32(mdev->app_hw_addr + 0x80020002);
-	// transmit_pkts = ioread32(mdev->app_hw_addr + 0x80020003);
-	// dropped_pkts = ioread32(mdev->app_hw_addr + 0x80020004);
-	// dev_info(dev, "Received Packets: %d", received_pkts);
-	// dev_info(dev, "Transmit Packets: %d", transmit_pkts);
-	// dev_info(dev, "Dropped Packets: %d", dropped_pkts);
+	// write test reg
+	u32 test_reg;
+	test_reg = ioread32(mdev->app_hw_addr + 0x0000000c);
+	dev_info(dev, "Before writing, test reg: 0x%08x", test_reg);
+	iowrite32(0x0000ffff, mdev->app_hw_addr + 0x0000000c);
+	test_reg = ioread32(mdev->app_hw_addr + 0x0000000c);
+	dev_info(dev, "After writing, test reg: 0x%08x", test_reg);
+	// instruction mem
+	// iowrite32(0x00001111, mdev->app_hw_addr + 0x00010000);
+	// iowrite32(0x00001111, mdev->app_hw_addr + 0x000100ff);
+	// u32 imem_line;
+	// for (int i=0; i<8; i++) {
+	// 	imem_line = ioread32(mdev->app_hw_addr + 0x00010000 + i*4);
+	// 	dev_info(dev, "%dth line of imem: 0x%08x", i+1, imem_line);
+	// }
+	// mapped mem
+	// iowrite32(0x00001111, mdev->app_hw_addr + 0x00020000);
+	// iowrite32(0x00001111, mdev->app_hw_addr + 0x000200ff);
+	// u32 mmap_line;
+	// for (int i=0; i<4; i++) {
+	// 	mmap_line = ioread32(mdev->app_hw_addr + 0x00020000 + i*4);
+	// 	dev_info(dev, "%dth line of mmap: 0x%08x", i+1, mmap_line);
+	// }
+	// counters
+	u32 received_pkts, transmit_pkts, dropped_pkts;
+	received_pkts = ioread32(mdev->app_hw_addr + 0x00030000);
+	transmit_pkts = ioread32(mdev->app_hw_addr + 0x00030004);
+	dropped_pkts = ioread32(mdev->app_hw_addr + 0x00030008);
+	dev_info(dev, "Received Packets: 0x%08x", received_pkts);
+	dev_info(dev, "Transmit Packets: 0x%08x", transmit_pkts);
+	dev_info(dev, "Dropped Packets: 0x%08x", dropped_pkts);
 
 	return 0;
 
