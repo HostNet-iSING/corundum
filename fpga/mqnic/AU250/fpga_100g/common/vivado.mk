@@ -40,13 +40,18 @@ CONFIG ?= config.mk
 FPGA_TOP ?= fpga
 PROJECT ?= $(FPGA_TOP)
 
+# list of source files
 SYN_FILES_REL = $(foreach p,$(SYN_FILES),$(if $(filter /% ./%,$p),$p,../$p))
-SYN_VHDL_FILES_REL = $(foreach p,$(SYN_VHDL_FILES),$(if $(filter /% ./%,$p),$p,../$p))
+
+# list of include files
 INC_FILES_REL = $(foreach p,$(INC_FILES),$(if $(filter /% ./%,$p),$p,../$p))
+
+# list of IP XCI files
 XCI_FILES_REL = $(foreach p,$(XCI_FILES),$(if $(filter /% ./%,$p),$p,../$p))
 IP_TCL_FILES_REL = $(foreach p,$(IP_TCL_FILES),$(if $(filter /% ./%,$p),$p,../$p))
 CONFIG_TCL_FILES_REL = $(foreach p,$(CONFIG_TCL_FILES),$(if $(filter /% ./%,$p),$p,../$p))
 
+# list of timing constraint files
 ifdef XDC_FILES
   XDC_FILES_REL = $(foreach p,$(XDC_FILES),$(if $(filter /% ./%,$p),$p,../$p))
 else

@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1691684024" />
-    <testcase name="run_test_001" classname="test_AXI4tomem" file="/home/zobin/projects/corundum_hxdp/fpga/mqnic/AU250/fpga_100g/env/lib/python3.10/site-packages/cocotb/regression.py" lineno="731" time="0.0028009414672851562" sim_time_ns="180.001" ratio_time="64264.4632536602" />
+    <property name="random_seed" value="1691944643" />
+    <testcase name="run_test_001" classname="test_AXI4tomem" file="/home/zobin/projects/corundum_hxdp/fpga/mqnic/AU250/fpga_100g/env/lib/python3.10/site-packages/cocotb/regression.py" lineno="731" time="0.004224061965942383" sim_time_ns="180.001" ratio_time="42613.247971101206" />
   </testsuite>
 </testsuites>
