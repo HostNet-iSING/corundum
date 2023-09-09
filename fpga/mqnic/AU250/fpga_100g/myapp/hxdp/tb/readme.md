@@ -28,8 +28,10 @@ make
 
 ![](./docs/gtkwave_1.png)
 
-* 
+* then open `AXI4tomem.fst`
 
-then open `AXI4tomem.fst`
+![](./docs/gtkwave_2.png)
 
-![](./docs/gtkwave_1.png)
+* you can check the signals now
+
+![](./docs/gtkwave_3.png)
