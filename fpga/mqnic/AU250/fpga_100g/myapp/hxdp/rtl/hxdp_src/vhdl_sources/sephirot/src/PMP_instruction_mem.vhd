@@ -8,8 +8,9 @@ use ieee.std_logic_unsigned.all;
 entity i_mem is
 
     --generic (init_file: string:="/home/marco/projects/sephirot/roms/xdp1_steps.bin");
-    generic (init_file: string:="/home/zobin/projects/corundum_hxdp/fpga/mqnic/AU250/fpga_100g/myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/xdp_load_and_stats_kern.bin.out");
+--    generic (init_file: string:="/home/zobin/projects/corundum_hxdp/fpga/mqnic/AU250/fpga_100g/myapp/hxdp/rtl/hxdp_src/vhdl_sources/sephirot/src/xdp_load_and_stats_kern.bin.out");
     --generic (init_file: string:="/home/marco/hdl_sources/sephirot/roms/call_test.bin");
+    generic (init_file: string:="/home/ubuntu/git_repos/bmc-cache/test_xdp_files/xdp_load_and_stats_kern.bin.out");
 
     
 
