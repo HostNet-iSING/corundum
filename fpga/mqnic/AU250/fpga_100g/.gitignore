@@ -2,6 +2,6 @@ env
 **/__pycache__
 **/sim_build
 **/singnic
-!/singnic/rev
+!/singnic/rev/
 !/singnic/config.tcl
 !/singnic/Makefile
