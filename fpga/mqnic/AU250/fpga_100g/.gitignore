@@ -5,3 +5,7 @@ env
 !/singnic/rev/
 !/singnic/config.tcl
 !/singnic/Makefile
+/fpga/*
+!/fpga/rev/
+!/fpga/config.tcl
+!/fpga/Makefile
