@@ -80,7 +80,8 @@ class TB(object):
 async def run_test(dut):
     tb = TB(dut)
     await tb.reset()
-    await tb.write_reg(0x68, 1024)
+    # await tb.write_reg(0x68, 1024)
+    await tb.read_reg(0x00)
 
     for k in range(10):
         await RisingEdge(dut.clk)
