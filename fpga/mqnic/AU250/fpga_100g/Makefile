@@ -3,7 +3,8 @@ TARGETS:=
 
 # Subdirectories
 # SUBDIRS = fpga
-SUBDIRS = singnic
+# SUBDIRS = singnic
+SUBDIRS = ainic
 
 SUBDIRS_CLEAN = $(patsubst %,%.clean,$(SUBDIRS))
 
