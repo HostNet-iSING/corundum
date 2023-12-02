@@ -1,17 +1,17 @@
-.. _rb_qm_tx:
+.. _rb_cqm:
 
-=====================================
-Transmit queue manager register block
-=====================================
+=======================================
+Completion queue manager register block
+=======================================
 
-The transmit queue manager register block has a header with type 0x0000C030, version 0x00000400, and indicates the location of the transmit queue manager registers and number of queues.
+The completion queue manager register block has a header with type 0x0000C020, version 0x00000400, and indicates the location of the completion queue manager registers and number of completion queues.
 
 .. table::
 
     ========  =============  ======  ======  ======  ======  =============
     Address   Field          31..24  23..16  15..8   7..0    Reset value
     ========  =============  ======  ======  ======  ======  =============
-    RBB+0x00  Type           Vendor ID       Type            RO 0x0000C030
+    RBB+0x00  Type           Vendor ID       Type            RO 0x0000C020
     --------  -------------  --------------  --------------  -------------
     RBB+0x04  Version        Major   Minor   Patch   Meta    RO 0x00000400
     --------  -------------  ------  ------  ------  ------  -------------
@@ -21,14 +21,14 @@ The transmit queue manager register block has a header with type 0x0000C030, ver
     --------  -------------  ------------------------------  -------------
     RBB+0x10  Count          Queue count                     RO -
     --------  -------------  ------------------------------  -------------
-    RBB+0x14  Stride         Queue control register stride   RO 0x00000020
+    RBB+0x14  Stride         Queue control register stride   RO 0x00000010
     ========  =============  ==============================  =============
 
 See :ref:`rb_overview` for definitions of the standard register block header fields.
 
 .. object:: Offset
 
-    The offset field contains the offset to the start of the transmit queue manager region, relative to the start of the current region.
+    The offset field contains the offset to the start of the completion queue manager region, relative to the start of the current region.
 
     .. table::
 
@@ -59,11 +59,11 @@ See :ref:`rb_overview` for definitions of the standard register block header fie
         ========  ======  ======  ======  ======  =============
         Address   31..24  23..16  15..8   7..0    Reset value
         ========  ======  ======  ======  ======  =============
-        RBB+0x14  Queue control register stride   RO 0x00000020
+        RBB+0x14  Queue control register stride   RO 0x00000010
         ========  ==============================  =============
 
-Queue manager CSRs
-==================
+Completion queue manager CSRs
+=============================
 
 Each queue has several associated control registers, detailed in this table:
 
@@ -76,11 +76,9 @@ Each queue has several associated control registers, detailed in this table:
     ---------  --------------  ------------------------------  -------------
     Base+0x04  Base addr H     Ring base addr (upper)          RW -
     ---------  --------------  ------------------------------  -------------
-    Base+0x08  Control/status  Control/status                  RO -
-    ---------  --------------  ------------------------------  -------------
-    Base+0x0C  Config          Size    CQN                     RO -
-    ---------  --------------  ------  ----------------------  -------------
-    Base+0x10  Pointers        Cons pointer    Prod pointer    RO -
+    Base+0x08  Control/status  Control/status  EQN             RO -
+    ---------  --------------  --------------  --------------  -------------
+    Base+0x0C  Pointers        Cons pointer    Prod pointer    RO -
     =========  ==============  ==============  ==============  =============
 
 .. object:: Base address
@@ -99,15 +97,15 @@ Each queue has several associated control registers, detailed in this table:
 
 .. object:: Control/status
 
-    The control/status field contains control and status information for the queue.  All fields are read-only; use commands to enable/disable the queue.
+    The control/status field contains control and status information for the queue, and the EQN field contains the corresponding event queue number.  All fields are read-only; use commands to set the size and EQN and to enable/disable and arm/disarm the queue.
 
     .. table::
 
         =========  ======  ======  ======  ======  =============
         Address    31..24  23..16  15..8   7..0    Reset value
         =========  ======  ======  ======  ======  =============
-        Base+0x08  Control/status                  RO -
-        =========  ==============================  =============
+        Base+0x08  Control/status  EQN             RO -
+        =========  ==============  ==============  =============
 
     Control/status bit definitions
 
@@ -117,20 +115,10 @@ Each queue has several associated control registers, detailed in this table:
         Bit    Function
         =====  =========
         0      Enable
+        1      Arm
         3      Active
+        15:12  Log size
         =====  =========
-
-.. object:: Config
-
-    The size field contains the size of the queue, and the CQN field contains the corresponding completion queue number.  All fields are read-only; use commands to set the size and CQN.
-
-    .. table::
-
-        =========  ======  ======  ======  ======  =============
-        Address    31..24  23..16  15..8   7..0    Reset value
-        =========  ======  ======  ======  ======  =============
-        Base+0x0C  Size    CQN                     RO -
-        =========  ======  ======================  =============
 
 .. object:: Pointers
 
@@ -141,13 +129,11 @@ Each queue has several associated control registers, detailed in this table:
         =========  ======  ======  ======  ======  =============
         Address    31..24  23..16  15..8   7..0    Reset value
         =========  ======  ======  ======  ======  =============
-        Base+0x10  Cons pointer    Prod pointer    RO -
+        Base+0x0C  Cons pointer    Prod pointer    RO -
         =========  ==============  ==============  =============
 
-Queue manager commands
-======================
-
-Commands are used to control various aspects of queue state in an atomic manner.  Commands can be written to any of the read-only registers associated with the queue (control/status, config, and pointers).
+Completion queue manager commands
+=================================
 
 .. table::
 
@@ -156,15 +142,19 @@ Commands are used to control various aspects of queue state in an atomic manner.
     ========================  ======  ======  ======  ======
     Set VF ID                 0x8001          VF ID
     ------------------------  --------------  --------------
-    Set size                  0x8002          size
+    Set size                  0x8002          Log size
     ------------------------  --------------  --------------
-    Set CQN                   0xC0    CQN
+    Set EQN                   0xC0    EQN
     ------------------------  ------  ----------------------
     Set prod pointer          0x8080          Prod pointer
     ------------------------  --------------  --------------
     Set cons pointer          0x8090          Cons pointer
     ------------------------  --------------  --------------
+    Set cons pointer, arm     0x8091          Cons pointer
+    ------------------------  --------------  --------------
     Set enable                0x400001                Enable
+    ------------------------  ----------------------  ------
+    Set arm                   0x400002                Arm
     ========================  ======================  ======
 
 .. object:: Set VF ID
@@ -191,21 +181,21 @@ Commands are used to control various aspects of queue state in an atomic manner.
         0x8002          Log size
         ==============  ==============
 
-.. object:: Set CQN
+.. object:: Set EQN
 
-    The set CQN command is used to set the CQN for completions generated by the queue.  Allowed when queue is disabled and inactive.
+    The set EQN command is used to set the EQN for events generated by the queue.  Allowed when queue is disabled and inactive.
 
     .. table::
 
         ======  ======  ======  ======
         31..24  23..16  15..8   7..0
         ======  ======  ======  ======
-        0xC0    CQN
+        0xC0    EQN
         ======  ======================
 
 .. object:: Set prod pointer
 
-    The set producer pointer command is used to set the queue producer pointer.  Allowed at any time.
+    The set producer pointer command is used to set the queue producer pointer.  Allowed when queue is disabled and inactive.
 
     .. table::
 
@@ -217,7 +207,7 @@ Commands are used to control various aspects of queue state in an atomic manner.
 
 .. object:: Set cons pointer
 
-    The set consumer pointer command is used to set the queue consumer pointer.  Allowed when queue is disabled and inactive.
+    The set consumer pointer command is used to set the queue consumer pointer.  Allowed at any time.
 
     .. table::
 
@@ -225,6 +215,18 @@ Commands are used to control various aspects of queue state in an atomic manner.
         31..24  23..16  15..8   7..0
         ======  ======  ======  ======
         0x8090          Cons pointer
+        ==============  ==============
+
+.. object:: Set cons pointer, arm
+
+    The set consumer pointer, arm command is used to set the queue consumer pointer and simultaneously re-arm the queue.  Allowed at any time.
+
+    .. table::
+
+        ======  ======  ======  ======
+        31..24  23..16  15..8   7..0
+        ======  ======  ======  ======
+        0x8091          Cons pointer
         ==============  ==============
 
 .. object:: Set enable
@@ -237,4 +239,16 @@ Commands are used to control various aspects of queue state in an atomic manner.
         31..24  23..16  15..8   7..0
         ======  ======  ======  ======
         0x400001                Enable
+        ======================  ======
+
+.. object:: Set arm
+
+    The set arm command is used to arm or disarm the queue.  Allowed at any time.
+
+    .. table::
+
+        ======  ======  ======  ======
+        31..24  23..16  15..8   7..0
+        ======  ======  ======  ======
+        0x400002                Arm
         ======================  ======

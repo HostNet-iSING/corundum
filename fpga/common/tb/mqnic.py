@@ -13,11 +13,10 @@ from cocotbext.axi import Window
 
 import struct
 
-MQNIC_MAX_EQ     = 1
-MQNIC_MAX_TXQ    = 32
-MQNIC_MAX_TX_CQ  = MQNIC_MAX_TXQ
-MQNIC_MAX_RXQ    = 8
-MQNIC_MAX_RX_CQ  = MQNIC_MAX_RXQ
+MQNIC_MAX_EQ   = 1
+MQNIC_MAX_TXQ  = 32
+MQNIC_MAX_RXQ  = 8
+MQNIC_MAX_CQ   = MQNIC_MAX_TXQ*2
 
 # Register blocks
 MQNIC_RB_REG_TYPE      = 0x00
@@ -159,34 +158,28 @@ MQNIC_RB_RX_QUEUE_MAP_CH_REG_RSS_MASK  = 0x04
 MQNIC_RB_RX_QUEUE_MAP_CH_REG_APP_MASK  = 0x08
 
 MQNIC_RB_EQM_TYPE        = 0x0000C010
-MQNIC_RB_EQM_VER         = 0x00000200
+MQNIC_RB_EQM_VER         = 0x00000400
 MQNIC_RB_EQM_REG_OFFSET  = 0x0C
 MQNIC_RB_EQM_REG_COUNT   = 0x10
 MQNIC_RB_EQM_REG_STRIDE  = 0x14
 
-MQNIC_RB_TX_QM_TYPE        = 0x0000C020
-MQNIC_RB_TX_QM_VER         = 0x00000200
+MQNIC_RB_CQM_TYPE        = 0x0000C020
+MQNIC_RB_CQM_VER         = 0x00000400
+MQNIC_RB_CQM_REG_OFFSET  = 0x0C
+MQNIC_RB_CQM_REG_COUNT   = 0x10
+MQNIC_RB_CQM_REG_STRIDE  = 0x14
+
+MQNIC_RB_TX_QM_TYPE        = 0x0000C030
+MQNIC_RB_TX_QM_VER         = 0x00000400
 MQNIC_RB_TX_QM_REG_OFFSET  = 0x0C
 MQNIC_RB_TX_QM_REG_COUNT   = 0x10
 MQNIC_RB_TX_QM_REG_STRIDE  = 0x14
 
-MQNIC_RB_TX_CQM_TYPE        = 0x0000C030
-MQNIC_RB_TX_CQM_VER         = 0x00000200
-MQNIC_RB_TX_CQM_REG_OFFSET  = 0x0C
-MQNIC_RB_TX_CQM_REG_COUNT   = 0x10
-MQNIC_RB_TX_CQM_REG_STRIDE  = 0x14
-
-MQNIC_RB_RX_QM_TYPE        = 0x0000C021
-MQNIC_RB_RX_QM_VER         = 0x00000200
+MQNIC_RB_RX_QM_TYPE        = 0x0000C031
+MQNIC_RB_RX_QM_VER         = 0x00000400
 MQNIC_RB_RX_QM_REG_OFFSET  = 0x0C
 MQNIC_RB_RX_QM_REG_COUNT   = 0x10
 MQNIC_RB_RX_QM_REG_STRIDE  = 0x14
-
-MQNIC_RB_RX_CQM_TYPE        = 0x0000C031
-MQNIC_RB_RX_CQM_VER         = 0x00000200
-MQNIC_RB_RX_CQM_REG_OFFSET  = 0x0C
-MQNIC_RB_RX_CQM_REG_COUNT   = 0x10
-MQNIC_RB_RX_CQM_REG_STRIDE  = 0x14
 
 MQNIC_RB_PORT_TYPE        = 0x0000C002
 MQNIC_RB_PORT_VER         = 0x00000200
@@ -244,38 +237,65 @@ MQNIC_RB_APP_INFO_TYPE    = 0x0000C005
 MQNIC_RB_APP_INFO_VER     = 0x00000200
 MQNIC_RB_APP_INFO_REG_ID  = 0x0C
 
-MQNIC_QUEUE_BASE_ADDR_REG       = 0x00
-MQNIC_QUEUE_ACTIVE_LOG_SIZE_REG = 0x08
-MQNIC_QUEUE_CPL_QUEUE_INDEX_REG = 0x0C
-MQNIC_QUEUE_HEAD_PTR_REG        = 0x10
-MQNIC_QUEUE_TAIL_PTR_REG        = 0x18
+MQNIC_QUEUE_BASE_ADDR_VF_REG  = 0x00
+MQNIC_QUEUE_CTRL_STATUS_REG   = 0x08
+MQNIC_QUEUE_SIZE_CQN_REG      = 0x0C
+MQNIC_QUEUE_PTR_REG           = 0x10
+MQNIC_QUEUE_PROD_PTR_REG      = 0x10
+MQNIC_QUEUE_CONS_PTR_REG      = 0x12
 
-MQNIC_QUEUE_ACTIVE_MASK = 0x80000000
+MQNIC_QUEUE_ENABLE_MASK  = 0x00000001
+MQNIC_QUEUE_ACTIVE_MASK  = 0x00000008
+MQNIC_QUEUE_PTR_MASK     = 0xFFFF
 
-MQNIC_CQ_BASE_ADDR_REG       = 0x00
-MQNIC_CQ_ACTIVE_LOG_SIZE_REG = 0x08
-MQNIC_CQ_INTERRUPT_INDEX_REG = 0x0C
-MQNIC_CQ_HEAD_PTR_REG        = 0x10
-MQNIC_CQ_TAIL_PTR_REG        = 0x18
+MQNIC_QUEUE_CMD_SET_VF_ID     = 0x80010000
+MQNIC_QUEUE_CMD_SET_SIZE      = 0x80020000
+MQNIC_QUEUE_CMD_SET_CQN       = 0xC0000000
+MQNIC_QUEUE_CMD_SET_PROD_PTR  = 0x80800000
+MQNIC_QUEUE_CMD_SET_CONS_PTR  = 0x80900000
+MQNIC_QUEUE_CMD_SET_ENABLE    = 0x40000100
 
-MQNIC_CQ_ACTIVE_MASK = 0x80000000
+MQNIC_CQ_BASE_ADDR_VF_REG  = 0x00
+MQNIC_CQ_CTRL_STATUS_REG   = 0x08
+MQNIC_CQ_PTR_REG           = 0x0C
+MQNIC_CQ_PROD_PTR_REG      = 0x0C
+MQNIC_CQ_CONS_PTR_REG      = 0x0E
 
-MQNIC_CQ_ARM_MASK  = 0x80000000
-MQNIC_CQ_CONT_MASK = 0x40000000
+MQNIC_CQ_ENABLE_MASK  = 0x00010000
+MQNIC_CQ_ARM_MASK     = 0x00020000
+MQNIC_CQ_ACTIVE_MASK  = 0x00080000
+MQNIC_CQ_PTR_MASK     = 0xFFFF
 
-MQNIC_EQ_BASE_ADDR_REG       = 0x00
-MQNIC_EQ_ACTIVE_LOG_SIZE_REG = 0x08
-MQNIC_EQ_INTERRUPT_INDEX_REG = 0x0C
-MQNIC_EQ_HEAD_PTR_REG        = 0x10
-MQNIC_EQ_TAIL_PTR_REG        = 0x18
+MQNIC_CQ_CMD_SET_VF_ID         = 0x80010000
+MQNIC_CQ_CMD_SET_SIZE          = 0x80020000
+MQNIC_CQ_CMD_SET_EQN           = 0xC0000000
+MQNIC_CQ_CMD_SET_PROD_PTR      = 0x80800000
+MQNIC_CQ_CMD_SET_CONS_PTR      = 0x80900000
+MQNIC_CQ_CMD_SET_CONS_PTR_ARM  = 0x80910000
+MQNIC_CQ_CMD_SET_ENABLE        = 0x40000100
+MQNIC_CQ_CMD_SET_ARM           = 0x40000200
 
-MQNIC_EQ_ACTIVE_MASK = 0x80000000
+MQNIC_EQ_BASE_ADDR_VF_REG  = 0x00
+MQNIC_EQ_CTRL_STATUS_REG   = 0x08
+MQNIC_EQ_PTR_REG           = 0x0C
+MQNIC_EQ_PROD_PTR_REG      = 0x0C
+MQNIC_EQ_CONS_PTR_REG      = 0x0E
 
-MQNIC_EQ_ARM_MASK  = 0x80000000
-MQNIC_EQ_CONT_MASK = 0x40000000
+MQNIC_EQ_ENABLE_MASK  = 0x00010000
+MQNIC_EQ_ARM_MASK     = 0x00020000
+MQNIC_EQ_ACTIVE_MASK  = 0x00080000
+MQNIC_EQ_PTR_MASK     = 0xFFFF
 
-MQNIC_EVENT_TYPE_TX_CPL = 0x0000
-MQNIC_EVENT_TYPE_RX_CPL = 0x0001
+MQNIC_EQ_CMD_SET_VF_ID         = 0x80010000
+MQNIC_EQ_CMD_SET_SIZE          = 0x80020000
+MQNIC_EQ_CMD_SET_IRQN          = 0xC0000000
+MQNIC_EQ_CMD_SET_PROD_PTR      = 0x80800000
+MQNIC_EQ_CMD_SET_CONS_PTR      = 0x80900000
+MQNIC_EQ_CMD_SET_CONS_PTR_ARM  = 0x80910000
+MQNIC_EQ_CMD_SET_ENABLE        = 0x40000100
+MQNIC_EQ_CMD_SET_ARM           = 0x40000200
+
+MQNIC_EVENT_TYPE_CPL = 0x0000
 
 MQNIC_DESC_SIZE = 16
 MQNIC_CPL_SIZE = 32
@@ -399,10 +419,9 @@ class Eq:
 
         self.cq_table = {}
 
-        self.head_ptr = 0
-        self.tail_ptr = 0
+        self.prod_ptr = 0
+        self.cons_ptr = 0
 
-        self.hw_ptr_mask = 0xffff
         self.hw_regs = None
 
     async def open(self, irq, size):
@@ -425,8 +444,8 @@ class Eq:
 
         self.buf[0:self.buf_size] = b'\x00'*self.buf_size
 
-        self.head_ptr = 0
-        self.tail_ptr = 0
+        self.prod_ptr = 0
+        self.cons_ptr = 0
 
         self.irq = irq
 
@@ -434,13 +453,14 @@ class Eq:
 
         self.hw_regs = self.interface.eq_res.get_window(self.eqn)
 
-        await self.hw_regs.write_dword(MQNIC_EQ_ACTIVE_LOG_SIZE_REG, 0)  # active, log size
-        await self.hw_regs.write_dword(MQNIC_EQ_BASE_ADDR_REG, self.buf_dma & 0xffffffff)  # base address
-        await self.hw_regs.write_dword(MQNIC_EQ_BASE_ADDR_REG+4, self.buf_dma >> 32)  # base address
-        await self.hw_regs.write_dword(MQNIC_EQ_INTERRUPT_INDEX_REG, self.irq)  # interrupt index
-        await self.hw_regs.write_dword(MQNIC_EQ_HEAD_PTR_REG, self.head_ptr & self.hw_ptr_mask)  # head pointer
-        await self.hw_regs.write_dword(MQNIC_EQ_TAIL_PTR_REG, self.tail_ptr & self.hw_ptr_mask)  # tail pointer
-        await self.hw_regs.write_dword(MQNIC_EQ_ACTIVE_LOG_SIZE_REG, self.log_size | MQNIC_EQ_ACTIVE_MASK)  # active, log size
+        await self.hw_regs.write_dword(MQNIC_EQ_CTRL_STATUS_REG, MQNIC_EQ_CMD_SET_ENABLE | 0)
+        await self.hw_regs.write_dword(MQNIC_EQ_BASE_ADDR_VF_REG, self.buf_dma & 0xfffff000)
+        await self.hw_regs.write_dword(MQNIC_EQ_BASE_ADDR_VF_REG+4, self.buf_dma >> 32)
+        await self.hw_regs.write_dword(MQNIC_EQ_CTRL_STATUS_REG, MQNIC_EQ_CMD_SET_SIZE | self.log_size)
+        await self.hw_regs.write_dword(MQNIC_EQ_CTRL_STATUS_REG, MQNIC_EQ_CMD_SET_IRQN | self.irq)
+        await self.hw_regs.write_dword(MQNIC_EQ_CTRL_STATUS_REG, MQNIC_EQ_CMD_SET_PROD_PTR | (self.prod_ptr & MQNIC_EQ_PTR_MASK))
+        await self.hw_regs.write_dword(MQNIC_EQ_CTRL_STATUS_REG, MQNIC_EQ_CMD_SET_CONS_PTR | (self.cons_ptr & MQNIC_EQ_PTR_MASK))
+        await self.hw_regs.write_dword(MQNIC_EQ_CTRL_STATUS_REG, MQNIC_EQ_CMD_SET_ENABLE | 1)
 
         self.enabled = True
 
@@ -448,8 +468,7 @@ class Eq:
         if not self.hw_regs:
             return
 
-        await self.hw_regs.write_dword(MQNIC_EQ_ACTIVE_LOG_SIZE_REG, self.log_size)  # active, log size
-        await self.hw_regs.write_dword(MQNIC_EQ_INTERRUPT_INDEX_REG, 0)  # interrupt index
+        await self.hw_regs.write_dword(MQNIC_EQ_CTRL_STATUS_REG, MQNIC_EQ_CMD_SET_ENABLE | 0)
 
         # TODO free buffer
 
@@ -463,29 +482,23 @@ class Eq:
         self.eqn = None
 
     def attach_cq(self, cq):
-        if cq.is_txcq:
-            self.cq_table[cq.cqn | 0x80000000] = cq
-        else:
-            self.cq_table[cq.cqn] = cq
+        self.cq_table[cq.cqn] = cq
 
     def detach_cq(self, cq):
-        if cq.is_txcq:
-            del self.cq_table[cq.cqn | 0x80000000]
-        else:
-            del self.cq_table[cq.cqn]
+        del self.cq_table[cq.cqn]
 
-    async def read_head_ptr(self):
-        val = await self.hw_regs.read_dword(MQNIC_EQ_HEAD_PTR_REG)
-        self.head_ptr += (val - self.head_ptr) & self.hw_ptr_mask
+    async def read_prod_ptr(self):
+        val = await self.hw_regs.read_dword(MQNIC_EQ_PTR_REG)
+        self.prod_ptr += ((val & MQNIC_EQ_PTR_MASK) - self.prod_ptr) & MQNIC_EQ_PTR_MASK
 
-    async def write_tail_ptr(self):
-        await self.hw_regs.write_dword(MQNIC_EQ_TAIL_PTR_REG, self.tail_ptr & self.hw_ptr_mask)
+    async def write_cons_ptr(self):
+        await self.hw_regs.write_dword(MQNIC_EQ_CTRL_STATUS_REG, MQNIC_EQ_CMD_SET_CONS_PTR | (self.cons_ptr & MQNIC_EQ_PTR_MASK))
 
     async def arm(self):
         if not self.hw_regs:
             return
 
-        await self.hw_regs.write_dword(MQNIC_EQ_INTERRUPT_INDEX_REG, self.irq | MQNIC_EQ_ARM_MASK)  # interrupt index
+        await self.hw_regs.write_dword(MQNIC_EQ_CTRL_STATUS_REG, MQNIC_EQ_CMD_SET_ARM | 1)
 
     async def process_eq(self):
         if not self.interface.port_up:
@@ -493,34 +506,29 @@ class Eq:
 
         self.log.info("Process EQ")
 
-        eq_tail_ptr = self.tail_ptr
-        eq_index = eq_tail_ptr & self.size_mask
+        eq_cons_ptr = self.cons_ptr
+        eq_index = eq_cons_ptr & self.size_mask
 
         while True:
             event_data = struct.unpack_from("<HHLLLLLLL", self.buf, eq_index*self.stride)
 
             self.log.info("EQ %d index %d data: %s", self.eqn, eq_index, repr(event_data))
 
-            if bool(event_data[-1] & 0x80000000) == bool(eq_tail_ptr & self.size):
+            if bool(event_data[-1] & 0x80000000) == bool(eq_cons_ptr & self.size):
                 self.log.info("EQ %d empty", self.eqn)
                 break
 
-            if event_data[0] == 0:
-                # transmit completion
-                cq = self.cq_table[event_data[1] | 0x80000000]
-                await cq.handler(cq)
-                await cq.arm()
-            elif event_data[0] == 1:
-                # receive completion
+            if event_data[0] == MQNIC_EVENT_TYPE_CPL:
+                # completion
                 cq = self.cq_table[event_data[1]]
                 await cq.handler(cq)
                 await cq.arm()
 
-            eq_tail_ptr += 1
-            eq_index = eq_tail_ptr & self.size_mask
+            eq_cons_ptr += 1
+            eq_index = eq_cons_ptr & self.size_mask
 
-        self.tail_ptr = eq_tail_ptr
-        await self.write_tail_ptr()
+        self.cons_ptr = eq_cons_ptr
+        await self.write_cons_ptr()
 
 
 class Cq:
@@ -545,23 +553,18 @@ class Cq:
         self.src_ring = None
         self.handler = None
 
-        self.head_ptr = 0
-        self.tail_ptr = 0
+        self.prod_ptr = 0
+        self.cons_ptr = 0
 
-        self.hw_ptr_mask = 0xffff
         self.hw_regs = None
 
-    async def open(self, eq, size, is_txcq=True):
+    async def open(self, eq, size):
         if self.hw_regs:
             raise Exception("Already open")
 
-        self.is_txcq = is_txcq
-        if is_txcq:
-            self.cqn = self.interface.tx_cq_res.alloc()
-        else:
-            self.cqn = self.interface.rx_cq_res.alloc()
+        self.cqn = self.interface.cq_res.alloc()
 
-        self.log.info("Open %s CQ %d (interface %d)", "TX" if is_txcq else "RX", self.cqn, self.interface.index)
+        self.log.info("Open CQ %d (interface %d)", self.cqn, self.interface.index)
 
         self.log_size = size.bit_length() - 1
         self.size = 2**self.log_size
@@ -575,24 +578,22 @@ class Cq:
 
         self.buf[0:self.buf_size] = b'\x00'*self.buf_size
 
-        self.head_ptr = 0
-        self.tail_ptr = 0
+        self.prod_ptr = 0
+        self.cons_ptr = 0
 
         eq.attach_cq(self)
         self.eq = eq
 
-        if is_txcq:
-            self.hw_regs = self.interface.tx_cq_res.get_window(self.cqn)
-        else:
-            self.hw_regs = self.interface.rx_cq_res.get_window(self.cqn)
+        self.hw_regs = self.interface.cq_res.get_window(self.cqn)
 
-        await self.hw_regs.write_dword(MQNIC_CQ_ACTIVE_LOG_SIZE_REG, 0)  # active, log size
-        await self.hw_regs.write_dword(MQNIC_CQ_BASE_ADDR_REG, self.buf_dma & 0xffffffff)  # base address
-        await self.hw_regs.write_dword(MQNIC_CQ_BASE_ADDR_REG+4, self.buf_dma >> 32)  # base address
-        await self.hw_regs.write_dword(MQNIC_CQ_INTERRUPT_INDEX_REG, self.eq.eqn)  # event index
-        await self.hw_regs.write_dword(MQNIC_CQ_HEAD_PTR_REG, self.head_ptr & self.hw_ptr_mask)  # head pointer
-        await self.hw_regs.write_dword(MQNIC_CQ_TAIL_PTR_REG, self.tail_ptr & self.hw_ptr_mask)  # tail pointer
-        await self.hw_regs.write_dword(MQNIC_CQ_ACTIVE_LOG_SIZE_REG, self.log_size | MQNIC_CQ_ACTIVE_MASK)  # active, log size
+        await self.hw_regs.write_dword(MQNIC_CQ_CTRL_STATUS_REG, MQNIC_CQ_CMD_SET_ENABLE | 0)
+        await self.hw_regs.write_dword(MQNIC_CQ_BASE_ADDR_VF_REG, self.buf_dma & 0xfffff000)
+        await self.hw_regs.write_dword(MQNIC_CQ_BASE_ADDR_VF_REG+4, self.buf_dma >> 32)
+        await self.hw_regs.write_dword(MQNIC_CQ_CTRL_STATUS_REG, MQNIC_CQ_CMD_SET_SIZE | self.log_size)
+        await self.hw_regs.write_dword(MQNIC_CQ_CTRL_STATUS_REG, MQNIC_CQ_CMD_SET_EQN | self.eq.eqn)
+        await self.hw_regs.write_dword(MQNIC_CQ_CTRL_STATUS_REG, MQNIC_CQ_CMD_SET_PROD_PTR | (self.prod_ptr & MQNIC_CQ_PTR_MASK))
+        await self.hw_regs.write_dword(MQNIC_CQ_CTRL_STATUS_REG, MQNIC_CQ_CMD_SET_CONS_PTR | (self.cons_ptr & MQNIC_CQ_PTR_MASK))
+        await self.hw_regs.write_dword(MQNIC_CQ_CTRL_STATUS_REG, MQNIC_CQ_CMD_SET_ENABLE | 1)
 
         self.enabled = True
 
@@ -600,8 +601,7 @@ class Cq:
         if not self.hw_regs:
             return
 
-        await self.hw_regs.write_dword(MQNIC_CQ_ACTIVE_LOG_SIZE_REG, self.log_size)  # active, log size
-        await self.hw_regs.write_dword(MQNIC_CQ_INTERRUPT_INDEX_REG, 0)  # event index
+        await self.hw_regs.write_dword(MQNIC_CQ_CTRL_STATUS_REG, MQNIC_CQ_CMD_SET_ENABLE | 0)
 
         # TODO free buffer
 
@@ -612,24 +612,21 @@ class Cq:
 
         self.hw_regs = None
 
-        if self.is_txcq:
-            self.interface.tx_cq_res.free(self.cqn)
-        else:
-            self.interface.rx_cq_res.free(self.cqn)
+        self.interface.cq_res.free(self.cqn)
         self.cqn = None
 
-    async def read_head_ptr(self):
-        val = await self.hw_regs.read_dword(MQNIC_CQ_HEAD_PTR_REG)
-        self.head_ptr += (val - self.head_ptr) & self.hw_ptr_mask
+    async def read_prod_ptr(self):
+        val = await self.hw_regs.read_dword(MQNIC_CQ_PTR_REG)
+        self.prod_ptr += ((val & MQNIC_CQ_PTR_MASK) - self.prod_ptr) & MQNIC_CQ_PTR_MASK
 
-    async def write_tail_ptr(self):
-        await self.hw_regs.write_dword(MQNIC_CQ_TAIL_PTR_REG, self.tail_ptr & self.hw_ptr_mask)
+    async def write_cons_ptr(self):
+        await self.hw_regs.write_dword(MQNIC_CQ_CTRL_STATUS_REG, MQNIC_CQ_CMD_SET_CONS_PTR | (self.cons_ptr & MQNIC_CQ_PTR_MASK))
 
     async def arm(self):
         if not self.hw_regs:
             return
 
-        await self.hw_regs.write_dword(MQNIC_CQ_INTERRUPT_INDEX_REG, self.eq.eqn | MQNIC_CQ_ARM_MASK)  # event index
+        await self.hw_regs.write_dword(MQNIC_CQ_CTRL_STATUS_REG, MQNIC_CQ_CMD_SET_ARM | 1)
 
 
 class Txq:
@@ -654,15 +651,14 @@ class Txq:
 
         self.cq = None
 
-        self.head_ptr = 0
-        self.tail_ptr = 0
+        self.prod_ptr = 0
+        self.cons_ptr = 0
 
         self.clean_event = Event()
 
         self.packets = 0
         self.bytes = 0
 
-        self.hw_ptr_mask = 0xffff
         self.hw_regs = None
 
     async def open(self, cq, size, desc_block_size):
@@ -688,8 +684,8 @@ class Txq:
         self.buf_dma = self.buf_region.get_absolute_address(0)
         self.buf = self.buf_region.mem
 
-        self.head_ptr = 0
-        self.tail_ptr = 0
+        self.prod_ptr = 0
+        self.cons_ptr = 0
 
         self.cq = cq
         self.cq.src_ring = self
@@ -697,13 +693,13 @@ class Txq:
 
         self.hw_regs = self.interface.txq_res.get_window(self.index)
 
-        await self.hw_regs.write_dword(MQNIC_QUEUE_ACTIVE_LOG_SIZE_REG, 0)  # active, log size
-        await self.hw_regs.write_dword(MQNIC_QUEUE_BASE_ADDR_REG, self.buf_dma & 0xffffffff)  # base address
-        await self.hw_regs.write_dword(MQNIC_QUEUE_BASE_ADDR_REG+4, self.buf_dma >> 32)  # base address
-        await self.hw_regs.write_dword(MQNIC_QUEUE_CPL_QUEUE_INDEX_REG, self.cq.cqn)  # completion queue index
-        await self.hw_regs.write_dword(MQNIC_QUEUE_HEAD_PTR_REG, self.head_ptr & self.hw_ptr_mask)  # head pointer
-        await self.hw_regs.write_dword(MQNIC_QUEUE_TAIL_PTR_REG, self.tail_ptr & self.hw_ptr_mask)  # tail pointer
-        await self.hw_regs.write_dword(MQNIC_QUEUE_ACTIVE_LOG_SIZE_REG, self.log_queue_size | (self.log_desc_block_size << 8))  # active, log desc block size, log queue size
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_ENABLE | 0)
+        await self.hw_regs.write_dword(MQNIC_QUEUE_BASE_ADDR_VF_REG, self.buf_dma & 0xfffff000)
+        await self.hw_regs.write_dword(MQNIC_QUEUE_BASE_ADDR_VF_REG+4, self.buf_dma >> 32)
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_SIZE | (self.log_desc_block_size << 8) | self.log_queue_size)
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_CQN | self.cq.cqn)
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_PROD_PTR | (self.prod_ptr & MQNIC_QUEUE_PTR_MASK))
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_CONS_PTR | (self.cons_ptr & MQNIC_QUEUE_PTR_MASK))
 
     async def close(self):
         if not self.hw_regs:
@@ -728,7 +724,7 @@ class Txq:
         if not self.hw_regs:
             raise Exception("Not open")
 
-        await self.hw_regs.write_dword(MQNIC_QUEUE_ACTIVE_LOG_SIZE_REG, self.log_queue_size | (self.log_desc_block_size << 8) | MQNIC_QUEUE_ACTIVE_MASK)  # active, log desc block size, log queue size
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_ENABLE | 1)
 
         self.enabled = True
 
@@ -736,22 +732,22 @@ class Txq:
         if not self.hw_regs:
             return
 
-        await self.hw_regs.write_dword(MQNIC_QUEUE_ACTIVE_LOG_SIZE_REG, self.log_queue_size | (self.log_desc_block_size << 8))  # active, log desc block size, log queue size
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_ENABLE | 0)
 
         self.enabled = False
 
     def empty(self):
-        return self.head_ptr == self.tail_ptr
+        return self.prod_ptr == self.cons_ptr
 
     def full(self):
-        return self.head_ptr - self.tail_ptr >= self.full_size
+        return self.prod_ptr - self.cons_ptr >= self.full_size
 
-    async def read_tail_ptr(self):
-        val = await self.hw_regs.read_dword(MQNIC_QUEUE_TAIL_PTR_REG)
-        self.tail_ptr += (val - self.tail_ptr) & self.hw_ptr_mask
+    async def read_cons_ptr(self):
+        val = await self.hw_regs.read_dword(MQNIC_QUEUE_PTR_REG)
+        self.cons_ptr += ((val >> 16) - self.cons_ptr) & MQNIC_QUEUE_PTR_MASK
 
-    async def write_head_ptr(self):
-        await self.hw_regs.write_dword(MQNIC_QUEUE_HEAD_PTR_REG, self.head_ptr & self.hw_ptr_mask)
+    async def write_prod_ptr(self):
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_PROD_PTR | (self.prod_ptr & MQNIC_QUEUE_PTR_MASK))
 
     def free_desc(self, index):
         pkt = self.tx_info[index]
@@ -760,15 +756,15 @@ class Txq:
 
     def free_buf(self):
         while not self.empty():
-            index = self.tail_ptr & self.size_mask
+            index = self.cons_ptr & self.size_mask
             self.free_desc(index)
-            self.tail_ptr += 1
+            self.cons_ptr += 1
 
     @staticmethod
     async def process_tx_cq(cq):
         interface = cq.interface
 
-        interface.log.info("Process TX CQ %d for TXQ %d (interface %d)", cq.cqn, cq.src_ring.index, interface.index)
+        interface.log.info("Process CQ %d for TXQ %d (interface %d)", cq.cqn, cq.src_ring.index, interface.index)
 
         ring = cq.src_ring
 
@@ -776,8 +772,8 @@ class Txq:
             return
 
         # process completion queue
-        cq_tail_ptr = cq.tail_ptr
-        cq_index = cq_tail_ptr & cq.size_mask
+        cq_cons_ptr = cq.cons_ptr
+        cq_index = cq_cons_ptr & cq.size_mask
 
         while True:
             cpl_data = struct.unpack_from("<HHHxxLHHLBBHLL", cq.buf, cq_index*cq.stride)
@@ -785,7 +781,7 @@ class Txq:
 
             interface.log.info("CQ %d index %d data: %s", cq.cqn, cq_index, repr(cpl_data))
 
-            if bool(cpl_data[-1] & 0x80000000) == bool(cq_tail_ptr & cq.size):
+            if bool(cpl_data[-1] & 0x80000000) == bool(cq_cons_ptr & cq.size):
                 interface.log.info("CQ %d empty", cq.cqn)
                 break
 
@@ -793,24 +789,24 @@ class Txq:
 
             ring.free_desc(ring_index)
 
-            cq_tail_ptr += 1
-            cq_index = cq_tail_ptr & cq.size_mask
+            cq_cons_ptr += 1
+            cq_index = cq_cons_ptr & cq.size_mask
 
-        cq.tail_ptr = cq_tail_ptr
-        await cq.write_tail_ptr()
+        cq.cons_ptr = cq_cons_ptr
+        await cq.write_cons_ptr()
 
         # process ring
-        ring_tail_ptr = ring.tail_ptr
-        ring_index = ring_tail_ptr & ring.size_mask
+        ring_cons_ptr = ring.cons_ptr
+        ring_index = ring_cons_ptr & ring.size_mask
 
-        while (ring_tail_ptr != ring.head_ptr):
+        while (ring_cons_ptr != ring.prod_ptr):
             if ring.tx_info[ring_index]:
                 break
 
-            ring_tail_ptr += 1
-            ring_index = ring_tail_ptr & ring.size_mask
+            ring_cons_ptr += 1
+            ring_index = ring_cons_ptr & ring.size_mask
 
-        ring.tail_ptr = ring_tail_ptr
+        ring.cons_ptr = ring_cons_ptr
 
         ring.clean_event.set()
 
@@ -837,13 +833,12 @@ class Rxq:
 
         self.cq = None
 
-        self.head_ptr = 0
-        self.tail_ptr = 0
+        self.prod_ptr = 0
+        self.cons_ptr = 0
 
         self.packets = 0
         self.bytes = 0
 
-        self.hw_ptr_mask = 0xffff
         self.hw_regs = None
 
     async def open(self, cq, size, desc_block_size):
@@ -869,8 +864,8 @@ class Rxq:
         self.buf_dma = self.buf_region.get_absolute_address(0)
         self.buf = self.buf_region.mem
 
-        self.head_ptr = 0
-        self.tail_ptr = 0
+        self.prod_ptr = 0
+        self.cons_ptr = 0
 
         self.cq = cq
         self.cq.src_ring = self
@@ -878,13 +873,13 @@ class Rxq:
 
         self.hw_regs = self.interface.rxq_res.get_window(self.index)
 
-        await self.hw_regs.write_dword(MQNIC_QUEUE_ACTIVE_LOG_SIZE_REG, 0)  # active, log size
-        await self.hw_regs.write_dword(MQNIC_QUEUE_BASE_ADDR_REG, self.buf_dma & 0xffffffff)  # base address
-        await self.hw_regs.write_dword(MQNIC_QUEUE_BASE_ADDR_REG+4, self.buf_dma >> 32)  # base address
-        await self.hw_regs.write_dword(MQNIC_QUEUE_CPL_QUEUE_INDEX_REG, self.cq.cqn)  # completion queue index
-        await self.hw_regs.write_dword(MQNIC_QUEUE_HEAD_PTR_REG, self.head_ptr & self.hw_ptr_mask)  # head pointer
-        await self.hw_regs.write_dword(MQNIC_QUEUE_TAIL_PTR_REG, self.tail_ptr & self.hw_ptr_mask)  # tail pointer
-        await self.hw_regs.write_dword(MQNIC_QUEUE_ACTIVE_LOG_SIZE_REG, self.log_queue_size | (self.log_desc_block_size << 8))  # active, log desc block size, log queue size
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_ENABLE | 0)
+        await self.hw_regs.write_dword(MQNIC_QUEUE_BASE_ADDR_VF_REG, self.buf_dma & 0xfffff000)
+        await self.hw_regs.write_dword(MQNIC_QUEUE_BASE_ADDR_VF_REG+4, self.buf_dma >> 32)
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_SIZE | (self.log_desc_block_size << 8) | self.log_queue_size)
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_CQN | self.cq.cqn)
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_PROD_PTR | (self.prod_ptr & MQNIC_QUEUE_PTR_MASK))
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_CONS_PTR | (self.cons_ptr & MQNIC_QUEUE_PTR_MASK))
 
         await self.refill_buffers()
 
@@ -911,7 +906,7 @@ class Rxq:
         if not self.hw_regs:
             raise Exception("Not open")
 
-        await self.hw_regs.write_dword(MQNIC_QUEUE_ACTIVE_LOG_SIZE_REG, self.log_queue_size | (self.log_desc_block_size << 8) | MQNIC_QUEUE_ACTIVE_MASK)  # active, log desc block size, log queue size
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_ENABLE | 1)
 
         self.enabled = True
 
@@ -919,22 +914,22 @@ class Rxq:
         if not self.hw_regs:
             return
 
-        await self.hw_regs.write_dword(MQNIC_QUEUE_ACTIVE_LOG_SIZE_REG, self.log_queue_size | (self.log_desc_block_size << 8))  # active, log desc block size, log queue size
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_ENABLE | 0)
 
         self.enabled = False
 
     def empty(self):
-        return self.head_ptr == self.tail_ptr
+        return self.prod_ptr == self.cons_ptr
 
     def full(self):
-        return self.head_ptr - self.tail_ptr >= self.full_size
+        return self.prod_ptr - self.cons_ptr >= self.full_size
 
-    async def read_tail_ptr(self):
-        val = await self.hw_regs.read_dword(MQNIC_QUEUE_TAIL_PTR_REG)
-        self.tail_ptr += (val - self.tail_ptr) & self.hw_ptr_mask
+    async def read_cons_ptr(self):
+        val = await self.hw_regs.read_dword(MQNIC_QUEUE_PTR_REG)
+        self.cons_ptr += ((val >> 16) - self.cons_ptr) & MQNIC_QUEUE_PTR_MASK
 
-    async def write_head_ptr(self):
-        await self.hw_regs.write_dword(MQNIC_QUEUE_HEAD_PTR_REG, self.head_ptr & self.hw_ptr_mask)
+    async def write_prod_ptr(self):
+        await self.hw_regs.write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_PROD_PTR | (self.prod_ptr & MQNIC_QUEUE_PTR_MASK))
 
     def free_desc(self, index):
         pkt = self.rx_info[index]
@@ -943,9 +938,9 @@ class Rxq:
 
     def free_buf(self):
         while not self.empty():
-            index = self.tail_ptr & self.size_mask
+            index = self.cons_ptr & self.size_mask
             self.free_desc(index)
-            self.tail_ptr += 1
+            self.cons_ptr += 1
 
     def prepare_desc(self, index):
         pkt = self.driver.alloc_pkt()
@@ -962,22 +957,22 @@ class Rxq:
             offset += seg
 
     async def refill_buffers(self):
-        missing = self.size - (self.head_ptr - self.tail_ptr)
+        missing = self.size - (self.prod_ptr - self.cons_ptr)
 
         if missing < 8:
             return
 
         for k in range(missing):
-            self.prepare_desc(self.head_ptr & self.size_mask)
-            self.head_ptr += 1
+            self.prepare_desc(self.prod_ptr & self.size_mask)
+            self.prod_ptr += 1
 
-        await self.write_head_ptr()
+        await self.write_prod_ptr()
 
     @staticmethod
     async def process_rx_cq(cq):
         interface = cq.interface
 
-        interface.log.info("Process RX CQ %d for RXQ %d (interface %d)", cq.cqn, cq.src_ring.index, interface.index)
+        interface.log.info("Process CQ %d for RXQ %d (interface %d)", cq.cqn, cq.src_ring.index, interface.index)
 
         ring = cq.src_ring
 
@@ -985,8 +980,8 @@ class Rxq:
             return
 
         # process completion queue
-        cq_tail_ptr = cq.tail_ptr
-        cq_index = cq_tail_ptr & cq.size_mask
+        cq_cons_ptr = cq.cons_ptr
+        cq_index = cq_cons_ptr & cq.size_mask
 
         while True:
             cpl_data = struct.unpack_from("<HHHxxLHHLBBHLL", cq.buf, cq_index*cq.stride)
@@ -994,7 +989,7 @@ class Rxq:
 
             interface.log.info("CQ %d index %d data: %s", cq.cqn, cq_index, repr(cpl_data))
 
-            if bool(cpl_data[-1] & 0x80000000) == bool(cq_tail_ptr & cq.size):
+            if bool(cpl_data[-1] & 0x80000000) == bool(cq_cons_ptr & cq.size):
                 interface.log.info("CQ %d empty", cq.cqn)
                 break
 
@@ -1017,24 +1012,24 @@ class Rxq:
 
             ring.free_desc(ring_index)
 
-            cq_tail_ptr += 1
-            cq_index = cq_tail_ptr & cq.size_mask
+            cq_cons_ptr += 1
+            cq_index = cq_cons_ptr & cq.size_mask
 
-        cq.tail_ptr = cq_tail_ptr
-        await cq.write_tail_ptr()
+        cq.cons_ptr = cq_cons_ptr
+        await cq.write_cons_ptr()
 
         # process ring
-        ring_tail_ptr = ring.tail_ptr
-        ring_index = ring_tail_ptr & ring.size_mask
+        ring_cons_ptr = ring.cons_ptr
+        ring_index = ring_cons_ptr & ring.size_mask
 
-        while (ring_tail_ptr != ring.head_ptr):
+        while (ring_cons_ptr != ring.prod_ptr):
             if ring.rx_info[ring_index]:
                 break
 
-            ring_tail_ptr += 1
-            ring_index = ring_tail_ptr & ring.size_mask
+            ring_cons_ptr += 1
+            ring_index = ring_cons_ptr & ring.size_mask
 
-        ring.tail_ptr = ring_tail_ptr
+        ring.cons_ptr = ring_cons_ptr
 
         # replenish buffers
         await ring.refill_buffers()
@@ -1156,10 +1151,9 @@ class Interface:
         self.reg_blocks = RegBlockList()
         self.if_ctrl_rb = None
         self.eq_rb = None
+        self.cq_rb = None
         self.txq_rb = None
-        self.tx_cq_rb = None
         self.rxq_rb = None
-        self.rx_cq_rb = None
         self.rx_queue_map_rb = None
 
         self.if_features = None
@@ -1173,10 +1167,9 @@ class Interface:
         self.max_rx_mtu = 0
 
         self.eq_res = None
+        self.cq_res = None
         self.txq_res = None
-        self.tx_cq_res = None
         self.rxq_res = None
-        self.rx_cq_res = None
 
         self.port_count = None
         self.sched_block_count = None
@@ -1187,9 +1180,7 @@ class Interface:
         self.eq = []
 
         self.txq = []
-        self.tx_cq = []
         self.rxq = []
-        self.rx_cq = []
         self.ports = []
         self.sched_blocks = []
 
@@ -1241,6 +1232,20 @@ class Interface:
 
         self.eq_res = Resource(count, self.hw_regs.create_window(offset), stride)
 
+        self.cq_rb = self.reg_blocks.find(MQNIC_RB_CQM_TYPE, MQNIC_RB_CQM_VER)
+
+        offset = await self.cq_rb.read_dword(MQNIC_RB_CQM_REG_OFFSET)
+        count = await self.cq_rb.read_dword(MQNIC_RB_CQM_REG_COUNT)
+        stride = await self.cq_rb.read_dword(MQNIC_RB_CQM_REG_STRIDE)
+
+        self.log.info("CQ offset: 0x%08x", offset)
+        self.log.info("CQ count: %d", count)
+        self.log.info("CQ stride: 0x%08x", stride)
+
+        count = min(count, MQNIC_MAX_CQ)
+
+        self.cq_res = Resource(count, self.hw_regs.create_window(offset), stride)
+
         self.txq_rb = self.reg_blocks.find(MQNIC_RB_TX_QM_TYPE, MQNIC_RB_TX_QM_VER)
 
         offset = await self.txq_rb.read_dword(MQNIC_RB_TX_QM_REG_OFFSET)
@@ -1255,20 +1260,6 @@ class Interface:
 
         self.txq_res = Resource(count, self.hw_regs.create_window(offset), stride)
 
-        self.tx_cq_rb = self.reg_blocks.find(MQNIC_RB_TX_CQM_TYPE, MQNIC_RB_TX_CQM_VER)
-
-        offset = await self.tx_cq_rb.read_dword(MQNIC_RB_TX_CQM_REG_OFFSET)
-        count = await self.tx_cq_rb.read_dword(MQNIC_RB_TX_CQM_REG_COUNT)
-        stride = await self.tx_cq_rb.read_dword(MQNIC_RB_TX_CQM_REG_STRIDE)
-
-        self.log.info("TX CQ offset: 0x%08x", offset)
-        self.log.info("TX CQ count: %d", count)
-        self.log.info("TX CQ stride: 0x%08x", stride)
-
-        count = min(count, MQNIC_MAX_TX_CQ)
-
-        self.tx_cq_res = Resource(count, self.hw_regs.create_window(offset), stride)
-
         self.rxq_rb = self.reg_blocks.find(MQNIC_RB_RX_QM_TYPE, MQNIC_RB_RX_QM_VER)
 
         offset = await self.rxq_rb.read_dword(MQNIC_RB_RX_QM_REG_OFFSET)
@@ -1282,20 +1273,6 @@ class Interface:
         count = min(count, MQNIC_MAX_RXQ)
 
         self.rxq_res = Resource(count, self.hw_regs.create_window(offset), stride)
-
-        self.rx_cq_rb = self.reg_blocks.find(MQNIC_RB_RX_CQM_TYPE, MQNIC_RB_RX_CQM_VER)
-
-        offset = await self.rx_cq_rb.read_dword(MQNIC_RB_RX_CQM_REG_OFFSET)
-        count = await self.rx_cq_rb.read_dword(MQNIC_RB_RX_CQM_REG_COUNT)
-        stride = await self.rx_cq_rb.read_dword(MQNIC_RB_RX_CQM_REG_STRIDE)
-
-        self.log.info("RX CQ offset: 0x%08x", offset)
-        self.log.info("RX CQ count: %d", count)
-        self.log.info("RX CQ stride: 0x%08x", stride)
-
-        count = min(count, MQNIC_MAX_RX_CQ)
-
-        self.rx_cq_res = Resource(count, self.hw_regs.create_window(offset), stride)
 
         self.rx_queue_map_rb = self.reg_blocks.find(MQNIC_RB_RX_QUEUE_MAP_TYPE, MQNIC_RB_RX_QUEUE_MAP_VER)
 
@@ -1313,19 +1290,16 @@ class Interface:
 
         # ensure all queues are disabled
         for k in range(self.eq_res.get_count()):
-            await self.eq_res.get_window(k).write_dword(MQNIC_EQ_ACTIVE_LOG_SIZE_REG, 0)
+            await self.eq_res.get_window(k).write_dword(MQNIC_EQ_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_ENABLE | 0)
+
+        for k in range(self.cq_res.get_count()):
+            await self.cq_res.get_window(k).write_dword(MQNIC_CQ_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_ENABLE | 0)
 
         for k in range(self.txq_res.get_count()):
-            await self.txq_res.get_window(k).write_dword(MQNIC_QUEUE_ACTIVE_LOG_SIZE_REG, 0)
-
-        for k in range(self.tx_cq_res.get_count()):
-            await self.tx_cq_res.get_window(k).write_dword(MQNIC_CQ_ACTIVE_LOG_SIZE_REG, 0)
+            await self.txq_res.get_window(k).write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_ENABLE | 0)
 
         for k in range(self.rxq_res.get_count()):
-            await self.rxq_res.get_window(k).write_dword(MQNIC_QUEUE_ACTIVE_LOG_SIZE_REG, 0)
-
-        for k in range(self.rx_cq_res.get_count()):
-            await self.rx_cq_res.get_window(k).write_dword(MQNIC_CQ_ACTIVE_LOG_SIZE_REG, 0)
+            await self.rxq_res.get_window(k).write_dword(MQNIC_QUEUE_CTRL_STATUS_REG, MQNIC_QUEUE_CMD_SET_ENABLE | 0)
 
         # create ports
         self.ports = []
@@ -1356,9 +1330,7 @@ class Interface:
             await eq.arm()
 
         self.txq = []
-        self.tx_cq = []
         self.rxq = []
-        self.rx_cq = []
 
         # wait for all writes to complete
         await self.hw_regs.read_dword(0)
@@ -1366,8 +1338,7 @@ class Interface:
     async def open(self):
         for k in range(self.rxq_res.get_count()):
             cq = Cq(self)
-            await cq.open(self.eq[k % len(self.eq)], 1024, is_txcq=False)
-            self.rx_cq.append(cq)
+            await cq.open(self.eq[k % len(self.eq)], 1024)
             await cq.arm()
             rxq = Rxq(self)
             await rxq.open(cq, 1024, 4)
@@ -1376,8 +1347,7 @@ class Interface:
 
         for k in range(self.txq_res.get_count()):
             cq = Cq(self)
-            await cq.open(self.eq[k % len(self.eq)], 1024, is_txcq=True)
-            self.tx_cq.append(cq)
+            await cq.open(self.eq[k % len(self.eq)], 1024)
             await cq.arm()
             txq = Txq(self)
             await txq.open(cq, 1024, 4)
@@ -1413,6 +1383,9 @@ class Interface:
             await q.close()
             await cq.close()
 
+        self.txq = []
+        self.rxq = []
+
     async def start_xmit(self, skb, tx_ring=None, csum_start=None, csum_offset=None):
         if not self.port_up:
             return
@@ -1430,14 +1403,14 @@ class Interface:
 
         while True:
             # check for space in ring
-            if ring.head_ptr - ring.tail_ptr < ring.full_size:
+            if ring.prod_ptr - ring.cons_ptr < ring.full_size:
                 break
 
             # wait for space
             ring.clean_event.clear()
             await ring.clean_event.wait()
 
-        index = ring.head_ptr & ring.size_mask
+        index = ring.prod_ptr & ring.size_mask
 
         ring.packets += 1
         ring.bytes += len(data)
@@ -1468,9 +1441,9 @@ class Interface:
             struct.pack_into("<4xLQ", ring.buf, index*ring.stride+k*MQNIC_DESC_SIZE, seg, ptr+offset if seg else 0)
             offset += seg
 
-        ring.head_ptr += 1
+        ring.prod_ptr += 1
 
-        await ring.write_head_ptr()
+        await ring.write_prod_ptr()
 
     async def set_mtu(self, mtu):
         await self.if_ctrl_rb.write_dword(MQNIC_RB_IF_CTRL_REG_TX_MTU, mtu)
