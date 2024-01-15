@@ -228,6 +228,8 @@ class DpdkDispatcher : public Dispatcher {
     /// process type. \p phy_port must not have been already initialized.
     static void setup_phy_port(uint16_t phy_port, size_t numa_node,
                               DpdkProcType proc_type);
+    // Corundum Setup
+    static void setup_corundum(uint16_t phy_port);
 
     // Defined in dpdk_dispatcher_dataplane.cc
     /**

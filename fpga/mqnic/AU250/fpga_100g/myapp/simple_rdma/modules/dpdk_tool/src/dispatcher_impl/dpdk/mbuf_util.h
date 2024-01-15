@@ -59,9 +59,9 @@ static void mbuf_print(struct rte_mbuf *m){
         iph = mbuf_ip_hdr(m); 
         uh = mbuf_udp_hdr(m);
         wsh = mbuf_ws_hdr(m);
-        sprintf(log, "muf: %s -> %s " IPV4_FMT ":%u ->" IPV4_FMT ":%u proto %u ws_type: %u ws_seg: %u ws_des_qpn: %u payload_size: %lu\n",
-            smac, dmac, IPV4_STR(iph->saddr), uh->source, IPV4_STR(iph->daddr), uh->dest, iph->protocol, 
-            wsh->workload_type_, wsh->segment_num_, wsh->des_qpn, strlen((char*)wsh + sizeof(struct ws_hdr)));
+        sprintf(log, "muf: %s -> %s " IPV4_FMT ":%u ->" IPV4_FMT ":%u proto %u ws_type: %u ws_seg: %u ws_op: %u ws_des_qpn: %u payload_size: %lu\n",
+            smac, dmac, IPV4_STR(iph->saddr), ntohs(uh->source), IPV4_STR(iph->daddr), ntohs(uh->dest), iph->protocol, 
+            wsh->workload_type_, wsh->segment_num_, wsh->opcode, wsh->des_qpn, strlen((char*)wsh + sizeof(struct ws_hdr))+1);
     } else if (eh->type == htons(ETHERTYPE_IPV6)) {
         ip6h = mbuf_ip6_hdr(m);
         sprintf(log, "muf: %s -> %s " IPV6_FMT " ->" IPV6_FMT " proto %u\n",

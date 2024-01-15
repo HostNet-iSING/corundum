@@ -119,6 +119,7 @@ void Workspace<TDispatcher>::launch() {
 
 template <class TDispatcher>
 void Workspace<TDispatcher>::aggregate_stats(perf_stats *g_stats, double freq){
+  /// App
   g_stats->app_tx_throughput_ += (double)stats_->app_tx_msg_num / 1e6;
   g_stats->app_rx_throughput_ += (double)stats_->app_rx_msg_num / 1e6;
   if (stats_->app_tx_msg_num )
@@ -126,6 +127,7 @@ void Workspace<TDispatcher>::aggregate_stats(perf_stats *g_stats, double freq){
   if (stats_->app_rx_msg_num )
     g_stats->app_rx_latency_ += to_usec(stats_->app_rx_duration, freq) / stats_->app_rx_msg_num;
 
+  /// Dispatcher
   g_stats->disp_tx_throughput_ += (double)stats_->disp_tx_pkt_num / 1e6;
   g_stats->disp_rx_throughput_ += (double)stats_->disp_rx_pkt_num / 1e6;
   if (stats_->disp_tx_pkt_num)
@@ -133,9 +135,18 @@ void Workspace<TDispatcher>::aggregate_stats(perf_stats *g_stats, double freq){
   if (stats_->disp_rx_pkt_num)
     g_stats->disp_rx_latency_ += to_usec(stats_->disp_rx_duration, freq) / stats_->disp_rx_pkt_num;
 
+  /// NIC
+  g_stats->nic_tx_throughput_ += (double)stats_->nic_tx_pkt_num / 1e6;
+  g_stats->nic_rx_throughput_ += (double)stats_->nic_rx_pkt_num / 1e6;
+  if (stats_->nic_tx_pkt_num)
+    g_stats->nic_tx_latency_ += to_usec(stats_->nic_tx_duration, freq) / stats_->nic_tx_pkt_num;
+  if (stats_->nic_rx_pkt_num)
+    g_stats->nic_rx_latency_ += to_usec(stats_->nic_rx_duration, freq) / stats_->nic_rx_pkt_num;
+
   /// Diagnose Stats for debugging
-  printf("Stall num: %lu, %lu\n", stats_->app_apply_mbuf_stalls, stats_->app_enqueue_stalls);
-  printf("TX Breakdown: throughput(%.2f, %.2f), latency(%.2f, %.2f)\n", (double)stats_->app_tx_msg_num / 1e6, (double)stats_->disp_tx_pkt_num / 1e6, to_usec(stats_->app_tx_duration, freq) / stats_->app_tx_msg_num, to_usec(stats_->disp_tx_duration, freq) / stats_->disp_tx_pkt_num);
+  printf("[Workspace %u] Apply mbuf stalls: %lu, App tx drop: %lu\n", ws_id_, stats_->app_apply_mbuf_stalls, stats_->app_enqueue_drops);
+  printf("[Workspace %u] TX Breakdown: throughput(App%.2f, Disp%.2f, NIC%.2f), latency(%.2f, %.2f, %.2f)\n", ws_id_, (double)stats_->app_tx_msg_num / 1e6, (double)stats_->disp_tx_pkt_num / 1e6, (double)stats_->nic_tx_pkt_num / 1e6, to_usec(stats_->app_tx_duration, freq) / stats_->app_tx_msg_num, to_usec(stats_->disp_tx_duration, freq) / stats_->disp_tx_pkt_num, to_usec(stats_->nic_tx_duration, freq) / stats_->nic_tx_pkt_num);
+  printf("[Workspace %u] RX Breakdown: throughput(App%.2f, Disp%.2f, NIC%.2f), latency(%.2f, %.2f, %.2f)\n", ws_id_, (double)stats_->app_rx_msg_num / 1e6, (double)stats_->disp_rx_pkt_num / 1e6, (double)stats_->nic_rx_pkt_num / 1e6, to_usec(stats_->app_rx_duration, freq) / stats_->app_rx_msg_num, to_usec(stats_->disp_rx_duration, freq) / stats_->disp_rx_pkt_num, to_usec(stats_->nic_rx_duration, freq) / stats_->nic_rx_pkt_num);
 }
 
 template <class TDispatcher>
@@ -163,7 +174,7 @@ void Workspace<TDispatcher>::update_stats() {
   /// Print ws freq for debug
   printf("Workspace freqs: ");
   for (auto &freq : ws_freq) {
-    printf("%.2f, ", freq);
+    printf("%.2f ", freq);
   }
   printf("\n");
   /// Update latency
@@ -171,6 +182,8 @@ void Workspace<TDispatcher>::update_stats() {
   context_->perf_stats_->app_rx_latency_ /= worker_num;
   context_->perf_stats_->disp_tx_latency_ /= dispatcher_num;
   context_->perf_stats_->disp_rx_latency_ /= dispatcher_num;
+  context_->perf_stats_->nic_tx_latency_ /= dispatcher_num;
+  context_->perf_stats_->nic_rx_latency_ /= dispatcher_num;
   stats_init_ws_ = true;
 }
 

@@ -93,6 +93,10 @@ void DpdkDispatcher::setup_phy_port(uint16_t phy_port, size_t numa_node,
   rte_eth_dev_start(phy_port);
 }
 
+void DpdkDispatcher::setup_corundum(uint16_t phy_port) {
+  // Corundum Specifically
+}
+
 }  // namespace dperf
 
 

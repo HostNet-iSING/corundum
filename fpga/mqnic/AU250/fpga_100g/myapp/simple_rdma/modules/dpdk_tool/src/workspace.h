@@ -39,13 +39,13 @@ class Workspace {
   /**
    * ----------------------Parameters in Application level----------------------
    */ 
-  static constexpr size_t kAppPayloadSize = 22;   // Corresponding MAC frame len: 22 -> 64; 86 -> 128; 214 -> 256; 470 -> 512; 982 -> 1024; 1458 -> 1500
+  static constexpr size_t kAppPayloadSize = 23;   // Corresponding MAC frame len: 22 -> 64; 86 -> 128; 214 -> 256; 470 -> 512; 982 -> 1024; 1458 -> 1500
   static constexpr size_t kAppGeneratePktsNum = ceil((double)kAppPayloadSize / (double)Dispatcher::kMaxPayloadSize);
   static constexpr size_t kAppFullPaddingSize = Dispatcher::kMaxPayloadSize - sizeof(ws_hdr);
   static constexpr size_t kAppLastPaddingSize = kAppPayloadSize - (kAppGeneratePktsNum - 1) * Dispatcher::kMaxPayloadSize - sizeof(ws_hdr);
   static constexpr double kAvgAppPktSize = (double)kAppPayloadSize / (double)kAppGeneratePktsNum;
 
-  static constexpr size_t kAppBatchSize = 32;
+  static constexpr size_t kAppBatchSize = 1;
   
   /**
    * ----------------------Workspace internal structures----------------------
@@ -99,8 +99,8 @@ class Workspace {
         MEM_REG_TYPE *temp_mbuf = NULL;
         temp_mbuf = alloc();
         while(unlikely(temp_mbuf == NULL)) {
-          temp_mbuf = alloc();
           net_stats_app_apply_mbuf_stalls();
+          temp_mbuf = alloc();
         }
         tx_mbuf_[i] = temp_mbuf;
       }
@@ -114,6 +114,7 @@ class Workspace {
       ws_hdr hdr;
       wshdr_init(&hdr);
       hdr.des_qpn = uh.dest;
+      hdr.src_qpn = uh.source;
       hdr.workload_type_ = workload_type_;
       hdr.segment_num_ = kAppGeneratePktsNum;
       MEM_REG_TYPE **mbuf_ptr = tx_mbuf_;
@@ -121,27 +122,41 @@ class Workspace {
       for (size_t msg_idx = 0; msg_idx < kAppBatchSize; msg_idx++) {
         /// TBD: Perform extra memory access and calculation for each message
         /// Iterate all messages in a batch
-        for (size_t seg_idx = 0; seg_idx < kAppGeneratePktsNum - 1; seg_idx++) {
+        for (size_t seg_idx = 0; seg_idx < kAppGeneratePktsNum; seg_idx++) {
           /// Iterate all segments in a message
-          char full_payload[kAppFullPaddingSize] = {0};
-          memset(full_payload, 'a', kAppFullPaddingSize - 1);
-          full_payload[kAppFullPaddingSize - 1] = '\0';
-          set_payload(*mbuf_ptr, (char*)&uh, (char*)&hdr, full_payload, kAppFullPaddingSize);
+          /// set RDMA header
+          if (kAppGeneratePktsNum == 1) {
+            hdr.opcode = 0x06; // RDMA_WRITE_FIRST
+            break;
+          }
+          else if (seg_idx == 0) {
+            hdr.opcode = 0x06; // RDMA_WRITE_FIRST
+          }
+          else if (seg_idx < kAppGeneratePktsNum - 1) {
+            printf("seg_idx: %lu\n", seg_idx);
+            hdr.opcode = 0x07; // RDMA_WRITE_MIDDLE
+          }
+          else {
+            hdr.opcode = 0x08; // RDMA_WRITE_LAST
+            break;
+          }
+          set_payload(*mbuf_ptr, (char*)&uh, (char*)&hdr, kAppFullPaddingSize);
           mbuf_ptr++;
         }
-        char last_payload[kAppLastPaddingSize] = {0};
-        memset(last_payload, 'a', kAppLastPaddingSize - 1);
-        last_payload[kAppLastPaddingSize - 1] = '\0';
-        set_payload(*mbuf_ptr, (char*)&uh, (char*)&hdr, last_payload, kAppLastPaddingSize);
+        set_payload(*mbuf_ptr, (char*)&uh, (char*)&hdr, kAppLastPaddingSize);
         mbuf_ptr++;
       }
       /// Insert packets to worker tx queue
+      size_t drop_num = 0;
       for (size_t i = 0; i < kAppGeneratePktsNum * kAppBatchSize; i++) {
-        while(unlikely(!tx_queue_->enqueue((uint8_t*)tx_mbuf_[i]))) {
-          net_stats_app_enqueue_stalls();
+        if (unlikely(!tx_queue_->enqueue((uint8_t*)tx_mbuf_[i]))) {
+          /// Drop the packet if the tx queue is full
+          de_alloc(tx_mbuf_[i]);
+          drop_num++;
         }
       }
-      net_stats_app_tx(kAppBatchSize * kAppGeneratePktsNum);
+      net_stats_app_tx(kAppBatchSize * kAppGeneratePktsNum - drop_num);
+      net_stats_app_drops(drop_num);
       net_stats_app_tx_duration();
     }
 
@@ -177,31 +192,37 @@ class Workspace {
       nb_collect = dispatcher_->collect_tx_pkts();
       if (unlikely(nb_collect == 0))
         return;
+      net_stats_disp_tx(nb_collect);
+      net_stats_disp_tx_duration();
       if (dispatcher_->get_tx_queue_size() > Dispatcher::kTxBatchSize) {
+        net_stats_nic_tx_start();
         nb_tx = dispatcher_->tx_flush();
         // DPERF_INFO("Workspace %u successfully transmit %lu packets\n", ws_id_, nb_tx); 
-        net_stats_disp_tx(nb_tx);
+        net_stats_nic_tx(nb_tx);
+        net_stats_nic_tx_duration();
       }
-      net_stats_disp_tx_duration();
     }
 
-    /// Dispatcher tx phase
+    /// Dispatcher rx phase
     void bursted_rx() {
-      net_stats_disp_rx_start();
+      net_stats_nic_rx_start();
       size_t nb_rx = 0, nb_dispatched = 0;
       nb_rx = dispatcher_->rx_burst();
       if (likely(nb_rx)){
         // DPERF_INFO("Workspace %u successfully receive %lu packets\n", ws_id_, nb_rx);
         /// TBD: add dispatcher func
+        net_stats_nic_rx(nb_rx);
+        net_stats_nic_rx_duration();
       }
       else
         return;
       if (dispatcher_->get_rx_queue_size() > Dispatcher::kRxBatchSize) {
+        net_stats_disp_rx_start();
         nb_dispatched = dispatcher_->dispatch_rx_pkts();
         // DPERF_INFO("Workspace %u successfully dispatch %lu packets\n", ws_id_, nb_rx);
         net_stats_disp_rx(nb_dispatched);
+        net_stats_disp_rx_duration();
       }
-      net_stats_disp_rx_duration();
     }
     
 
@@ -229,8 +250,8 @@ class Workspace {
       mem_reg_->de_alloc_(mbuf);
     }
 
-    void set_payload(MEM_REG_TYPE *mbuf, char* udp_header, char* ws_header, char *payload, size_t payload_size) {
-      mem_reg_->set_payload_(mbuf, udp_header, ws_header, payload, payload_size);
+    void set_payload(MEM_REG_TYPE *mbuf, char* udp_header, char* ws_header, size_t payload_size) {
+      mem_reg_->set_payload_(mbuf, udp_header, ws_header, payload_size);
     }
     
     size_t get_RX_ring_size() {

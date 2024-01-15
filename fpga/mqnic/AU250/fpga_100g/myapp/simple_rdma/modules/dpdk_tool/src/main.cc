@@ -23,7 +23,7 @@ void ws_main(dperf::WsContext* context, uint8_t ws_id, uint8_t ws_type, std::vec
 int main(int argc, char **argv) {
 
   /// Read config file
-  dperf::UserConfig *user_config = new dperf::UserConfig("./config/only_tx");
+  dperf::UserConfig *user_config = new dperf::UserConfig("./config/only_rx");
   user_config->print_config();
 
   /// Init datapath pipeline

@@ -21,7 +21,7 @@ DpdkDispatcher::DpdkDispatcher(uint8_t ws_id, uint8_t phy_port, size_t numa_node
         "-c",            "0x0",
         "-n",            "6",  // Memory channels
         "-m",            "1024", // Max memory in megabytes
-        "-a",            "0000:ca:00.0",
+        "-a",            "0000:17:00.0",
         "--proc-type",   "auto",
         "--log-level",   (DPERF_LOG_LEVEL >= DPERF_LOG_LEVEL_INFO) ? "8" : "0",
         nullptr};
@@ -71,6 +71,7 @@ DpdkDispatcher::DpdkDispatcher(uint8_t ws_id, uint8_t phy_port, size_t numa_node
     if (!g_port_initialized[phy_port]) {
       g_port_initialized[phy_port] = true;
       setup_phy_port(phy_port, numa_node, DpdkProcType::kPrimary);
+      setup_corundum(phy_port);
     }
 
     mempool_ = rte_mempool_lookup(mempool_name.c_str());
@@ -173,19 +174,15 @@ void dpdk_mbuf_de_alloc(rte_mbuf *mbuf) {
 }
 
 /// Set mbuf payload
-void dpdk_set_mbuf_paylod(rte_mbuf *mbuf, char* uh, char* ws_header, char *payload, size_t payload_size) {
-  /// update mbuf pkt length
-  // if (unlikely(mbuf->pkt_len != 0))
-  //   printf("%p, %u, %u, %u\n", mbuf, mbuf->buf_len, mbuf->data_len, mbuf->pkt_len);
+void dpdk_set_mbuf_paylod(rte_mbuf *mbuf, char* uh, char* ws_header, size_t payload_size) {
   uint8_t *ret = NULL;
   ret = mbuf_push_data(mbuf, TOTAL_HEADER_LEN + payload_size);
-  // if (unlikely(ret == NULL)) {
-  //   printf("%p, %u, %u, %u\n", mbuf, mbuf->buf_len, mbuf->data_len, mbuf->pkt_len);
-  //   return;
-  // }
+
   rte_memcpy(mbuf_udp_hdr(mbuf), uh, sizeof(udphdr)); 
-  rte_memcpy(mbuf_ws_hdr(mbuf), ws_header, sizeof(ws_hdr)); 
-  rte_memcpy(mbuf_ws_payload(mbuf), payload, payload_size); 
+  rte_memcpy(mbuf_ws_hdr(mbuf), ws_header, sizeof(ws_hdr));
+  char* payload_ptr = mbuf_ws_payload(mbuf);
+  memset(payload_ptr, 'a', payload_size - 1);
+  payload_ptr[payload_size - 1] = '\0'; 
 }
 
 void DpdkDispatcher::init_mem_reg_funcs() {

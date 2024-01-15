@@ -10,9 +10,16 @@ void DpdkDispatcher::set_pkt_hdr(rte_mbuf *m) {
   struct eth_hdr *eth = NULL;
   struct iphdr *iph = NULL;
   struct udphdr *uh = NULL;
+  struct ws_hdr *wh = NULL;
   eth = mbuf_eth_hdr(m);
   iph = mbuf_ip_hdr(m);
   uh = mbuf_udp_hdr(m);
+  wh = mbuf_ws_hdr(m);
+  if (wh->opcode != 0x06) {
+    mbuf_print(m);  /// DEBUG
+    /// Only the first packet contains the packet header
+    return;
+  }
 
   /// set eth header
   eth->type = htons(ETHERTYPE_IP);
@@ -22,16 +29,29 @@ void DpdkDispatcher::set_pkt_hdr(rte_mbuf *m) {
   /// set ip header
   iph->saddr = resolve_.ipv4_addr_.ip;
   iph->daddr = daddr_->ip;
+  iph->ihl = 5;   // header len: 20 bytes
+  iph->version = 4;
+  iph->tos = 0;
+  iph->tot_len = rte_cpu_to_be_16(m->pkt_len - sizeof(struct eth_hdr));
+  iph->ttl = 64;
+  iph->frag_off = IP_FLAG_DF;   // Don't fragment
+  iph->protocol = IPPROTO_UDP;  // UDP
 
   /// set udp header completely
   uh->source += kDefaultUdpPort;
+  uh->source = rte_cpu_to_be_16(uh->source);
   uh->dest += kDefaultUdpPort;
+  uh->dest = rte_cpu_to_be_16(uh->dest);
+  uh->len = rte_cpu_to_be_16(m->pkt_len - sizeof(struct eth_hdr) - sizeof(struct iphdr));
+  char *payload = mbuf_ws_payload(m);
+  printf("payload: %s\n", payload);
+  mbuf_print(m);  /// DEBUG
 }
 
 uint8_t DpdkDispatcher::resolve_pkt_hdr(rte_mbuf *m) {
   struct ws_hdr *wh = NULL;
   wh = mbuf_ws_hdr(m);
-  return wh->workload_type_;
+  return rte_be_to_cpu_16(wh->workload_type_);
 }
 
 /// Collect mbufs from all workers' tx queues with Round-Robin mode
@@ -84,6 +104,7 @@ size_t DpdkDispatcher::dispatch_rx_pkts() {
     // char *payload = rte_pktmbuf_mtod_offset(rx_queue_[i], char*, 0);
     char *payload = mbuf_ws_payload(rx_queue_[i]);
     printf("payload: %s\n", payload);
+    // mbuf_print(rx_queue_[i]);
     rte_pktmbuf_free(rx_queue_[i]);
     dispatch_total++;
   }
@@ -116,6 +137,9 @@ size_t DpdkDispatcher::rx_burst(){
   // insert rx pkts to rx queue
   nb_rx = rte_eth_rx_burst(phy_port_, qp_id_, rx, kNumRxRingEntries - rx_queue_idx_);
   rx_queue_idx_ += nb_rx;
+  if (nb_rx) {
+    printf("Queue %zu: Received %zu packets\n", qp_id_, nb_rx);
+  }
   return nb_rx;
 }
 

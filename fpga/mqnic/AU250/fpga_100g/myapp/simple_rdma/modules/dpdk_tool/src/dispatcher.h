@@ -54,7 +54,7 @@ class Dispatcher {
       void* dispatcher_mr_;     ///< The dispatcher-specific memory region (eg, ibv_mr, dpdk mempool)
       using alloc_t = T*(*)(void*);
       using de_alloc_t = void(*)(T*);
-      using set_payload_t = void(*)(T*, char*, char*, char*, size_t);
+      using set_payload_t = void(*)(T*, char*, char*, size_t);
       alloc_t alloc_;
       de_alloc_t de_alloc_;
       set_payload_t set_payload_;

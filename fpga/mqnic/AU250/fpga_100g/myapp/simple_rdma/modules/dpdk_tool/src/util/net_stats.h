@@ -49,7 +49,7 @@ struct net_stats {
 
     /* Diagnose */
     uint64_t app_apply_mbuf_stalls;
-    uint64_t app_enqueue_stalls;
+    uint64_t app_enqueue_drops;
 };
 
 struct perf_stats {
@@ -112,10 +112,14 @@ struct perf_stats {
 
 #define net_stats_nic_tx(n)     do {stats_->nic_tx_pkt_num += (n);} while (0)
 #define net_stats_nic_rx(n)     do {stats_->nic_rx_pkt_num += (n);} while (0)
+#define net_stats_nic_tx_start() do {stats_->nic_tx_start_tick = rdtsc();} while (0)
+#define net_stats_nic_tx_duration() do {stats_->nic_tx_duration += rdtsc() - stats_->nic_tx_start_tick;} while (0)
+#define net_stats_nic_rx_start() do {stats_->nic_rx_start_tick = rdtsc();} while (0)
+#define net_stats_nic_rx_duration() do {stats_->nic_rx_duration += rdtsc() - stats_->nic_rx_start_tick;} while (0)
 
 /* Diagnose */
 #define net_stats_app_apply_mbuf_stalls() do {stats_->app_apply_mbuf_stalls++;} while (0)
-#define net_stats_app_enqueue_stalls()    do {stats_->app_enqueue_stalls++;} while (0)
+#define net_stats_app_drops(n)    do {stats_->app_enqueue_drops += n;} while (0)
 
 static inline void net_stats_init(struct net_stats *stats) {
     memset(stats, 0, sizeof(struct net_stats));

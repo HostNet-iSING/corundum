@@ -3,3 +3,5 @@ workload : 1 : RXNIC,RXDispatcher,RxApplication,TxApplication,TxDispatcher,TxNIC
 
 numa : 1
 phy_port : 0
+iteration: 1
+duration : 1
