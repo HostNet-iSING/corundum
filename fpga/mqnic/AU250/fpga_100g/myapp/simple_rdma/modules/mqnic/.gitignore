@@ -3,6 +3,7 @@
 *.mod.c
 *.o
 *.ko
+usertools/*.out
 
 .tmp_versions/
 modules.order

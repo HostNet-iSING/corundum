@@ -78,11 +78,18 @@ static int sgt_list_idx = 0;
 
 static struct page **page_list_list[1024];
 
+struct user_mem
+{
+	unsigned long start;
+	int length;
+};
+
 static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 {
 	struct miscdevice *miscdev = file->private_data;
 	struct mqnic_dev *mqnic = container_of(miscdev, struct mqnic_dev, misc_dev);
 	size_t minsz;
+	struct user_mem mem;
 
 	if (cmd == MQNIC_IOCTL_SEND)
 	{
@@ -109,12 +116,6 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		tx_info->ts_requested = 0;
 		tx_desc->tx_csum_cmd = 0;
 
-		struct user_mem
-		{
-			unsigned long start;
-			int length;
-		};
-		struct user_mem mem;
 		int retval = 0;
 		if (copy_from_user(&mem, (void *)arg, sizeof(struct user_mem)))
 		{
@@ -213,7 +214,12 @@ free_page_list:
 		return retval;
 
 	}
-	else if (cmd == MQNIC_IOCTL_FREE_BUFFER) {
+	else if (cmd == MQNIC_IOCTL_DMA_MAP)
+	{
+
+	}
+	else if (cmd == MQNIC_IOCTL_FREE_BUFFER) 
+	{
 		struct mqnic_if *interface = mqnic->interface[0];
 		if (!interface)
 		{
