@@ -121,7 +121,7 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		{
 			return -EFAULT;
 		}
-		int npages = mem.length / PAGE_SIZE;
+		int npages = (mem.length + PAGE_SIZE - 1) / PAGE_SIZE;
 		printk(KERN_INFO "accept user mem: addr: %lx, length: %d, npages: %d\n"
 			, mem.start, mem.length, npages);
 		struct page **page_list = kmalloc(npages * sizeof(struct page), GFP_KERNEL);
