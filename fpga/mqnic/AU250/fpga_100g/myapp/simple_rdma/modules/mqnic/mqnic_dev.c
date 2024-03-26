@@ -4,6 +4,7 @@
  */
 
 #include "mqnic.h"
+#include "mqnic_hw.h"
 #include "mqnic_ioctl.h"
 
 #include <linux/uaccess.h>
@@ -169,13 +170,13 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 				break;
 			}
 			printk(KERN_INFO "block %d, dma addr: %llx, len: %d", i, sg_dma_address(sg), sg_dma_len(sg));
-			tx_desc[i].len = cpu_to_le32(sg->length);
+			tx_desc[i].len = cpu_to_le32(mem.length);
 			tx_desc[i].addr = cpu_to_le64(sg->dma_address);
 
 			tx_info->frag_count = i + 1;
-			tx_info->frags[i].len = sg->length;
+			tx_info->frags[i].len = mem.length;
 			tx_info->frags[i].dma_addr = sg->dma_address;
-			tx_info->len = sg->length;
+			tx_info->len = mem.length;
 			tx_info->dma_addr = sg->dma_address;
 		}
 		for (i = tx_info->frag_count; i < ring->desc_block_size; i++) {
@@ -199,6 +200,16 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		dma_wmb();
 		// 写硬件寄存器
 		mqnic_tx_write_prod_ptr(ring);
+
+		printk(KERN_INFO "descriptor:\n");
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 16; j++)
+			{
+				printk(KERN_CONT"%x ", ((char*)tx_desc)[i*16+j]);
+			}
+			printk(KERN_INFO "\n");
+		}
 
 		return 0;
 
