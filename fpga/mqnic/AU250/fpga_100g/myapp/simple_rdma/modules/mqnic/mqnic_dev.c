@@ -91,6 +91,7 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 	struct mqnic_dev *mqnic = container_of(miscdev, struct mqnic_dev, misc_dev);
 	size_t minsz;
 	struct user_mem mem;
+	int retval = 0;
 
 	if (cmd == MQNIC_IOCTL_SEND)
 	{
@@ -117,7 +118,6 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		tx_info->ts_requested = 0;
 		tx_desc->tx_csum_cmd = 0;
 
-		int retval = 0;
 		if (copy_from_user(&mem, (void *)arg, sizeof(struct user_mem)))
 		{
 			return -EFAULT;
@@ -206,7 +206,7 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		{
 			for (int j = 0; j < 16; j++)
 			{
-				printk(KERN_CONT"%x ", ((char*)tx_desc)[i*16+j]);
+				printk(KERN_CONT"%02x ", ((char*)tx_desc)[i*16+j]);
 			}
 			printk(KERN_INFO "\n");
 		}
@@ -227,7 +227,80 @@ free_page_list:
 	}
 	else if (cmd == MQNIC_IOCTL_DMA_MAP)
 	{
+		struct mqnic_if *interface = mqnic->interface[0];
+		if (!interface)
+		{
+			printk(KERN_ERR "cannot get interface\n");
+			return -1;
+		}
+		struct mqnic_ring *ring = interface->ring;
+		if (!ring)
+		{
+			printk(KERN_ERR "cannot get TX ring\n");
+			return -1;
+		}
+		
+		if (copy_from_user(&mem, (void *)arg, sizeof(struct user_mem)))
+		{
+			return -EFAULT;
+		}
+		int npages = (mem.length + PAGE_SIZE - 1) / PAGE_SIZE;
+		printk(KERN_INFO "accept user mem: addr: %lx, length: %d, npages: %d\n"
+			, mem.start, mem.length, npages);
+		struct page **page_list = kmalloc(npages * sizeof(struct page), GFP_KERNEL);
+		int pinned = pin_user_pages_fast(
+			mem.start, 
+			npages, 
+			FOLL_LONGTERM, 
+			page_list
+		);
+		if (pinned < 0)
+		{
+			retval = pinned;
+			goto free_page_list2;
+		}
+		printk(KERN_INFO "page in hugepage: %d\n", thp_nr_pages(page_list[0]));
+		printk(KERN_INFO "pin user pages return: %d\n", pinned);
 
+		struct sg_table *sgt = kmalloc(sizeof(struct sg_table), GFP_KERNEL);
+		retval = sg_alloc_table_from_pages(
+			sgt, page_list, 
+			pinned, 0, pinned << PAGE_SHIFT, GFP_KERNEL);
+		if (retval < 0)
+		{
+			goto unpin_user_pages2;
+		}
+		printk(KERN_INFO "sg table entry num: %d %d\n", sgt->orig_nents, sgt->nents);
+		retval = dma_map_sgtable(ring->dev, sgt, DMA_TO_DEVICE, 0);
+		if (retval < 0)
+		{
+			goto free_table2;
+		}
+		printk(KERN_INFO "dma map success\n");
+		return 0;
+free_table2:
+		sg_free_table(sgt);
+unpin_user_pages2:
+		kfree(sgt);
+		unpin_user_pages(page_list, pinned);
+free_page_list2:
+		kfree(page_list);
+		return retval;
+	}
+	else if (cmd == MQNIC_IOCTL_DMA_UNMAP)
+	{
+		struct mqnic_if *interface = mqnic->interface[0];
+		if (!interface)
+		{
+			printk(KERN_ERR "cannot get interface\n");
+			return -1;
+		}
+		struct mqnic_ring *ring = interface->ring;
+		if (!ring)
+		{
+			printk(KERN_ERR "cannot get TX ring\n");
+			return -1;
+		}
 	}
 	else if (cmd == MQNIC_IOCTL_FREE_BUFFER) 
 	{

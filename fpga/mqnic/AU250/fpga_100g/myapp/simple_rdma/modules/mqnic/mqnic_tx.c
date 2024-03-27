@@ -420,6 +420,9 @@ netdev_tx_t mqnic_start_xmit(struct sk_buff *skb, struct net_device *ndev)
 	ring = radix_tree_lookup(&priv->txq_table, ring_index);
 	rcu_read_unlock();
 
+	// 拦截
+	goto tx_drop;
+
 	if (unlikely(!ring))
 		// unknown TX queue
 		goto tx_drop;
