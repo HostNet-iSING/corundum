@@ -109,6 +109,7 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		}
 
 		u32 cons_ptr = READ_ONCE(ring->cons_ptr);
+		printk(KERN_INFO "current consumer ptr: %d\n", cons_ptr);
 		u32 index = ring->prod_ptr & ring->size_mask;
 
 		struct mqnic_desc *tx_desc = (struct mqnic_desc *)(ring->buf + index * ring->stride);
@@ -137,7 +138,7 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			retval = pinned;
 			goto free_page_list;
 		}
-		printk(KERN_INFO "page in hugepage: %d\n", thp_nr_pages(page_list[0]));
+		//printk(KERN_INFO "page in hugepage: %d\n", thp_nr_pages(page_list[0]));
 		printk(KERN_INFO "pin user pages return: %d\n", pinned);
 
 		struct sg_table *sgt = kmalloc(sizeof(struct sg_table), GFP_KERNEL);
@@ -196,7 +197,7 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			goto destruction;
 		}
 
-		printk(KERN_INFO "write produce ptr\n");
+		printk(KERN_INFO "write produce ptr %d\n", ring->prod_ptr);
 		dma_wmb();
 		// 写硬件寄存器
 		mqnic_tx_write_prod_ptr(ring);
