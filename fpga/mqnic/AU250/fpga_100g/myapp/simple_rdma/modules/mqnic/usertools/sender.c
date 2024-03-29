@@ -6,7 +6,7 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
-#include "mqnic_ioctl.h"
+#include "../mqnic_ioctl.h"
 
 // buffer长度
 #define LENGTH (2*1024*1024)

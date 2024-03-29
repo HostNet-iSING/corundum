@@ -4,6 +4,8 @@
 *.o
 *.ko
 usertools/*.out
+usertools/sender
+usertools/receiver
 
 .tmp_versions/
 modules.order

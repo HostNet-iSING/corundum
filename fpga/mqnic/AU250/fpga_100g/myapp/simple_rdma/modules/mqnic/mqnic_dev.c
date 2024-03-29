@@ -278,6 +278,9 @@ free_page_list:
 			goto free_table2;
 		}
 		printk(KERN_INFO "dma map success\n");
+		sgt_list[sgt_list_idx] = sgt;
+		page_list_list[sgt_list_idx] = page_list;
+		sgt_list_idx++;
 		return 0;
 free_table2:
 		sg_free_table(sgt);
@@ -287,21 +290,6 @@ unpin_user_pages2:
 free_page_list2:
 		kfree(page_list);
 		return retval;
-	}
-	else if (cmd == MQNIC_IOCTL_DMA_UNMAP)
-	{
-		struct mqnic_if *interface = mqnic->interface[0];
-		if (!interface)
-		{
-			printk(KERN_ERR "cannot get interface\n");
-			return -1;
-		}
-		struct mqnic_ring *ring = interface->ring;
-		if (!ring)
-		{
-			printk(KERN_ERR "cannot get TX ring\n");
-			return -1;
-		}
 	}
 	else if (cmd == MQNIC_IOCTL_FREE_BUFFER) 
 	{
@@ -317,6 +305,7 @@ free_page_list2:
 			printk(KERN_ERR "cannot get TX ring\n");
 			return -1;
 		}
+		printk(KERN_INFO "free %d items.\n", sgt_list_idx);
 		for (int i = 0; i < sgt_list_idx; i++)
 		{
 			dma_unmap_sgtable(ring->dev, sgt_list[i], DMA_TO_DEVICE, 0);
@@ -328,6 +317,7 @@ free_page_list2:
 		}
 		// 下标清零
 		sgt_list_idx = 0;
+		printk(KERN_INFO "free success.\n");
 		return 0;
 	}
 	else if (cmd == MQNIC_IOCTL_GET_API_VERSION) {
