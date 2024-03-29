@@ -94,6 +94,8 @@ int main(int argc, char *argv[])
 		return -1;
     }
 
+	printf("map success, buffer dma addr: 0x%llx\n", *(unsigned long long *)&mem);
+
 	void *ref = malloc(buffer_length);
 	if (ref == NULL)
 	{

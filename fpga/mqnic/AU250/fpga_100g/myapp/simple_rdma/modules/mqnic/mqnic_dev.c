@@ -278,10 +278,28 @@ free_page_list:
 			goto free_table2;
 		}
 		printk(KERN_INFO "dma map success\n");
+		struct scatterlist *sg;
+		int i;
+		for_each_sgtable_dma_sg(sgt, sg, i)
+		{
+			if (i >= 1)
+			{
+				printk(KERN_ERR "buffer map to more than one dma buffer\n");
+				break;
+			}
+			printk(KERN_INFO "block %d, dma addr: %llx, len: %d", i, sg_dma_address(sg), sg_dma_len(sg));
+			if (copy_to_user((void *)arg, &sg->dma_address, sizeof(dma_addr_t)))
+			{
+				printk(KERN_ERR "failed to copy to user.\n");
+				goto dma_unmap;
+			}
+		}
 		sgt_list[sgt_list_idx] = sgt;
 		page_list_list[sgt_list_idx] = page_list;
 		sgt_list_idx++;
 		return 0;
+dma_unmap:
+		dma_unmap_sgtable(ring->dev, sgt, DMA_TO_DEVICE, 0);
 free_table2:
 		sg_free_table(sgt);
 unpin_user_pages2:
