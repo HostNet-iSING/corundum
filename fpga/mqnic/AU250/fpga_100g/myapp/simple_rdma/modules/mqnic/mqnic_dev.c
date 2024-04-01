@@ -79,12 +79,6 @@ static int sgt_list_idx = 0;
 
 static struct page **page_list_list[1024];
 
-struct user_mem
-{
-	unsigned long start;
-	int length;
-};
-
 static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 {
 	struct miscdevice *miscdev = file->private_data;
@@ -167,18 +161,20 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		{
 			if (i >= 1)
 			{
-				printk(KERN_ERR "buffer map to more than one dma buffer\n");
+				printk(KERN_ERR "buffer map to more than one dma buffer");
 				break;
 			}
-			printk(KERN_INFO "block %d, dma addr: %llx, len: %d", i, sg_dma_address(sg), sg_dma_len(sg));
+			printk(KERN_INFO "block %d, dma addr: %llx, len: %d, remote addr: %llx"
+				, i, sg_dma_address(sg), sg_dma_len(sg), mem.remote_addr);
 			tx_desc[i].len = cpu_to_le32(mem.length);
-			tx_desc[i].addr = cpu_to_le64(sg->dma_address);
+			tx_desc[i].addr = cpu_to_le64(sg_dma_address(sg));
+			tx_desc[i].raddr = cpu_to_le64(mem.remote_addr);
 
 			tx_info->frag_count = i + 1;
 			tx_info->frags[i].len = mem.length;
-			tx_info->frags[i].dma_addr = sg->dma_address;
+			tx_info->frags[i].dma_addr = sg_dma_address(sg);
 			tx_info->len = mem.length;
-			tx_info->dma_addr = sg->dma_address;
+			tx_info->dma_addr = sg_dma_address(sg);
 		}
 		for (i = tx_info->frag_count; i < ring->desc_block_size; i++) {
 			tx_desc[i].len = 0;

@@ -11,10 +11,12 @@ gcc sender.c -o sender
 - Usage(需要sudo)
 
 ```bash
-sudo ./sender packet_length(in bytes)
+sudo ./sender packet_length(in bytes) remote_addr(Optional)
 ```
 
 生成一个packet_length字节的buffer提交给网卡，packet_length应在0-2MB之间。
+
+可选择提供对端buffer地址，将填写到描述符raddr字段，如不提供则填0。
 
 发完包后会sleep一秒然后释放buffer，不是卡死了。
 

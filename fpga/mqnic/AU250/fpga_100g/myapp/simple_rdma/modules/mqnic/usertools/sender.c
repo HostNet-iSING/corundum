@@ -11,15 +11,9 @@
 // buffer长度
 #define LENGTH (2*1024*1024)
 
-struct user_mem
-{
-    unsigned long start;
-    int length;
-};
-
 int main(int argc, char *argv[])
 {
-	if (argc != 2)
+	if (argc != 2 && argc != 3)
 	{
 		printf("unexpected arg num: %d\n", argc - 1);
 		return -1;
@@ -29,6 +23,12 @@ int main(int argc, char *argv[])
 	{
 		printf("Unexpected packet length: %d\n", packet_length);
 		return -1;
+	}
+	unsigned long long remote_addr = 0;
+	if (argc == 3)
+	{
+		sscanf(argv[2], "%llx", &remote_addr);
+		printf("check remote addr: 0x%llx\n", remote_addr);
 	}
     // 准备buffer
     void *buffer = mmap(
@@ -52,7 +52,8 @@ int main(int argc, char *argv[])
 
     struct user_mem mem = {
         .start = (unsigned long)buffer,
-        .length = packet_length
+        .length = packet_length,
+		.remote_addr = remote_addr
     };
 
     int ret = ioctl(fd, MQNIC_IOCTL_SEND, &mem);

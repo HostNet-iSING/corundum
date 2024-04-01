@@ -346,6 +346,9 @@ struct mqnic_desc {
 	__le16 tx_csum_cmd;
 	__le32 len;
 	__le64 addr;
+	__le64 padding1;
+	__le64 padding2;
+	__le64 raddr;
 };
 
 struct mqnic_cpl {

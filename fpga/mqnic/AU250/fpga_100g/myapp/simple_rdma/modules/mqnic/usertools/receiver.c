@@ -12,12 +12,6 @@
 // buffer长度
 #define LENGTH (2*1024*1024)
 
-struct user_mem
-{
-    unsigned long start;
-    int length;
-};
-
 int fd;
 
 void handler(int signal)
