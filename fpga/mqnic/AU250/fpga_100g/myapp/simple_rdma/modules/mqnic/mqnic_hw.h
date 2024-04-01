@@ -349,6 +349,7 @@ struct mqnic_desc {
 	__le64 padding1;
 	__le64 padding2;
 	__le64 raddr;
+	__le16 udp_dst_port;
 };
 
 struct mqnic_cpl {

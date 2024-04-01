@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 	int buffer_length = atoi(argv[1]);
 	if (buffer_length < 0 || buffer_length > LENGTH)
 	{
-		printf("Unexpected packet length: %d\n", buffer_length);
+		printf("Unexpected buffer length: %d\n", buffer_length);
 		return -1;
 	}
     // 准备buffer

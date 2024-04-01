@@ -169,6 +169,7 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			tx_desc[i].len = cpu_to_le32(mem.length);
 			tx_desc[i].addr = cpu_to_le64(sg_dma_address(sg));
 			tx_desc[i].raddr = cpu_to_le64(mem.remote_addr);
+			tx_desc[i].udp_dst_port = cpu_to_le16(4791);
 
 			tx_info->frag_count = i + 1;
 			tx_info->frags[i].len = mem.length;
