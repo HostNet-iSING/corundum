@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
     FILE *mqnic = fopen("/dev/mqnic0", "rw");
     if (mqnic == NULL)
     {
-        printf("open file err\n");
+        printf("Failed to open device file, please check driver status.\n");
         return -1;
     }
     fd = fileno(mqnic);
