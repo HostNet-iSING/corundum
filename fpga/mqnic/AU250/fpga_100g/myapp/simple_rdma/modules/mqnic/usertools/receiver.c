@@ -12,6 +12,8 @@
 // buffer长度
 #define LENGTH (2*1024*1024)
 
+#define min(a,b) (((a) < (b)) ? (a) : (b))
+
 int fd;
 
 void handler(int signal)
@@ -31,13 +33,19 @@ void check_buffer(char *buffer, char *ref, int length)
 	{
 		if (buffer[i] != ref[i])
 		{
-			printf("buffer changed, new buffer:\n");
-			for (int j = 0; j < length; j++)
+			printf("buffer changed, new buffer(total length %d):\n", length);
+			for (int j = 0; j < (length + 15) / 16; j++)
 			{
-				printf("%x ", buffer[j]);
+				printf("%04x: ", j * 16);
+				for (int k = 0; k < min(16, length - j * 16); k++)
+				{
+					printf("%02x ", (unsigned char)buffer[j * 16 + k]);
+				}
+				printf("\n");
+				
 			}
-			printf("\n");
-			memcpy(ref, buffer, length);
+			memcpy(buffer, ref, length);
+			printf("buffer reseted.\n");
 			return;
 		}
 	}
