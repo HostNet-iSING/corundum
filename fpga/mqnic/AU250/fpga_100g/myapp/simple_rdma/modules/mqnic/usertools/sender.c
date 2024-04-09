@@ -12,7 +12,7 @@
 // buffer长度
 #define LENGTH (2*1024*1024)
 // buffer数目
-#define BUFFER_NUM 128
+#define BUFFER_NUM 512
 
 struct args
 {
@@ -45,12 +45,13 @@ int parse_args(int argc, char *argv[], struct args *args)
 		else 
 		{
 			sscanf(argv[i], "%llx", &remote_addr);
-			printf("check remote addr: 0x%llx\n", remote_addr);
 		}
 	}
 	args->packet_length = packet_length;
 	args->remote_addr = remote_addr;
 	args->loop = loop;
+	printf("Received args:\n\tpacket length: %d\n\tremote addr: 0x%llx\n\tloop: %d\n"
+		, args->packet_length, args->remote_addr, args->loop);
 	return 0;
 }
 
@@ -102,7 +103,7 @@ int main(int argc, char *argv[])
 			printf("ioctl error:%d\n", errno);
 			break;
 		}
-	} while (args.loop && i < BUFFER_NUM);
+	} while (args.loop && (i + 1) < BUFFER_NUM);
 
     
     //sleep(1);
