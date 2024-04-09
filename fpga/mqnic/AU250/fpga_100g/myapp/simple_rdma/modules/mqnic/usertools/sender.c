@@ -12,7 +12,7 @@
 // buffer长度
 #define LENGTH (2*1024*1024)
 // buffer数目
-#define BUFFER_NUM 1024
+#define BUFFER_NUM 128
 
 struct args
 {
@@ -38,7 +38,7 @@ int parse_args(int argc, char *argv[], struct args *args)
 	bool loop = false;
 	for (int i = 2; i < argc; i++)
 	{
-		if (strcmp(argv[i], "--loop") || strcmp(argv[i], "-loop"))
+		if (strcmp(argv[i], "--loop") == 0 || strcmp(argv[i], "-loop") == 0)
 		{
 			loop = true;
 		}
