@@ -119,8 +119,14 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			}
 
 		}
+		// check队列是否满了
+		if(mqnic_is_tx_ring_full(ring))
+		{
+			printk(KERN_INFO "tx_ring full, current message is not sended.\n");
+			return -EAGAIN;
+		}
+		
 		u32 index = ring->prod_ptr & ring->size_mask;
-
 		struct mqnic_desc *tx_desc = (struct mqnic_desc *)(ring->buf + index * ring->stride);
 		struct mqnic_tx_info *tx_info = &ring->tx_info[index];
 
@@ -206,16 +212,12 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		// enqueue
 		ring->prod_ptr++;
 
-		// check队列是否满了
-		if(mqnic_is_tx_ring_full(ring))
-		{
-			printk(KERN_INFO "tx_ring full, current message is not sended.\n");
-			goto destruction;
-		}
+		
 
 		//printk(KERN_INFO "write produce ptr %d\n", ring->prod_ptr);
 		dma_wmb();
 		// 写硬件寄存器
+		// 当前tx_ring producer只有这里，所以不用二次检查队列是不是满了
 		mqnic_tx_write_prod_ptr(ring);
 
 		/*printk(KERN_INFO "descriptor:\n");
@@ -231,7 +233,6 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		return 0;
 
 destruction:
-		sgt_list_idx--;
 free_table:
 		sg_free_table(sgt);
 unpin_user_pages:
