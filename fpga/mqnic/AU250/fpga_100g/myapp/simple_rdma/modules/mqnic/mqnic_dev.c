@@ -102,8 +102,23 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			return -1;
 		}
 
-		u32 cons_ptr = READ_ONCE(ring->cons_ptr);
-		printk(KERN_INFO "current consumer ptr: %d\n", cons_ptr);
+		u32 prev_cons_ptr = ring->cons_ptr;
+		mqnic_tx_read_cons_ptr(ring);
+		printk(KERN_INFO "current consumer ptr: %d producer ptr: %d\n", 
+			ring->cons_ptr, ring->prod_ptr);
+		if (ring->cons_ptr != prev_cons_ptr)
+		{
+			//硬件consume了WQE，释放[prev_cons_ptr, cons_ptr)的DMA buffer.
+			for (u32 index = prev_cons_ptr & ring->size_mask; 
+				index != (ring->cons_ptr & ring->size_mask);
+				index = (index + 1) & ring->size_mask)
+			{
+				struct mqnic_desc *tx_desc = (struct mqnic_desc *)(ring->buf + index * ring->stride);
+				dma_unmap_single(ring->dev, tx_desc->addr, tx_desc->len, DMA_TO_DEVICE);
+				printk(KERN_INFO "DMA unmap buffer of WQE at index %d success.\n", index);
+			}
+
+		}
 		u32 index = ring->prod_ptr & ring->size_mask;
 
 		struct mqnic_desc *tx_desc = (struct mqnic_desc *)(ring->buf + index * ring->stride);
@@ -118,8 +133,13 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			return -EFAULT;
 		}
 		int npages = (mem.length + PAGE_SIZE - 1) / PAGE_SIZE;
-		printk(KERN_INFO "accept user mem: addr: %lx, length: %d, npages: %d\n"
-			, mem.start, mem.length, npages);
+		//printk(KERN_INFO "accept user mem: addr: %lx, length: %d, npages: %d\n"
+		//	, mem.start, mem.length, npages);
+		if (npages <= 0 || npages > 512)
+		{
+			printk(KERN_WARNING "unacceptable buffer length: %d, quit.\n", mem.length);
+			return -EINVAL;
+		}
 		struct page **page_list = kmalloc(npages * sizeof(struct page), GFP_KERNEL);
 		int pinned = pin_user_pages_fast(
 			mem.start, 
@@ -133,7 +153,7 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			goto free_page_list;
 		}
 		//printk(KERN_INFO "page in hugepage: %d\n", thp_nr_pages(page_list[0]));
-		printk(KERN_INFO "pin user pages return: %d\n", pinned);
+		//printk(KERN_INFO "pin user pages return: %d\n", pinned);
 
 		struct sg_table *sgt = kmalloc(sizeof(struct sg_table), GFP_KERNEL);
 		retval = sg_alloc_table_from_pages(
@@ -143,16 +163,13 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		{
 			goto unpin_user_pages;
 		}
-		printk(KERN_INFO "sg table entry num: %d %d\n", sgt->orig_nents, sgt->nents);
+		//printk(KERN_INFO "sg table entry num: %d %d\n", sgt->orig_nents, sgt->nents);
 		retval = dma_map_sgtable(ring->dev, sgt, DMA_TO_DEVICE, 0);
 		if (retval < 0)
 		{
 			goto free_table;
 		}
-		printk(KERN_INFO "dma map success\n");
-		sgt_list[sgt_list_idx] = sgt;
-		page_list_list[sgt_list_idx] = page_list;
-		sgt_list_idx++;
+		//printk(KERN_INFO "dma map success\n");
 
 		tx_info->frag_count = 0;
 		struct scatterlist *sg;
@@ -164,8 +181,8 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 				printk(KERN_ERR "buffer map to more than one dma buffer");
 				break;
 			}
-			printk(KERN_INFO "block %d, dma addr: %llx, len: %d, remote addr: %llx"
-				, i, sg_dma_address(sg), sg_dma_len(sg), mem.remote_addr);
+			//printk(KERN_INFO "block %d, dma addr: %llx, len: %d, remote addr: %llx"
+			//	, i, sg_dma_address(sg), sg_dma_len(sg), mem.remote_addr);
 			tx_desc[i].len = cpu_to_le32(mem.length);
 			tx_desc[i].addr = cpu_to_le64(sg_dma_address(sg));
 			tx_desc[i].raddr = cpu_to_le64(mem.remote_addr);
@@ -177,10 +194,11 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			tx_info->len = mem.length;
 			tx_info->dma_addr = sg_dma_address(sg);
 		}
-		for (i = tx_info->frag_count; i < ring->desc_block_size; i++) {
+		// 看上去不需要，先ban了看看会不会出问题
+		/*for (i = tx_info->frag_count; i < ring->desc_block_size; i++) {
 			tx_desc[i].len = 0;
 			tx_desc[i].addr = 0;
-		}
+		}*/
 
 		// count packet
 		ring->packets++;
@@ -191,15 +209,16 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		// check队列是否满了
 		if(mqnic_is_tx_ring_full(ring))
 		{
+			printk(KERN_INFO "tx_ring full, current message is not sended.\n");
 			goto destruction;
 		}
 
-		printk(KERN_INFO "write produce ptr %d\n", ring->prod_ptr);
+		//printk(KERN_INFO "write produce ptr %d\n", ring->prod_ptr);
 		dma_wmb();
 		// 写硬件寄存器
 		mqnic_tx_write_prod_ptr(ring);
 
-		printk(KERN_INFO "descriptor:\n");
+		/*printk(KERN_INFO "descriptor:\n");
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 16; j++)
@@ -207,7 +226,7 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 				printk(KERN_CONT"%02x ", ((char*)tx_desc)[i*16+j]);
 			}
 			printk(KERN_INFO "\n");
-		}
+		}*/
 
 		return 0;
 
