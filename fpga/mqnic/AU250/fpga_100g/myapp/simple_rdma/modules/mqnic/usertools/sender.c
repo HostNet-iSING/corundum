@@ -100,6 +100,7 @@ int main(int argc, char *argv[])
 		if (ret < 0)
 		{
 			printf("ioctl error:%d\n", errno);
+			break;
 		}
 	} while (args.loop && i < BUFFER_NUM);
 

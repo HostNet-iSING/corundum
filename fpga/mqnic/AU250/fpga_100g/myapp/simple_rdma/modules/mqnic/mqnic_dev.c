@@ -74,6 +74,8 @@ static int mqnic_mmap(struct file *file, struct vm_area_struct *vma)
 	return -EINVAL;
 }
 
+DEFINE_MUTEX(mqnic_lock);
+
 static struct sg_table *sgt_list[1024];
 static int sgt_list_idx = 0;
 
@@ -102,6 +104,27 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			return -1;
 		}
 
+		// 解析用户参数
+		if (copy_from_user(&mem, (void *)arg, sizeof(struct user_mem)))
+		{
+			return -EFAULT;
+		}
+		int npages = (mem.length + PAGE_SIZE - 1) / PAGE_SIZE;
+		//printk(KERN_INFO "accept user mem: addr: %lx, length: %d, npages: %d\n"
+		//	, mem.start, mem.length, npages);
+		if (npages <= 0 || npages > 512)
+		{
+			printk(KERN_WARNING "unacceptable buffer length: %d, quit.\n", mem.length);
+			return -EINVAL;
+		}
+
+		// 上锁
+		if (mutex_lock_interruptible(&mqnic_lock))
+		{
+			printk(KERN_ERR "Failed to aquire device lock, exiting...\n");
+			return -EAGAIN;
+		}
+
 		u32 prev_cons_ptr = ring->cons_ptr;
 		mqnic_tx_read_cons_ptr(ring);
 		printk(KERN_INFO "current consumer ptr: %d producer ptr: %d\n", 
@@ -123,7 +146,8 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		if(mqnic_is_tx_ring_full(ring))
 		{
 			printk(KERN_INFO "tx_ring full, current message is not sended.\n");
-			return -EAGAIN;
+			retval = -EAGAIN;
+			goto unlock;
 		}
 		
 		u32 index = ring->prod_ptr & ring->size_mask;
@@ -133,19 +157,7 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		// 关掉硬件checksum和timestamp
 		tx_info->ts_requested = 0;
 		tx_desc->tx_csum_cmd = 0;
-
-		if (copy_from_user(&mem, (void *)arg, sizeof(struct user_mem)))
-		{
-			return -EFAULT;
-		}
-		int npages = (mem.length + PAGE_SIZE - 1) / PAGE_SIZE;
-		//printk(KERN_INFO "accept user mem: addr: %lx, length: %d, npages: %d\n"
-		//	, mem.start, mem.length, npages);
-		if (npages <= 0 || npages > 512)
-		{
-			printk(KERN_WARNING "unacceptable buffer length: %d, quit.\n", mem.length);
-			return -EINVAL;
-		}
+		
 		struct page **page_list = kmalloc(npages * sizeof(struct page), GFP_KERNEL);
 		int pinned = pin_user_pages_fast(
 			mem.start, 
@@ -230,9 +242,8 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			printk(KERN_INFO "\n");
 		}*/
 
-		return 0;
+		goto unlock;
 
-destruction:
 free_table:
 		sg_free_table(sgt);
 unpin_user_pages:
@@ -240,6 +251,8 @@ unpin_user_pages:
 		unpin_user_pages(page_list, pinned);
 free_page_list:
 		kfree(page_list);
+unlock:
+		mutex_unlock(&mqnic_lock);
 		return retval;
 
 	}
