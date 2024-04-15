@@ -1,34 +1,24 @@
 # Usertools
 
-## 发包器
-
-- Build
+### 构建
 
 ```bash
-gcc sender.c -o sender
+make
 ```
+
+### 发包器
 
 - Usage(需要sudo)
 
 ```bash
-sudo ./sender packet_length(in bytes) remote_addr(Optional) (--loop)
+sudo ./sender packets_file
 ```
 
-生成一个packet_length字节的buffer提交给网卡，packet_length应在0-2MB之间。
+根据给定的packets file的配置生成一串包并发送，packets file格式见本目录下packets文件。
 
-可选择提供对端buffer地址，将填写到描述符raddr字段，如不提供则填0。
+每个包的长度应在0-2MB之间。
 
-如果指定了--loop则会持续发包。
-
-发完包后会sleep一秒然后释放buffer，不是卡死了。
-
-## 收包器
-
-- Build
-
-```bash
-gcc receiver.c -o receiver
-```
+### 收包器
 
 - Usage(需要sudo)
 

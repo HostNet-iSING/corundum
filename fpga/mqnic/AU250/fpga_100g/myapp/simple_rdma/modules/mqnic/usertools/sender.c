@@ -11,72 +11,140 @@
 
 // buffer长度
 #define LENGTH (2*1024*1024)
-// buffer数目
-#define BUFFER_NUM 512
+// 配置文件最大包数目
+#define MAX_PACKETS_NUM 1024
 
-struct args
+struct Packet
 {
-	int packet_length;
+	int length;
 	unsigned long long remote_addr;
-	bool loop;
+	char *content;
 };
 
-int parse_args(int argc, char *argv[], struct args *args)
+// 读取一行，清除尾部\n，一行不得超过32k字符
+char *readline(FILE *fp)
 {
-	if (argc < 2 && argc > 4)
+	char *line = malloc(sizeof(char) * 32768);
+	fgets(line, 32768, fp);
+	// 忽略#开头的注释行
+	while (line[0] == '#')
 	{
-		printf("unexpected arg num: %d\n", argc - 1);
-		return -1;
+		fgets(line, 32768, fp);
 	}
-	int packet_length = atoi(argv[1]);
-	if (packet_length < 0 || packet_length > LENGTH)
+	if (strchr(line, '\n') != NULL)
 	{
-		printf("Unexpected packet length: %d\n", packet_length);
-		return -1;
+		*strchr(line, '\n') = '\0';
 	}
-	unsigned long long remote_addr = 0;
-	bool loop = false;
-	for (int i = 2; i < argc; i++)
+	line = realloc(line, strlen(line));
+	return line;
+}
+
+void *alloc_hugepage()
+{
+	void *buf = mmap(
+		NULL, 2 * 1024 * 1024, 
+		PROT_READ | PROT_WRITE, 
+		MAP_PRIVATE | MAP_ANONYMOUS | MAP_HUGETLB,
+		-1, 0);
+	if (buf == NULL)
 	{
-		if (strcmp(argv[i], "--loop") == 0 || strcmp(argv[i], "-loop") == 0)
+		printf("fail to alloc buffer\n");
+		exit(-1);
+	}
+	return buf;
+}
+
+int parse_packets_file(FILE *packets_file, struct Packet **out_packets)
+{
+	int loop_times = atoi(readline(packets_file));
+	printf("loop times: %d\n", loop_times);
+	struct Packet *packets = malloc(sizeof(struct Packet) * MAX_PACKETS_NUM);
+	int packet_num = 0;
+	while (!feof(packets_file))
+	{
+		// read packet length
+		int packet_length = atoi(readline(packets_file));
+		if (packet_length < 0 || packet_length > LENGTH)
 		{
-			loop = true;
+			printf("Unexpected packet length: %d\n", packet_length);
+			return -1;
 		}
-		else 
+		// read remote addr
+		unsigned long long remote_addr = 0;
+		sscanf(readline(packets_file), "%llx", &remote_addr);
+		// read content
+		char *content = alloc_hugepage();
+		char *line_buffer;
+		int buffer_idx = 0, buffer_length = 0;
+		for (int i = 0; i < packet_length; i++)
 		{
-			sscanf(argv[i], "%llx", &remote_addr);
+			if (buffer_idx >= buffer_length)
+			{
+				// 读取新一行
+				buffer_idx = 0;
+				line_buffer = readline(packets_file);
+				buffer_length = strlen(line_buffer);
+			}
+			char upper_half = line_buffer[buffer_idx];
+			buffer_idx++;
+			if (buffer_idx >= buffer_length)
+			{
+				// 读取新一行
+				buffer_idx = 0;
+				line_buffer = readline(packets_file);
+				buffer_length = strlen(line_buffer);
+			}
+			char bottom_half = line_buffer[buffer_idx];
+			buffer_idx++;
+			char cur_byte[5] = {'0', 'x', upper_half, bottom_half, '\0'};
+			char real_value;
+			sscanf(cur_byte, "%c", &real_value);
+			content[i] = real_value;
+		}
+		// generate struct Packet
+		struct Packet *packet = &packets[packet_num];
+		packet->length = packet_length;
+		packet->remote_addr = remote_addr;
+		packet->content = content;
+		packet_num++;
+		printf("Read packet: length: %d remote addr: 0x%llx\n", packet->length, packet->remote_addr);
+	}
+	// 若loop > 1，复制packets序列来填充
+	for (int i = 1; i < loop_times; i++)
+	{
+		for (int j = 0; j < packet_num; j++)
+		{
+			struct Packet ref = packets[j];
+			struct Packet *copy = &packets[i * packet_num + j];
+			copy->length = ref.length;
+			copy->remote_addr = ref.remote_addr;
+			copy->content = alloc_hugepage();
+			strcpy(copy->content, ref.content);
 		}
 	}
-	args->packet_length = packet_length;
-	args->remote_addr = remote_addr;
-	args->loop = loop;
-	printf("Received args:\n\tpacket length: %d\n\tremote addr: 0x%llx\n\tloop: %d\n"
-		, args->packet_length, args->remote_addr, args->loop);
-	return 0;
+	*out_packets = packets;
+	return packet_num * loop_times;
 }
 
 int main(int argc, char *argv[])
 {
-	struct args args;
-	if (parse_args(argc, argv, &args))
+	if (argc != 2)
 	{
+		printf("unexpected arg num: %d\n", argc - 1);
 		return -1;
 	}
-    // 准备buffer
-	void *buffers[BUFFER_NUM];
-	for (int i = 0; i < BUFFER_NUM; i++)
+	FILE *packets_file = fopen(argv[1], "r");
+	if (packets_file == NULL)
 	{
-		buffers[i] = mmap(
-			NULL, LENGTH, 
-			PROT_READ | PROT_WRITE, 
-			MAP_PRIVATE | MAP_ANONYMOUS | MAP_HUGETLB,
-			-1, 0);
-		if (buffers[i] == NULL)
-		{
-			printf("fail to alloc buffer\n");
-			return -1;
-		}
-		memset(buffers[i], 0xFF, LENGTH);
+		printf("Failed to open packets file %s\n", argv[1]);
+		return -1;
+	}
+	struct Packet *packets;
+	int packet_num = parse_packets_file(packets_file, &packets);
+	if (packet_num < 0)
+	{
+		printf("Error occured during parsing packets file.\n");
+		return -1;
 	}
     
     FILE *mqnic = fopen("/dev/mqnic0", "rw");
@@ -87,25 +155,18 @@ int main(int argc, char *argv[])
     }
     int fd = fileno(mqnic);
 
-	int i = -1;
-	do
+	for (int i = 0; i < packet_num; i++)
 	{
-		i++;
 		struct user_mem mem = {
-			.start = (unsigned long)buffers[i],
-			.length = args.packet_length,
-			.remote_addr = args.remote_addr
+			.start = (unsigned long)packets[i].content,
+			.length = packets[i].length,
+			.remote_addr = packets[i].remote_addr
 		};
-
 		int ret = ioctl(fd, MQNIC_IOCTL_SEND, &mem);
 		if (ret < 0)
 		{
 			printf("ioctl error:%d\n", errno);
 			break;
 		}
-	} while (args.loop && (i + 1) < BUFFER_NUM);
-
-    
-    //sleep(1);
-    //ret = ioctl(fd, MQNIC_IOCTL_FREE_BUFFER);
+	}
 }
