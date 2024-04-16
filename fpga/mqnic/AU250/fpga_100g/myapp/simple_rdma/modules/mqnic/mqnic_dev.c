@@ -97,7 +97,7 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			printk(KERN_ERR "cannot get interface\n");
 			return -1;
 		}
-		struct mqnic_ring *ring = interface->ring;
+		struct mqnic_ring *ring = interface->ring[0];
 		if (!ring)
 		{
 			printk(KERN_ERR "cannot get TX ring\n");
@@ -264,7 +264,7 @@ unlock:
 			printk(KERN_ERR "cannot get interface\n");
 			return -1;
 		}
-		struct mqnic_ring *ring = interface->ring;
+		struct mqnic_ring *ring = interface->ring[0];
 		if (!ring)
 		{
 			printk(KERN_ERR "cannot get TX ring\n");
@@ -347,7 +347,7 @@ free_page_list2:
 			printk(KERN_ERR "cannot get interface\n");
 			return -1;
 		}
-		struct mqnic_ring *ring = interface->ring;
+		struct mqnic_ring *ring = interface->ring[0];
 		if (!ring)
 		{
 			printk(KERN_ERR "cannot get TX ring\n");

@@ -419,7 +419,8 @@ struct mqnic_if {
 	struct i2c_client *mod_i2c_client;
 
 	// 我加的
-	struct mqnic_ring *ring;
+	struct mqnic_ring *ring[256];
+	int ring_num;
 };
 
 struct mqnic_priv {

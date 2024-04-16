@@ -264,6 +264,13 @@ struct mqnic_if *mqnic_create_interface(struct mqnic_dev *mdev, int index, u8 __
 		mqnic_arm_eq(eq);
 	}
 
+	// initialize my ring buffer array
+	interface->ring_num = 0;
+	for (int i = 0; i < 256; i++)
+	{
+		interface->ring[i] = NULL;
+	}
+
 	// create net_devices
 	interface->dev_port_base = mdev->dev_port_max;
 	interface->dev_port_max = mdev->dev_port_max;

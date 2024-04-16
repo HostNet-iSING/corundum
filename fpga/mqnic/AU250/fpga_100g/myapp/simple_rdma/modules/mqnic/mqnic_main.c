@@ -727,7 +727,7 @@ static void free_dma_buffer(struct mqnic_dev *mqnic)
 {
 	struct mqnic_if *interface = mqnic->interface[0];
 	if (!interface) { return; }
-	struct mqnic_ring *ring = interface->ring;
+	struct mqnic_ring *ring = interface->ring[0];
 	if (!ring) { return; }
 
 	u32 prev_cons_ptr = ring->cons_ptr;

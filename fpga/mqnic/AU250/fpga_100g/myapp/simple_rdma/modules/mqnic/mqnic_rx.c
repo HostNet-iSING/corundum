@@ -24,8 +24,6 @@ struct mqnic_ring *mqnic_create_rx_ring(struct mqnic_if *interface)
 	ring->prod_ptr = 0;
 	ring->cons_ptr = 0;
 
-	interface->ring = ring;
-
 	return ring;
 }
 
