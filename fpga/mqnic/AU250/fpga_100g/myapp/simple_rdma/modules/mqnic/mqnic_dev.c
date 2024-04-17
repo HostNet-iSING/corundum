@@ -76,11 +76,6 @@ static int mqnic_mmap(struct file *file, struct vm_area_struct *vma)
 
 DEFINE_MUTEX(mqnic_lock);
 
-static struct sg_table *sgt_list[1024];
-static int sgt_list_idx = 0;
-
-static struct page **page_list_list[1024];
-
 static int dma_map_buffer(struct device *dev, struct user_mem *mem)
 {
 	int retval = 0;
@@ -144,26 +139,9 @@ free_page_list:
 
 static int send_message_with_ring(struct mqnic_ring *ring, struct user_mem mem)
 {
-	int retval = 0;
-
-	// DMA buffer release
-	u32 prev_cons_ptr = ring->cons_ptr;
 	mqnic_tx_read_cons_ptr(ring);
 	printk(KERN_INFO "current consumer ptr: %d producer ptr: %d\n", 
 		ring->cons_ptr, ring->prod_ptr);
-	if (ring->cons_ptr != prev_cons_ptr)
-	{
-		//硬件consume了WQE，释放[prev_cons_ptr, cons_ptr)的DMA buffer.
-		for (u32 index = prev_cons_ptr & ring->size_mask; 
-			index != (ring->cons_ptr & ring->size_mask);
-			index = (index + 1) & ring->size_mask)
-		{
-			struct mqnic_desc *tx_desc = (struct mqnic_desc *)(ring->buf + index * ring->stride);
-			dma_unmap_single(ring->dev, tx_desc->addr, tx_desc->len, DMA_TO_DEVICE);
-			printk(KERN_INFO "DMA unmap buffer of WQE at index %d success.\n", index);
-		}
-
-	}
 	
 	// get descriptor to be written to
 	u32 index = ring->prod_ptr & ring->size_mask;
@@ -173,16 +151,7 @@ static int send_message_with_ring(struct mqnic_ring *ring, struct user_mem mem)
 	// 关掉硬件checksum和timestamp
 	tx_info->ts_requested = 0;
 	tx_desc->tx_csum_cmd = 0;
-	
-	retval = dma_map_buffer(ring->dev, &mem);
-	if (retval < 0)
-	{
-		return retval;
-	}
 
-
-	//printk(KERN_INFO "block %d, dma addr: %llx, len: %d, remote addr: %llx"
-	//	, i, sg_dma_address(sg), sg_dma_len(sg), mem.remote_addr);
 	tx_desc->len = cpu_to_le32(mem.length);
 	tx_desc->addr = cpu_to_le64(mem.dma_addr);
 	tx_desc->raddr = cpu_to_le64(mem.remote_addr);
@@ -255,6 +224,12 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			printk(KERN_WARNING "unacceptable buffer length: %d, quit.\n", mem.length);
 			return -EINVAL;
 		}
+		// check if buffer is DMA mapped
+		if (mem.dma_addr == (dma_addr_t)NULL)
+		{
+			printk(KERN_WARNING "buffer %lx is not dma mapped.\n", mem.start);
+			return -EINVAL;
+		}
 
 		// 上锁
 		if (mutex_lock_interruptible(&mqnic_lock))
@@ -263,7 +238,7 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			return -EAGAIN;
 		}
 
-		bool message_sended = false;
+		int used_ring = -1;
 		for (int i = 0; i < interface->ring_num; i++)
 		{
 			if (interface->ring[i] == NULL)
@@ -274,21 +249,24 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			// check队列是否满了
 			if(mqnic_is_tx_ring_full(interface->ring[i]))
 			{
-				printk(KERN_INFO "tx_ring %d full.\n", i);
 				continue;
 			}
 			retval = send_message_with_ring(interface->ring[i], mem);
 			if (retval == 0)
 			{
-				message_sended = true;
+				used_ring = i;
 				break;
 			}
 		}
 
-		if (!message_sended && retval == 0)
+		if (used_ring == -1 && retval == 0)
 		{
 			printk(KERN_INFO "All tx_ring busy, current message is not sended.\n");
 			retval = -EAGAIN;
+		}
+		else if (used_ring != -1)
+		{
+			printk(KERN_INFO "Message sended at ring %d\n", used_ring);
 		}
 
 		mutex_unlock(&mqnic_lock);

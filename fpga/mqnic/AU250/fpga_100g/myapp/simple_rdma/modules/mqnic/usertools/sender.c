@@ -54,10 +54,10 @@ void *alloc_hugepage()
 	return buf;
 }
 
-int parse_packets_file(FILE *packets_file, struct Packet **out_packets)
+int parse_packets_file(FILE *packets_file, struct Packet **out_packets, int *loop_times)
 {
-	int loop_times = atoi(readline(packets_file));
-	printf("loop times: %d\n", loop_times);
+	*loop_times = atoi(readline(packets_file));
+	printf("loop times: %d\n", *loop_times);
 	struct Packet *packets = malloc(sizeof(struct Packet) * MAX_PACKETS_NUM);
 	int packet_num = 0;
 	while (!feof(packets_file))
@@ -109,21 +109,8 @@ int parse_packets_file(FILE *packets_file, struct Packet **out_packets)
 		packet_num++;
 		printf("Read packet: length: %d remote addr: 0x%llx\n", packet->length, packet->remote_addr);
 	}
-	// 若loop > 1，复制packets序列来填充
-	for (int i = 1; i < loop_times; i++)
-	{
-		for (int j = 0; j < packet_num; j++)
-		{
-			struct Packet ref = packets[j];
-			struct Packet *copy = &packets[i * packet_num + j];
-			copy->length = ref.length;
-			copy->remote_addr = ref.remote_addr;
-			copy->content = alloc_hugepage();
-			strcpy(copy->content, ref.content);
-		}
-	}
 	*out_packets = packets;
-	return packet_num * loop_times;
+	return packet_num;
 }
 
 int main(int argc, char *argv[])
@@ -140,7 +127,8 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 	struct Packet *packets;
-	int packet_num = parse_packets_file(packets_file, &packets);
+	int loop_times = 0;
+	int packet_num = parse_packets_file(packets_file, &packets, &loop_times);
 	if (packet_num < 0)
 	{
 		printf("Error occured during parsing packets file.\n");
@@ -155,18 +143,53 @@ int main(int argc, char *argv[])
     }
     int fd = fileno(mqnic);
 
+	struct user_mem *mems = calloc(packet_num, sizeof(struct user_mem));
+
+	// DMA map
 	for (int i = 0; i < packet_num; i++)
 	{
-		struct user_mem mem = {
-			.start = (unsigned long)packets[i].content,
-			.length = packets[i].length,
-			.remote_addr = packets[i].remote_addr
-		};
-		int ret = ioctl(fd, MQNIC_IOCTL_SEND, &mem);
+		mems[i].start = (unsigned long)packets[i].content;
+		mems[i].length = packets[i].length;
+		mems[i].remote_addr = packets[i].remote_addr;
+		int ret = ioctl(fd, MQNIC_IOCTL_DMA_MAP, &mems[i]);
 		if (ret < 0)
 		{
-			printf("ioctl error:%d\n", errno);
-			break;
+			printf("DMA MAP:ioctl error:%d\n", errno);
+			return -1;
+		}
+		printf("dma addr: %llx\n", mems[i].dma_addr);
+	}
+
+	// Send packets
+	for (int i = 0; i < loop_times; i++)
+	{
+		for (int j = 0; j < packet_num; j++)
+		{
+			int ret = ioctl(fd, MQNIC_IOCTL_SEND, &mems[j]);
+			if (ret < 0)
+			{
+				printf("SEND:ioctl error:%d\n", errno);
+				goto end;
+			}
+		}
+	}
+end:
+	// in case NIC is using these buffers
+	sleep(1);
+	// DMA Unmap
+	for (int i = 0; i < packet_num; i++)
+	{
+		if (mems[i].dma_addr != 0)
+		{
+			int ret = ioctl(fd, MQNIC_IOCTL_DMA_UNMAP, &mems[i]);
+			if (ret < 0)
+			{
+				printf("UNMAP:ioctl error:%d\n", errno);
+			}
+			else
+			{
+				printf("Successful unmap buffer %d\n", i);
+			}
 		}
 	}
 }

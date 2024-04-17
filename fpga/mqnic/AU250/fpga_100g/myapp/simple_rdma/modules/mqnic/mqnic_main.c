@@ -722,38 +722,11 @@ fail_enable_device:
 	return ret;
 }
 
-// 释放剩余的已处理完的buffer.
-static void free_dma_buffer(struct mqnic_dev *mqnic)
-{
-	struct mqnic_if *interface = mqnic->interface[0];
-	if (!interface) { return; }
-	struct mqnic_ring *ring = interface->ring[0];
-	if (!ring) { return; }
-
-	u32 prev_cons_ptr = ring->cons_ptr;
-	mqnic_tx_read_cons_ptr(ring);
-	if (ring->cons_ptr != prev_cons_ptr)
-	{
-		//硬件consume了WQE，释放[prev_cons_ptr, cons_ptr)的DMA buffer.
-		for (u32 index = prev_cons_ptr & ring->size_mask; 
-			index != (ring->cons_ptr & ring->size_mask);
-			index = (index + 1) & ring->size_mask)
-		{
-			struct mqnic_desc *tx_desc = (struct mqnic_desc *)(ring->buf + index * ring->stride);
-			dma_unmap_single(ring->dev, tx_desc->addr, tx_desc->len, DMA_TO_DEVICE);
-			printk(KERN_INFO "DMA unmap buffer of WQE at index %d success.\n", index);
-		}
-
-	}
-}
-
 static void mqnic_pci_remove(struct pci_dev *pdev)
 {
 	struct mqnic_dev *mqnic = pci_get_drvdata(pdev);
 
 	dev_info(&pdev->dev, DRIVER_NAME " PCI remove");
-
-	free_dma_buffer(mqnic);
 
 	mqnic_common_remove(mqnic);
 
