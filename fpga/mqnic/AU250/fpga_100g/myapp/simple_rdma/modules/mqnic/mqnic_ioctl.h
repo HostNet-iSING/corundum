@@ -58,8 +58,6 @@ struct mqnic_ioctl_region_info {
 
 // 发包
 #define MQNIC_IOCTL_SEND _IO(MQNIC_IOCTL_TYPE, MQNIC_IOCTL_BASE + 3)
-// 清理缓冲区
-#define MQNIC_IOCTL_FREE_BUFFER _IO(MQNIC_IOCTL_TYPE, MQNIC_IOCTL_BASE + 4)
 // 映射DMA缓冲区
 #define MQNIC_IOCTL_DMA_MAP _IO(MQNIC_IOCTL_TYPE, MQNIC_IOCTL_BASE + 5)
 #define MQNIC_IOCTL_DMA_UNMAP _IO(MQNIC_IOCTL_TYPE, MQNIC_IOCTL_BASE + 6)
@@ -69,6 +67,7 @@ struct user_mem
 	unsigned long start;
 	int length;
 	unsigned long long remote_addr;
+	unsigned long long dma_addr;
 };
 
 #endif /* MQNIC_IOCTL_H */

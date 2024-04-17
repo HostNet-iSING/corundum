@@ -81,6 +81,67 @@ static int sgt_list_idx = 0;
 
 static struct page **page_list_list[1024];
 
+static int dma_map_buffer(struct device *dev, struct user_mem *mem)
+{
+	int retval = 0;
+	int npages = (mem->length + PAGE_SIZE - 1) / PAGE_SIZE;
+	struct page **page_list = kmalloc(npages * sizeof(struct page), GFP_KERNEL);
+	int pinned = pin_user_pages_fast(
+		mem->start,
+		npages, 
+		FOLL_LONGTERM, 
+		page_list
+	);
+	if (pinned < 0)
+	{
+		retval = pinned;
+		goto free_page_list;
+	}
+	//printk(KERN_INFO "page in hugepage: %d\n", thp_nr_pages(page_list[0]));
+	//printk(KERN_INFO "pin user pages return: %d\n", pinned);
+
+	struct sg_table *sgt = kmalloc(sizeof(struct sg_table), GFP_KERNEL);
+	retval = sg_alloc_table_from_pages(
+		sgt, page_list, 
+		pinned, 0, pinned << PAGE_SHIFT, GFP_KERNEL);
+	if (retval < 0)
+	{
+		goto unpin_user_pages;
+	}
+	//printk(KERN_INFO "sg table entry num: %d %d\n", sgt->orig_nents, sgt->nents);
+	retval = dma_map_sgtable(dev, sgt, DMA_TO_DEVICE, 0);
+	if (retval < 0)
+	{
+		goto free_table;
+	}
+	//printk(KERN_INFO "dma map success\n");
+
+	struct scatterlist *sg;
+	int i;
+	for_each_sgtable_dma_sg(sgt, sg, i)
+	{
+		if (i >= 1)
+		{
+			printk(KERN_ERR "buffer map to more than one dma buffer");
+			retval = -EINVAL;
+			goto dma_unmap_table;
+		}
+		mem->dma_addr = sg_dma_address(sg);
+	}
+	return 0;
+
+dma_unmap_table:
+	dma_unmap_sgtable(dev, sgt, DMA_TO_DEVICE, 0);
+free_table:
+	sg_free_table(sgt);
+unpin_user_pages:
+	kfree(sgt);
+	unpin_user_pages(page_list, pinned);
+free_page_list:
+	kfree(page_list);
+	return retval;
+}
+
 static int send_message_with_ring(struct mqnic_ring *ring, struct user_mem mem)
 {
 	int retval = 0;
@@ -113,61 +174,26 @@ static int send_message_with_ring(struct mqnic_ring *ring, struct user_mem mem)
 	tx_info->ts_requested = 0;
 	tx_desc->tx_csum_cmd = 0;
 	
-	int npages = (mem.length + PAGE_SIZE - 1) / PAGE_SIZE;
-	struct page **page_list = kmalloc(npages * sizeof(struct page), GFP_KERNEL);
-	int pinned = pin_user_pages_fast(
-		mem.start, 
-		npages, 
-		FOLL_LONGTERM, 
-		page_list
-	);
-	if (pinned < 0)
-	{
-		retval = pinned;
-		goto free_page_list;
-	}
-	//printk(KERN_INFO "page in hugepage: %d\n", thp_nr_pages(page_list[0]));
-	//printk(KERN_INFO "pin user pages return: %d\n", pinned);
-
-	struct sg_table *sgt = kmalloc(sizeof(struct sg_table), GFP_KERNEL);
-	retval = sg_alloc_table_from_pages(
-		sgt, page_list, 
-		pinned, 0, pinned << PAGE_SHIFT, GFP_KERNEL);
+	retval = dma_map_buffer(ring->dev, &mem);
 	if (retval < 0)
 	{
-		goto unpin_user_pages;
+		return retval;
 	}
-	//printk(KERN_INFO "sg table entry num: %d %d\n", sgt->orig_nents, sgt->nents);
-	retval = dma_map_sgtable(ring->dev, sgt, DMA_TO_DEVICE, 0);
-	if (retval < 0)
-	{
-		goto free_table;
-	}
-	//printk(KERN_INFO "dma map success\n");
 
-	tx_info->frag_count = 0;
-	struct scatterlist *sg;
-	int i;
-	for_each_sgtable_dma_sg(sgt, sg, i)
-	{
-		if (i >= 1)
-		{
-			printk(KERN_ERR "buffer map to more than one dma buffer");
-			break;
-		}
-		//printk(KERN_INFO "block %d, dma addr: %llx, len: %d, remote addr: %llx"
-		//	, i, sg_dma_address(sg), sg_dma_len(sg), mem.remote_addr);
-		tx_desc[i].len = cpu_to_le32(mem.length);
-		tx_desc[i].addr = cpu_to_le64(sg_dma_address(sg));
-		tx_desc[i].raddr = cpu_to_le64(mem.remote_addr);
-		tx_desc[i].udp_dst_port = cpu_to_le16(4791);
 
-		tx_info->frag_count = i + 1;
-		tx_info->frags[i].len = mem.length;
-		tx_info->frags[i].dma_addr = sg_dma_address(sg);
-		tx_info->len = mem.length;
-		tx_info->dma_addr = sg_dma_address(sg);
-	}
+	//printk(KERN_INFO "block %d, dma addr: %llx, len: %d, remote addr: %llx"
+	//	, i, sg_dma_address(sg), sg_dma_len(sg), mem.remote_addr);
+	tx_desc->len = cpu_to_le32(mem.length);
+	tx_desc->addr = cpu_to_le64(mem.dma_addr);
+	tx_desc->raddr = cpu_to_le64(mem.remote_addr);
+	tx_desc->udp_dst_port = cpu_to_le16(4791);
+
+	tx_info->frag_count = 1;
+	tx_info->frags->len = mem.length;
+	tx_info->frags->dma_addr = mem.dma_addr;
+	tx_info->len = mem.length;
+	tx_info->dma_addr = mem.dma_addr;
+	
 	// 看上去不需要，先ban了看看会不会出问题
 	/*for (i = tx_info->frag_count; i < ring->desc_block_size; i++) {
 		tx_desc[i].len = 0;
@@ -179,8 +205,6 @@ static int send_message_with_ring(struct mqnic_ring *ring, struct user_mem mem)
 	ring->bytes += tx_info->len;
 	// enqueue
 	ring->prod_ptr++;
-
-	
 
 	//printk(KERN_INFO "write produce ptr %d\n", ring->prod_ptr);
 	dma_wmb();
@@ -199,15 +223,6 @@ static int send_message_with_ring(struct mqnic_ring *ring, struct user_mem mem)
 	}*/
 
 	return 0;
-
-free_table:
-	sg_free_table(sgt);
-unpin_user_pages:
-	kfree(sgt);
-	unpin_user_pages(page_list, pinned);
-free_page_list:
-	kfree(page_list);
-	return retval;
 }
 
 static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
@@ -281,115 +296,60 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 
 	}
 	else if (cmd == MQNIC_IOCTL_DMA_MAP)
-	{
-		struct mqnic_if *interface = mqnic->interface[0];
-		if (!interface)
-		{
-			printk(KERN_ERR "cannot get interface\n");
-			return -1;
-		}
-		struct mqnic_ring *ring = interface->ring[0];
-		if (!ring)
-		{
-			printk(KERN_ERR "cannot get TX ring\n");
-			return -1;
-		}
-		
+	{		
 		if (copy_from_user(&mem, (void *)arg, sizeof(struct user_mem)))
 		{
 			return -EFAULT;
 		}
 		int npages = (mem.length + PAGE_SIZE - 1) / PAGE_SIZE;
-		printk(KERN_INFO "accept user mem: addr: %lx, length: %d, npages: %d\n"
-			, mem.start, mem.length, npages);
-		struct page **page_list = kmalloc(npages * sizeof(struct page), GFP_KERNEL);
-		int pinned = pin_user_pages_fast(
-			mem.start, 
-			npages, 
-			FOLL_LONGTERM, 
-			page_list
-		);
-		if (pinned < 0)
+		if (npages <= 0 || npages > 512)
 		{
-			retval = pinned;
-			goto free_page_list2;
+			printk(KERN_WARNING "unacceptable buffer length: %d, quit.\n", mem.length);
+			return -EINVAL;
 		}
-		printk(KERN_INFO "page in hugepage: %d\n", thp_nr_pages(page_list[0]));
-		printk(KERN_INFO "pin user pages return: %d\n", pinned);
+		retval = dma_map_buffer(mqnic->dev, &mem);
+		if (retval < 0)
+		{
+			return retval;
+		}
 
-		struct sg_table *sgt = kmalloc(sizeof(struct sg_table), GFP_KERNEL);
-		retval = sg_alloc_table_from_pages(
-			sgt, page_list, 
-			pinned, 0, pinned << PAGE_SHIFT, GFP_KERNEL);
-		if (retval < 0)
+		if (copy_to_user((void *)arg, &mem, sizeof(struct user_mem)))
 		{
-			goto unpin_user_pages2;
+			printk(KERN_ERR "failed to copy to user.\n");
+			dma_unmap_single(mqnic->dev, mem.dma_addr, mem.length, DMA_TO_DEVICE);
+			mem.dma_addr = (dma_addr_t)NULL;
+			return -EFAULT;
 		}
-		printk(KERN_INFO "sg table entry num: %d %d\n", sgt->orig_nents, sgt->nents);
-		retval = dma_map_sgtable(ring->dev, sgt, DMA_TO_DEVICE, 0);
-		if (retval < 0)
-		{
-			goto free_table2;
-		}
-		printk(KERN_INFO "dma map success\n");
-		struct scatterlist *sg;
-		int i;
-		for_each_sgtable_dma_sg(sgt, sg, i)
-		{
-			if (i >= 1)
-			{
-				printk(KERN_ERR "buffer map to more than one dma buffer\n");
-				break;
-			}
-			printk(KERN_INFO "block %d, dma addr: %llx, len: %d", i, sg_dma_address(sg), sg_dma_len(sg));
-			if (copy_to_user((void *)arg, &sg->dma_address, sizeof(dma_addr_t)))
-			{
-				printk(KERN_ERR "failed to copy to user.\n");
-				goto dma_unmap;
-			}
-		}
-		sgt_list[sgt_list_idx] = sgt;
-		page_list_list[sgt_list_idx] = page_list;
-		sgt_list_idx++;
+		
 		return 0;
-dma_unmap:
-		dma_unmap_sgtable(ring->dev, sgt, DMA_TO_DEVICE, 0);
-free_table2:
-		sg_free_table(sgt);
-unpin_user_pages2:
-		kfree(sgt);
-		unpin_user_pages(page_list, pinned);
-free_page_list2:
-		kfree(page_list);
-		return retval;
 	}
-	else if (cmd == MQNIC_IOCTL_FREE_BUFFER) 
+	else if (cmd == MQNIC_IOCTL_DMA_UNMAP)
 	{
-		struct mqnic_if *interface = mqnic->interface[0];
-		if (!interface)
+		if (copy_from_user(&mem, (void *)arg, sizeof(struct user_mem)))
 		{
-			printk(KERN_ERR "cannot get interface\n");
-			return -1;
+			return -EFAULT;
 		}
-		struct mqnic_ring *ring = interface->ring[0];
-		if (!ring)
+		int npages = (mem.length + PAGE_SIZE - 1) / PAGE_SIZE;
+		if (npages <= 0 || npages > 512)
 		{
-			printk(KERN_ERR "cannot get TX ring\n");
-			return -1;
+			printk(KERN_WARNING "unacceptable buffer length: %d, quit.\n", mem.length);
+			return -EINVAL;
 		}
-		printk(KERN_INFO "free %d items.\n", sgt_list_idx);
-		for (int i = 0; i < sgt_list_idx; i++)
+
+		if (mem.dma_addr == (dma_addr_t)NULL)
 		{
-			dma_unmap_sgtable(ring->dev, sgt_list[i], DMA_TO_DEVICE, 0);
-			//int npages = sgt_list[i]->orig_nents;
-			sg_free_table(sgt_list[i]);
-			kfree(sgt_list[i]);
-			//unpin_user_pages(page_list_list[sgt_list_idx], npages);
-			kfree(page_list_list[sgt_list_idx]);
+			printk(KERN_ERR "Trying to unmap a non-DMA buffer: 0x%lx\n", mem.start);
+			return -EFAULT;
 		}
-		// 下标清零
-		sgt_list_idx = 0;
-		printk(KERN_INFO "free success.\n");
+		dma_unmap_single(mqnic->dev, mem.dma_addr, mem.length, DMA_TO_DEVICE);
+		mem.dma_addr = (dma_addr_t)NULL;
+		
+		if (copy_to_user((void *)arg, &mem, sizeof(struct user_mem)))
+		{
+			printk(KERN_ERR "failed to copy to user.\n");
+			return -EFAULT;
+		}
+		
 		return 0;
 	}
 	else if (cmd == MQNIC_IOCTL_GET_API_VERSION) {

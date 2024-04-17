@@ -15,15 +15,20 @@
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 
 int fd;
+struct user_mem mem;
 
 void handler(int signal)
 {
 	printf("exiting with signal %d\n", signal);
-	int ret = ioctl(fd, MQNIC_IOCTL_FREE_BUFFER);
-	if (ret < 0)
-    {
-        printf("ioctl error:%d\n", errno);
-    }
+	if (mem.dma_addr != 0)
+	{
+		int ret = ioctl(fd, MQNIC_IOCTL_DMA_UNMAP, &mem);
+		if (ret < 0)
+		{
+			printf("ioctl error:%d\n", errno);
+		}
+	}
+	
 	exit(0);
 }
 
@@ -84,10 +89,8 @@ int main(int argc, char *argv[])
     }
     fd = fileno(mqnic);
 
-    struct user_mem mem = {
-        .start = (unsigned long)buffer,
-        .length = buffer_length
-    };
+    mem.start = (unsigned long)buffer;
+    mem.length = buffer_length;
 
     int ret = ioctl(fd, MQNIC_IOCTL_DMA_MAP, &mem);
     if (ret < 0)
@@ -96,7 +99,7 @@ int main(int argc, char *argv[])
 		return -1;
     }
 
-	printf("map success, buffer dma addr: 0x%llx\n", *(unsigned long long *)&mem);
+	printf("map success, buffer dma addr: 0x%llx\n", mem.dma_addr);
 
 	void *ref = malloc(buffer_length);
 	if (ref == NULL)
