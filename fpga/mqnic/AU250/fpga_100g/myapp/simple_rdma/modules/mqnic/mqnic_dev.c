@@ -139,7 +139,14 @@ free_page_list:
 
 static int send_message_with_ring(struct mqnic_ring *ring, struct user_mem mem)
 {
+	u32 prev_cons_ptr = ring->cons_ptr;
 	mqnic_tx_read_cons_ptr(ring);
+	
+	if (ring->cons_ptr == prev_cons_ptr)
+	{
+		return -EBUSY;
+	}
+
 	printk(KERN_INFO "current consumer ptr: %d producer ptr: %d\n", 
 		ring->cons_ptr, ring->prod_ptr);
 	
@@ -239,7 +246,7 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		}
 
 		int used_ring = -1;
-		for (int i = 0; i < interface->ring_num; i++)
+		for (int i = 0; i < 1; i++)
 		{
 			if (interface->ring[i] == NULL)
 			{

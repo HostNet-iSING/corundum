@@ -1,3 +1,4 @@
+#include <asm-generic/errno-base.h>
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -165,7 +166,12 @@ int main(int argc, char *argv[])
 	{
 		for (int j = 0; j < packet_num; j++)
 		{
-			int ret = ioctl(fd, MQNIC_IOCTL_SEND, &mems[j]);
+			int ret = 0;
+			do 
+			{
+				ret = ioctl(fd, MQNIC_IOCTL_SEND, &mems[j]);
+			} while (ret == -EBUSY);
+			
 			if (ret < 0)
 			{
 				printf("SEND:ioctl error:%d\n", errno);
