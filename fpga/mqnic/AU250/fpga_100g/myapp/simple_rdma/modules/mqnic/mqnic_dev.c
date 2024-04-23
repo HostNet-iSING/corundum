@@ -139,10 +139,9 @@ free_page_list:
 
 static int send_message_with_ring(struct mqnic_ring *ring, struct user_mem mem)
 {
-	u32 prev_cons_ptr = ring->cons_ptr;
 	mqnic_tx_read_cons_ptr(ring);
 	
-	if (ring->cons_ptr == prev_cons_ptr)
+	if (ring->cons_ptr != ring->prod_ptr)
 	{
 		return -EBUSY;
 	}

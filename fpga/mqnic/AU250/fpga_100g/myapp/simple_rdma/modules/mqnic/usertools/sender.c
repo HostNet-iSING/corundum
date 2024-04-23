@@ -170,7 +170,7 @@ int main(int argc, char *argv[])
 			do 
 			{
 				ret = ioctl(fd, MQNIC_IOCTL_SEND, &mems[j]);
-			} while (ret == -EBUSY);
+			} while (ret < 0 && errno == EBUSY);
 			
 			if (ret < 0)
 			{
