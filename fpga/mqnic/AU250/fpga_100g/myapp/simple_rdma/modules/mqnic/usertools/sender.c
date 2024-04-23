@@ -1,5 +1,6 @@
 #include <asm-generic/errno-base.h>
 #include <errno.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -114,6 +115,33 @@ int parse_packets_file(FILE *packets_file, struct Packet **out_packets, int *loo
 	return packet_num;
 }
 
+int fd;
+int packet_num;
+struct user_mem *mems;
+
+void handler(int signal)
+{
+	printf("exiting with signal %d\n", signal);
+	// DMA Unmap
+	for (int i = 0; i < packet_num; i++)
+	{
+		if (mems[i].dma_addr != 0)
+		{
+			int ret = ioctl(fd, MQNIC_IOCTL_DMA_UNMAP, &mems[i]);
+			if (ret < 0)
+			{
+				printf("UNMAP:ioctl error:%d\n", errno);
+			}
+			else
+			{
+				printf("Successful unmap buffer %d\n", i);
+			}
+		}
+	}
+	
+	exit(0);
+}
+
 int main(int argc, char *argv[])
 {
 	if (argc != 2)
@@ -129,7 +157,7 @@ int main(int argc, char *argv[])
 	}
 	struct Packet *packets;
 	int loop_times = 0;
-	int packet_num = parse_packets_file(packets_file, &packets, &loop_times);
+	packet_num = parse_packets_file(packets_file, &packets, &loop_times);
 	if (packet_num < 0)
 	{
 		printf("Error occured during parsing packets file.\n");
@@ -142,9 +170,9 @@ int main(int argc, char *argv[])
         printf("Failed to open device file, please check driver status.\n");
         return -1;
     }
-    int fd = fileno(mqnic);
+    fd = fileno(mqnic);
 
-	struct user_mem *mems = calloc(packet_num, sizeof(struct user_mem));
+	mems = calloc(packet_num, sizeof(struct user_mem));
 
 	// DMA map
 	for (int i = 0; i < packet_num; i++)
@@ -160,6 +188,8 @@ int main(int argc, char *argv[])
 		}
 		printf("dma addr: %llx\n", mems[i].dma_addr);
 	}
+
+	signal(SIGINT, handler);
 
 	// Send packets
 	for (int i = 0; i < loop_times; i++)
@@ -181,7 +211,7 @@ int main(int argc, char *argv[])
 	}
 end:
 	// in case NIC is using these buffers
-	sleep(1);
+	sleep(100);
 	// DMA Unmap
 	for (int i = 0; i < packet_num; i++)
 	{
