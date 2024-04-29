@@ -198,6 +198,13 @@ module tx_engine_v3 #
     output wire                             s_axis_tx_cpl_ready,
 
     /*
+     * Transmit completion output
+     */
+    output wire [TX_TAG_WIDTH-1:0]          m_axis_tx_cpl_tag,
+    output wire                             m_axis_tx_cpl_valid,
+    input  wire                             m_axis_tx_cpl_ready,
+
+    /*
      * Configuration
      */
     input  wire                             enable
@@ -278,12 +285,14 @@ reg [7:0] m_axis_tx_csum_cmd_csum_start_reg = 7'd0, m_axis_tx_csum_cmd_csum_star
 reg [7:0] m_axis_tx_csum_cmd_csum_offset_reg = 7'd0, m_axis_tx_csum_cmd_csum_offset_next;
 reg m_axis_tx_csum_cmd_valid_reg = 1'b0, m_axis_tx_csum_cmd_valid_next;
 
+reg [TX_TAG_WIDTH-1:0] m_axis_tx_cpl_tag_reg = {TX_TAG_WIDTH{1'b0}}, m_axis_tx_cpl_tag_next;
+reg m_axis_tx_cpl_valid_reg = 1'b0, m_axis_tx_cpl_valid_next;
+
 reg s_axis_tx_cpl_ready_reg = 1'b0, s_axis_tx_cpl_ready_next;
 
 reg [CL_TX_BUFFER_SIZE+1-1:0] buf_wr_ptr_reg = 0, buf_wr_ptr_next;
 reg [CL_TX_BUFFER_SIZE+1-1:0] buf_rd_ptr_reg = 0, buf_rd_ptr_next;
 
-reg desc_start_reg = 1'b1, desc_start_next;
 reg [DMA_CLIENT_LEN_WIDTH-1:0] desc_len_reg = {DMA_CLIENT_LEN_WIDTH{1'b0}}, desc_len_next;
 
 reg [REQ_TAG_WIDTH-1:0] early_tx_req_status_tag_reg = {REQ_TAG_WIDTH{1'b0}}, early_tx_req_status_tag_next;
@@ -304,6 +313,7 @@ reg [DESC_TABLE_SIZE-1:0] desc_table_active = 0;
 reg [DESC_TABLE_SIZE-1:0] desc_table_invalid = 0;
 reg [DESC_TABLE_SIZE-1:0] desc_table_desc_fetched = 0;
 reg [DESC_TABLE_SIZE-1:0] desc_table_data_fetched = 0;
+
 (* ram_style = "distributed", ramstyle = "no_rw_check, mlab" *)
 reg desc_table_tx_done_a[DESC_TABLE_SIZE-1:0];
 (* ram_style = "distributed", ramstyle = "no_rw_check, mlab" *)
@@ -331,13 +341,8 @@ reg [DMA_CLIENT_LEN_WIDTH-1:0] desc_table_len[DESC_TABLE_SIZE-1:0];
 reg [CL_TX_BUFFER_SIZE+1-1:0] desc_table_buf_ptr[DESC_TABLE_SIZE-1:0];
 (* ram_style = "distributed", ramstyle = "no_rw_check, mlab" *)
 reg [PTP_TS_WIDTH-1:0] desc_table_ptp_ts[DESC_TABLE_SIZE-1:0];
-(* ram_style = "distributed", ramstyle = "no_rw_check, mlab" *)
-reg desc_table_read_commit[DESC_TABLE_SIZE-1:0];
-(* ram_style = "distributed", ramstyle = "no_rw_check, mlab" *)
-reg [DESC_TABLE_DMA_OP_COUNT_WIDTH-1:0] desc_table_read_count_start[DESC_TABLE_SIZE-1:0];
-(* ram_style = "distributed", ramstyle = "no_rw_check, mlab" *)
-reg [DESC_TABLE_DMA_OP_COUNT_WIDTH-1:0] desc_table_read_count_finish[DESC_TABLE_SIZE-1:0];
 
+//v3
 (* ram_style = "distributed", ramstyle = "no_rw_check, mlab" *)
 reg [8-1:0] desc_table_op_code[DESC_TABLE_SIZE-1:0];
 (* ram_style = "distributed", ramstyle = "no_rw_check, mlab" *)
@@ -358,6 +363,7 @@ reg [64-1:0] desc_table_raddr[DESC_TABLE_SIZE-1:0];
 reg [32-1:0] desc_table_finished_len[DESC_TABLE_SIZE-1:0];
 (* ram_style = "distributed", ramstyle = "no_rw_check, mlab" *)
 reg [24-1:0] desc_table_pkt_cnt[DESC_TABLE_SIZE-1:0];      
+ 
 
 reg [CL_DESC_TABLE_SIZE+1-1:0] desc_table_start_ptr_reg = 0;
 reg [QUEUE_INDEX_WIDTH-1:0] desc_table_start_queue;
@@ -374,10 +380,8 @@ reg [CL_TX_BUFFER_SIZE+1-1:0] desc_table_desc_ctrl_buf_ptr;
 reg [6:0] desc_table_desc_ctrl_csum_start;
 reg [7:0] desc_table_desc_ctrl_csum_offset;
 reg desc_table_desc_ctrl_csum_enable;
-reg desc_table_desc_ctrl_en;
-reg [CL_DESC_TABLE_SIZE-1:0] desc_table_desc_fetched_ptr;
-reg [DMA_CLIENT_LEN_WIDTH-1:0] desc_table_desc_fetched_len;
-reg desc_table_desc_fetched_en;
+reg desc_table_desc_latch_en;
+
 reg [CL_DESC_TABLE_SIZE-1:0] desc_table_data_fetched_ptr;
 reg desc_table_data_fetched_en;
 reg [CL_DESC_TABLE_SIZE+1-1:0] desc_table_tx_start_ptr_reg = 0;
@@ -393,12 +397,6 @@ reg [CL_DESC_TABLE_SIZE-1:0] desc_table_cpl_write_done_ptr;
 reg desc_table_cpl_write_done_en;
 reg [CL_DESC_TABLE_SIZE+1-1:0] desc_table_finish_ptr_reg = 0;
 reg desc_table_finish_en;
-reg [CL_DESC_TABLE_SIZE+1-1:0] desc_table_read_start_ptr;
-reg desc_table_read_start_commit;
-reg desc_table_read_start_init;
-reg desc_table_read_start_en;
-reg [CL_DESC_TABLE_SIZE+1-1:0] desc_table_read_finish_ptr;
-reg desc_table_read_finish_en;
 
 reg [8  -1:0] desc_op_code      ;
 reg [32 -1:0] desc_dma_total_len;
@@ -410,9 +408,7 @@ reg [32 -1:0] desc_rip          ;
 reg [64 -1:0] desc_raddr        ;
 
 reg [32 -1:0] desc_dma_finish_len  ;
-reg [32 -1:0] desc_dma_rest_len    ;
 reg [24 -1:0] desc_dma_pkt_cnt     ;
-reg [32 -1:0] temp_len  ;
 
 // internal datapath
 reg  [DMA_ADDR_WIDTH-1:0]  m_axis_dma_read_desc_dma_addr_int;
@@ -423,6 +419,8 @@ reg                        m_axis_dma_read_desc_valid_int;
 reg                        m_axis_dma_read_desc_ready_int_reg = 1'b0;
 wire                       m_axis_dma_read_desc_ready_int_early;
 
+//simulation debug
+reg [31:0] temp0,temp1;
 reg temp;
 
 assign s_axis_tx_req_ready = s_axis_tx_req_ready_reg;
@@ -457,6 +455,10 @@ assign m_axis_tx_csum_cmd_valid = m_axis_tx_csum_cmd_valid_reg;
 
 assign s_axis_tx_cpl_ready = s_axis_tx_cpl_ready_reg;
 
+assign m_axis_tx_cpl_tag = m_axis_tx_cpl_tag_reg;
+assign m_axis_tx_cpl_valid = m_axis_tx_cpl_valid_reg;
+
+
 integer i;
 
 initial begin
@@ -472,10 +474,8 @@ initial begin
         desc_table_csum_offset[i] = 0;
         desc_table_csum_enable[i] = 0;
         
-        
         desc_table_total_len[i] = 0;
-        desc_table_pkt_cnt[i] = 0;   
-        desc_table_finished_len[i] = 0;     
+        desc_table_pkt_cnt[i] = 0;        
         
         desc_table_op_code[i] = 0;        
         desc_table_total_len[i] = 0;        
@@ -484,14 +484,11 @@ initial begin
         desc_table_src_port[i] = 0;        
         desc_table_rmac[i] = 0;       
         desc_table_rip[i] = 0;       
-        desc_table_raddr[i] = 0; 
-        
+        desc_table_raddr[i] = 0;    
+  
         desc_table_len[i] = 0;
         desc_table_buf_ptr[i] = 0;
         desc_table_ptp_ts[i] = 0;
-        desc_table_read_commit[i] = 0;
-        desc_table_read_count_start[i] = 0;
-        desc_table_read_count_finish[i] = 0;
     end
 end
 
@@ -527,11 +524,13 @@ always @* begin
     m_axis_tx_csum_cmd_valid_next = m_axis_tx_csum_cmd_valid_reg && !m_axis_tx_csum_cmd_ready;
 
     s_axis_tx_cpl_ready_next = 1'b0;
+    
+    m_axis_tx_cpl_tag_next = m_axis_tx_cpl_tag_reg;
+    m_axis_tx_cpl_valid_next = m_axis_tx_cpl_valid_reg && !m_axis_tx_cpl_ready;
 
     buf_wr_ptr_next = buf_wr_ptr_reg;
     buf_rd_ptr_next = buf_rd_ptr_reg;
 
-    desc_start_next = desc_start_reg;
     desc_len_next = desc_len_reg;
 
     early_tx_req_status_tag_next = early_tx_req_status_tag_reg;
@@ -565,10 +564,7 @@ always @* begin
         desc_table_desc_ctrl_csum_offset = 0;
         desc_table_desc_ctrl_csum_enable = 0;
     end
-    desc_table_desc_ctrl_en = 1'b0;
-    desc_table_desc_fetched_ptr = s_axis_desc_tid & DESC_PTR_MASK;
-    desc_table_desc_fetched_len = desc_len_reg + s_axis_desc_tdata[63:32];
-    desc_table_desc_fetched_en = 1'b0;
+    desc_table_desc_latch_en = 1'b0;
     desc_table_data_fetched_ptr = s_axis_dma_read_desc_status_tag & DESC_PTR_MASK;
     desc_table_data_fetched_en = 1'b0;
     desc_table_tx_start_en = 1'b0;
@@ -581,16 +577,10 @@ always @* begin
     desc_table_cpl_write_done_ptr = s_axis_cpl_req_status_tag & DESC_PTR_MASK;
     desc_table_cpl_write_done_en = 1'b0;
     desc_table_finish_en = 1'b0;
-    desc_table_read_start_ptr = s_axis_desc_tid;
-    desc_table_read_start_commit = 1'b0;
-    desc_table_read_start_init = 1'b0;
-    desc_table_read_start_en = 1'b0;
-    desc_table_read_finish_ptr = s_axis_dma_read_desc_status_tag;
-    desc_table_read_finish_en = 1'b0;
 
     m_axis_dma_read_desc_dma_addr_int = s_axis_desc_tdata[127:64];
-    m_axis_dma_read_desc_ram_addr_int = (buf_wr_ptr_reg & TX_BUFFER_PTR_MASK) + desc_len_reg + TX_BUFFER_OFFSET;
-    m_axis_dma_read_desc_len_int = s_axis_desc_tdata[63:32];
+    m_axis_dma_read_desc_ram_addr_int = (buf_wr_ptr_reg & TX_BUFFER_PTR_MASK) + TX_BUFFER_OFFSET;
+    m_axis_dma_read_desc_len_int = 0;
     m_axis_dma_read_desc_tag_int = s_axis_desc_tid & DESC_PTR_MASK;
     m_axis_dma_read_desc_valid_int = 1'b0;
     
@@ -604,10 +594,9 @@ always @* begin
     desc_rmac           = s_axis_desc_tdata[223:176];
     desc_rip            = s_axis_desc_tdata[255:224];
     desc_raddr          = s_axis_desc_tdata[319:256];
+    
     desc_dma_finish_len = 0;
-    desc_dma_rest_len = 0;
     desc_dma_pkt_cnt = 0;
-    temp_len = 0;
 
     // descriptor fetch
     // wait for transmit request
@@ -650,7 +639,6 @@ always @* begin
             early_tx_req_status_tag_next = desc_table_tag[s_axis_desc_req_status_tag & DESC_PTR_MASK];
             early_tx_req_status_valid_next = 1'b1;
 
-            dec_active_desc_req_1 = 1'b1;
         end else begin
             // descriptor available to dequeue
 
@@ -664,28 +652,25 @@ always @* begin
     if (s_axis_desc_tready && s_axis_desc_tvalid) begin
         desc_valid_cnt_next = desc_valid_cnt + 1;
         if (desc_table_active[s_axis_desc_tid & DESC_PTR_MASK]) begin
-            if(desc_valid_cnt == 0) begin
-                //latch WQE info
-                desc_op_code        = s_axis_desc_tdata[7:0];
-                desc_dma_total_len  = s_axis_desc_tdata[63:32];
-                desc_laddr          = s_axis_desc_tdata[127:64];
-                desc_dst_qpn        = s_axis_desc_tdata[151:128];
-                desc_src_port       = s_axis_desc_tdata[175:160];
-                desc_rmac           = s_axis_desc_tdata[223:176];
-                desc_rip            = s_axis_desc_tdata[255:224];
-                desc_raddr          = s_axis_desc_tdata[319:256];
-                
-                desc_dma_finish_len = (s_axis_desc_tdata[63:32] > PKT_LEN)?PKT_LEN:s_axis_desc_tdata[63:32];
-                desc_dma_pkt_cnt = 0;
-            end
-            desc_start_next = 1'b0;
-            desc_len_next = desc_len_reg + s_axis_desc_tdata[63:32];
+          if(desc_valid_cnt == 0) begin
+            //latch WQE info
+            desc_op_code        = s_axis_desc_tdata[7:0];
+            desc_dma_total_len  = s_axis_desc_tdata[63:32];
+            desc_laddr          = s_axis_desc_tdata[127:64];
+            desc_dst_qpn        = s_axis_desc_tdata[151:128];
+            desc_src_port       = s_axis_desc_tdata[175:160];
+            desc_rmac           = s_axis_desc_tdata[223:176];
+            desc_rip            = s_axis_desc_tdata[255:224];
+            desc_raddr          = s_axis_desc_tdata[319:256];
+            
+            desc_dma_finish_len = (s_axis_desc_tdata[63:32] > PKT_LEN)?PKT_LEN:s_axis_desc_tdata[63:32];
+            desc_dma_pkt_cnt = 0;           
+                    
+            desc_len_next = (s_axis_desc_tdata[63:32] > PKT_LEN)?(0 + PKT_LEN):(0 + s_axis_desc_tdata[63:32]);
 
             if (desc_len_next > MAX_TX_SIZE) begin
                 desc_len_next = MAX_TX_SIZE;
             end
-
-            desc_table_read_start_init = desc_start_reg;
 
             // update entry in descriptor table
             desc_table_desc_ctrl_ptr = s_axis_desc_tid & DESC_PTR_MASK;
@@ -695,45 +680,30 @@ always @* begin
                 desc_table_desc_ctrl_csum_offset = s_axis_desc_tdata[30:24];
                 desc_table_desc_ctrl_csum_enable = s_axis_desc_tdata[31];
             end
-            desc_table_desc_ctrl_en = desc_start_reg;
+            desc_table_desc_latch_en = 1'b1;//desc_start_reg;
 
             // initiate data fetch to onboard RAM
             m_axis_dma_read_desc_dma_addr_int = s_axis_desc_tdata[127:64];
-            m_axis_dma_read_desc_ram_addr_int = (buf_wr_ptr_reg & TX_BUFFER_PTR_MASK) + desc_len_reg + TX_BUFFER_OFFSET;
-            m_axis_dma_read_desc_len_int = s_axis_desc_tdata[63:32];
+            m_axis_dma_read_desc_ram_addr_int = (buf_wr_ptr_reg & TX_BUFFER_PTR_MASK) + TX_BUFFER_OFFSET;
+            m_axis_dma_read_desc_len_int = (s_axis_desc_tdata[63:32] > PKT_LEN)?PKT_LEN:s_axis_desc_tdata[63:32];
             m_axis_dma_read_desc_tag_int = s_axis_desc_tid & DESC_PTR_MASK;
-
-            desc_table_read_start_ptr = s_axis_desc_tid;
 
             if (m_axis_dma_read_desc_len_int != 0) begin
                 m_axis_dma_read_desc_valid_int = 1'b1;
-
-                // read start
-                desc_table_read_start_en = 1'b1;
             end
+          end
+          if (s_axis_desc_tlast) begin
 
-            if (s_axis_desc_tlast) begin
-                // update entry in descriptor table
-                desc_table_desc_fetched_ptr = s_axis_desc_tid & DESC_PTR_MASK;
-                desc_table_desc_fetched_len = desc_len_next;
-                desc_table_desc_fetched_en = 1'b1;
+              // update write pointer
+              buf_wr_ptr_next = (buf_wr_ptr_reg + desc_len_next + TX_BUFFER_PTR_MASK_LOWER) & ~TX_BUFFER_PTR_MASK_LOWER;
 
-                // read commit
-                desc_table_read_start_commit = 1'b1;
+              if ((buf_wr_ptr_reg & TX_BUFFER_PTR_MASK) + desc_len_next > TX_BUFFER_SIZE - MAX_TX_SIZE) begin
+                  buf_wr_ptr_next = ~buf_wr_ptr_reg & ~TX_BUFFER_PTR_MASK;
+              end
 
-                // update write pointer
-                buf_wr_ptr_next = (buf_wr_ptr_reg + desc_len_next + TX_BUFFER_PTR_MASK_LOWER) & ~TX_BUFFER_PTR_MASK_LOWER;
-
-                if ((buf_wr_ptr_reg & TX_BUFFER_PTR_MASK) + desc_len_next > TX_BUFFER_SIZE - MAX_TX_SIZE) begin
-                    buf_wr_ptr_next = ~buf_wr_ptr_reg & ~TX_BUFFER_PTR_MASK;
-                end
-
-                dec_active_desc_req_2 = 1'b1;
-
-                desc_start_next = 1'b1;
-                desc_len_next = 0;
-                desc_valid_cnt_next = 0;
-            end
+              desc_len_next = 0;
+              desc_valid_cnt_next = 0;
+          end
         end
     end
 
@@ -743,20 +713,15 @@ always @* begin
         // update entry in descriptor table
         desc_table_data_fetched_ptr = s_axis_dma_read_desc_status_tag & DESC_PTR_MASK;
         desc_table_data_fetched_en = 1'b1;
-
-        // read finish
-        desc_table_read_finish_ptr = s_axis_dma_read_desc_status_tag;
-        desc_table_read_finish_en = 1'b1;
     end
 
     // transmit start
     // wait for data fetch completion
-    if (desc_table_active[desc_table_tx_start_ptr_reg & DESC_PTR_MASK] && desc_table_tx_start_ptr_reg != desc_table_start_ptr_reg) begin
+    if (desc_table_active[desc_table_tx_start_ptr_reg & DESC_PTR_MASK]) begin
         if (desc_table_invalid[desc_table_tx_start_ptr_reg & DESC_PTR_MASK]) begin
             // invalid entry; skip
             desc_table_tx_start_en = 1'b1;
-        //end else if (desc_table_data_fetched[desc_table_tx_start_ptr_reg & DESC_PTR_MASK] && !m_axis_tx_desc_valid && (!m_axis_tx_csum_cmd_valid || !TX_CHECKSUM_ENABLE)) begin
-        end else if (desc_table_desc_fetched[desc_table_tx_start_ptr_reg & DESC_PTR_MASK] && desc_table_read_commit[desc_table_tx_start_ptr_reg & DESC_PTR_MASK] && (desc_table_read_count_start[desc_table_tx_start_ptr_reg & DESC_PTR_MASK] == desc_table_read_count_finish[desc_table_tx_start_ptr_reg & DESC_PTR_MASK]) && !m_axis_tx_desc_valid && (!m_axis_tx_csum_cmd_valid || !TX_CHECKSUM_ENABLE)) begin
+        end else if (desc_table_data_fetched[desc_table_tx_start_ptr_reg & DESC_PTR_MASK] && !m_axis_tx_desc_valid && (!m_axis_tx_csum_cmd_valid || !TX_CHECKSUM_ENABLE)) begin
             // update entry in descriptor table
             desc_table_tx_start_en = 1'b1;
 
@@ -812,21 +777,76 @@ always @* begin
     // wait for transmit completion; store PTP timestamp
     s_axis_tx_cpl_ready_next = 1'b1;
     if (s_axis_tx_cpl_valid && s_axis_tx_cpl_tag[TX_TAG_WIDTH-1]) begin
+      temp0 = desc_table_finished_len[s_axis_tx_cpl_tag & DESC_PTR_MASK];
+      temp1 = desc_table_total_len[s_axis_tx_cpl_tag & DESC_PTR_MASK];
+      if(desc_table_finished_len[s_axis_tx_cpl_tag & DESC_PTR_MASK] >= desc_table_total_len[s_axis_tx_cpl_tag & DESC_PTR_MASK]) begin
         desc_table_tx_finish_ptr = s_axis_tx_cpl_tag;
         desc_table_tx_finish_ts = s_axis_tx_cpl_ts;
         desc_table_tx_finish_en = 1'b1;
-    end
+        desc_len_next = 0;
+        
+        //to qm update consumer ptr
+        m_axis_tx_cpl_tag_next = s_axis_tx_cpl_tag;
+        m_axis_tx_cpl_valid_next = 1'b1;
 
+      end
+      else begin      
+          //latch WQE info
+          desc_op_code        = desc_table_op_code[s_axis_tx_cpl_tag & DESC_PTR_MASK]  ;
+          desc_dma_total_len  = desc_table_total_len[s_axis_tx_cpl_tag & DESC_PTR_MASK];
+          desc_laddr          = desc_table_laddr[s_axis_tx_cpl_tag & DESC_PTR_MASK]    ;
+          desc_dst_qpn        = desc_table_dst_qpn[s_axis_tx_cpl_tag & DESC_PTR_MASK]  ;
+          desc_src_port       = desc_table_src_port[s_axis_tx_cpl_tag & DESC_PTR_MASK] ;
+          desc_rmac           = desc_table_rmac[s_axis_tx_cpl_tag & DESC_PTR_MASK]     ;
+          desc_rip            = desc_table_rip[s_axis_tx_cpl_tag & DESC_PTR_MASK]      ;
+          desc_raddr          = desc_table_raddr[s_axis_tx_cpl_tag & DESC_PTR_MASK]    ;     
+          
+          desc_dma_finish_len = desc_table_finished_len[s_axis_tx_cpl_tag & DESC_PTR_MASK] + PKT_LEN;
+          desc_dma_pkt_cnt    = desc_table_pkt_cnt[s_axis_tx_cpl_tag & DESC_PTR_MASK]  + 1;           
+                  
+          desc_len_next = PKT_LEN;
+        
+          if (desc_len_next > MAX_TX_SIZE) begin
+              desc_len_next = MAX_TX_SIZE;
+          end
+        
+          // update entry in descriptor table
+          desc_table_desc_ctrl_ptr = s_axis_tx_cpl_tag & DESC_PTR_MASK;
+          desc_table_desc_ctrl_buf_ptr = buf_wr_ptr_reg;
+          desc_table_desc_latch_en = 1'b1;
+        
+          // initiate data fetch to onboard RAM
+          m_axis_dma_read_desc_dma_addr_int = desc_laddr + desc_table_finished_len[s_axis_tx_cpl_tag & DESC_PTR_MASK];
+          m_axis_dma_read_desc_ram_addr_int = (buf_wr_ptr_reg & TX_BUFFER_PTR_MASK) + TX_BUFFER_OFFSET;
+          m_axis_dma_read_desc_len_int = PKT_LEN;
+          m_axis_dma_read_desc_tag_int = s_axis_tx_cpl_tag & DESC_PTR_MASK;
+        
+          if (m_axis_dma_read_desc_len_int != 0) begin
+              m_axis_dma_read_desc_valid_int = 1'b1;
+          end
+          
+          // update write pointer
+          buf_wr_ptr_next = (buf_wr_ptr_reg + desc_len_next + TX_BUFFER_PTR_MASK_LOWER) & ~TX_BUFFER_PTR_MASK_LOWER;
+
+          if ((buf_wr_ptr_reg & TX_BUFFER_PTR_MASK) + desc_len_next > TX_BUFFER_SIZE - MAX_TX_SIZE) begin
+              buf_wr_ptr_next = ~buf_wr_ptr_reg & ~TX_BUFFER_PTR_MASK;
+          end
+          
+      end   
+    end
+    
+    
+    
     // finish transmit; start completion enqueue
     temp = desc_table_active[desc_table_cpl_enqueue_start_ptr_reg & DESC_PTR_MASK];
-    if (desc_table_active[desc_table_cpl_enqueue_start_ptr_reg & DESC_PTR_MASK] && desc_table_cpl_enqueue_start_ptr_reg != desc_table_start_ptr_reg && desc_table_cpl_enqueue_start_ptr_reg != desc_table_tx_start_ptr_reg) begin
+    if (desc_table_active[desc_table_cpl_enqueue_start_ptr_reg & DESC_PTR_MASK] && desc_table_cpl_enqueue_start_ptr_reg != desc_table_start_ptr_reg ) begin
         if (desc_table_invalid[desc_table_cpl_enqueue_start_ptr_reg & DESC_PTR_MASK]) begin
             // invalid entry; skip
             desc_table_cpl_enqueue_start_en = 1'b1;
         end else if (desc_table_tx_done_a[desc_table_cpl_enqueue_start_ptr_reg & DESC_PTR_MASK] != desc_table_tx_done_b[desc_table_cpl_enqueue_start_ptr_reg & DESC_PTR_MASK] && !m_axis_cpl_req_valid_next) begin
             // update entry in descriptor table
             desc_table_cpl_enqueue_start_en = 1'b1;
-
+    
             // initiate queue query
             m_axis_cpl_req_queue_next = desc_table_cpl_queue[desc_table_cpl_enqueue_start_ptr_reg & DESC_PTR_MASK];
             m_axis_cpl_req_tag_next = desc_table_cpl_enqueue_start_ptr_reg & DESC_PTR_MASK;
@@ -842,7 +862,7 @@ always @* begin
             m_axis_cpl_req_valid_next = 1'b1;
         end
     end
-
+    
     // start completion write
     // wait for queue query response
     if (s_axis_cpl_req_status_valid) begin
@@ -850,7 +870,7 @@ always @* begin
         desc_table_cpl_write_done_ptr = s_axis_cpl_req_status_tag & DESC_PTR_MASK;
         desc_table_cpl_write_done_en = 1'b1;
     end
-
+    
     // operation complete
     if (desc_table_active[desc_table_finish_ptr_reg & DESC_PTR_MASK] && desc_table_finish_ptr_reg != desc_table_start_ptr_reg && desc_table_finish_ptr_reg != desc_table_cpl_enqueue_start_ptr_reg && !finish_tx_req_status_valid_reg) begin
         if (desc_table_invalid[desc_table_finish_ptr_reg & DESC_PTR_MASK]) begin
@@ -859,25 +879,27 @@ always @* begin
         end else if (desc_table_cpl_write_done[desc_table_finish_ptr_reg & DESC_PTR_MASK]) begin
             // invalidate entry in descriptor table
             desc_table_finish_en = 1'b1;
-
+    
             // return transmit request completion
             finish_tx_req_status_len_next = desc_table_len[desc_table_finish_ptr_reg & DESC_PTR_MASK];
             finish_tx_req_status_tag_next = desc_table_tag[desc_table_finish_ptr_reg & DESC_PTR_MASK];
             finish_tx_req_status_valid_next = 1'b1;
         end
     end
-
+    
     // transmit request completion arbitration
     if (early_tx_req_status_valid_next) begin
         m_axis_tx_req_status_len_next = 0;
         m_axis_tx_req_status_tag_next = early_tx_req_status_tag_next;
         m_axis_tx_req_status_valid_next = 1'b1;
-        early_tx_req_status_valid_next = 1'b0;
+        early_tx_req_status_valid_next = 1'b0;       
+        dec_active_desc_req_1 = 1'b1;   
     end else if (finish_tx_req_status_valid_next) begin
         m_axis_tx_req_status_len_next = finish_tx_req_status_len_next;
         m_axis_tx_req_status_tag_next = finish_tx_req_status_tag_next;
         m_axis_tx_req_status_valid_next = 1'b1;
         finish_tx_req_status_valid_next = 1'b0;
+        dec_active_desc_req_2 = 1'b1; 
     end
 end
 
@@ -908,6 +930,9 @@ always @(posedge clk) begin
     m_axis_tx_desc_valid_reg <= m_axis_tx_desc_valid_next;
 
     s_axis_tx_cpl_ready_reg <= s_axis_tx_cpl_ready_next;
+    
+    m_axis_tx_cpl_tag_reg <= m_axis_tx_cpl_tag_next;
+    m_axis_tx_cpl_valid_reg <= m_axis_tx_cpl_valid_next;
 
     m_axis_tx_csum_cmd_csum_enable_reg <= m_axis_tx_csum_cmd_csum_enable_next;
     m_axis_tx_csum_cmd_csum_start_reg <= m_axis_tx_csum_cmd_csum_start_next;
@@ -917,8 +942,8 @@ always @(posedge clk) begin
     buf_wr_ptr_reg <= buf_wr_ptr_next;
     buf_rd_ptr_reg <= buf_rd_ptr_next;
 
-    desc_start_reg <= desc_start_next;
     desc_len_reg <= desc_len_next;
+    desc_valid_cnt <= desc_valid_cnt_next;
 
     early_tx_req_status_tag_reg <= early_tx_req_status_tag_next;
     early_tx_req_status_valid_reg <= early_tx_req_status_valid_next;
@@ -951,9 +976,9 @@ always @(posedge clk) begin
         end
     end
 
-    if (desc_table_desc_ctrl_en) begin
-        desc_table_buf_ptr[desc_table_desc_ctrl_ptr & DESC_PTR_MASK] <= desc_table_desc_ctrl_buf_ptr;
-        desc_table_csum_start[desc_table_desc_ctrl_ptr & DESC_PTR_MASK] <= desc_table_desc_ctrl_csum_start;
+    if (desc_table_desc_latch_en) begin
+        desc_table_buf_ptr[desc_table_desc_ctrl_ptr & DESC_PTR_MASK]     <= desc_table_desc_ctrl_buf_ptr;
+        desc_table_csum_start[desc_table_desc_ctrl_ptr & DESC_PTR_MASK]  <= desc_table_desc_ctrl_csum_start;
         desc_table_csum_offset[desc_table_desc_ctrl_ptr & DESC_PTR_MASK] <= desc_table_desc_ctrl_csum_offset;
         desc_table_csum_enable[desc_table_desc_ctrl_ptr & DESC_PTR_MASK] <= desc_table_desc_ctrl_csum_enable;
         //latch WQE info                                                                                                             
@@ -964,23 +989,23 @@ always @(posedge clk) begin
         desc_table_src_port[desc_table_desc_ctrl_ptr & DESC_PTR_MASK]    <= desc_src_port;
         desc_table_rmac[desc_table_desc_ctrl_ptr & DESC_PTR_MASK]        <= desc_rmac;
         desc_table_rip[desc_table_desc_ctrl_ptr & DESC_PTR_MASK]         <= desc_rip;   
-        desc_table_raddr[desc_table_desc_ctrl_ptr & DESC_PTR_MASK]       <= desc_raddr;         
-        desc_table_finished_len[desc_table_desc_ctrl_ptr & DESC_PTR_MASK]<= desc_dma_finish_len; 
-        desc_table_pkt_cnt[desc_table_desc_ctrl_ptr & DESC_PTR_MASK]     <= desc_dma_pkt_cnt; 
+        desc_table_raddr[desc_table_desc_ctrl_ptr & DESC_PTR_MASK]       <= desc_raddr;          
     end                                                                                               
-
-    if (desc_table_desc_fetched_en) begin
-        desc_table_len[desc_table_desc_fetched_ptr & DESC_PTR_MASK] <= desc_table_desc_fetched_len;
-        desc_table_desc_fetched[desc_table_desc_fetched_ptr & DESC_PTR_MASK] <= 1'b1;
+                                                                                                      
+    if (desc_table_desc_latch_en) begin                                                            
+        //latch WQE info
+        desc_table_finished_len[desc_table_desc_ctrl_ptr & DESC_PTR_MASK] <= desc_dma_finish_len;
+        desc_table_pkt_cnt[desc_table_desc_ctrl_ptr & DESC_PTR_MASK]      <= desc_dma_pkt_cnt;
+        desc_table_len[desc_table_desc_ctrl_ptr & DESC_PTR_MASK]          <= desc_len_next; 
     end
 
     if (desc_table_data_fetched_en) begin
         desc_table_data_fetched[desc_table_data_fetched_ptr & DESC_PTR_MASK] <= 1'b1;
+        desc_table_tx_start_ptr_reg <= desc_table_data_fetched_ptr;
     end
 
     if (desc_table_tx_start_en) begin
         desc_table_data_fetched[desc_table_tx_start_ptr_reg & DESC_PTR_MASK] <= 1'b0;
-        desc_table_tx_start_ptr_reg <= desc_table_tx_start_ptr_reg + 1;
     end
 
     if (desc_table_tx_finish_en) begin
@@ -1003,24 +1028,6 @@ always @(posedge clk) begin
         desc_table_finish_ptr_reg <= desc_table_finish_ptr_reg + 1;
     end
 
-    if (desc_table_read_start_en) begin
-        desc_table_read_commit[desc_table_read_start_ptr] <= desc_table_read_start_commit;
-        if (desc_table_read_start_init) begin
-            desc_table_read_count_start[desc_table_read_start_ptr] <= desc_table_read_count_finish[desc_table_read_start_ptr] + 1;
-        end else begin
-            desc_table_read_count_start[desc_table_read_start_ptr] <= desc_table_read_count_start[desc_table_read_start_ptr] + 1;
-        end
-    end else if (desc_table_read_start_commit || desc_table_read_start_init) begin
-        desc_table_read_commit[desc_table_read_start_ptr] <= desc_table_read_start_commit;
-        if (desc_table_read_start_init) begin
-            desc_table_read_count_start[desc_table_read_start_ptr] <= desc_table_read_count_finish[desc_table_read_start_ptr];
-        end
-    end
-
-    if (desc_table_read_finish_en) begin
-        desc_table_read_count_finish[desc_table_read_finish_ptr] <= desc_table_read_count_finish[desc_table_read_finish_ptr] + 1;
-    end
-
     if (rst) begin
         s_axis_tx_req_ready_reg <= 1'b0;
         m_axis_tx_req_status_valid_reg <= 1'b0;
@@ -1030,11 +1037,12 @@ always @(posedge clk) begin
         m_axis_tx_desc_valid_reg <= 1'b0;
         s_axis_tx_cpl_ready_reg <= 1'b0;
         m_axis_tx_csum_cmd_valid_reg <= 1'b0;
+        m_axis_tx_cpl_valid_reg <= 1'b0;
+        
 
         buf_wr_ptr_reg <= 0;
         buf_rd_ptr_reg <= 0;
 
-        desc_start_reg <= 1'b1;
         desc_len_reg <= 0;
 
         early_tx_req_status_valid_reg <= 1'b0;
