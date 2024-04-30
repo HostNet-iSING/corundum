@@ -1,0 +1,13 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1700723203" />
+    <testcase name="run_test_001" classname="test_rx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.9948360919952393" sim_time_ns="3028.001" ratio_time="3043.71848223465" />
+    <testcase name="run_test_002" classname="test_rx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="2.290130376815796" sim_time_ns="11956.001" ratio_time="5220.6639067526185" />
+    <testcase name="run_test_003" classname="test_rx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="1.228173017501831" sim_time_ns="3396.001" ratio_time="2765.0835440984088" />
+    <testcase name="run_test_004" classname="test_rx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="2.3450489044189453" sim_time_ns="13412.001" ratio_time="5719.2841371993545" />
+    <testcase name="run_test_005" classname="test_rx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="1.4921002388000488" sim_time_ns="3528.0009999999966" ratio_time="2364.453076448285" />
+    <testcase name="run_test_006" classname="test_rx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="2.5744450092315674" sim_time_ns="13940.001000000004" ratio_time="5414.759666651758" />
+    <testcase name="run_test_007" classname="test_rx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="1.5086913108825684" sim_time_ns="3764.0009999999966" ratio_time="2494.87815887141" />
+    <testcase name="run_test_008" classname="test_rx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="2.9156110286712646" sim_time_ns="14884.001000000004" ratio_time="5104.933701249961" />
+  </testsuite>
+</testsuites>

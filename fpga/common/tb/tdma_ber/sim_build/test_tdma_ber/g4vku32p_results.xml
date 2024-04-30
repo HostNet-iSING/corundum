@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1700723174" />
+    <testcase name="run_test_001" classname="test_tdma_ber" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="2.3389248847961426" sim_time_ns="10472.001" ratio_time="4477.271189028683" />
+  </testsuite>
+</testsuites>

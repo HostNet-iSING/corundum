@@ -918,13 +918,13 @@ def test_mqnic_core_pcie_us(request, if_count, ports_per_if, axis_pcie_data_widt
 
     # Application block configuration
     parameters['APP_ID'] = 0x00000000
-    parameters['APP_ENABLE'] = 0
+    parameters['APP_ENABLE'] = 1
     parameters['APP_CTRL_ENABLE'] = 1
-    parameters['APP_DMA_ENABLE'] = 1
-    parameters['APP_AXIS_DIRECT_ENABLE'] = 1
-    parameters['APP_AXIS_SYNC_ENABLE'] = 1
+    parameters['APP_DMA_ENABLE'] = 0
+    parameters['APP_AXIS_DIRECT_ENABLE'] = 0
+    parameters['APP_AXIS_SYNC_ENABLE'] = 0
     parameters['APP_AXIS_IF_ENABLE'] = 1
-    parameters['APP_STAT_ENABLE'] = 1
+    parameters['APP_STAT_ENABLE'] = 0
 
     # DMA interface configuration
     parameters['DMA_IMM_ENABLE'] = 0

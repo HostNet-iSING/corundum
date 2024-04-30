@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1700724556" />
+    <testcase name="run_test_nic" classname="test_fpga_core" file="/home/caogang/corundum/fpga/mqnic/DK_DEV_1SDX_P_A/fpga_25g/tb/fpga_core/test_fpga_core.py" lineno="509" time="2121.1331515312195" sim_time_ns="250328.001" ratio_time="118.01616547235204" />
+  </testsuite>
+</testsuites>

@@ -1,6 +1,0 @@
-<testsuites name="results">
-  <testsuite name="all" package="all">
-    <property name="random_seed" value="1691682762" />
-    <testcase name="run_test_001" classname="test_dram_test_ch" file="/home/zobin/projects/corundum_hxdp/fpga/mqnic/AU250/fpga_100g/env/lib/python3.10/site-packages/cocotb/regression.py" lineno="731" time="6.682497501373291" sim_time_ns="20164.001" ratio_time="3017.434873092909" />
-  </testsuite>
-</testsuites>

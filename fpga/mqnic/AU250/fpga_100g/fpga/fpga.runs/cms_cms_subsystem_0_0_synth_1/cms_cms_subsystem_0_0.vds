@@ -1,0 +1,216 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Tue Dec 19 07:46:07 2023
+# Process ID: 2231536
+# Current directory: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1
+# Command line: vivado -log cms_cms_subsystem_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source cms_cms_subsystem_0_0.tcl
+# Log file: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/cms_cms_subsystem_0_0.vds
+# Journal file: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/vivado.jou
+#-----------------------------------------------------------
+source cms_cms_subsystem_0_0.tcl -notrace
+Command: synth_design -top cms_cms_subsystem_0_0 -part xcu250-figd2104-2-e -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Device 21-403] Loading part xcu250-figd2104-2-e
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 2231576
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2982.270 ; gain = 225.688 ; free physical = 293697 ; free virtual = 371482
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'cms_cms_subsystem_0_0' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/synth/cms_cms_subsystem_0_0.v:57]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:10]
+INFO: [Synth 8-6157] synthesizing module 'bd_fb99_shell_cmc_subsystem_0' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-2231536-gpu11/realtime/bd_fb99_shell_cmc_subsystem_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99_shell_cmc_subsystem_0' (1#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/.Xil/Vivado-2231536-gpu11/realtime/bd_fb99_shell_cmc_subsystem_0_stub.v:6]
+WARNING: [Synth 8-7071] port 'mdm_mbdebug_tdo' of module 'bd_fb99_shell_cmc_subsystem_0' is unconnected for instance 'shell_cmc_subsystem' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:143]
+WARNING: [Synth 8-7071] port 'usb_uart_txd' of module 'bd_fb99_shell_cmc_subsystem_0' is unconnected for instance 'shell_cmc_subsystem' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:143]
+WARNING: [Synth 8-7023] instance 'shell_cmc_subsystem' of module 'bd_fb99_shell_cmc_subsystem_0' has 50 connections declared, but only 48 given [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:143]
+INFO: [Synth 8-6155] done synthesizing module 'bd_fb99' (2#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/synth/bd_fb99.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'cms_cms_subsystem_0_0' (3#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/synth/cms_cms_subsystem_0_0.v:57]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 3025.207 ; gain = 268.625 ; free physical = 292967 ; free virtual = 370753
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 3043.020 ; gain = 286.438 ; free physical = 292836 ; free virtual = 370622
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 3043.020 ; gain = 286.438 ; free physical = 292836 ; free virtual = 370622
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3043.020 ; gain = 0.000 ; free physical = 292830 ; free virtual = 370615
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_0/bd_fb99_shell_cmc_subsystem_0/bd_fb99_shell_cmc_subsystem_0_in_context.xdc] for cell 'inst/shell_cmc_subsystem'
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_0/ip/ip_0/bd_fb99_shell_cmc_subsystem_0/bd_fb99_shell_cmc_subsystem_0_in_context.xdc] for cell 'inst/shell_cmc_subsystem'
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/synth/cms_cms_subsystem_0_0_ooc.xdc] for cell 'inst'
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/synth/cms_cms_subsystem_0_0_ooc.xdc] for cell 'inst'
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3160.105 ; gain = 0.000 ; free physical = 293543 ; free virtual = 371328
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3160.105 ; gain = 0.000 ; free physical = 293543 ; free virtual = 371328
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 3160.105 ; gain = 403.523 ; free physical = 293649 ; free virtual = 371435
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu250-figd2104-2-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 3160.105 ; gain = 403.523 ; free physical = 293649 ; free virtual = 371435
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for inst. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/shell_cmc_subsystem. (constraint file  auto generated constraint).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 3160.105 ; gain = 403.523 ; free physical = 293649 ; free virtual = 371435
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 3160.105 ; gain = 403.523 ; free physical = 293649 ; free virtual = 371435
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 12288 (col length:96)
+BRAMs: 5376 (col length: RAMB18 384 RAMB36 192)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 3160.105 ; gain = 403.523 ; free physical = 293637 ; free virtual = 371427
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:27 ; elapsed = 00:00:29 . Memory (MB): peak = 3482.613 ; gain = 726.031 ; free physical = 293087 ; free virtual = 370881
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:27 ; elapsed = 00:00:29 . Memory (MB): peak = 3482.613 ; gain = 726.031 ; free physical = 293087 ; free virtual = 370881
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:27 ; elapsed = 00:00:29 . Memory (MB): peak = 3501.645 ; gain = 745.062 ; free physical = 293084 ; free virtual = 370878
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 3507.582 ; gain = 751.000 ; free physical = 293057 ; free virtual = 370851
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 3507.582 ; gain = 751.000 ; free physical = 293057 ; free virtual = 370851
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 3507.582 ; gain = 751.000 ; free physical = 293057 ; free virtual = 370851
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 3507.582 ; gain = 751.000 ; free physical = 293057 ; free virtual = 370851
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 3507.582 ; gain = 751.000 ; free physical = 293057 ; free virtual = 370851
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 3507.582 ; gain = 751.000 ; free physical = 293057 ; free virtual = 370851
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+------------------------------+----------+
+|      |BlackBox name                 |Instances |
++------+------------------------------+----------+
+|1     |bd_fb99_shell_cmc_subsystem_0 |         1|
++------+------------------------------+----------+
+
+Report Cell Usage: 
++------+----------------------------+------+
+|      |Cell                        |Count |
++------+----------------------------+------+
+|1     |bd_fb99_shell_cmc_subsystem |     1|
++------+----------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 3507.582 ; gain = 751.000 ; free physical = 293057 ; free virtual = 370851
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:23 ; elapsed = 00:00:25 . Memory (MB): peak = 3507.582 ; gain = 633.914 ; free physical = 293084 ; free virtual = 370878
+Synthesis Optimization Complete : Time (s): cpu = 00:00:30 ; elapsed = 00:00:33 . Memory (MB): peak = 3507.590 ; gain = 751.000 ; free physical = 293084 ; free virtual = 370878
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3507.590 ; gain = 0.000 ; free physical = 293077 ; free virtual = 370871
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Generating merged BMM file for the design top 'cms_cms_subsystem_0_0'...
+WARNING: [Memdata 28-146] Could not find a netlist instance for the specified SCOPED_TO_REF value of: bd_43c9
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3600.059 ; gain = 0.000 ; free physical = 293088 ; free virtual = 370882
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: a02ac48a
+INFO: [Common 17-83] Releasing license: Synthesis
+19 Infos, 4 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:47 ; elapsed = 00:00:45 . Memory (MB): peak = 3613.996 ; gain = 1132.797 ; free physical = 293229 ; free virtual = 371023
+INFO: [Common 17-1381] The checkpoint '/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/cms_cms_subsystem_0_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP cms_cms_subsystem_0_0, cache-ID = 40caeb63e61e1b6d
+INFO: [Coretcl 2-1174] Renamed 2 cell refs.
+INFO: [Common 17-1381] The checkpoint '/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cms_cms_subsystem_0_0_synth_1/cms_cms_subsystem_0_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file cms_cms_subsystem_0_0_utilization_synth.rpt -pb cms_cms_subsystem_0_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Dec 19 07:47:08 2023...

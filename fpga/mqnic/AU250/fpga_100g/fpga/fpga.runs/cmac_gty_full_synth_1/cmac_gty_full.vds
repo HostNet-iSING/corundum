@@ -1,0 +1,244 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Tue Dec 19 07:35:48 2023
+# Process ID: 2227344
+# Current directory: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cmac_gty_full_synth_1
+# Command line: vivado -log cmac_gty_full.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source cmac_gty_full.tcl
+# Log file: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cmac_gty_full_synth_1/cmac_gty_full.vds
+# Journal file: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cmac_gty_full_synth_1/vivado.jou
+#-----------------------------------------------------------
+source cmac_gty_full.tcl -notrace
+Command: synth_design -top cmac_gty_full -part xcu250-figd2104-2-e -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Device 21-403] Loading part xcu250-figd2104-2-e
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 2227526
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2962.227 ; gain = 226.656 ; free physical = 295831 ; free virtual = 373386
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'cmac_gty_full' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/cmac_gty_full.v:62]
+INFO: [Synth 8-6157] synthesizing module 'cmac_gty_full_gtwizard_top' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/cmac_gty_full_gtwizard_top.v:175]
+INFO: [Synth 8-6157] synthesizing module 'cmac_gty_full_gtwizard_gtye4' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/cmac_gty_full_gtwizard_gtye4.v:143]
+INFO: [Synth 8-6157] synthesizing module 'cmac_gty_full_gtye4_common_wrapper' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/cmac_gty_full_gtye4_common_wrapper.v:56]
+INFO: [Synth 8-6157] synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_common' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/gtwizard_ultrascale_v1_7_gtye4_common.v:55]
+INFO: [Synth 8-6157] synthesizing module 'GTYE4_COMMON' [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:40414]
+INFO: [Synth 8-6155] done synthesizing module 'GTYE4_COMMON' (1#1) [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:40414]
+INFO: [Synth 8-6155] done synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_common' (2#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/gtwizard_ultrascale_v1_7_gtye4_common.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'cmac_gty_full_gtye4_common_wrapper' (3#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/cmac_gty_full_gtye4_common_wrapper.v:56]
+INFO: [Synth 8-6157] synthesizing module 'cmac_gty_full_gtye4_channel_wrapper' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/cmac_gty_full_gtye4_channel_wrapper.v:56]
+INFO: [Synth 8-6157] synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_channel' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/gtwizard_ultrascale_v1_7_gtye4_channel.v:55]
+INFO: [Synth 8-6157] synthesizing module 'GTYE4_CHANNEL' [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:39253]
+INFO: [Synth 8-6155] done synthesizing module 'GTYE4_CHANNEL' (4#1) [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:39253]
+INFO: [Synth 8-6155] done synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_channel' (5#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/gtwizard_ultrascale_v1_7_gtye4_channel.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'cmac_gty_full_gtye4_channel_wrapper' (6#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/cmac_gty_full_gtye4_channel_wrapper.v:56]
+INFO: [Synth 8-6157] synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_delay_powergood' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/hdl/gtwizard_ultrascale_v1_7_gtye4_delay_powergood.v:55]
+INFO: [Synth 8-226] default block is never used [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/hdl/gtwizard_ultrascale_v1_7_gtye4_delay_powergood.v:138]
+INFO: [Synth 8-6155] done synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_delay_powergood' (7#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/hdl/gtwizard_ultrascale_v1_7_gtye4_delay_powergood.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'cmac_gty_full_gtwizard_gtye4' (8#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/cmac_gty_full_gtwizard_gtye4.v:143]
+INFO: [Synth 8-6155] done synthesizing module 'cmac_gty_full_gtwizard_top' (9#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/cmac_gty_full_gtwizard_top.v:175]
+INFO: [Synth 8-6155] done synthesizing module 'cmac_gty_full' (10#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/cmac_gty_full.v:62]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 3017.133 ; gain = 281.562 ; free physical = 295474 ; free virtual = 373033
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 3034.945 ; gain = 299.375 ; free physical = 295538 ; free virtual = 373112
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 3034.945 ; gain = 299.375 ; free physical = 295542 ; free virtual = 373116
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 3044.852 ; gain = 0.000 ; free physical = 295294 ; free virtual = 372882
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/cmac_gty_full_ooc.xdc] for cell 'inst'
+create_clock: Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 3173.445 ; gain = 0.000 ; free physical = 294220 ; free virtual = 371785
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/cmac_gty_full_ooc.xdc] for cell 'inst'
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/cmac_gty_full.xdc] for cell 'inst'
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/cmac_gty_full.xdc] for cell 'inst'
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/cmac_gty_full/synth/cmac_gty_full.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/cmac_gty_full_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/cmac_gty_full_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+WARNING: [Timing 38-277] The instance 'inst/gen_gtwizard_gtye4_top.cmac_gty_full_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[28].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST' has RXPLLCLKSEL pins that are not constant, so the corresponding mux will select the input(s) having the worst case (highest frequency) clock(s) for automatic derivation of generated clocks
+WARNING: [Timing 38-277] The instance 'inst/gen_gtwizard_gtye4_top.cmac_gty_full_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[28].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST' has TXPLLCLKSEL pins that are not constant, so the corresponding mux will select the input(s) having the worst case (highest frequency) clock(s) for automatic derivation of generated clocks
+INFO: [Timing 38-2] Deriving generated clocks
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cmac_gty_full_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cmac_gty_full_synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3173.445 ; gain = 0.000 ; free physical = 294212 ; free virtual = 371777
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3173.445 ; gain = 0.000 ; free physical = 294205 ; free virtual = 371770
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 3173.445 ; gain = 437.875 ; free physical = 293113 ; free virtual = 370679
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu250-figd2104-2-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 3173.445 ; gain = 437.875 ; free physical = 293113 ; free virtual = 370679
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for inst. (constraint file  /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cmac_gty_full_synth_1/dont_touch.xdc, line 9).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 3173.445 ; gain = 437.875 ; free physical = 293116 ; free virtual = 370682
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 3173.445 ; gain = 437.875 ; free physical = 293967 ; free virtual = 371534
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	                9 Bit    Registers := 1     
+	                5 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input    9 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 5     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 12288 (col length:96)
+BRAMs: 5376 (col length: RAMB18 384 RAMB36 192)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 3173.445 ; gain = 437.875 ; free physical = 293898 ; free virtual = 371469
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 3483.977 ; gain = 748.406 ; free physical = 293276 ; free virtual = 370849
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 3501.992 ; gain = 766.422 ; free physical = 293263 ; free virtual = 370835
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:31 ; elapsed = 00:00:34 . Memory (MB): peak = 3512.016 ; gain = 776.445 ; free physical = 293253 ; free virtual = 370825
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3517.953 ; gain = 782.383 ; free physical = 293085 ; free virtual = 370657
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3517.953 ; gain = 782.383 ; free physical = 293085 ; free virtual = 370657
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3517.953 ; gain = 782.383 ; free physical = 293084 ; free virtual = 370656
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3517.953 ; gain = 782.383 ; free physical = 293083 ; free virtual = 370655
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3517.953 ; gain = 782.383 ; free physical = 293083 ; free virtual = 370655
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3517.953 ; gain = 782.383 ; free physical = 293083 ; free virtual = 370655
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+--------------+------+
+|      |Cell          |Count |
++------+--------------+------+
+|1     |GTYE4_CHANNEL |     1|
+|2     |GTYE4_COMMON  |     1|
+|3     |LUT1          |     4|
+|4     |LUT2          |     3|
+|5     |LUT3          |     1|
+|6     |FDCE          |     6|
+|7     |FDRE          |    10|
++------+--------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3517.953 ; gain = 782.383 ; free physical = 293083 ; free virtual = 370655
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:26 ; elapsed = 00:00:29 . Memory (MB): peak = 3517.953 ; gain = 643.883 ; free physical = 293109 ; free virtual = 370681
+Synthesis Optimization Complete : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3517.961 ; gain = 782.383 ; free physical = 293109 ; free virtual = 370681
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:07 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3517.961 ; gain = 0.000 ; free physical = 293194 ; free virtual = 370766
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3607.539 ; gain = 0.000 ; free physical = 295030 ; free virtual = 372602
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: 1fe3f536
+INFO: [Common 17-83] Releasing license: Synthesis
+36 Infos, 2 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:53 ; elapsed = 00:00:50 . Memory (MB): peak = 3607.539 ; gain = 1135.344 ; free physical = 295177 ; free virtual = 372750
+INFO: [Common 17-1381] The checkpoint '/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cmac_gty_full_synth_1/cmac_gty_full.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP cmac_gty_full, cache-ID = 75164c90b2772126
+INFO: [Coretcl 2-1174] Renamed 3 cell refs.
+INFO: [Common 17-1381] The checkpoint '/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/cmac_gty_full_synth_1/cmac_gty_full.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file cmac_gty_full_utilization_synth.rpt -pb cmac_gty_full_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Dec 19 07:36:53 2023...

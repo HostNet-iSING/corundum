@@ -1,0 +1,13 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1700814830" />
+    <testcase name="run_test_001" classname="test_rx_hash" file="/home/caogang/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="731" time="0.7681515216827393" sim_time_ns="11148.001" ratio_time="14512.763023080139" />
+    <testcase name="run_test_002" classname="test_rx_hash" file="/home/caogang/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="731" time="2.6343119144439697" sim_time_ns="44460.001000000004" ratio_time="16877.27286819195" />
+    <testcase name="run_test_003" classname="test_rx_hash" file="/home/caogang/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="731" time="0.9518923759460449" sim_time_ns="12536.000999999997" ratio_time="13169.557102021123" />
+    <testcase name="run_test_004" classname="test_rx_hash" file="/home/caogang/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="731" time="2.8605287075042725" sim_time_ns="49996.001000000004" ratio_time="17477.88822004868" />
+    <testcase name="run_test_005" classname="test_rx_hash" file="/home/caogang/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="731" time="1.0406200885772705" sim_time_ns="13092.001000000004" ratio_time="12580.96124004228" />
+    <testcase name="run_test_006" classname="test_rx_hash" file="/home/caogang/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="731" time="3.0395078659057617" sim_time_ns="52220.00099999999" ratio_time="17180.413179960182" />
+    <testcase name="run_test_007" classname="test_rx_hash" file="/home/caogang/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="731" time="1.1108176708221436" sim_time_ns="13944.001000000018" ratio_time="12552.91607818925" />
+    <testcase name="run_test_008" classname="test_rx_hash" file="/home/caogang/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="731" time="3.20025897026062" sim_time_ns="55628.00099999999" ratio_time="17382.34359060942" />
+  </testsuite>
+</testsuites>

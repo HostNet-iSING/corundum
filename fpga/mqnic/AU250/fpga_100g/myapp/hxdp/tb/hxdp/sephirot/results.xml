@@ -1,6 +1,0 @@
-<testsuites name="results">
-  <testsuite name="all" package="all">
-    <property name="random_seed" value="1700810962" />
-    <testcase name="run_test_001" classname="test_AXI4tomem" file="/home/ubuntu/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="731" time="0.018984079360961914" sim_time_ns="164.001" ratio_time="8638.870333488227" />
-  </testsuite>
-</testsuites>

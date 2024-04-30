@@ -1,0 +1,601 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue Dec 19 07:31:20 2023" VIVADOVERSION="2021.1">
+
+  <SYSTEMINFO ARCH="virtexuplus" DEVICE="xcu250" NAME="bd_fb99" PACKAGE="figd2104" SPEEDGRADE="-2"/>
+
+  <EXTERNALPORTS>
+    <PORT DIR="I" LEFT="3" NAME="satellite_gpio" RIGHT="0" SENSITIVITY="EDGE_RISING" SIGIS="INTERRUPT" SIGNAME="External_Ports_satellite_gpio">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="satellite_gpio"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT CLKFREQUENCY="50000000" DIR="I" NAME="aclk_ctrl" SIGIS="clk" SIGNAME="External_Ports_aclk_ctrl">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="aclk_ctrl"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="aresetn_ctrl" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="External_Ports_aresetn_ctrl">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="aresetn_ctrl"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="interrupt_host" SENSITIVITY="LEVEL_HIGH" SIGIS="INTERRUPT" SIGNAME="shell_cmc_subsystem_interrupt_host">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="interrupt_host"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="0" NAME="qsfp0_modprs_l" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_qsfp0_modprs_l">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="qsfp0_modprs_l"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="0" NAME="qsfp1_modprs_l" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_qsfp1_modprs_l">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="qsfp1_modprs_l"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="0" NAME="qsfp0_int_l" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_qsfp0_int_l">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="qsfp0_int_l"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="0" NAME="qsfp1_int_l" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_qsfp1_int_l">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="qsfp1_int_l"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="qsfp0_lpmode" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_qsfp0_lpmode">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="qsfp0_lpmode"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="qsfp1_lpmode" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_qsfp1_lpmode">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="qsfp1_lpmode"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="qsfp0_modsel_l" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_qsfp0_modsel_l">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="qsfp0_modsel_l"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="qsfp1_modsel_l" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_qsfp1_modsel_l">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="qsfp1_modsel_l"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="qsfp0_reset_l" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_qsfp0_reset_l">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="qsfp0_reset_l"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="qsfp1_reset_l" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_qsfp1_reset_l">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="qsfp1_reset_l"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="17" NAME="s_axi_ctrl_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_awaddr">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_awaddr"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="2" NAME="s_axi_ctrl_awprot" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_awprot">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_awprot"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="0" NAME="s_axi_ctrl_awvalid" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_awvalid">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_awvalid"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="s_axi_ctrl_awready" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_awready">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_awready"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="31" NAME="s_axi_ctrl_wdata" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_wdata">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_wdata"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="3" NAME="s_axi_ctrl_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_wstrb">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_wstrb"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="0" NAME="s_axi_ctrl_wvalid" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_wvalid">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_wvalid"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="s_axi_ctrl_wready" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_wready">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_wready"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="1" NAME="s_axi_ctrl_bresp" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_bresp">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_bresp"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="s_axi_ctrl_bvalid" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_bvalid">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_bvalid"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="0" NAME="s_axi_ctrl_bready" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_bready">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_bready"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="17" NAME="s_axi_ctrl_araddr" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_araddr">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_araddr"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="2" NAME="s_axi_ctrl_arprot" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_arprot">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_arprot"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="0" NAME="s_axi_ctrl_arvalid" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_arvalid">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_arvalid"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="s_axi_ctrl_arready" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_arready">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_arready"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="31" NAME="s_axi_ctrl_rdata" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_rdata">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_rdata"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="1" NAME="s_axi_ctrl_rresp" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_rresp">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_rresp"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="s_axi_ctrl_rvalid" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_rvalid">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_rvalid"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="0" NAME="s_axi_ctrl_rready" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_rready">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="s_axi_ctrl_mgmt_rready"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="satellite_uart_rxd" SIGIS="undef" SIGNAME="shell_cmc_subsystem_satellite_uart_rxd">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="satellite_uart_rxd"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="satellite_uart_txd" SIGIS="undef" SIGNAME="shell_cmc_subsystem_satellite_uart_txd">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="shell_cmc_subsystem" PORT="satellite_uart_txd"/>
+      </CONNECTIONS>
+    </PORT>
+  </EXTERNALPORTS>
+
+  <EXTERNALINTERFACES>
+    <BUSINTERFACE BUSNAME="External_Interface_s_axi_ctrl" DATAWIDTH="32" NAME="s_axi_ctrl" TYPE="SLAVE">
+      <PARAMETER NAME="DATA_WIDTH" VALUE="32"/>
+      <PARAMETER NAME="PROTOCOL" VALUE="AXI4LITE"/>
+      <PARAMETER NAME="FREQ_HZ" VALUE="50000000"/>
+      <PARAMETER NAME="ID_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="ADDR_WIDTH" VALUE="18"/>
+      <PARAMETER NAME="AWUSER_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="ARUSER_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="WUSER_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="RUSER_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="BUSER_WIDTH" VALUE="0"/>
+      <PARAMETER NAME="READ_WRITE_MODE" VALUE="READ_WRITE"/>
+      <PARAMETER NAME="HAS_BURST" VALUE="0"/>
+      <PARAMETER NAME="HAS_LOCK" VALUE="0"/>
+      <PARAMETER NAME="HAS_PROT" VALUE="0"/>
+      <PARAMETER NAME="HAS_CACHE" VALUE="0"/>
+      <PARAMETER NAME="HAS_QOS" VALUE="0"/>
+      <PARAMETER NAME="HAS_REGION" VALUE="0"/>
+      <PARAMETER NAME="HAS_WSTRB" VALUE="1"/>
+      <PARAMETER NAME="HAS_BRESP" VALUE="1"/>
+      <PARAMETER NAME="HAS_RRESP" VALUE="1"/>
+      <PARAMETER NAME="SUPPORTS_NARROW_BURST" VALUE="0"/>
+      <PARAMETER NAME="NUM_READ_OUTSTANDING" VALUE="2"/>
+      <PARAMETER NAME="NUM_WRITE_OUTSTANDING" VALUE="2"/>
+      <PARAMETER NAME="MAX_BURST_LENGTH" VALUE="1"/>
+      <PARAMETER NAME="PHASE" VALUE="0.0"/>
+      <PARAMETER NAME="CLK_DOMAIN" VALUE="cms_aclk_ctrl_0"/>
+      <PARAMETER NAME="NUM_READ_THREADS" VALUE="1"/>
+      <PARAMETER NAME="NUM_WRITE_THREADS" VALUE="1"/>
+      <PARAMETER NAME="RUSER_BITS_PER_BYTE" VALUE="0"/>
+      <PARAMETER NAME="WUSER_BITS_PER_BYTE" VALUE="0"/>
+      <PARAMETER NAME="INSERT_VIP" VALUE="1"/>
+      <PORTMAPS>
+        <PORTMAP LOGICAL="AWADDR" PHYSICAL="s_axi_ctrl_awaddr"/>
+        <PORTMAP LOGICAL="AWPROT" PHYSICAL="s_axi_ctrl_awprot"/>
+        <PORTMAP LOGICAL="AWVALID" PHYSICAL="s_axi_ctrl_awvalid"/>
+        <PORTMAP LOGICAL="AWREADY" PHYSICAL="s_axi_ctrl_awready"/>
+        <PORTMAP LOGICAL="WDATA" PHYSICAL="s_axi_ctrl_wdata"/>
+        <PORTMAP LOGICAL="WSTRB" PHYSICAL="s_axi_ctrl_wstrb"/>
+        <PORTMAP LOGICAL="WVALID" PHYSICAL="s_axi_ctrl_wvalid"/>
+        <PORTMAP LOGICAL="WREADY" PHYSICAL="s_axi_ctrl_wready"/>
+        <PORTMAP LOGICAL="BRESP" PHYSICAL="s_axi_ctrl_bresp"/>
+        <PORTMAP LOGICAL="BVALID" PHYSICAL="s_axi_ctrl_bvalid"/>
+        <PORTMAP LOGICAL="BREADY" PHYSICAL="s_axi_ctrl_bready"/>
+        <PORTMAP LOGICAL="ARADDR" PHYSICAL="s_axi_ctrl_araddr"/>
+        <PORTMAP LOGICAL="ARPROT" PHYSICAL="s_axi_ctrl_arprot"/>
+        <PORTMAP LOGICAL="ARVALID" PHYSICAL="s_axi_ctrl_arvalid"/>
+        <PORTMAP LOGICAL="ARREADY" PHYSICAL="s_axi_ctrl_arready"/>
+        <PORTMAP LOGICAL="RDATA" PHYSICAL="s_axi_ctrl_rdata"/>
+        <PORTMAP LOGICAL="RRESP" PHYSICAL="s_axi_ctrl_rresp"/>
+        <PORTMAP LOGICAL="RVALID" PHYSICAL="s_axi_ctrl_rvalid"/>
+        <PORTMAP LOGICAL="RREADY" PHYSICAL="s_axi_ctrl_rready"/>
+      </PORTMAPS>
+      <MEMORYMAP>
+        <MEMRANGE ADDRESSBLOCK="Mem" BASENAME="C_BASEADDR" BASEVALUE="0x00000000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0x0003FFFF" INSTANCE="shell_cmc_subsystem" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MASTERBUSINTERFACE="s_axi_ctrl" MEMTYPE="MEMORY" SLAVEBUSINTERFACE="s_axi_ctrl_mgmt"/>
+      </MEMORYMAP>
+      <PERIPHERALS>
+        <PERIPHERAL INSTANCE="shell_cmc_subsystem"/>
+      </PERIPHERALS>
+    </BUSINTERFACE>
+    <BUSINTERFACE BUSNAME="shell_cmc_subsystem_satellite_uart" NAME="satellite_uart" TYPE="INITIATOR">
+      <PORTMAPS>
+        <PORTMAP LOGICAL="RxD" PHYSICAL="satellite_uart_rxd"/>
+        <PORTMAP LOGICAL="TxD" PHYSICAL="satellite_uart_txd"/>
+      </PORTMAPS>
+    </BUSINTERFACE>
+  </EXTERNALINTERFACES>
+
+  <MODULES>
+    <MODULE BD="bd_fb99_shell_cmc_subsystem_0" BDTYPE="SBD" COREREVISION="0" DRIVERMODE="SUBCORE" FULLNAME="/shell_cmc_subsystem" HWVERSION="2.2" INSTANCE="shell_cmc_subsystem" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="shell_cmc_subsystem" SIM_BD="bd_fb99_shell_cmc_subsystem_0" VLNV="xilinx.com:ip:shell_cmc_subsystem:2.2">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="bd_fb99_shell_cmc_subsystem_0"/>
+        <PARAMETER NAME="VERSION.SUBSYSTEM_ID" VALUE="0x02"/>
+        <PARAMETER NAME="VERSION.VIV_VERSION" VALUE="0x202110"/>
+        <PARAMETER NAME="VERSION.MAJOR_VERSION" VALUE="2"/>
+        <PARAMETER NAME="VERSION.MINOR_VERSION" VALUE="2"/>
+        <PARAMETER NAME="VERSION.CORE_REVISION" VALUE="0"/>
+        <PARAMETER NAME="VERSION.PATCH_REVISION" VALUE="0"/>
+        <PARAMETER NAME="VERSION.RESERVED_TAG" VALUE="0x00000000"/>
+        <PARAMETER NAME="HAS_AXI_IIC" VALUE="false"/>
+        <PARAMETER NAME="HAS_QSFP_GPIO" VALUE="true"/>
+        <PARAMETER NAME="HAS_USB_UART" VALUE="true"/>
+        <PARAMETER NAME="HAS_EXTERNAL_M_AXILITE" VALUE="false"/>
+        <PARAMETER NAME="ENABLE_AXI_IC_PIPELINING" VALUE="false"/>
+        <PARAMETER NAME="NUM_HOST_INTERRUPTS" VALUE="31"/>
+        <PARAMETER NAME="HOST_INTC_KIND_OF_INTR" VALUE="0xFFFFFFFF"/>
+        <PARAMETER NAME="HOST_INTC_KIND_OF_EDGE" VALUE="0xFFFFFFFF"/>
+        <PARAMETER NAME="HOST_INTC_KIND_OF_LVL" VALUE="0xFFFFFFFF"/>
+        <PARAMETER NAME="HOST_INTC_ASYNC_INTR" VALUE="0x00000000"/>
+        <PARAMETER NAME="CMC_INTC_KIND_OF_INTR" VALUE="0x0000024F"/>
+        <PARAMETER NAME="CMC_INTC_KIND_OF_EDGE" VALUE="0xFFFFFFFF"/>
+        <PARAMETER NAME="CMC_INTC_KIND_OF_LVL" VALUE="0xFFFFFFFF"/>
+        <PARAMETER NAME="CMC_INTC_ASYNC_INTR" VALUE="0x0000800F"/>
+        <PARAMETER NAME="OFFSET_AXI_BRAM_CTRL_FW_SEG" VALUE="0x00000000"/>
+        <PARAMETER NAME="RANGE_AXI_BRAM_CTRL_FW_SEG" VALUE="128k"/>
+        <PARAMETER NAME="OFFSET_AXI_GPIO_MB_RESET_SEG" VALUE="0x00020000"/>
+        <PARAMETER NAME="RANGE_AXI_GPIO_MB_RESET_SEG" VALUE="4k"/>
+        <PARAMETER NAME="OFFSET_AXI_GPIO_MUTEX_HOST_SEG" VALUE="0x00021000"/>
+        <PARAMETER NAME="RANGE_AXI_GPIO_MUTEX_HOST_SEG" VALUE="4k"/>
+        <PARAMETER NAME="OFFSET_AXI_INTC_HOST_SEG" VALUE="0x00022000"/>
+        <PARAMETER NAME="RANGE_AXI_INTC_HOST_SEG" VALUE="4k"/>
+        <PARAMETER NAME="OFFSET_AXI_BRAM_CTRL_REGMAP_HOST_SEG" VALUE="0x00028000"/>
+        <PARAMETER NAME="RANGE_AXI_BRAM_CTRL_REGMAP_HOST_SEG" VALUE="8k"/>
+        <PARAMETER NAME="OFFSET_BUILD_INFO_HOST_SEG" VALUE="0x0002A000"/>
+        <PARAMETER NAME="RANGE_BUILD_INFO_HOST_SEG" VALUE="4k"/>
+        <PARAMETER NAME="OFFSET_BUILD_INFO_CMC_SEG" VALUE="0x01F00000"/>
+        <PARAMETER NAME="RANGE_BUILD_INFO_CMC_SEG" VALUE="64k"/>
+        <PARAMETER NAME="OFFSET_AXI_GPIO_QSFP_SEG" VALUE="0x01F10000"/>
+        <PARAMETER NAME="RANGE_AXI_GPIO_QSFP_SEG" VALUE="64k"/>
+        <PARAMETER NAME="OFFSET_AXI_GPIO_HBM_SEG" VALUE="0x01F20000"/>
+        <PARAMETER NAME="RANGE_AXI_GPIO_HBM_SEG" VALUE="64k"/>
+        <PARAMETER NAME="OFFSET_AXI_GPIO_MB_INT_SEG" VALUE="0x01F30000"/>
+        <PARAMETER NAME="RANGE_AXI_GPIO_MB_INT_SEG" VALUE="64k"/>
+        <PARAMETER NAME="OFFSET_AXI_GPIO_WDT_SEG" VALUE="0x01F40000"/>
+        <PARAMETER NAME="RANGE_AXI_GPIO_WDT_SEG" VALUE="64k"/>
+        <PARAMETER NAME="OFFSET_AXI_INTC_CMC_SEG" VALUE="0x01F50000"/>
+        <PARAMETER NAME="RANGE_AXI_INTC_CMC_SEG" VALUE="64k"/>
+        <PARAMETER NAME="OFFSET_AXI_TIMEBASE_WDT_SEG" VALUE="0x01F60000"/>
+        <PARAMETER NAME="RANGE_AXI_TIMEBASE_WDT_SEG" VALUE="64k"/>
+        <PARAMETER NAME="OFFSET_AXI_UART_SATELLITE_SEG" VALUE="0x01F70000"/>
+        <PARAMETER NAME="RANGE_AXI_UART_SATELLITE_SEG" VALUE="64k"/>
+        <PARAMETER NAME="OFFSET_AXI_UART_USB_SEG" VALUE="0x01F80000"/>
+        <PARAMETER NAME="RANGE_AXI_UART_USB_SEG" VALUE="64k"/>
+        <PARAMETER NAME="OFFSET_TIMEBASE_COUNTER_SEG" VALUE="0x01F90000"/>
+        <PARAMETER NAME="RANGE_TIMEBASE_COUNTER_SEG" VALUE="64k"/>
+        <PARAMETER NAME="OFFSET_AXI_BRAM_CTRL_REGMAP_CMC_SEG" VALUE="0x01FA0000"/>
+        <PARAMETER NAME="RANGE_AXI_BRAM_CTRL_REGMAP_CMC_SEG" VALUE="8k"/>
+        <PARAMETER NAME="OFFSET_AXI_GPIO_MUTEX_CMC_SEG" VALUE="0x01FB0000"/>
+        <PARAMETER NAME="RANGE_AXI_GPIO_MUTEX_CMC_SEG" VALUE="64k"/>
+        <PARAMETER NAME="OFFSET_AXI_IIC_SEG" VALUE="0x01FC0000"/>
+        <PARAMETER NAME="RANGE_AXI_IIC_SEG" VALUE="64k"/>
+        <PARAMETER NAME="OFFSET_AXI_GPIO_CMS_FEATURES_SEG" VALUE="0x01FD0000"/>
+        <PARAMETER NAME="RANGE_AXI_GPIO_CMS_FEATURES_SEG" VALUE="64k"/>
+        <PARAMETER NAME="MB_BASE_VECTORS" VALUE="0xF0000000"/>
+        <PARAMETER NAME="VERSION.PERFORCE_CL" VALUE="3246043"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+        <PARAMETER NAME="C_BASEADDR" VALUE="0x00000000"/>
+        <PARAMETER NAME="C_HIGHADDR" VALUE="0x0003FFFF"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="3" NAME="satellite_gpio" RIGHT="0" SENSITIVITY="EDGE_RISING" SIGIS="INTERRUPT" SIGNAME="External_Ports_satellite_gpio">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="satellite_gpio"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="50000000" DIR="I" NAME="aclk_ctrl" SIGIS="clk" SIGNAME="External_Ports_aclk_ctrl">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="aclk_ctrl"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="aresetn_ctrl" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="External_Ports_aresetn_ctrl">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="aresetn_ctrl"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="mdm_debug_sys_rst" POLARITY="ACTIVE_HIGH" SIGIS="rst"/>
+        <PORT DIR="I" LEFT="0" NAME="interrupt_hbm_cattrip" RIGHT="0" SENSITIVITY="LEVEL_HIGH" SIGIS="INTERRUPT"/>
+        <PORT DIR="I" LEFT="6" NAME="hbm_temp_1" RIGHT="0" SIGIS="undef"/>
+        <PORT DIR="I" LEFT="6" NAME="hbm_temp_2" RIGHT="0" SIGIS="undef"/>
+        <PORT DIR="O" NAME="interrupt_host" SENSITIVITY="LEVEL_HIGH" SIGIS="INTERRUPT" SIGNAME="shell_cmc_subsystem_interrupt_host">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="interrupt_host"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="qsfp0_modprs_l" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_qsfp0_modprs_l">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="qsfp0_modprs_l"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="qsfp1_modprs_l" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_qsfp1_modprs_l">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="qsfp1_modprs_l"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="qsfp0_int_l" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_qsfp0_int_l">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="qsfp0_int_l"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="qsfp1_int_l" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_qsfp1_int_l">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="qsfp1_int_l"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="qsfp0_lpmode" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_qsfp0_lpmode">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="qsfp0_lpmode"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="qsfp1_lpmode" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_qsfp1_lpmode">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="qsfp1_lpmode"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="qsfp0_modsel_l" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_qsfp0_modsel_l">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="qsfp0_modsel_l"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="qsfp1_modsel_l" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_qsfp1_modsel_l">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="qsfp1_modsel_l"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="qsfp0_reset_l" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_qsfp0_reset_l">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="qsfp0_reset_l"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="qsfp1_reset_l" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_qsfp1_reset_l">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="qsfp1_reset_l"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="mdm_mbdebug_capture" SIGIS="undef"/>
+        <PORT DIR="I" NAME="mdm_mbdebug_clk" SIGIS="clk"/>
+        <PORT DIR="I" NAME="mdm_mbdebug_disable" SIGIS="undef"/>
+        <PORT DIR="I" LEFT="0" NAME="mdm_mbdebug_reg_en" RIGHT="7" SIGIS="undef"/>
+        <PORT DIR="I" NAME="mdm_mbdebug_rst" SIGIS="rst"/>
+        <PORT DIR="I" NAME="mdm_mbdebug_shift" SIGIS="undef"/>
+        <PORT DIR="I" NAME="mdm_mbdebug_tdi" SIGIS="undef"/>
+        <PORT DIR="O" NAME="mdm_mbdebug_tdo" SIGIS="undef"/>
+        <PORT DIR="I" NAME="mdm_mbdebug_update" SIGIS="undef"/>
+        <PORT DIR="I" NAME="satellite_uart_rxd" SIGIS="undef" SIGNAME="shell_cmc_subsystem_satellite_uart_rxd">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="satellite_uart_rxd"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="satellite_uart_txd" SIGIS="undef" SIGNAME="shell_cmc_subsystem_satellite_uart_txd">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="satellite_uart_txd"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="17" NAME="s_axi_ctrl_mgmt_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_awaddr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_awaddr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="2" NAME="s_axi_ctrl_mgmt_awprot" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_awprot">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_awprot"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="s_axi_ctrl_mgmt_awvalid" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_awvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_awvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="s_axi_ctrl_mgmt_awready" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_awready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_awready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="31" NAME="s_axi_ctrl_mgmt_wdata" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_wdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_wdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="s_axi_ctrl_mgmt_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_wstrb">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_wstrb"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="s_axi_ctrl_mgmt_wvalid" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_wvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_wvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="s_axi_ctrl_mgmt_wready" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_wready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_wready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="1" NAME="s_axi_ctrl_mgmt_bresp" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_bresp">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_bresp"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="s_axi_ctrl_mgmt_bvalid" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_bvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_bvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="s_axi_ctrl_mgmt_bready" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_bready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_bready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="17" NAME="s_axi_ctrl_mgmt_araddr" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_araddr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_araddr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="2" NAME="s_axi_ctrl_mgmt_arprot" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_arprot">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_arprot"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="s_axi_ctrl_mgmt_arvalid" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_arvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_arvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="s_axi_ctrl_mgmt_arready" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_arready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_arready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="31" NAME="s_axi_ctrl_mgmt_rdata" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_rdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_rdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="1" NAME="s_axi_ctrl_mgmt_rresp" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_rresp">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_rresp"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="s_axi_ctrl_mgmt_rvalid" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_rvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_rvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="s_axi_ctrl_mgmt_rready" RIGHT="0" SIGIS="undef" SIGNAME="shell_cmc_subsystem_s_axi_ctrl_mgmt_rready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="bd_fb99_imp" PORT="s_axi_ctrl_rready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="usb_uart_rxd" SIGIS="undef"/>
+        <PORT DIR="O" NAME="usb_uart_txd" SIGIS="undef"/>
+      </PORTS>
+      <BUSINTERFACES>
+        <BUSINTERFACE BUSNAME="External_Interface_s_axi_ctrl" DATAWIDTH="32" NAME="s_axi_ctrl_mgmt" TYPE="SLAVE" VLNV="xilinx.com:interface:aximm:1.0">
+          <PARAMETER NAME="DATA_WIDTH" VALUE="32"/>
+          <PARAMETER NAME="PROTOCOL" VALUE="AXI4LITE"/>
+          <PARAMETER NAME="FREQ_HZ" VALUE="50000000"/>
+          <PARAMETER NAME="ID_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="ADDR_WIDTH" VALUE="18"/>
+          <PARAMETER NAME="AWUSER_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="ARUSER_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="WUSER_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="RUSER_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="BUSER_WIDTH" VALUE="0"/>
+          <PARAMETER NAME="READ_WRITE_MODE" VALUE="READ_WRITE"/>
+          <PARAMETER NAME="HAS_BURST" VALUE="0"/>
+          <PARAMETER NAME="HAS_LOCK" VALUE="0"/>
+          <PARAMETER NAME="HAS_PROT" VALUE="1"/>
+          <PARAMETER NAME="HAS_CACHE" VALUE="0"/>
+          <PARAMETER NAME="HAS_QOS" VALUE="0"/>
+          <PARAMETER NAME="HAS_REGION" VALUE="0"/>
+          <PARAMETER NAME="HAS_WSTRB" VALUE="1"/>
+          <PARAMETER NAME="HAS_BRESP" VALUE="1"/>
+          <PARAMETER NAME="HAS_RRESP" VALUE="1"/>
+          <PARAMETER NAME="SUPPORTS_NARROW_BURST" VALUE="0"/>
+          <PARAMETER NAME="NUM_READ_OUTSTANDING" VALUE="2"/>
+          <PARAMETER NAME="NUM_WRITE_OUTSTANDING" VALUE="2"/>
+          <PARAMETER NAME="MAX_BURST_LENGTH" VALUE="1"/>
+          <PARAMETER NAME="PHASE" VALUE="0.0"/>
+          <PARAMETER NAME="CLK_DOMAIN" VALUE="cms_aclk_ctrl_0"/>
+          <PARAMETER NAME="NUM_READ_THREADS" VALUE="1"/>
+          <PARAMETER NAME="NUM_WRITE_THREADS" VALUE="1"/>
+          <PARAMETER NAME="RUSER_BITS_PER_BYTE" VALUE="0"/>
+          <PARAMETER NAME="WUSER_BITS_PER_BYTE" VALUE="0"/>
+          <PARAMETER NAME="INSERT_VIP" VALUE="1"/>
+          <PORTMAPS>
+            <PORTMAP LOGICAL="AWADDR" PHYSICAL="s_axi_ctrl_mgmt_awaddr"/>
+            <PORTMAP LOGICAL="AWPROT" PHYSICAL="s_axi_ctrl_mgmt_awprot"/>
+            <PORTMAP LOGICAL="AWVALID" PHYSICAL="s_axi_ctrl_mgmt_awvalid"/>
+            <PORTMAP LOGICAL="AWREADY" PHYSICAL="s_axi_ctrl_mgmt_awready"/>
+            <PORTMAP LOGICAL="WDATA" PHYSICAL="s_axi_ctrl_mgmt_wdata"/>
+            <PORTMAP LOGICAL="WSTRB" PHYSICAL="s_axi_ctrl_mgmt_wstrb"/>
+            <PORTMAP LOGICAL="WVALID" PHYSICAL="s_axi_ctrl_mgmt_wvalid"/>
+            <PORTMAP LOGICAL="WREADY" PHYSICAL="s_axi_ctrl_mgmt_wready"/>
+            <PORTMAP LOGICAL="BRESP" PHYSICAL="s_axi_ctrl_mgmt_bresp"/>
+            <PORTMAP LOGICAL="BVALID" PHYSICAL="s_axi_ctrl_mgmt_bvalid"/>
+            <PORTMAP LOGICAL="BREADY" PHYSICAL="s_axi_ctrl_mgmt_bready"/>
+            <PORTMAP LOGICAL="ARADDR" PHYSICAL="s_axi_ctrl_mgmt_araddr"/>
+            <PORTMAP LOGICAL="ARPROT" PHYSICAL="s_axi_ctrl_mgmt_arprot"/>
+            <PORTMAP LOGICAL="ARVALID" PHYSICAL="s_axi_ctrl_mgmt_arvalid"/>
+            <PORTMAP LOGICAL="ARREADY" PHYSICAL="s_axi_ctrl_mgmt_arready"/>
+            <PORTMAP LOGICAL="RDATA" PHYSICAL="s_axi_ctrl_mgmt_rdata"/>
+            <PORTMAP LOGICAL="RRESP" PHYSICAL="s_axi_ctrl_mgmt_rresp"/>
+            <PORTMAP LOGICAL="RVALID" PHYSICAL="s_axi_ctrl_mgmt_rvalid"/>
+            <PORTMAP LOGICAL="RREADY" PHYSICAL="s_axi_ctrl_mgmt_rready"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+        <BUSINTERFACE BUSNAME="__NOC__" NAME="mdm_mbdebug" TYPE="TARGET" VLNV="xilinx.com:interface:mbdebug:3.0">
+          <PORTMAPS>
+            <PORTMAP LOGICAL="CAPTURE" PHYSICAL="mdm_mbdebug_capture"/>
+            <PORTMAP LOGICAL="CLK" PHYSICAL="mdm_mbdebug_clk"/>
+            <PORTMAP LOGICAL="DISABLE" PHYSICAL="mdm_mbdebug_disable"/>
+            <PORTMAP LOGICAL="REG_EN" PHYSICAL="mdm_mbdebug_reg_en"/>
+            <PORTMAP LOGICAL="RST" PHYSICAL="mdm_mbdebug_rst"/>
+            <PORTMAP LOGICAL="SHIFT" PHYSICAL="mdm_mbdebug_shift"/>
+            <PORTMAP LOGICAL="TDI" PHYSICAL="mdm_mbdebug_tdi"/>
+            <PORTMAP LOGICAL="TDO" PHYSICAL="mdm_mbdebug_tdo"/>
+            <PORTMAP LOGICAL="UPDATE" PHYSICAL="mdm_mbdebug_update"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+        <BUSINTERFACE BUSNAME="shell_cmc_subsystem_satellite_uart" NAME="satellite_uart" TYPE="INITIATOR" VLNV="xilinx.com:interface:uart:1.0">
+          <PORTMAPS>
+            <PORTMAP LOGICAL="RxD" PHYSICAL="satellite_uart_rxd"/>
+            <PORTMAP LOGICAL="TxD" PHYSICAL="satellite_uart_txd"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+        <BUSINTERFACE BUSNAME="__NOC__" NAME="usb_uart" TYPE="INITIATOR" VLNV="xilinx.com:interface:uart:1.0">
+          <PORTMAPS>
+            <PORTMAP LOGICAL="RxD" PHYSICAL="usb_uart_rxd"/>
+            <PORTMAP LOGICAL="TxD" PHYSICAL="usb_uart_txd"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+      </BUSINTERFACES>
+    </MODULE>
+  </MODULES>
+
+</EDKSYSTEM>

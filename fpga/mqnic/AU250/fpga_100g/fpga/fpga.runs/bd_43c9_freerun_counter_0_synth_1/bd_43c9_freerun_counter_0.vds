@@ -1,0 +1,316 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Tue Dec 19 07:37:14 2023
+# Process ID: 2227959
+# Current directory: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_freerun_counter_0_synth_1
+# Command line: vivado -log bd_43c9_freerun_counter_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source bd_43c9_freerun_counter_0.tcl
+# Log file: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_freerun_counter_0_synth_1/bd_43c9_freerun_counter_0.vds
+# Journal file: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_freerun_counter_0_synth_1/vivado.jou
+#-----------------------------------------------------------
+source bd_43c9_freerun_counter_0.tcl -notrace
+Command: synth_design -top bd_43c9_freerun_counter_0 -part xcu250-figd2104-2-e -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Device 21-403] Loading part xcu250-figd2104-2-e
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 2228250
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2960.258 ; gain = 228.656 ; free physical = 288964 ; free virtual = 366610
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'bd_43c9_freerun_counter_0' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_46/synth/bd_43c9_freerun_counter_0.vhd:66]
+WARNING: [Synth 8-3819] Generic 'FPGA_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'FW_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'FW_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'BOARD_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'BOARD_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'BUILD_DATE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'GIT_HASH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RELEASE_INFO' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'IF_COUNT' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PORTS_PER_IF' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'SCHED_PER_IF' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PORT_MASK' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CLK_PERIOD_NS_NUM' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CLK_PERIOD_NS_DENOM' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_CLOCK_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_CLOCK_CDC_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_PORT_CDC_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_PEROUT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_PEROUT_COUNT' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'EVENT_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CQ_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'EQN_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CQN_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'EQ_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CQ_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_DESC_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_DESC_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_INDIR_TBL_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_SCHEDULER_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_SCHEDULER_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TDMA_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_TS_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CPL_FIFO_DEPTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CHECKSUM_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_HASH_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_CHECKSUM_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_FIFO_DEPTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_FIFO_DEPTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'MAX_TX_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'MAX_RX_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_RAM_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_RAM_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DDR_CH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DDR_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXI_DDR_ID_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXI_DDR_MAX_BURST_LEN' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_CTRL_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_DMA_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_AXIS_DIRECT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_AXIS_SYNC_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_AXIS_IF_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_STAT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_IMM_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_IMM_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_LEN_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_TAG_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RAM_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RAM_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'IRQ_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_CTRL_DATA_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_CTRL_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_APP_CTRL_DATA_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_APP_CTRL_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_TX_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_TX_FIFO_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_TX_TS_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_RX_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_RX_FIFO_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_DMA_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_PCIE_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_INC_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_ID_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_PCIE_DATA_WIDTH' not present in instantiated entity will be ignored
+	Parameter C_IMPLEMENTATION bound to: 0 - type: integer 
+	Parameter C_VERBOSITY bound to: 0 - type: integer 
+	Parameter C_XDEVICEFAMILY bound to: virtexuplus - type: string 
+	Parameter C_WIDTH bound to: 32 - type: integer 
+	Parameter C_HAS_CE bound to: 0 - type: integer 
+	Parameter C_HAS_SCLR bound to: 0 - type: integer 
+	Parameter C_RESTRICT_COUNT bound to: 0 - type: integer 
+	Parameter C_COUNT_TO bound to: 1 - type: string 
+	Parameter C_COUNT_BY bound to: 1 - type: string 
+	Parameter C_COUNT_MODE bound to: 0 - type: integer 
+	Parameter C_THRESH0_VALUE bound to: 1 - type: string 
+	Parameter C_CE_OVERRIDES_SYNC bound to: 0 - type: integer 
+	Parameter C_HAS_THRESH0 bound to: 0 - type: integer 
+	Parameter C_HAS_LOAD bound to: 0 - type: integer 
+	Parameter C_LOAD_LOW bound to: 0 - type: integer 
+	Parameter C_LATENCY bound to: 1 - type: integer 
+	Parameter C_FB_LATENCY bound to: 0 - type: integer 
+	Parameter C_AINIT_VAL bound to: 0 - type: string 
+	Parameter C_SINIT_VAL bound to: 0 - type: string 
+	Parameter C_SCLR_OVERRIDES_SSET bound to: 1 - type: integer 
+	Parameter C_HAS_SSET bound to: 0 - type: integer 
+	Parameter C_HAS_SINIT bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'c_counter_binary_v12_0_14' declared at '/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/1f12/hdl/c_counter_binary_v12_0_vh_rfs.vhd:2146' bound to instance 'U0' of component 'c_counter_binary_v12_0_14' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_46/synth/bd_43c9_freerun_counter_0.vhd:122]
+INFO: [Synth 8-256] done synthesizing module 'bd_43c9_freerun_counter_0' (8#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_46/synth/bd_43c9_freerun_counter_0.vhd:66]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 3010.195 ; gain = 278.594 ; free physical = 288365 ; free virtual = 366012
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 3028.008 ; gain = 296.406 ; free physical = 288708 ; free virtual = 366356
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 3028.008 ; gain = 296.406 ; free physical = 288708 ; free virtual = 366355
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3036.914 ; gain = 0.000 ; free physical = 288587 ; free virtual = 366234
+INFO: [Netlist 29-17] Analyzing 63 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_46/bd_43c9_freerun_counter_0_ooc.xdc] for cell 'U0'
+create_clock: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 3207.508 ; gain = 0.000 ; free physical = 287793 ; free virtual = 365468
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_46/bd_43c9_freerun_counter_0_ooc.xdc] for cell 'U0'
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_freerun_counter_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_freerun_counter_0_synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3207.508 ; gain = 0.000 ; free physical = 287793 ; free virtual = 365469
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3207.508 ; gain = 0.000 ; free physical = 287783 ; free virtual = 365459
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 3207.508 ; gain = 475.906 ; free physical = 287662 ; free virtual = 365335
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu250-figd2104-2-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 3207.508 ; gain = 475.906 ; free physical = 287662 ; free virtual = 365334
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for U0. (constraint file  /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_freerun_counter_0_synth_1/dont_touch.xdc, line 6).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 3207.508 ; gain = 475.906 ; free physical = 287652 ; free virtual = 365324
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 3207.508 ; gain = 475.906 ; free physical = 287705 ; free virtual = 365379
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 12288 (col length:96)
+BRAMs: 5376 (col length: RAMB18 384 RAMB36 192)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 3207.508 ; gain = 475.906 ; free physical = 287550 ; free virtual = 365226
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:32 ; elapsed = 00:00:35 . Memory (MB): peak = 3453.961 ; gain = 722.359 ; free physical = 285628 ; free virtual = 363293
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:35 . Memory (MB): peak = 3453.961 ; gain = 722.359 ; free physical = 285626 ; free virtual = 363292
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:32 ; elapsed = 00:00:35 . Memory (MB): peak = 3472.992 ; gain = 741.391 ; free physical = 285599 ; free virtual = 363264
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3478.930 ; gain = 747.328 ; free physical = 285335 ; free virtual = 362995
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3478.930 ; gain = 747.328 ; free physical = 285334 ; free virtual = 362994
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3478.930 ; gain = 747.328 ; free physical = 285333 ; free virtual = 362993
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3478.930 ; gain = 747.328 ; free physical = 285332 ; free virtual = 362992
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3478.930 ; gain = 747.328 ; free physical = 285332 ; free virtual = 362992
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3478.930 ; gain = 747.328 ; free physical = 285331 ; free virtual = 362991
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+------+------+
+|      |Cell  |Count |
++------+------+------+
+|1     |LUT1  |     1|
+|2     |MUXCY |    31|
+|3     |XORCY |    32|
+|4     |FDRE  |    32|
++------+------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3478.930 ; gain = 747.328 ; free physical = 285331 ; free virtual = 362991
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:27 ; elapsed = 00:00:30 . Memory (MB): peak = 3478.930 ; gain = 567.828 ; free physical = 285361 ; free virtual = 363021
+Synthesis Optimization Complete : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 3478.938 ; gain = 747.328 ; free physical = 285361 ; free virtual = 363021
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3478.938 ; gain = 0.000 ; free physical = 285352 ; free virtual = 363012
+INFO: [Netlist 29-17] Analyzing 63 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3566.992 ; gain = 0.000 ; free physical = 285281 ; free virtual = 362941
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 4 instances were transformed.
+  (CARRY4) => CARRY8: 4 instances
+
+Synth Design complete, checksum: c96f42ce
+INFO: [Common 17-83] Releasing license: Synthesis
+20 Infos, 82 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:55 ; elapsed = 00:00:53 . Memory (MB): peak = 3566.992 ; gain = 1097.797 ; free physical = 285420 ; free virtual = 363080
+INFO: [Common 17-1381] The checkpoint '/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_freerun_counter_0_synth_1/bd_43c9_freerun_counter_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP bd_43c9_freerun_counter_0, cache-ID = e075dbc6e8ffbb26
+INFO: [Coretcl 2-1174] Renamed 7 cell refs.
+INFO: [Common 17-1381] The checkpoint '/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_freerun_counter_0_synth_1/bd_43c9_freerun_counter_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file bd_43c9_freerun_counter_0_utilization_synth.rpt -pb bd_43c9_freerun_counter_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Dec 19 07:38:22 2023...

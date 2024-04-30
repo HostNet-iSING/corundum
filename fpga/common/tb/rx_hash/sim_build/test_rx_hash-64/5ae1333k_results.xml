@@ -1,0 +1,13 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1700723166" />
+    <testcase name="run_test_001" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="1.8558337688446045" sim_time_ns="11148.001" ratio_time="6007.004068548912" />
+    <testcase name="run_test_002" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="5.536004066467285" sim_time_ns="44460.001000000004" ratio_time="8031.063645582085" />
+    <testcase name="run_test_003" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="2.0182833671569824" sim_time_ns="12536.000999999997" ratio_time="6211.219496724389" />
+    <testcase name="run_test_004" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="6.022810935974121" sim_time_ns="49996.001000000004" ratio_time="8301.107494737209" />
+    <testcase name="run_test_005" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="2.2717528343200684" sim_time_ns="13092.001000000004" ratio_time="5762.951322087121" />
+    <testcase name="run_test_006" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="6.549584150314331" sim_time_ns="52220.00099999999" ratio_time="7973.025432079351" />
+    <testcase name="run_test_007" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="2.458301067352295" sim_time_ns="13944.001000000018" ratio_time="5672.210448583647" />
+    <testcase name="run_test_008" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="7.128144264221191" sim_time_ns="55628.00099999999" ratio_time="7803.994832037509" />
+  </testsuite>
+</testsuites>

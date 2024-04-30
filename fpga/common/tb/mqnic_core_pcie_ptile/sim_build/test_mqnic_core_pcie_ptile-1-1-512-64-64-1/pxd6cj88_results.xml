@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1700723168" />
+    <testcase name="run_test_nic" classname="test_mqnic_core_pcie_ptile" file="/home/caogang/corundum/fpga/common/tb/mqnic_core_pcie_ptile/test_mqnic_core_pcie_ptile.py" lineno="403" time="3090.379115819931" sim_time_ns="835816.001" ratio_time="270.457432462374" />
+  </testsuite>
+</testsuites>

@@ -1,0 +1,409 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Tue Dec 19 07:40:18 2023
+# Process ID: 2229441
+# Current directory: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_axi_gpio_mutex_host_0_synth_1
+# Command line: vivado -log bd_43c9_axi_gpio_mutex_host_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source bd_43c9_axi_gpio_mutex_host_0.tcl
+# Log file: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_axi_gpio_mutex_host_0_synth_1/bd_43c9_axi_gpio_mutex_host_0.vds
+# Journal file: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_axi_gpio_mutex_host_0_synth_1/vivado.jou
+#-----------------------------------------------------------
+source bd_43c9_axi_gpio_mutex_host_0.tcl -notrace
+Command: synth_design -top bd_43c9_axi_gpio_mutex_host_0 -part xcu250-figd2104-2-e -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Device 21-403] Loading part xcu250-figd2104-2-e
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 2229603
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2957.227 ; gain = 224.656 ; free physical = 277296 ; free virtual = 355128
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'bd_43c9_axi_gpio_mutex_host_0' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_18/synth/bd_43c9_axi_gpio_mutex_host_0.vhd:85]
+WARNING: [Synth 8-3819] Generic 'FPGA_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'FW_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'FW_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'BOARD_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'BOARD_VER' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'BUILD_DATE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'GIT_HASH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RELEASE_INFO' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'IF_COUNT' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PORTS_PER_IF' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'SCHED_PER_IF' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PORT_MASK' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CLK_PERIOD_NS_NUM' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CLK_PERIOD_NS_DENOM' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_CLOCK_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_CLOCK_CDC_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_PORT_CDC_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_PEROUT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_PEROUT_COUNT' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'EVENT_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_QUEUE_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CQ_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'EQN_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_QUEUE_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CQN_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'EQ_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_QUEUE_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'CQ_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_DESC_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_DESC_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_INDIR_TBL_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_SCHEDULER_OP_TABLE_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_SCHEDULER_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TDMA_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'PTP_TS_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CPL_FIFO_DEPTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_CHECKSUM_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_HASH_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_CHECKSUM_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_FIFO_DEPTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_FIFO_DEPTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'MAX_TX_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'MAX_RX_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'TX_RAM_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RX_RAM_SIZE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DDR_CH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DDR_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXI_DDR_ID_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXI_DDR_MAX_BURST_LEN' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_ID' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_CTRL_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_DMA_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_AXIS_DIRECT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_AXIS_SYNC_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_AXIS_IF_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'APP_STAT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_IMM_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_IMM_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_LEN_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'DMA_TAG_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RAM_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'RAM_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'IRQ_INDEX_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_CTRL_DATA_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_CTRL_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_APP_CTRL_DATA_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIL_APP_CTRL_ADDR_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_TX_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_TX_FIFO_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_TX_TS_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_RX_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_ETH_RX_FIFO_PIPELINE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_DMA_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_PCIE_ENABLE' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_INC_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'STAT_ID_WIDTH' not present in instantiated entity will be ignored
+WARNING: [Synth 8-3819] Generic 'AXIS_PCIE_DATA_WIDTH' not present in instantiated entity will be ignored
+	Parameter C_FAMILY bound to: virtexuplus - type: string 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 9 - type: integer 
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_GPIO_WIDTH bound to: 1 - type: integer 
+	Parameter C_GPIO2_WIDTH bound to: 2 - type: integer 
+	Parameter C_ALL_INPUTS bound to: 0 - type: integer 
+	Parameter C_ALL_INPUTS_2 bound to: 1 - type: integer 
+	Parameter C_ALL_OUTPUTS bound to: 1 - type: integer 
+	Parameter C_ALL_OUTPUTS_2 bound to: 0 - type: integer 
+	Parameter C_INTERRUPT_PRESENT bound to: 0 - type: integer 
+	Parameter C_DOUT_DEFAULT bound to: 32'b00000000000000000000000000000000 
+	Parameter C_TRI_DEFAULT bound to: 32'b11111111111111111111111111111111 
+	Parameter C_IS_DUAL bound to: 1 - type: integer 
+	Parameter C_DOUT_DEFAULT_2 bound to: 32'b00000000000000000000000000000000 
+	Parameter C_TRI_DEFAULT_2 bound to: 32'b11111111111111111111111111111111 
+INFO: [Synth 8-3491] module 'axi_gpio' declared at '/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/65b4/hdl/axi_gpio_v2_0_vh_rfs.vhd:1265' bound to instance 'U0' of component 'axi_gpio' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_18/synth/bd_43c9_axi_gpio_mutex_host_0.vhd:172]
+INFO: [Synth 8-638] synthesizing module 'axi_gpio' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/65b4/hdl/axi_gpio_v2_0_vh_rfs.vhd:1351]
+INFO: [Synth 8-638] synthesizing module 'axi_lite_ipif' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:2948]
+INFO: [Synth 8-638] synthesizing module 'slave_attachment' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:2341]
+INFO: [Synth 8-638] synthesizing module 'address_decoder' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1775]
+INFO: [Synth 8-638] synthesizing module 'pselect_f' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1534]
+INFO: [Synth 8-256] done synthesizing module 'pselect_f' (1#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1534]
+INFO: [Synth 8-638] synthesizing module 'pselect_f__parameterized0' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1534]
+INFO: [Synth 8-256] done synthesizing module 'pselect_f__parameterized0' (1#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1534]
+INFO: [Synth 8-638] synthesizing module 'pselect_f__parameterized1' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1534]
+INFO: [Synth 8-256] done synthesizing module 'pselect_f__parameterized1' (1#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1534]
+INFO: [Synth 8-638] synthesizing module 'pselect_f__parameterized2' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1534]
+INFO: [Synth 8-256] done synthesizing module 'pselect_f__parameterized2' (1#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1534]
+INFO: [Synth 8-256] done synthesizing module 'address_decoder' (2#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:1775]
+INFO: [Synth 8-226] default block is never used [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:2550]
+INFO: [Synth 8-256] done synthesizing module 'slave_attachment' (3#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:2341]
+INFO: [Synth 8-256] done synthesizing module 'axi_lite_ipif' (4#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd:2948]
+INFO: [Synth 8-638] synthesizing module 'GPIO_Core' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/65b4/hdl/axi_gpio_v2_0_vh_rfs.vhd:178]
+INFO: [Synth 8-226] default block is never used [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/65b4/hdl/axi_gpio_v2_0_vh_rfs.vhd:835]
+INFO: [Synth 8-638] synthesizing module 'cdc_sync' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:106]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:736]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d2' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:772]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d3' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:788]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d4' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:804]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d5' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:821]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d6' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:837]
+INFO: [Synth 8-256] done synthesizing module 'cdc_sync' (5#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:106]
+INFO: [Synth 8-638] synthesizing module 'cdc_sync__parameterized0' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:106]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:736]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_IN_cdc_to' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:736]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d2' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:772]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d2' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:772]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d3' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:788]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d3' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:788]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d4' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:804]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d4' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:804]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d5' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:821]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d5' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:821]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d6' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:837]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'CROSS2_PLEVEL_IN2SCNDRY_s_level_out_bus_d6' to cell 'FDR' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:837]
+INFO: [Synth 8-256] done synthesizing module 'cdc_sync__parameterized0' (5#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/ef1e/hdl/lib_cdc_v1_0_rfs.vhd:106]
+INFO: [Synth 8-256] done synthesizing module 'GPIO_Core' (6#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/65b4/hdl/axi_gpio_v2_0_vh_rfs.vhd:178]
+INFO: [Synth 8-256] done synthesizing module 'axi_gpio' (7#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ipshared/65b4/hdl/axi_gpio_v2_0_vh_rfs.vhd:1351]
+INFO: [Synth 8-256] done synthesizing module 'bd_43c9_axi_gpio_mutex_host_0' (8#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_18/synth/bd_43c9_axi_gpio_mutex_host_0.vhd:85]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 3003.164 ; gain = 270.594 ; free physical = 276665 ; free virtual = 354498
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 3022.977 ; gain = 290.406 ; free physical = 276516 ; free virtual = 354349
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 3022.977 ; gain = 290.406 ; free physical = 276516 ; free virtual = 354349
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3034.883 ; gain = 0.000 ; free physical = 276511 ; free virtual = 354344
+INFO: [Netlist 29-17] Analyzing 18 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_18/bd_43c9_axi_gpio_mutex_host_0_ooc.xdc] for cell 'U0'
+create_clock: Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 3212.477 ; gain = 0.000 ; free physical = 277016 ; free virtual = 354845
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_18/bd_43c9_axi_gpio_mutex_host_0_ooc.xdc] for cell 'U0'
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_18/bd_43c9_axi_gpio_mutex_host_0_board.xdc] for cell 'U0'
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_18/bd_43c9_axi_gpio_mutex_host_0_board.xdc] for cell 'U0'
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_18/bd_43c9_axi_gpio_mutex_host_0.xdc] for cell 'U0'
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_18/bd_43c9_axi_gpio_mutex_host_0.xdc] for cell 'U0'
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_axi_gpio_mutex_host_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_axi_gpio_mutex_host_0_synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3212.477 ; gain = 0.000 ; free physical = 277016 ; free virtual = 354845
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 18 instances were transformed.
+  FDR => FDRE: 18 instances
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3212.477 ; gain = 0.000 ; free physical = 277015 ; free virtual = 354844
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 3212.477 ; gain = 479.906 ; free physical = 277276 ; free virtual = 355105
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu250-figd2104-2-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 3212.477 ; gain = 479.906 ; free physical = 277276 ; free virtual = 355105
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for U0. (constraint file  /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_axi_gpio_mutex_host_0_synth_1/dont_touch.xdc, line 6).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 3212.477 ; gain = 479.906 ; free physical = 277274 ; free virtual = 355104
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'slave_attachment'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE2 |                             0001 |                               00
+                  iSTATE |                             0010 |                               01
+                 iSTATE0 |                             0100 |                               10
+                 iSTATE1 |                             1000 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'slave_attachment'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 3212.477 ; gain = 479.906 ; free physical = 277265 ; free virtual = 355094
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input    4 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 3     
+	                9 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
+	                2 Bit    Registers := 6     
+	                1 Bit    Registers := 20    
++---Muxes : 
+	   5 Input   32 Bit        Muxes := 1     
+	   2 Input   32 Bit        Muxes := 1     
+	   2 Input    9 Bit        Muxes := 1     
+	   4 Input    4 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 5     
+	   7 Input    2 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 5     
+	   4 Input    2 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 10    
+	   4 Input    1 Bit        Muxes := 3     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 12288 (col length:96)
+BRAMs: 5376 (col length: RAMB18 384 RAMB36 192)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 3212.477 ; gain = 479.906 ; free physical = 277262 ; free virtual = 355095
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:30 ; elapsed = 00:00:33 . Memory (MB): peak = 3462.867 ; gain = 730.297 ; free physical = 288913 ; free virtual = 366719
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:30 ; elapsed = 00:00:33 . Memory (MB): peak = 3482.898 ; gain = 750.328 ; free physical = 288924 ; free virtual = 366731
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:30 ; elapsed = 00:00:33 . Memory (MB): peak = 3484.914 ; gain = 752.344 ; free physical = 288916 ; free virtual = 366722
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3490.852 ; gain = 758.281 ; free physical = 289424 ; free virtual = 367230
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3490.852 ; gain = 758.281 ; free physical = 289424 ; free virtual = 367230
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3490.852 ; gain = 758.281 ; free physical = 289421 ; free virtual = 367227
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3490.852 ; gain = 758.281 ; free physical = 289419 ; free virtual = 367225
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3490.852 ; gain = 758.281 ; free physical = 289417 ; free virtual = 367223
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3490.852 ; gain = 758.281 ; free physical = 289416 ; free virtual = 367223
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-----+------+
+|      |Cell |Count |
++------+-----+------+
+|1     |LUT1 |     2|
+|2     |LUT2 |    15|
+|3     |LUT3 |     8|
+|4     |LUT4 |     6|
+|5     |LUT5 |    10|
+|6     |LUT6 |    10|
+|7     |FDR  |     8|
+|8     |FDRE |    41|
+|9     |FDSE |     3|
++------+-----+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3490.852 ; gain = 758.281 ; free physical = 289416 ; free virtual = 367223
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:26 ; elapsed = 00:00:29 . Memory (MB): peak = 3490.852 ; gain = 568.781 ; free physical = 289437 ; free virtual = 367243
+Synthesis Optimization Complete : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3490.859 ; gain = 758.281 ; free physical = 289437 ; free virtual = 367243
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3490.859 ; gain = 0.000 ; free physical = 289426 ; free virtual = 367232
+INFO: [Netlist 29-17] Analyzing 8 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3609.453 ; gain = 0.000 ; free physical = 289299 ; free virtual = 367105
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 8 instances were transformed.
+  FDR => FDRE: 8 instances
+
+Synth Design complete, checksum: 7267496
+INFO: [Common 17-83] Releasing license: Synthesis
+64 Infos, 82 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:54 ; elapsed = 00:00:51 . Memory (MB): peak = 3609.453 ; gain = 1142.258 ; free physical = 289421 ; free virtual = 367227
+INFO: [Common 17-1381] The checkpoint '/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_axi_gpio_mutex_host_0_synth_1/bd_43c9_axi_gpio_mutex_host_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP bd_43c9_axi_gpio_mutex_host_0, cache-ID = d401acc7b02f7da6
+INFO: [Coretcl 2-1174] Renamed 8 cell refs.
+INFO: [Common 17-1381] The checkpoint '/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_axi_gpio_mutex_host_0_synth_1/bd_43c9_axi_gpio_mutex_host_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file bd_43c9_axi_gpio_mutex_host_0_utilization_synth.rpt -pb bd_43c9_axi_gpio_mutex_host_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Dec 19 07:41:27 2023...

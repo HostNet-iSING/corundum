@@ -385,6 +385,8 @@ reg                        m_axis_dma_read_desc_valid_int;
 reg                        m_axis_dma_read_desc_ready_int_reg = 1'b0;
 wire                       m_axis_dma_read_desc_ready_int_early;
 
+reg temp;
+
 assign s_axis_tx_req_ready = s_axis_tx_req_ready_reg;
 
 assign m_axis_tx_req_status_len = m_axis_tx_req_status_len_reg;
@@ -756,6 +758,7 @@ always @* begin
     end
 
     // finish transmit; start completion enqueue
+    temp = desc_table_active[desc_table_cpl_enqueue_start_ptr_reg & DESC_PTR_MASK];
     if (desc_table_active[desc_table_cpl_enqueue_start_ptr_reg & DESC_PTR_MASK] && desc_table_cpl_enqueue_start_ptr_reg != desc_table_start_ptr_reg && desc_table_cpl_enqueue_start_ptr_reg != desc_table_tx_start_ptr_reg) begin
         if (desc_table_invalid[desc_table_cpl_enqueue_start_ptr_reg & DESC_PTR_MASK]) begin
             // invalid entry; skip

@@ -66,10 +66,7 @@ module mqnic_interface_tx #
     parameter AXIS_KEEP_WIDTH = AXIS_DATA_WIDTH/8,
     parameter AXIS_TX_ID_WIDTH = TX_QUEUE_INDEX_WIDTH,
     parameter AXIS_TX_DEST_WIDTH = $clog2(PORTS)+4,
-    parameter AXIS_TX_USER_WIDTH = TX_TAG_WIDTH + 1,
-    
-    parameter DMA_CLIENT_TAG_WIDTH = $clog2(TX_DESC_TABLE_SIZE),
-    parameter DMA_CLIENT_LEN_WIDTH = DMA_LEN_WIDTH
+    parameter AXIS_TX_USER_WIDTH = TX_TAG_WIDTH + 1
 )
 (
     input  wire                                         clk,
@@ -186,17 +183,13 @@ module mqnic_interface_tx #
     output wire                                         s_axis_tx_cpl_ready,
 
     /*
-     * Transmit completion output
-     */
-    output wire [TX_TAG_WIDTH-1:0]                      m_axis_tx_cpl_tag,
-    output wire                                         m_axis_tx_cpl_valid,
-    input  wire                                         m_axis_tx_cpl_ready,
-    /*
      * Configuration
      */
     input  wire [DMA_CLIENT_LEN_WIDTH-1:0]              mtu
 );
 
+parameter DMA_CLIENT_TAG_WIDTH = $clog2(TX_DESC_TABLE_SIZE);
+parameter DMA_CLIENT_LEN_WIDTH = DMA_LEN_WIDTH;
 
 wire [AXIS_DESC_DATA_WIDTH-1:0]  tx_fifo_desc_tdata;
 wire [AXIS_DESC_KEEP_WIDTH-1:0]  tx_fifo_desc_tkeep;
@@ -267,7 +260,7 @@ wire [DMA_CLIENT_TAG_WIDTH-1:0]  dma_tx_desc_status_tag;
 wire [3:0]                       dma_tx_desc_status_error;
 wire                             dma_tx_desc_status_valid;
 
-tx_engine_v3 #(
+tx_engine #(
     .RAM_ADDR_WIDTH(RAM_ADDR_WIDTH),
     .DMA_ADDR_WIDTH(DMA_ADDR_WIDTH),
     .DMA_LEN_WIDTH(DMA_LEN_WIDTH),
@@ -299,7 +292,7 @@ tx_engine_v3 #(
     .AXIS_TX_DEST_WIDTH(AXIS_TX_DEST_WIDTH),
     .AXIS_TX_USER_WIDTH(AXIS_TX_USER_WIDTH)
 )
-tx_engine_inst_v3 (
+tx_engine_inst (
     .clk(clk),
     .rst(rst),
 
@@ -418,170 +411,6 @@ tx_engine_inst_v3 (
     .s_axis_tx_cpl_tag(s_axis_tx_cpl_tag),
     .s_axis_tx_cpl_valid(s_axis_tx_cpl_valid),
     .s_axis_tx_cpl_ready(s_axis_tx_cpl_ready),
-
-    /*
-     * Transmit completion output to qm
-     */
-    .m_axis_tx_cpl_tag(m_axis_tx_cpl_tag),
-    .m_axis_tx_cpl_valid(m_axis_tx_cpl_valid),
-    .m_axis_tx_cpl_ready(m_axis_tx_cpl_ready),
-    /*
-     * Configuration
-     */
-    .enable(1'b1)
-);
-
-tx_engine #(
-    .RAM_ADDR_WIDTH(RAM_ADDR_WIDTH),
-    .DMA_ADDR_WIDTH(DMA_ADDR_WIDTH),
-    .DMA_LEN_WIDTH(DMA_LEN_WIDTH),
-    .DMA_CLIENT_LEN_WIDTH(DMA_CLIENT_LEN_WIDTH),
-    .REQ_TAG_WIDTH(REQ_TAG_WIDTH),
-    .DESC_REQ_TAG_WIDTH(DESC_REQ_TAG_WIDTH),
-    .CPL_REQ_TAG_WIDTH(CPL_REQ_TAG_WIDTH),
-    .DMA_TAG_WIDTH(DMA_TAG_WIDTH),
-    .DMA_CLIENT_TAG_WIDTH(DMA_CLIENT_TAG_WIDTH),
-    .QUEUE_INDEX_WIDTH(TX_QUEUE_INDEX_WIDTH),
-    .QUEUE_PTR_WIDTH(QUEUE_PTR_WIDTH),
-    .CQN_WIDTH(CQN_WIDTH),
-    .DESC_TABLE_SIZE(TX_DESC_TABLE_SIZE),
-    .DESC_TABLE_DMA_OP_COUNT_WIDTH(DESC_TABLE_DMA_OP_COUNT_WIDTH),
-    .MAX_TX_SIZE(MAX_TX_SIZE),
-    .TX_BUFFER_OFFSET(0),
-    .TX_BUFFER_SIZE(TX_RAM_SIZE),
-    .TX_BUFFER_STEP_SIZE(RAM_SEG_COUNT*RAM_SEG_BE_WIDTH),
-    .DESC_SIZE(DESC_SIZE),
-    .CPL_SIZE(CPL_SIZE),
-    .MAX_DESC_REQ(TX_MAX_DESC_REQ),
-    .AXIS_DESC_DATA_WIDTH(AXIS_DESC_DATA_WIDTH),
-    .AXIS_DESC_KEEP_WIDTH(AXIS_DESC_KEEP_WIDTH),
-    .PTP_TS_ENABLE(PTP_TS_ENABLE),
-    .PTP_TS_WIDTH(PTP_TS_WIDTH),
-    .TX_TAG_WIDTH(TX_TAG_WIDTH),
-    .TX_CHECKSUM_ENABLE(TX_CHECKSUM_ENABLE),
-    .AXIS_TX_ID_WIDTH(AXIS_TX_ID_WIDTH),
-    .AXIS_TX_DEST_WIDTH(AXIS_TX_DEST_WIDTH),
-    .AXIS_TX_USER_WIDTH(AXIS_TX_USER_WIDTH)
-)
-tx_engine_inst (
-    .clk(clk),
-    .rst(rst),
-
-    /*
-     * Transmit request input (queue index)
-     */
-    .s_axis_tx_req_queue(s_axis_tx_req_queue),
-    .s_axis_tx_req_tag(s_axis_tx_req_tag),
-    .s_axis_tx_req_dest(s_axis_tx_req_dest),
-    .s_axis_tx_req_valid(s_axis_tx_req_valid),
-    .s_axis_tx_req_ready(),
-
-    /*
-     * Transmit request status output
-     */
-    .m_axis_tx_req_status_len(),
-    .m_axis_tx_req_status_tag(),
-    .m_axis_tx_req_status_valid(),
-
-    /*
-     * Descriptor request output
-     */
-    .m_axis_desc_req_queue(),
-    .m_axis_desc_req_tag(),
-    .m_axis_desc_req_valid(),
-    .m_axis_desc_req_ready(m_axis_desc_req_ready),
-
-    /*
-     * Descriptor request status input
-     */
-    .s_axis_desc_req_status_queue(s_axis_desc_req_status_queue),
-    .s_axis_desc_req_status_ptr(s_axis_desc_req_status_ptr),
-    .s_axis_desc_req_status_cpl(s_axis_desc_req_status_cpl),
-    .s_axis_desc_req_status_tag(s_axis_desc_req_status_tag),
-    .s_axis_desc_req_status_empty(s_axis_desc_req_status_empty),
-    .s_axis_desc_req_status_error(s_axis_desc_req_status_error),
-    .s_axis_desc_req_status_valid(s_axis_desc_req_status_valid),
-
-    /*
-     * Descriptor data input
-     */
-    .s_axis_desc_tdata(tx_fifo_desc_tdata),
-    .s_axis_desc_tkeep(tx_fifo_desc_tkeep),
-    .s_axis_desc_tvalid(tx_fifo_desc_tvalid),
-    .s_axis_desc_tready(),
-    .s_axis_desc_tlast(tx_fifo_desc_tlast),
-    .s_axis_desc_tid(tx_fifo_desc_tid),
-    .s_axis_desc_tuser(tx_fifo_desc_tuser),
-
-    /*
-     * Completion request output
-     */
-    .m_axis_cpl_req_queue(),
-    .m_axis_cpl_req_tag(),
-    .m_axis_cpl_req_data(),
-    .m_axis_cpl_req_valid(),
-    .m_axis_cpl_req_ready(m_axis_cpl_req_ready),
-
-    /*
-     * Completion request status input
-     */
-    .s_axis_cpl_req_status_tag(s_axis_cpl_req_status_tag),
-    .s_axis_cpl_req_status_full(s_axis_cpl_req_status_full),
-    .s_axis_cpl_req_status_error(s_axis_cpl_req_status_error),
-    .s_axis_cpl_req_status_valid(s_axis_cpl_req_status_valid),
-
-    /*
-     * DMA read descriptor output
-     */
-    .m_axis_dma_read_desc_dma_addr(),
-    .m_axis_dma_read_desc_ram_addr(),
-    .m_axis_dma_read_desc_len(),
-    .m_axis_dma_read_desc_tag(),
-    .m_axis_dma_read_desc_valid(),
-    .m_axis_dma_read_desc_ready(m_axis_dma_read_desc_ready),
-
-    /*
-     * DMA read descriptor status input
-     */
-    .s_axis_dma_read_desc_status_tag(s_axis_dma_read_desc_status_tag),
-    .s_axis_dma_read_desc_status_error(s_axis_dma_read_desc_status_error),
-    .s_axis_dma_read_desc_status_valid(s_axis_dma_read_desc_status_valid),
-
-    /*
-     * Transmit descriptor output
-     */
-    .m_axis_tx_desc_addr(),
-    .m_axis_tx_desc_len(),
-    .m_axis_tx_desc_tag(),
-    .m_axis_tx_desc_id(),
-    .m_axis_tx_desc_dest(),
-    .m_axis_tx_desc_user(),
-    .m_axis_tx_desc_valid(),
-    .m_axis_tx_desc_ready(dma_tx_desc_ready),
-
-    /*
-     * Transmit descriptor status input
-     */
-    .s_axis_tx_desc_status_tag(dma_tx_desc_status_tag),
-    .s_axis_tx_desc_status_error(dma_tx_desc_status_error),
-    .s_axis_tx_desc_status_valid(dma_tx_desc_status_valid),
-
-    /*
-     * Transmit checksum command output
-     */
-    .m_axis_tx_csum_cmd_csum_enable(),
-    .m_axis_tx_csum_cmd_csum_start(),
-    .m_axis_tx_csum_cmd_csum_offset(),
-    .m_axis_tx_csum_cmd_valid(),
-    .m_axis_tx_csum_cmd_ready(tx_csum_cmd_ready),
-
-    /*
-     * Transmit completion input
-     */
-    .s_axis_tx_cpl_ts(s_axis_tx_cpl_ts),
-    .s_axis_tx_cpl_tag(s_axis_tx_cpl_tag),
-    .s_axis_tx_cpl_valid(s_axis_tx_cpl_valid),
-    .s_axis_tx_cpl_ready(),
 
     /*
      * Configuration

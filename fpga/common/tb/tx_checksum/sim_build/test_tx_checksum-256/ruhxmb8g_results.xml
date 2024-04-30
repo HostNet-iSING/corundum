@@ -1,0 +1,13 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1700723691" />
+    <testcase name="run_test_001" classname="test_tx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="22.24157428741455" sim_time_ns="13172.001" ratio_time="592.2243106439372" />
+    <testcase name="run_test_002" classname="test_tx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="30.414692401885986" sim_time_ns="41172.001000000004" ratio_time="1353.6878971508838" />
+    <testcase name="run_test_003" classname="test_tx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="30.871533632278442" sim_time_ns="42124.001" ratio_time="1364.4933064146926" />
+    <testcase name="run_test_004" classname="test_tx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="32.80618858337402" sim_time_ns="45764.00099999999" ratio_time="1394.98073309232" />
+    <testcase name="run_test_offsets_001" classname="test_tx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="67.80293202400208" sim_time_ns="44004.00100000002" ratio_time="648.9984973573519" />
+    <testcase name="run_test_offsets_002" classname="test_tx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="85.3372232913971" sim_time_ns="117140.00099999999" ratio_time="1372.671812861867" />
+    <testcase name="run_test_offsets_003" classname="test_tx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="86.28379392623901" sim_time_ns="117152.00099999999" ratio_time="1357.7520837823743" />
+    <testcase name="run_test_offsets_004" classname="test_tx_checksum" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="91.4514946937561" sim_time_ns="117188.00100000005" ratio_time="1281.422478576516" />
+  </testsuite>
+</testsuites>

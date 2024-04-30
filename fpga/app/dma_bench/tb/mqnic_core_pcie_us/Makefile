@@ -143,16 +143,16 @@ export PARAM_CQ_OP_TABLE_SIZE := 32
 export PARAM_EQN_WIDTH := 6
 export PARAM_TX_QUEUE_INDEX_WIDTH := 13
 export PARAM_RX_QUEUE_INDEX_WIDTH := 8
-export PARAM_CQN_WIDTH := $(shell python -c "print(max($(PARAM_TX_QUEUE_INDEX_WIDTH), $(PARAM_RX_QUEUE_INDEX_WIDTH)) + 1)")
+export PARAM_CQN_WIDTH := $(shell python3 -c "print(max($(PARAM_TX_QUEUE_INDEX_WIDTH), $(PARAM_RX_QUEUE_INDEX_WIDTH)) + 1)")
 export PARAM_EQ_PIPELINE := 3
-export PARAM_TX_QUEUE_PIPELINE := $(shell python -c "print(3 + max($(PARAM_TX_QUEUE_INDEX_WIDTH)-12, 0))")
-export PARAM_RX_QUEUE_PIPELINE := $(shell python -c "print(3 + max($(PARAM_RX_QUEUE_INDEX_WIDTH)-12, 0))")
-export PARAM_CQ_PIPELINE := $(shell python -c "print(3 + max($(PARAM_CQN_WIDTH)-12, 0))")
+export PARAM_TX_QUEUE_PIPELINE := $(shell python3 -c "print(3 + max($(PARAM_TX_QUEUE_INDEX_WIDTH)-12, 0))")
+export PARAM_RX_QUEUE_PIPELINE := $(shell python3 -c "print(3 + max($(PARAM_RX_QUEUE_INDEX_WIDTH)-12, 0))")
+export PARAM_CQ_PIPELINE := $(shell python3 -c "print(3 + max($(PARAM_CQN_WIDTH)-12, 0))")
 
 # TX and RX engine configuration
 export PARAM_TX_DESC_TABLE_SIZE := 32
 export PARAM_RX_DESC_TABLE_SIZE := 32
-export PARAM_RX_INDIR_TBL_ADDR_WIDTH := $(shell python -c "print(min($(PARAM_RX_QUEUE_INDEX_WIDTH), 8))")
+export PARAM_RX_INDIR_TBL_ADDR_WIDTH := $(shell python3 -c "print(min($(PARAM_RX_QUEUE_INDEX_WIDTH), 8))")
 
 # Scheduler configuration
 export PARAM_TX_SCHEDULER_OP_TABLE_SIZE := $(PARAM_TX_DESC_TABLE_SIZE)
@@ -191,7 +191,7 @@ export PARAM_AXI_HBM_ID_WIDTH := 6
 export PARAM_AXI_HBM_MAX_BURST_LEN := 16
 
 # Application block configuration
-export PARAM_APP_ID := $(shell echo $$((0x12348001)) )
+export PARAM_APP_ID := $(shell echo $$((0x12340001)) )
 export PARAM_APP_ENABLE := 1
 export PARAM_APP_CTRL_ENABLE := 0
 export PARAM_APP_DMA_ENABLE := 1
@@ -205,7 +205,7 @@ export PARAM_DMA_IMM_ENABLE := 1
 export PARAM_DMA_IMM_WIDTH := 32
 export PARAM_DMA_LEN_WIDTH := 16
 export PARAM_DMA_TAG_WIDTH := 16
-export PARAM_RAM_ADDR_WIDTH := $(shell python -c "print((max($(PARAM_TX_RAM_SIZE), $(PARAM_RX_RAM_SIZE))-1).bit_length())")
+export PARAM_RAM_ADDR_WIDTH := $(shell python3 -c "print((max($(PARAM_TX_RAM_SIZE), $(PARAM_RX_RAM_SIZE))-1).bit_length())")
 export PARAM_RAM_PIPELINE := 2
 
 # PCIe interface configuration

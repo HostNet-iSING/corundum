@@ -1,6 +1,0 @@
-workload : 0 : RXNIC,RXDispatcher,RxApplication : 0 : 0 : 0
-
-numa : 0
-phy_port : 0
-iteration: 10
-duration : 1

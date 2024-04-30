@@ -1,0 +1,13 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1700723201" />
+    <testcase name="run_test_001" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.7263190746307373" sim_time_ns="3016.001" ratio_time="4152.446363236906" />
+    <testcase name="run_test_002" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="1.789896011352539" sim_time_ns="11932.001" ratio_time="6666.309620402783" />
+    <testcase name="run_test_003" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.9463081359863281" sim_time_ns="3384.001" ratio_time="3576.0032819255935" />
+    <testcase name="run_test_004" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="2.114175796508789" sim_time_ns="13388.001" ratio_time="6332.491849593617" />
+    <testcase name="run_test_005" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="1.101391077041626" sim_time_ns="3516.0009999999966" ratio_time="3192.327478668245" />
+    <testcase name="run_test_006" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="2.3076508045196533" sim_time_ns="13916.001000000004" ratio_time="6030.375554544386" />
+    <testcase name="run_test_007" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="1.2000575065612793" sim_time_ns="3748.0009999999966" ratio_time="3123.1844969994445" />
+    <testcase name="run_test_008" classname="test_rx_hash" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="2.4616281986236572" sim_time_ns="14844.001000000004" ratio_time="6030.155572762599" />
+  </testsuite>
+</testsuites>

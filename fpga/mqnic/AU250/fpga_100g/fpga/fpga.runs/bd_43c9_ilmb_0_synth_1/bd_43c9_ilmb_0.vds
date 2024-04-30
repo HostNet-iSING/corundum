@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Tue Dec 19 07:35:15 2023
+# Process ID: 2227045
+# Current directory: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_ilmb_0_synth_1
+# Command line: vivado -log bd_43c9_ilmb_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source bd_43c9_ilmb_0.tcl
+# Log file: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_ilmb_0_synth_1/bd_43c9_ilmb_0.vds
+# Journal file: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/bd_43c9_ilmb_0_synth_1/vivado.jou
+#-----------------------------------------------------------
+source bd_43c9_ilmb_0.tcl -notrace
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP bd_43c9_ilmb_0, cache-ID = 8562e725e4edee7f.
+INFO: [Common 17-206] Exiting Vivado at Tue Dec 19 07:35:27 2023...

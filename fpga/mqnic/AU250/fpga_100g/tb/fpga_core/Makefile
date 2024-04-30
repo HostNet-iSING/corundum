@@ -4,7 +4,7 @@
 TOPLEVEL_LANG = verilog
 
 SIM ?= icarus
-WAVES ?= 0
+WAVES ?= 1
 
 COCOTB_HDL_TIMEUNIT = 1ns
 COCOTB_HDL_TIMEPRECISION = 1ps
@@ -56,6 +56,14 @@ VERILOG_SOURCES += ../../rtl/common/stats_dma_if_pcie.v
 VERILOG_SOURCES += ../../rtl/common/stats_dma_latency.v
 VERILOG_SOURCES += ../../rtl/common/mqnic_tx_scheduler_block_rr.v
 VERILOG_SOURCES += ../../rtl/common/tx_scheduler_rr.v
+
+VERILOG_SOURCES += ../../rtl/v3/mqnic_app_if_tx_data_proc_v3.v
+#VERILOG_SOURCES += ../../rtl/v3/tx_engine.v
+#VERILOG_SOURCES += ../../rtl/v3/mqnic_app_block.v
+VERILOG_SOURCES += ../../rtl/v3/mqnic_app_if_ctrl.v
+VERILOG_SOURCES += ../../rtl/v3/wrapper_tdpram.v
+VERILOG_SOURCES += ../../rtl/v3/tdpram.v
+
 VERILOG_SOURCES += ../../lib/eth/rtl/ptp_clock.v
 VERILOG_SOURCES += ../../lib/eth/rtl/ptp_clock_cdc.v
 VERILOG_SOURCES += ../../lib/eth/rtl/ptp_perout.v
@@ -139,16 +147,16 @@ export PARAM_CQ_OP_TABLE_SIZE := 32
 export PARAM_EQN_WIDTH := 6
 export PARAM_TX_QUEUE_INDEX_WIDTH := 13
 export PARAM_RX_QUEUE_INDEX_WIDTH := 8
-export PARAM_CQN_WIDTH := $(shell python -c "print(max($(PARAM_TX_QUEUE_INDEX_WIDTH), $(PARAM_RX_QUEUE_INDEX_WIDTH)) + 1)")
+export PARAM_CQN_WIDTH := $(shell python3 -c "print(max($(PARAM_TX_QUEUE_INDEX_WIDTH), $(PARAM_RX_QUEUE_INDEX_WIDTH)) + 1)")
 export PARAM_EQ_PIPELINE := 3
-export PARAM_TX_QUEUE_PIPELINE := $(shell python -c "print(3 + max($(PARAM_TX_QUEUE_INDEX_WIDTH)-12, 0))")
-export PARAM_RX_QUEUE_PIPELINE := $(shell python -c "print(3 + max($(PARAM_RX_QUEUE_INDEX_WIDTH)-12, 0))")
-export PARAM_CQ_PIPELINE := $(shell python -c "print(3 + max($(PARAM_CQN_WIDTH)-12, 0))")
+export PARAM_TX_QUEUE_PIPELINE := $(shell python3 -c "print(3 + max($(PARAM_TX_QUEUE_INDEX_WIDTH)-12, 0))")
+export PARAM_RX_QUEUE_PIPELINE := $(shell python3 -c "print(3 + max($(PARAM_RX_QUEUE_INDEX_WIDTH)-12, 0))")
+export PARAM_CQ_PIPELINE := $(shell python3 -c "print(3 + max($(PARAM_CQN_WIDTH)-12, 0))")
 
 # TX and RX engine configuration
 export PARAM_TX_DESC_TABLE_SIZE := 32
 export PARAM_RX_DESC_TABLE_SIZE := 32
-export PARAM_RX_INDIR_TBL_ADDR_WIDTH := $(shell python -c "print(min($(PARAM_RX_QUEUE_INDEX_WIDTH), 8))")
+export PARAM_RX_INDIR_TBL_ADDR_WIDTH := $(shell python3 -c "print(min($(PARAM_RX_QUEUE_INDEX_WIDTH), 8))")
 
 # Scheduler configuration
 export PARAM_TX_SCHEDULER_OP_TABLE_SIZE := $(PARAM_TX_DESC_TABLE_SIZE)
@@ -158,8 +166,8 @@ export PARAM_TDMA_INDEX_WIDTH := 6
 # Interface configuration
 export PARAM_PTP_TS_ENABLE := 1
 export PARAM_TX_CPL_FIFO_DEPTH := 32
-export PARAM_TX_CHECKSUM_ENABLE := 1
-export PARAM_RX_HASH_ENABLE := 1
+export PARAM_TX_CHECKSUM_ENABLE := 0
+export PARAM_RX_HASH_ENABLE := 0
 export PARAM_RX_CHECKSUM_ENABLE := 1
 export PARAM_TX_FIFO_DEPTH := 32768
 export PARAM_RX_FIFO_DEPTH := 131072
@@ -169,12 +177,12 @@ export PARAM_TX_RAM_SIZE := 131072
 export PARAM_RX_RAM_SIZE := 131072
 
 # Application block configuration
-export PARAM_APP_ID := $(shell echo $$((0x00000000)) )
+export PARAM_APP_ID := $(shell echo $$((0x12340001)) )
 export PARAM_APP_ENABLE := 1
 export PARAM_APP_CTRL_ENABLE := 1
 export PARAM_APP_DMA_ENABLE := 1
-export PARAM_APP_AXIS_DIRECT_ENABLE := 1
-export PARAM_APP_AXIS_SYNC_ENABLE := 1
+export PARAM_APP_AXIS_DIRECT_ENABLE := 0
+export PARAM_APP_AXIS_SYNC_ENABLE := 0
 export PARAM_APP_AXIS_IF_ENABLE := 1
 export PARAM_APP_STAT_ENABLE := 1
 
@@ -183,7 +191,7 @@ export PARAM_DMA_IMM_ENABLE := 0
 export PARAM_DMA_IMM_WIDTH := 32
 export PARAM_DMA_LEN_WIDTH := 16
 export PARAM_DMA_TAG_WIDTH := 16
-export PARAM_RAM_ADDR_WIDTH := $(shell python -c "print((max($(PARAM_TX_RAM_SIZE), $(PARAM_RX_RAM_SIZE))-1).bit_length())")
+export PARAM_RAM_ADDR_WIDTH := $(shell python3 -c "print((max($(PARAM_TX_RAM_SIZE), $(PARAM_RX_RAM_SIZE))-1).bit_length())")
 export PARAM_RAM_PIPELINE := 2
 
 # PCIe interface configuration

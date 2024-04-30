@@ -1,8 +1,8 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1691940489" />
-    <testcase name="run_test_nic" classname="test_fpga_core" file="/home/zobin/projects/corundum_hxdp/fpga/mqnic/AU250/fpga_100g/tb/fpga_core/test_fpga_core.py" lineno="389" time="135.67235398292542" sim_time_ns="42948.0" ratio_time="316.5567541151757">
-      <failure message="Test failed with RANDOM_SEED=1691940489" />
+    <property name="random_seed" value="1709519232" />
+    <testcase name="run_test_nic" classname="test_fpga_core" file="/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/tb/fpga_core/test_fpga_core.py" lineno="389" time="0.16118311882019043" sim_time_ns="0.0" ratio_time="0.0">
+      <failure message="Test failed with RANDOM_SEED=1709519232" />
     </testcase>
   </testsuite>
 </testsuites>

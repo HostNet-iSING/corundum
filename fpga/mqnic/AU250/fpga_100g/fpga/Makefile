@@ -58,6 +58,18 @@ SYN_FILES += rtl/common/mqnic_tx_scheduler_block_rr.v
 SYN_FILES += rtl/common/tx_scheduler_rr.v
 SYN_FILES += rtl/common/cmac_pad.v
 SYN_FILES += rtl/common/mac_ts_insert.v
+
+SYN_FILES += rtl/common/mqnic_app_block.v
+SYN_FILES += rtl/common/mqnic_app_if_data_proc_v1.v
+SYN_FILES += rtl/common/mqnic_app_if_data_proc_v2.v
+SYN_FILES += rtl/common/syn_fifo.v
+SYN_FILES += rtl/common/axi_cpu_bus.v
+SYN_FILES += rtl/common/tdpram.v
+SYN_FILES += rtl/common/dpram.v
+SYN_FILES += rtl/common/wrapper_dpram.v
+SYN_FILES += rtl/common/wrapper_tdpram.v
+SYN_FILES += rtl/common/mqnic_app_if_ctrl.v
+
 SYN_FILES += lib/eth/rtl/ptp_clock.v
 SYN_FILES += lib/eth/rtl/ptp_clock_cdc.v
 SYN_FILES += lib/eth/rtl/ptp_perout.v

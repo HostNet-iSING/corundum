@@ -54,7 +54,7 @@ VERILOG_SOURCES += ../../rtl/common/stats_dma_latency.v
 VERILOG_SOURCES += ../../rtl/common/mqnic_tx_scheduler_block_rr.v
 VERILOG_SOURCES += ../../rtl/common/tx_scheduler_rr.v
 
-VERILOG_SOURCES += ../../rtl/common/mqnic_app_if_data_proc_v2.v
+#VERILOG_SOURCES += ../../rtl/common/mqnic_app_if_data_proc_v2.v
 VERILOG_SOURCES += ../../rtl/common/mqnic_app_if_ctrl.v
 #VERILOG_SOURCES += ../../rtl/common/wrapper_tdpram.v
 #VERILOG_SOURCES += ../../rtl/common/tdpram.v
@@ -66,7 +66,7 @@ VERILOG_SOURCES += ../../rtl/v3/mqnic_app_block.v
 VERILOG_SOURCES += ../../rtl/v3/mqnic_interface_tx.v
 VERILOG_SOURCES += ../../rtl/v3/mqnic_interface.v
 VERILOG_SOURCES += ../../rtl/v3/mqnic_core.v
-VERILOG_SOURCES += ../../rtl/v3/tx_queue_manager.v
+#VERILOG_SOURCES += ../../rtl/v3/tx_queue_manager.v
 #VERILOG_SOURCES += ../../rtl/v3/mqnic_app_if_ctrl.v
 VERILOG_SOURCES += ../../rtl/v3/wrapper_tdpram.v
 VERILOG_SOURCES += ../../rtl/v3/tdpram.v

@@ -1,0 +1,1053 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Tue Dec 19 07:35:39 2023
+# Process ID: 2227254
+# Current directory: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/pcie4_uscale_plus_0_synth_1
+# Command line: vivado -log pcie4_uscale_plus_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source pcie4_uscale_plus_0.tcl
+# Log file: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/pcie4_uscale_plus_0_synth_1/pcie4_uscale_plus_0.vds
+# Journal file: /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/pcie4_uscale_plus_0_synth_1/vivado.jou
+#-----------------------------------------------------------
+source pcie4_uscale_plus_0.tcl -notrace
+Command: synth_design -top pcie4_uscale_plus_0 -part xcu250-figd2104-2-e -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Device 21-403] Loading part xcu250-figd2104-2-e
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 2227467
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2982.234 ; gain = 227.656 ; free physical = 296606 ; free virtual = 374159
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/synth/pcie4_uscale_plus_0.v:84]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_pcie4_uscale_core_top' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_pcie4_uscale_core_top.v:59]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_pipe' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_pipe.v:71]
+INFO: [Synth 8-6157] synthesizing module 'PCIE40E4' [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:70596]
+INFO: [Synth 8-6155] done synthesizing module 'PCIE40E4' (1#1) [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:70596]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_bram' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram.v:59]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_bram_32k' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram_32k.v:59]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_bram_16k_int' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram_16k_int.v:59]
+INFO: [Synth 8-6157] synthesizing module 'RAMB36E2' [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:99110]
+INFO: [Synth 8-6155] done synthesizing module 'RAMB36E2' (2#1) [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:99110]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_bram_16k_int' (3#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram_16k_int.v:59]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_bram_32k' (4#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram_32k.v:59]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_bram_rep' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram_rep.v:59]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_bram_rep_int' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram_rep_int.v:59]
+INFO: [Synth 8-6157] synthesizing module 'RAMB36E2__parameterized0' [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:99110]
+INFO: [Synth 8-6155] done synthesizing module 'RAMB36E2__parameterized0' (4#1) [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:99110]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_bram_rep_int' (5#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram_rep_int.v:59]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_bram_rep' (6#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram_rep.v:59]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_bram_16k' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram_16k.v:59]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_bram_16k' (7#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram_16k.v:59]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_bram_msix' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram_msix.v:59]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_bram_msix' (8#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram_msix.v:59]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_bram_tph' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram_tph.v:59]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_bram_tph' (9#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram_tph.v:59]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_bram' (10#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_bram.v:59]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_init_ctrl' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_init_ctrl.v:62]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_init_ctrl.v:263]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_init_ctrl.v:312]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_init_ctrl' (11#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_init_ctrl.v:62]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_vf_decode' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_vf_decode.v:59]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_vf_decode' (12#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_vf_decode.v:59]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_pl_eq' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_pl_eq.v:59]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_pl_eq' (13#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_pl_eq.v:59]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_512b_intfc' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_intfc.v:58]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_512b_intfc_int' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_intfc_int.v:58]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_512b_cq_intfc' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_cq_intfc.v:58]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_512b_sync_fifo' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_sync_fifo.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_512b_sync_fifo' (14#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_sync_fifo.v:58]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_512b_cq_output_mux' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_cq_output_mux.v:58]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_cq_output_mux.v:398]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_512b_cq_output_mux' (15#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_cq_output_mux.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_512b_cq_intfc' (16#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_cq_intfc.v:58]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_512b_cc_intfc' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_cc_intfc.v:58]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_512b_async_fifo' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_async_fifo.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_512b_async_fifo' (17#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_async_fifo.v:58]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_512b_cc_output_mux' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_cc_output_mux.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_512b_cc_output_mux' (18#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_cc_output_mux.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_512b_cc_intfc' (19#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_cc_intfc.v:58]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_512b_rq_intfc' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_rq_intfc.v:58]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_512b_async_fifo__parameterized0' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_async_fifo.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_512b_async_fifo__parameterized0' (19#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_async_fifo.v:58]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_512b_rq_output_mux' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_rq_output_mux.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_512b_rq_output_mux' (20#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_rq_output_mux.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_512b_rq_intfc' (21#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_rq_intfc.v:58]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_512b_rc_intfc' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_rc_intfc.v:58]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_512b_sync_fifo__parameterized0' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_sync_fifo.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_512b_sync_fifo__parameterized0' (21#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_sync_fifo.v:58]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_512b_rc_output_mux' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_rc_output_mux.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_512b_rc_output_mux' (22#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_rc_output_mux.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_512b_rc_intfc' (23#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_rc_intfc.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_512b_intfc_int' (24#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_intfc_int.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_512b_intfc' (25#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_512b_intfc.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_pipe' (26#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_pipe.v:71]
+INFO: [Synth 8-6157] synthesizing module 'BUFG_GT' [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:1259]
+INFO: [Synth 8-6155] done synthesizing module 'BUFG_GT' (27#1) [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:1259]
+INFO: [Synth 8-6157] synthesizing module 'BUFG_GT_SYNC' [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:1281]
+INFO: [Synth 8-6155] done synthesizing module 'BUFG_GT_SYNC' (28#1) [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:1281]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_phy_top' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_top.v:111]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_gt_phy_wrapper' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_phy_wrapper.v:140]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_gt_phy_txeq' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_phy_txeq.v:70]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_sync' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_sync.v:66]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_sync_cell' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_sync_cell.v:66]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_sync_cell' (29#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_sync_cell.v:66]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_sync' (30#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_sync.v:66]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_sync__parameterized0' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_sync.v:66]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_sync__parameterized0' (30#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_sync.v:66]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_sync__parameterized1' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_sync.v:66]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_sync__parameterized1' (30#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_sync.v:66]
+INFO: [Synth 8-226] default block is never used [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_phy_txeq.v:287]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_gt_phy_txeq' (31#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_phy_txeq.v:70]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_gt_phy_rxeq' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_phy_rxeq.v:66]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_sync__parameterized2' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_sync.v:66]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_sync__parameterized2' (31#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_sync.v:66]
+INFO: [Synth 8-226] default block is never used [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_phy_rxeq.v:225]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_gt_phy_rxeq' (32#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_phy_rxeq.v:66]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_gt_receiver_detect_rxterm' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_receiver_detect_rxterm.v:69]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_sync__parameterized3' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_sync.v:66]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_sync__parameterized3' (32#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_sync.v:66]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_gt_receiver_detect_rxterm' (33#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_receiver_detect_rxterm.v:69]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_gt_cdr_ctrl_on_eidle' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_cdr_ctrl_on_eidle.v:66]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_gt_cdr_ctrl_on_eidle' (34#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_cdr_ctrl_on_eidle.v:66]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_gtwizard_top' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gtwizard_top.v:66]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_gt' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/pcie4_uscale_plus_0_gt.v:62]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_gt_gtwizard_top' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/pcie4_uscale_plus_0_gt_gtwizard_top.v:175]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_gt_gtwizard_gtye4' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/pcie4_uscale_plus_0_gt_gtwizard_gtye4.v:143]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_gt_gtye4_common_wrapper' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/pcie4_uscale_plus_0_gt_gtye4_common_wrapper.v:56]
+INFO: [Synth 8-6157] synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_common' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/gtwizard_ultrascale_v1_7_gtye4_common.v:55]
+INFO: [Synth 8-6157] synthesizing module 'GTYE4_COMMON' [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:40414]
+INFO: [Synth 8-6155] done synthesizing module 'GTYE4_COMMON' (35#1) [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:40414]
+INFO: [Synth 8-6155] done synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_common' (36#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/gtwizard_ultrascale_v1_7_gtye4_common.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_gt_gtye4_common_wrapper' (37#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/pcie4_uscale_plus_0_gt_gtye4_common_wrapper.v:56]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_gt_gtye4_channel_wrapper' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/pcie4_uscale_plus_0_gt_gtye4_channel_wrapper.v:56]
+INFO: [Synth 8-6157] synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_channel' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/gtwizard_ultrascale_v1_7_gtye4_channel.v:55]
+INFO: [Synth 8-6157] synthesizing module 'GTYE4_CHANNEL' [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:39253]
+INFO: [Synth 8-6155] done synthesizing module 'GTYE4_CHANNEL' (38#1) [/opt/Xilinx/Vivado/2021.1/scripts/rt/data/unisim_comp.v:39253]
+INFO: [Synth 8-6155] done synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_channel' (39#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/gtwizard_ultrascale_v1_7_gtye4_channel.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_gt_gtye4_channel_wrapper' (40#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/pcie4_uscale_plus_0_gt_gtye4_channel_wrapper.v:56]
+INFO: [Synth 8-6157] synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_gtye4_cpll_cal.v:55]
+INFO: [Synth 8-6157] synthesizing module 'gtwizard_ultrascale_v1_7_10_reset_synchronizer' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_reset_sync.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'gtwizard_ultrascale_v1_7_10_reset_synchronizer' (41#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_reset_sync.v:55]
+INFO: [Synth 8-6157] synthesizing module 'gtwizard_ultrascale_v1_7_10_bit_synchronizer' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_bit_sync.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'gtwizard_ultrascale_v1_7_10_bit_synchronizer' (42#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_bit_sync.v:55]
+INFO: [Synth 8-6157] synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_gtye4_cpll_cal_tx.v:55]
+INFO: [Synth 8-6157] synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_freq_counter' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_gtye4_cal_freqcnt.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_freq_counter' (43#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_gtye4_cal_freqcnt.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx' (44#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_gtye4_cpll_cal_tx.v:55]
+INFO: [Synth 8-6157] synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_rx' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_gtye4_cpll_cal_rx.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_rx' (45#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_gtye4_cpll_cal_rx.v:55]
+INFO: [Synth 8-6157] synthesizing module 'gtwizard_ultrascale_v1_7_10_gte4_drp_arb' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_gte4_drp_arb.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'gtwizard_ultrascale_v1_7_10_gte4_drp_arb' (46#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_gte4_drp_arb.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal' (47#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_gtye4_cpll_cal.v:55]
+INFO: [Synth 8-6157] synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_delay_powergood' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_gtye4_delay_powergood.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'gtwizard_ultrascale_v1_7_10_gtye4_delay_powergood' (48#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/hdl/gtwizard_ultrascale_v1_7_gtye4_delay_powergood.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_gt_gtwizard_gtye4' (49#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/pcie4_uscale_plus_0_gt_gtwizard_gtye4.v:143]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_gt_gtwizard_top' (50#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/pcie4_uscale_plus_0_gt_gtwizard_top.v:175]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_gt' (51#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/pcie4_uscale_plus_0_gt.v:62]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_gtwizard_top' (52#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gtwizard_top.v:66]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_gt_phy_clk' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_phy_clk.v:66]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_gt_phy_clk' (53#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_phy_clk.v:66]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_gt_phy_rst' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_phy_rst.v:66]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_sync__parameterized4' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_sync.v:66]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_sync__parameterized4' (53#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_sync.v:66]
+INFO: [Synth 8-226] default block is never used [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_phy_rst.v:417]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_gt_phy_rst' (54#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_phy_rst.v:66]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_gt_phy_wrapper' (55#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_gt_phy_wrapper.v:140]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_phy_pipeline' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_pipeline.v:78]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain' (56#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized0' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized0' (56#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized1' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized1' (56#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized2' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized2' (56#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized3' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized3' (56#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized4' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized4' (56#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized5' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized5' (56#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized6' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized6' (56#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized7' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized7' (56#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6157] synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized8' [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_phy_ff_chain__parameterized8' (56#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_ff_chain.v:80]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_phy_pipeline' (57#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_pipeline.v:78]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_phy_top' (58#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_phy_top.v:111]
+INFO: [Synth 8-6157] synthesizing module 'xpm_cdc_async_rst' [/opt/Xilinx/Vivado/2021.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:1175]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_cdc_async_rst' (59#1) [/opt/Xilinx/Vivado/2021.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:1175]
+INFO: [Synth 8-6157] synthesizing module 'xpm_cdc_async_rst__parameterized0' [/opt/Xilinx/Vivado/2021.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:1175]
+INFO: [Synth 8-6155] done synthesizing module 'xpm_cdc_async_rst__parameterized0' (59#1) [/opt/Xilinx/Vivado/2021.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:1175]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0_pcie4_uscale_core_top' (60#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/pcie4_uscale_plus_0_pcie4_uscale_core_top.v:59]
+INFO: [Synth 8-6155] done synthesizing module 'pcie4_uscale_plus_0' (61#1) [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/synth/pcie4_uscale_plus_0.v:84]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 3175.938 ; gain = 421.359 ; free physical = 295095 ; free virtual = 372661
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 3190.781 ; gain = 436.203 ; free physical = 294679 ; free virtual = 372244
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 3190.781 ; gain = 436.203 ; free physical = 294679 ; free virtual = 372244
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 3204.719 ; gain = 0.000 ; free physical = 293088 ; free virtual = 370653
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/synth/pcie4_uscale_plus_0_ooc.xdc] for cell 'inst'
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/synth/pcie4_uscale_plus_0_ooc.xdc] for cell 'inst'
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/pcie4_uscale_plus_0_gt.xdc] for cell 'inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst'
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/pcie4_uscale_plus_0_gt.xdc] for cell 'inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst'
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/ip_0/synth/pcie4_uscale_plus_0_gt.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/pcie4_uscale_plus_0_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/pcie4_uscale_plus_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/ip_pcie4_uscale_plus_x0y1.xdc] for cell 'inst'
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/ip_pcie4_uscale_plus_x0y1.xdc] for cell 'inst'
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/source/ip_pcie4_uscale_plus_x0y1.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/pcie4_uscale_plus_0_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/pcie4_uscale_plus_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+INFO: [Timing 38-2] Deriving generated clocks
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/pcie4_uscale_plus_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/pcie4_uscale_plus_0_synth_1/dont_touch.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/pcie4_uscale_plus_0_synth_1/dont_touch.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/pcie4_uscale_plus_0_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/pcie4_uscale_plus_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/pcie4_uscale_plus_0_board.xdc] for cell 'inst'
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/pcie4_uscale_plus_0_board.xdc] for cell 'inst'
+Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/synth/pcie4_uscale_plus_0_late.xdc] for cell 'inst'
+Finished Parsing XDC File [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/synth/pcie4_uscale_plus_0_late.xdc] for cell 'inst'
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.gen/sources_1/ip/pcie4_uscale_plus_0/synth/pcie4_uscale_plus_0_late.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/pcie4_uscale_plus_0_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/pcie4_uscale_plus_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+INFO: [Project 1-1714] 2 XPM XDC files have been applied to the design.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.03 . Memory (MB): peak = 3701.867 ; gain = 0.000 ; free physical = 295051 ; free virtual = 372620
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.61 . Memory (MB): peak = 3711.773 ; gain = 9.906 ; free physical = 295011 ; free virtual = 372580
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:01:02 ; elapsed = 00:00:58 . Memory (MB): peak = 3711.773 ; gain = 957.195 ; free physical = 294472 ; free virtual = 372041
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu250-figd2104-2-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:01:02 ; elapsed = 00:00:58 . Memory (MB): peak = 3711.773 ; gain = 957.195 ; free physical = 294472 ; free virtual = 372041
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for inst/pcie4_uscale_plus_0_gt_top_i/\diablo_gt.diablo_gt_phy_wrapper /\gt_wizard.gtwizard_top_i /pcie4_uscale_plus_0_gt_i/inst. (constraint file  /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/pcie4_uscale_plus_0_synth_1/dont_touch.xdc, line 13).
+Applied set_property KEEP_HIERARCHY = SOFT for inst. (constraint file  /home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/pcie4_uscale_plus_0_synth_1/dont_touch.xdc, line 17).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/pcie4_uscale_plus_0_gt_top_i/\diablo_gt.diablo_gt_phy_wrapper /\gt_wizard.gtwizard_top_i /pcie4_uscale_plus_0_gt_i. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/user_lnk_up_cdc. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for inst/user_reset_cdc. (constraint file  auto generated constraint).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:01:02 ; elapsed = 00:00:58 . Memory (MB): peak = 3711.773 ; gain = 957.195 ; free physical = 294440 ; free virtual = 372009
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'read_state_reg' in module 'pcie4_uscale_plus_0_512b_cq_intfc'
+INFO: [Synth 8-802] inferred FSM for state register 'read_state_reg' in module 'pcie4_uscale_plus_0_512b_rc_intfc'
+INFO: [Synth 8-802] inferred FSM for state register 'fsm_reg' in module 'pcie4_uscale_plus_0_gt_phy_txeq'
+INFO: [Synth 8-802] inferred FSM for state register 'fsm_reg' in module 'pcie4_uscale_plus_0_gt_phy_rxeq'
+INFO: [Synth 8-802] inferred FSM for state register 'ctrl_fsm_reg' in module 'pcie4_uscale_plus_0_gt_receiver_detect_rxterm'
+INFO: [Synth 8-802] inferred FSM for state register 'non_sris.fsm_reg' in module 'pcie4_uscale_plus_0_gt_cdr_ctrl_on_eidle'
+INFO: [Synth 8-802] inferred FSM for state register 'pwr_on_fsm_reg' in module 'pcie4_uscale_plus_0_gt_phy_rst'
+INFO: [Synth 8-802] inferred FSM for state register 'fsm_reg' in module 'pcie4_uscale_plus_0_gt_phy_rst'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                               00 |                               00
+     WAIT_FOR_UPPER_HALF |                               01 |                               11
+         EXPECT_NEW_WORD |                               10 |                               01
+    SEND_SAVED_HALF_WORD |                               11 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'read_state_reg' using encoding 'sequential' in module 'pcie4_uscale_plus_0_512b_cq_intfc'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                               00 |                               00
+     WAIT_FOR_UPPER_HALF |                               01 |                               11
+         EXPECT_NEW_WORD |                               10 |                               01
+    SEND_SAVED_HALF_WORD |                               11 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'read_state_reg' using encoding 'sequential' in module 'pcie4_uscale_plus_0_512b_rc_intfc'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                FSM_IDLE |                              000 |                              000
+              FSM_PRESET |                              001 |                              001
+               FSM_COEFF |                              010 |                              010
+               FSM_REMAP |                              011 |                              011
+               FSM_QUERY |                              100 |                              100
+                FSM_DONE |                              101 |                              101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'fsm_reg' using encoding 'sequential' in module 'pcie4_uscale_plus_0_gt_phy_txeq'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                FSM_IDLE |                            00001 |                              000
+              FSM_PRESET |                            00010 |                              001
+             FSM_TXCOEFF |                            00100 |                              010
+               FSM_ADAPT |                            01000 |                              011
+                FSM_DONE |                            10000 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'fsm_reg' using encoding 'one-hot' in module 'pcie4_uscale_plus_0_gt_phy_rxeq'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+         FSM_ASSERT_AVTT |                              000 |                              001
+FSM_CHECK_RXELECIDLE_ASSERTED |                              001 |                              010
+FSM_CHECK_RXELECIDLE_SOLID_DEASSERT |                              010 |                              011
+         FSM_ASSERT_PROG |                              011 |                              100
+           FSM_CTRL_IDLE |                              100 |                              000
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'ctrl_fsm_reg' using encoding 'sequential' in module 'pcie4_uscale_plus_0_gt_receiver_detect_rxterm'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                FSM_IDLE |                               00 |                              000
+FSM_GEN12_RXELECIDLE_EXIT |                               01 |                              001
+FSM_GEN34_RXELECIDLE_EXIT |                               10 |                              010
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'non_sris.fsm_reg' using encoding 'sequential' in module 'pcie4_uscale_plus_0_gt_cdr_ctrl_on_eidle'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+         PWR_ON_WAIT_CNT |                                0 |                               00
+             PWR_ON_DONE |                                1 |                               01
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'pwr_on_fsm_reg' using encoding 'sequential' in module 'pcie4_uscale_plus_0_gt_phy_rst'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+         FSM_GTPOWERGOOD |                         00000001 |                              001
+             FSM_PLLLOCK |                         00000010 |                              010
+  FSM_TXPROGDIVRESETDONE |                         00000100 |                              011
+           FSM_RESETDONE |                         00001000 |                              100
+        FSM_TXSYNC_START |                         00010000 |                              101
+         FSM_TXSYNC_DONE |                         00100000 |                              110
+           FSM_PHYSTATUS |                         01000000 |                              111
+                FSM_IDLE |                         10000000 |                              000
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'fsm_reg' using encoding 'one-hot' in module 'pcie4_uscale_plus_0_gt_phy_rst'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:11 ; elapsed = 00:01:07 . Memory (MB): peak = 3711.773 ; gain = 957.195 ; free physical = 297207 ; free virtual = 374778
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   25 Bit       Adders := 16    
+	   2 Input   20 Bit       Adders := 1     
+	   2 Input   18 Bit       Adders := 16    
+	   3 Input   18 Bit       Adders := 16    
+	   2 Input   16 Bit       Adders := 16    
+	   2 Input    8 Bit       Adders := 17    
+	   2 Input    7 Bit       Adders := 32    
+	   2 Input    6 Bit       Adders := 20    
+	   2 Input    5 Bit       Adders := 1     
+	   2 Input    4 Bit       Adders := 22    
+	   2 Input    3 Bit       Adders := 4     
+	   2 Input    2 Bit       Adders := 59    
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---XORs : 
+	                2 Bit    Wide XORs := 16    
++---Registers : 
+	              756 Bit    Registers := 1     
+	              708 Bit    Registers := 2     
+	              684 Bit    Registers := 1     
+	              512 Bit    Registers := 8     
+	              504 Bit    Registers := 1     
+	              354 Bit    Registers := 1     
+	              342 Bit    Registers := 1     
+	              327 Bit    Registers := 1     
+	              298 Bit    Registers := 1     
+	              256 Bit    Registers := 14    
+	              252 Bit    Registers := 5     
+	              183 Bit    Registers := 3     
+	              161 Bit    Registers := 3     
+	              144 Bit    Registers := 8     
+	              137 Bit    Registers := 1     
+	               88 Bit    Registers := 2     
+	               81 Bit    Registers := 1     
+	               75 Bit    Registers := 4     
+	               64 Bit    Registers := 32    
+	               62 Bit    Registers := 3     
+	               48 Bit    Registers := 32    
+	               33 Bit    Registers := 3     
+	               32 Bit    Registers := 33    
+	               30 Bit    Registers := 16    
+	               25 Bit    Registers := 16    
+	               22 Bit    Registers := 2     
+	               20 Bit    Registers := 1     
+	               19 Bit    Registers := 32    
+	               18 Bit    Registers := 64    
+	               16 Bit    Registers := 120   
+	               15 Bit    Registers := 32    
+	               12 Bit    Registers := 2     
+	               10 Bit    Registers := 33    
+	                9 Bit    Registers := 9     
+	                8 Bit    Registers := 56    
+	                7 Bit    Registers := 80    
+	                6 Bit    Registers := 37    
+	                5 Bit    Registers := 50    
+	                4 Bit    Registers := 879   
+	                3 Bit    Registers := 90    
+	                2 Bit    Registers := 235   
+	                1 Bit    Registers := 1723  
++---Muxes : 
+	   2 Input  756 Bit        Muxes := 7     
+	   5 Input  756 Bit        Muxes := 1     
+	   3 Input  756 Bit        Muxes := 1     
+	   4 Input  708 Bit        Muxes := 1     
+	   4 Input  684 Bit        Muxes := 1     
+	   2 Input  512 Bit        Muxes := 2     
+	   2 Input  504 Bit        Muxes := 3     
+	   3 Input  504 Bit        Muxes := 1     
+	   2 Input  354 Bit        Muxes := 3     
+	   4 Input  354 Bit        Muxes := 1     
+	   2 Input  342 Bit        Muxes := 3     
+	   4 Input  342 Bit        Muxes := 1     
+	   2 Input  327 Bit        Muxes := 1     
+	   2 Input  298 Bit        Muxes := 1     
+	   2 Input  256 Bit        Muxes := 4     
+	   2 Input  252 Bit        Muxes := 14    
+	   5 Input  252 Bit        Muxes := 1     
+	   2 Input  183 Bit        Muxes := 1     
+	   2 Input  161 Bit        Muxes := 1     
+	   2 Input  144 Bit        Muxes := 2     
+	   2 Input  137 Bit        Muxes := 1     
+	   2 Input  128 Bit        Muxes := 4     
+	   2 Input   75 Bit        Muxes := 2     
+	   2 Input   62 Bit        Muxes := 1     
+	   5 Input   48 Bit        Muxes := 16    
+	   2 Input   48 Bit        Muxes := 32    
+	   2 Input   33 Bit        Muxes := 1     
+	   2 Input   32 Bit        Muxes := 16    
+	  33 Input   32 Bit        Muxes := 16    
+	   3 Input   32 Bit        Muxes := 16    
+	   2 Input   30 Bit        Muxes := 48    
+	   2 Input   28 Bit        Muxes := 16    
+	   2 Input   27 Bit        Muxes := 16    
+	   2 Input   26 Bit        Muxes := 16    
+	  33 Input   25 Bit        Muxes := 16    
+	   2 Input   25 Bit        Muxes := 16    
+	   2 Input   24 Bit        Muxes := 16    
+	   2 Input   23 Bit        Muxes := 16    
+	   4 Input   22 Bit        Muxes := 16    
+	   2 Input   21 Bit        Muxes := 16    
+	   2 Input   20 Bit        Muxes := 16    
+	   3 Input   20 Bit        Muxes := 1     
+	   2 Input   19 Bit        Muxes := 48    
+	   6 Input   19 Bit        Muxes := 16    
+	   2 Input   18 Bit        Muxes := 16    
+	   2 Input   17 Bit        Muxes := 16    
+	   2 Input   16 Bit        Muxes := 71    
+	  33 Input   16 Bit        Muxes := 32    
+	   4 Input   16 Bit        Muxes := 16    
+	   2 Input   15 Bit        Muxes := 16    
+	   2 Input   13 Bit        Muxes := 16    
+	   2 Input   12 Bit        Muxes := 16    
+	   2 Input   11 Bit        Muxes := 16    
+	   2 Input   10 Bit        Muxes := 80    
+	   4 Input   10 Bit        Muxes := 16    
+	   2 Input    9 Bit        Muxes := 16    
+	   2 Input    8 Bit        Muxes := 56    
+	   8 Input    8 Bit        Muxes := 3     
+	   9 Input    8 Bit        Muxes := 2     
+	   4 Input    8 Bit        Muxes := 1     
+	   3 Input    8 Bit        Muxes := 1     
+	   5 Input    8 Bit        Muxes := 16    
+	   7 Input    8 Bit        Muxes := 16    
+	   8 Input    7 Bit        Muxes := 16    
+	   2 Input    7 Bit        Muxes := 64    
+	   3 Input    7 Bit        Muxes := 16    
+	   7 Input    7 Bit        Muxes := 16    
+	   7 Input    6 Bit        Muxes := 2     
+	   2 Input    6 Bit        Muxes := 37    
+	   3 Input    6 Bit        Muxes := 2     
+	   6 Input    5 Bit        Muxes := 16    
+	   3 Input    5 Bit        Muxes := 32    
+	   2 Input    5 Bit        Muxes := 64    
+	   5 Input    5 Bit        Muxes := 16    
+	   4 Input    5 Bit        Muxes := 16    
+	   2 Input    4 Bit        Muxes := 43    
+	   3 Input    4 Bit        Muxes := 1     
+	  33 Input    4 Bit        Muxes := 16    
+	   6 Input    4 Bit        Muxes := 16    
+	   2 Input    3 Bit        Muxes := 232   
+	   8 Input    3 Bit        Muxes := 2     
+	   5 Input    3 Bit        Muxes := 64    
+	   6 Input    3 Bit        Muxes := 32    
+	   4 Input    3 Bit        Muxes := 16    
+	   4 Input    2 Bit        Muxes := 3     
+	   2 Input    2 Bit        Muxes := 171   
+	   3 Input    2 Bit        Muxes := 18    
+	   7 Input    2 Bit        Muxes := 1     
+	  29 Input    2 Bit        Muxes := 2     
+	   6 Input    2 Bit        Muxes := 16    
+	   5 Input    2 Bit        Muxes := 16    
+	   2 Input    1 Bit        Muxes := 340   
+	   5 Input    1 Bit        Muxes := 195   
+	   4 Input    1 Bit        Muxes := 44    
+	   3 Input    1 Bit        Muxes := 17    
+	  33 Input    1 Bit        Muxes := 288   
+	   8 Input    1 Bit        Muxes := 50    
+	   7 Input    1 Bit        Muxes := 144   
+	   6 Input    1 Bit        Muxes := 32    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 12288 (col length:96)
+BRAMs: 5376 (col length: RAMB18 384 RAMB36 192)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[251] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[250] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[249] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[248] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[247] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[246] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[245] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[244] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[243] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[242] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[241] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[240] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[239] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[238] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[237] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[236] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[235] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[234] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[233] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[232] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[231] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[230] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[229] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[228] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[227] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[226] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[225] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[224] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[223] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[222] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[221] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[220] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[219] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[218] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[217] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[216] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[215] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[214] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[213] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[212] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[211] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[210] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[209] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[208] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[207] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[206] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[205] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[204] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[203] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[202] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[201] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[200] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[199] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[198] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[197] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[196] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[195] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[194] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[193] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[192] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[191] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[190] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[189] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[188] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[187] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[186] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[185] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[184] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[183] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[182] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[181] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[180] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[179] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[178] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[177] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[176] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[175] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[174] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[173] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[172] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[171] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[170] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[169] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[168] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[167] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[166] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[165] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[164] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[163] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[162] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[161] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[160] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[159] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[158] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[157] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[156] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[155] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[154] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[153] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\reg_cfg_vf_active_reg[152] )
+INFO: [Common 17-14] Message 'Synth 8-3333' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Common 17-14] Message 'Synth 8-3333' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-5544] ROM "pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cc_intfc_mod/s_axis_cc_tkeep_reg" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rq_intfc_mod/s_axis_rq_tkeep_reg" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+WARNING: [Synth 8-7129] Port attr_alignment_mode_i[1] in module pcie4_uscale_plus_0_512b_rc_intfc is either unconnected or has no load
+WARNING: [Synth 8-7129] Port attr_alignment_mode_i[0] in module pcie4_uscale_plus_0_512b_rc_intfc is either unconnected or has no load
+WARNING: [Synth 8-7129] Port attr_alignment_mode_i[1] in module pcie4_uscale_plus_0_512b_cq_intfc is either unconnected or has no load
+WARNING: [Synth 8-7129] Port attr_alignment_mode_i[0] in module pcie4_uscale_plus_0_512b_cq_intfc is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_hot_reset_in_i in module pcie4_uscale_plus_0_init_ctrl is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_clk_i in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset_i in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_waddr_i[12] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_waddr_i[11] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_waddr_i[10] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_waddr_i[9] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_waddr_i[8] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_waddr_i[7] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_waddr_i[6] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_waddr_i[5] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_waddr_i[4] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_waddr_i[3] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_waddr_i[2] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_waddr_i[1] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_waddr_i[0] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[31] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[30] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[29] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[28] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[27] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[26] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[25] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[24] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[23] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[22] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[21] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[20] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[19] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[18] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[17] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[16] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[15] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[14] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[13] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[12] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[11] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[10] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[9] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[8] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[7] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[6] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[5] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[4] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[3] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[2] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[1] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdata_i[0] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdip_i[3] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdip_i[2] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdip_i[1] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wdip_i[0] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wen_i[3] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wen_i[2] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wen_i[1] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_wen_i[0] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_msix_ren_i in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_tph_stt_func_num_i[7] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_tph_stt_func_num_i[6] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_tph_stt_func_num_i[5] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_tph_stt_func_num_i[4] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_tph_stt_func_num_i[3] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_tph_stt_func_num_i[2] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_tph_stt_func_num_i[1] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_tph_stt_func_num_i[0] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_tph_stt_index_i[5] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_tph_stt_index_i[4] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_tph_stt_index_i[3] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_tph_stt_index_i[2] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_tph_stt_index_i[1] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_tph_stt_index_i[0] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port user_tph_stt_rd_en_i in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_waddr_i[11] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_waddr_i[10] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_waddr_i[9] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_waddr_i[8] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_waddr_i[7] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_waddr_i[6] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_waddr_i[5] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_waddr_i[4] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_waddr_i[3] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_waddr_i[2] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_waddr_i[1] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_waddr_i[0] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_wdata_i[31] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_wdata_i[30] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_wdata_i[29] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_wdata_i[28] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_wdata_i[27] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_wdata_i[26] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_wdata_i[25] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_wdata_i[24] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_wdata_i[23] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_wdata_i[22] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_wdata_i[21] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_tph_wdata_i[20] in module pcie4_uscale_plus_0_bram is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rq_intfc_mod/pcie_4_0_512b_async_fifo_blk/write_data_reg_reg[274]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rq_intfc_mod/pcie_4_0_512b_async_fifo_blk/write_data_reg_reg[279]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[0]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[1]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[0]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[1]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[2]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[1]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[2]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[3]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[2]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[3]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[4]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[3]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[4]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[5]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[4]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[5]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[6]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[5]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[6]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[7]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[6]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[7]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[8]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[7]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[8]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[8]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[9]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[10]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[9]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[10]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[11]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[10]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[11]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[12]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[11]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[12]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[13]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[12]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[13]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[14]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[13]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[14]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_second_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[14]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_second_reg_reg[67]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_second_reg_reg[74]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_first_reg_reg[67]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_first_reg_reg[74]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_second_reg_reg[74]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_second_reg_reg[75]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_first_reg_reg[74]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_first_reg_reg[75]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_second_reg_reg[79]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_second_reg_reg[95]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_first_reg_reg[79]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_first_reg_reg[95]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[0]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[1]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[0]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[1]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[2]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[1]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[2]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[3]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[2]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[3]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[4]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[3]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[4]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[5]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[4]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[5]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[6]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[5]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[6]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[7]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[6]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[7]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[8]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[7]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[8]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[8]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[9]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[10]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[9]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[10]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[11]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[10]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[11]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[12]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[11]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[12]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[13]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[12]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[13]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[14]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[13]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[14]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_second_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[14]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tkeep_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tuser_second_reg_reg[81]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tuser_second_reg_reg[85]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tuser_first_reg_reg[81]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tuser_first_reg_reg[85]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tuser_second_reg_reg[82]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tuser_second_reg_reg[84]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tuser_first_reg_reg[82]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tuser_first_reg_reg[84]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tuser_second_reg_reg[87]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tuser_second_reg_reg[95]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tuser_first_reg_reg[87]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/m_axis_cq_tuser_first_reg_reg[95]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/out_tuser_o_reg[67]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/out_tuser_o_reg[75]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/out_tuser_o_reg[74]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/out_tuser_o_reg[75]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/out_tuser_o_reg[79]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/out_tuser_o_reg[95]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/out_tuser_o_reg[81]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/out_tuser_o_reg[85]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/out_tuser_o_reg[82]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/out_tuser_o_reg[84]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/out_tuser_o_reg[87]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/pcie_4_0_512b_cq_output_mux_blk/out_tuser_o_reg[95]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rq_intfc_mod/pcie_4_0_512b_rq_output_mux_blk/m_axis_rq_tuser_second_reg_reg[10]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rq_intfc_mod/pcie_4_0_512b_rq_output_mux_blk/m_axis_rq_tuser_second_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rq_intfc_mod/pcie_4_0_512b_rq_output_mux_blk/m_axis_rq_tuser_first_reg_reg[10]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rq_intfc_mod/pcie_4_0_512b_rq_output_mux_blk/m_axis_rq_tuser_first_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rq_intfc_mod/pcie_4_0_512b_rq_output_mux_blk/out_tuser_o_reg[10]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rq_intfc_mod/pcie_4_0_512b_rq_output_mux_blk/out_tuser_o_reg[15]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/saved_data_reg_reg[306]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/saved_err_reg'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/saved_data_reg_reg[305]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_cq_intfc_mod/saved_err_reg'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_second_reg_reg[66]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_second_reg_reg[73]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_first_reg_reg[66]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_first_reg_reg[73]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_second_reg_reg[78]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_second_reg_reg[91]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_first_reg_reg[78]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/m_axis_rc_tuser_first_reg_reg[91]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/out_tuser_o_reg[66]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/out_tuser_o_reg[73]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/out_tuser_o_reg[78]' (FDRE) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/out_tuser_o_reg[91]'
+INFO: [Synth 8-3886] merging instance 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/compl_sop2_ptr_reg[1]' (FDR) to 'pcie4_0_512b_intfc_mod/pcie_4_0_512b_intfc_int_mod/pcie_4_0_512b_rc_intfc_mod/pcie_4_0_512b_rc_output_mux_blk/compl_sop_reg[2]'
+INFO: [Synth 8-3886] merging instance 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[5].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/daddr_reg[0]' (FDE) to 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[5].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/daddr_reg[6]'
+INFO: [Synth 8-3886] merging instance 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[5].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gte4_drp_arb_i/we_reg[1]' (FDRE) to 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[5].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gte4_drp_arb_i/en_reg[1]'
+INFO: [Synth 8-3886] merging instance 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[6].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/daddr_reg[0]' (FDE) to 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[6].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/daddr_reg[6]'
+INFO: [Synth 8-3886] merging instance 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[6].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gte4_drp_arb_i/we_reg[1]' (FDRE) to 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[6].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gte4_drp_arb_i/en_reg[1]'
+INFO: [Synth 8-3886] merging instance 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[7].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/daddr_reg[0]' (FDE) to 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[7].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/daddr_reg[6]'
+INFO: [Synth 8-3886] merging instance 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[7].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gte4_drp_arb_i/we_reg[1]' (FDRE) to 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[7].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gte4_drp_arb_i/en_reg[1]'
+INFO: [Synth 8-3886] merging instance 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[8].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/daddr_reg[0]' (FDE) to 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[8].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/daddr_reg[6]'
+INFO: [Synth 8-3886] merging instance 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[8].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gte4_drp_arb_i/we_reg[1]' (FDRE) to 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[8].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gte4_drp_arb_i/en_reg[1]'
+INFO: [Synth 8-3886] merging instance 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[9].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/daddr_reg[0]' (FDE) to 'gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[9].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/daddr_reg[6]'
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "preset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-3917] design pcie4_uscale_plus_0_gt_phy_wrapper__GC0 has port GT_DRP_CLK_125M driven by constant 0
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:47 ; elapsed = 00:02:20 . Memory (MB): peak = 3711.773 ; gain = 957.195 ; free physical = 285581 ; free virtual = 363238
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:02:04 ; elapsed = 00:02:40 . Memory (MB): peak = 4741.758 ; gain = 1987.180 ; free physical = 288259 ; free virtual = 365967
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:03:12 ; elapsed = 00:03:50 . Memory (MB): peak = 5105.781 ; gain = 2351.203 ; free physical = 284832 ; free virtual = 362545
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:03:37 ; elapsed = 00:04:31 . Memory (MB): peak = 5117.707 ; gain = 2363.129 ; free physical = 279891 ; free virtual = 357627
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:03:57 ; elapsed = 00:04:52 . Memory (MB): peak = 5117.707 ; gain = 2363.129 ; free physical = 277162 ; free virtual = 354991
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:03:57 ; elapsed = 00:04:52 . Memory (MB): peak = 5117.707 ; gain = 2363.129 ; free physical = 277151 ; free virtual = 354979
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:04:04 ; elapsed = 00:04:59 . Memory (MB): peak = 5117.707 ; gain = 2363.129 ; free physical = 277182 ; free virtual = 355011
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:04:04 ; elapsed = 00:04:59 . Memory (MB): peak = 5117.707 ; gain = 2363.129 ; free physical = 277236 ; free virtual = 355065
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:04:08 ; elapsed = 00:05:03 . Memory (MB): peak = 5117.707 ; gain = 2363.129 ; free physical = 279169 ; free virtual = 356997
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:04:08 ; elapsed = 00:05:03 . Memory (MB): peak = 5117.707 ; gain = 2363.129 ; free physical = 279156 ; free virtual = 356985
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++------------------------------------------+---------------------------------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name                               | RTL Name                                                                                          | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++------------------------------------------+---------------------------------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|pcie4_uscale_plus_0_pcie4_uscale_core_top | pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_rst_i/cpllpd_r_reg[3]            | 4      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|pcie4_uscale_plus_0_pcie4_uscale_core_top | pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_rst_i/cpllreset_r_reg[3]         | 4      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|pcie4_uscale_plus_0_pcie4_uscale_core_top | pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_rst_i/qpllpd_r_reg[3]            | 4      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|pcie4_uscale_plus_0_pcie4_uscale_core_top | pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_rst_i/qpllreset_r_reg[3]         | 4      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|pcie4_uscale_plus_0_pcie4_uscale_core_top | pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_rst_i/txprogdivreset_r_reg[3]    | 4      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|pcie4_uscale_plus_0_pcie4_uscale_core_top | pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_rst_i/gtreset_r_reg[3]           | 4      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|pcie4_uscale_plus_0_pcie4_uscale_core_top | pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_rst_i/userrdy_r_reg[3]           | 4      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|pcie4_uscale_plus_0_pcie4_uscale_core_top | pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_lane[0].cdrhold_shift_reg[0][31] | 32     | 16    | NO           | NO                 | YES               | 0      | 16      | 
++------------------------------------------+---------------------------------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+
+Dynamic Shift Register Report:
++------------+---------------------------------+--------+------------+--------+---------+--------+--------+--------+
+|Module Name | RTL Name                        | Length | Data Width | SRL16E | SRLC32E | Mux F7 | Mux F8 | Mux F9 | 
++------------+---------------------------------+--------+------------+--------+---------+--------+--------+--------+
+|dsrl        | srl_style_fifo.ram_array_reg[7] | 708    | 708        | 708    | 0       | 0      | 0      | 0      | 
+|dsrl__1     | ram_array_reg[15]               | 298    | 298        | 298    | 0       | 0      | 0      | 0      | 
+|dsrl__2     | ram_array_reg[15]               | 327    | 327        | 327    | 0       | 0      | 0      | 0      | 
+|dsrl__3     | srl_style_fifo.ram_array_reg[7] | 684    | 684        | 684    | 0       | 0      | 0      | 0      | 
++------------+---------------------------------+--------+------------+--------+---------+--------+--------+--------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+--------------+------+
+|      |Cell          |Count |
++------+--------------+------+
+|1     |BUFG_GT       |    22|
+|2     |BUFG_GT_SYNC  |     1|
+|3     |CARRY8        |   339|
+|4     |GTYE4_CHANNEL |    16|
+|5     |GTYE4_COMMON  |     4|
+|6     |LUT1          |   201|
+|7     |LUT2          |  1604|
+|8     |LUT3          |  3212|
+|9     |LUT4          |  3353|
+|10    |LUT5          |  3076|
+|11    |LUT6          |  2476|
+|12    |MUXF7         |    28|
+|13    |PCIE40E4      |     1|
+|14    |RAMB36E2      |    22|
+|16    |SRL16E        |  1988|
+|17    |SRLC32E       |    16|
+|18    |FDCE          |   802|
+|19    |FDPE          |   295|
+|20    |FDRE          | 27674|
+|21    |FDSE          |   350|
++------+--------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:04:09 ; elapsed = 00:05:04 . Memory (MB): peak = 5117.707 ; gain = 2363.129 ; free physical = 279144 ; free virtual = 356973
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 291 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:03:36 ; elapsed = 00:04:35 . Memory (MB): peak = 5117.707 ; gain = 1842.137 ; free physical = 288193 ; free virtual = 366022
+Synthesis Optimization Complete : Time (s): cpu = 00:04:15 ; elapsed = 00:05:09 . Memory (MB): peak = 5117.707 ; gain = 2363.129 ; free physical = 288216 ; free virtual = 366022
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.68 ; elapsed = 00:00:00.70 . Memory (MB): peak = 5117.707 ; gain = 0.000 ; free physical = 288999 ; free virtual = 366805
+INFO: [Netlist 29-17] Analyzing 367 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[28].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[0].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[28].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC_1 for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[1].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[28].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC_2 for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[2].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[28].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC_3 for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[3].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[29].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[4].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[29].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC_1 for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[5].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[29].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC_2 for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[6].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[29].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC_3 for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[7].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[30].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[10].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[30].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC_1 for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[11].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[30].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC_2 for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[8].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[30].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC_3 for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[9].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[31].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[12].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[31].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC_1 for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[13].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[31].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC_2 for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[14].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-441] Inserted BUFG_GT_SYNC inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[31].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/BUFG_GT_SYNC_3 for BUFG_GT inst/pcie4_uscale_plus_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/pcie4_uscale_plus_0_gt_i/inst/gen_gtwizard_gtye4_top.pcie4_uscale_plus_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_cpll_cal_gtye4.gen_cpll_cal_inst[15].gen_inst_cpll_cal.gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_inst/gtwizard_ultrascale_v1_7_10_gtye4_cpll_cal_tx_i/bufg_gt_txoutclkmon_inst
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/RAM32K.bram_comp_inst/bram_16k_0_int/ECC_RAM.RAMB36E2[0].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/RAM32K.bram_comp_inst/bram_16k_0_int/ECC_RAM.RAMB36E2[1].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/RAM32K.bram_comp_inst/bram_16k_0_int/ECC_RAM.RAMB36E2[2].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/RAM32K.bram_comp_inst/bram_16k_0_int/ECC_RAM.RAMB36E2[3].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/RAM32K.bram_comp_inst/bram_16k_0_int/ECC_RAM.RAMB36E2[4].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/RAM32K.bram_comp_inst/bram_16k_0_int/ECC_RAM.RAMB36E2[5].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/RAM32K.bram_comp_inst/bram_16k_1_int/ECC_RAM.RAMB36E2[0].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/RAM32K.bram_comp_inst/bram_16k_1_int/ECC_RAM.RAMB36E2[1].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/RAM32K.bram_comp_inst/bram_16k_1_int/ECC_RAM.RAMB36E2[2].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/RAM32K.bram_comp_inst/bram_16k_1_int/ECC_RAM.RAMB36E2[3].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/RAM32K.bram_comp_inst/bram_16k_1_int/ECC_RAM.RAMB36E2[4].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/RAM32K.bram_comp_inst/bram_16k_1_int/ECC_RAM.RAMB36E2[5].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/bram_post_inst/bram_16k_int/ECC_RAM.RAMB36E2[0].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/bram_post_inst/bram_16k_int/ECC_RAM.RAMB36E2[1].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/bram_post_inst/bram_16k_int/ECC_RAM.RAMB36E2[2].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/bram_post_inst/bram_16k_int/ECC_RAM.RAMB36E2[3].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/bram_post_inst/bram_16k_int/ECC_RAM.RAMB36E2[4].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/bram_post_inst/bram_16k_int/ECC_RAM.RAMB36E2[5].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/bram_repl_inst/bram_rep_int_0/ECC_RAM.RAMB36E2[0].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/bram_repl_inst/bram_rep_int_0/ECC_RAM.RAMB36E2[1].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/bram_repl_inst/bram_rep_int_0/ECC_RAM.RAMB36E2[2].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell inst/pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/bram_repl_inst/bram_rep_int_0/ECC_RAM.RAMB36E2[3].ramb36e2_inst has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 5179.707 ; gain = 0.000 ; free physical = 287618 ; free virtual = 365420
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: fd1bebec
+INFO: [Common 17-83] Releasing license: Synthesis
+467 Infos, 100 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:04:44 ; elapsed = 00:05:39 . Memory (MB): peak = 5179.707 ; gain = 2707.512 ; free physical = 289592 ; free virtual = 367394
+INFO: [Common 17-1381] The checkpoint '/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/pcie4_uscale_plus_0_synth_1/pcie4_uscale_plus_0.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:15 ; elapsed = 00:00:14 . Memory (MB): peak = 5211.723 ; gain = 32.016 ; free physical = 289700 ; free virtual = 367543
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP pcie4_uscale_plus_0, cache-ID = a7662b23dbf6618e
+INFO: [Coretcl 2-1174] Renamed 234 cell refs.
+INFO: [Common 17-1381] The checkpoint '/home/caogang/corundum/fpga/mqnic/AU250/fpga_100g/fpga/fpga.runs/pcie4_uscale_plus_0_synth_1/pcie4_uscale_plus_0.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:15 ; elapsed = 00:00:14 . Memory (MB): peak = 5211.723 ; gain = 0.000 ; free physical = 287966 ; free virtual = 365898
+INFO: [runtcl-4] Executing : report_utilization -file pcie4_uscale_plus_0_utilization_synth.rpt -pb pcie4_uscale_plus_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Dec 19 07:42:12 2023...

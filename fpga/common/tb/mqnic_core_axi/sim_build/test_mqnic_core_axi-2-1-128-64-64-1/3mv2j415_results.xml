@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1700723169" />
+    <testcase name="run_test_nic" classname="test_mqnic_core_axi" file="/home/caogang/corundum/fpga/common/tb/mqnic_core_axi/test_mqnic_core_axi.py" lineno="205" time="5402.904391050339" sim_time_ns="961464.001" ratio_time="177.95317692325276" />
+  </testsuite>
+</testsuites>

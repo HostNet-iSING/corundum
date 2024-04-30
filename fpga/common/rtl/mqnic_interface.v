@@ -121,7 +121,7 @@ module mqnic_interface #
     parameter AXIS_IF_RX_ID_WIDTH = PORTS > 1 ? $clog2(PORTS) : 1,
     parameter AXIS_IF_TX_DEST_WIDTH = $clog2(PORTS)+4,
     parameter AXIS_IF_RX_DEST_WIDTH = RX_QUEUE_INDEX_WIDTH+1,
-    parameter AXIS_IF_TX_USER_WIDTH = AXIS_SYNC_TX_USER_WIDTH+248,
+    parameter AXIS_IF_TX_USER_WIDTH = AXIS_SYNC_TX_USER_WIDTH,
     parameter AXIS_IF_RX_USER_WIDTH = AXIS_SYNC_RX_USER_WIDTH
 )
 (
@@ -305,7 +305,7 @@ module mqnic_interface #
     input  wire                                         s_axis_app_if_tx_tlast,
     input  wire [AXIS_IF_TX_ID_WIDTH-1:0]               s_axis_app_if_tx_tid,
     input  wire [AXIS_IF_TX_DEST_WIDTH-1:0]             s_axis_app_if_tx_tdest,
-    input  wire [AXIS_TX_USER_WIDTH-1:0]                s_axis_app_if_tx_tuser,
+    input  wire [AXIS_IF_TX_USER_WIDTH-1:0]             s_axis_app_if_tx_tuser,
 
     output wire [PTP_TS_WIDTH-1:0]                      m_axis_app_if_tx_cpl_ts,
     output wire [TX_TAG_WIDTH-1:0]                      m_axis_app_if_tx_cpl_tag,
@@ -871,10 +871,6 @@ wire [CPL_REQ_TAG_WIDTH_INT-1:0]    tx_cpl_req_status_tag;
 wire                                tx_cpl_req_status_full;
 wire                                tx_cpl_req_status_error;
 wire                                tx_cpl_req_status_valid;
-
-wire [TX_TAG_WIDTH-1:0]             eng_axis_tx_cpl_tag;
-wire                                eng_axis_tx_cpl_valid;
-wire                                eng_axis_tx_cpl_ready;
 
 // events
 wire [EQN_WIDTH-1:0]                fifo_event_queue;
@@ -1799,7 +1795,7 @@ cpl_write_inst (
 );
 
 // TX/RX queues
-tx_queue_manager #(
+queue_manager #(
     .ADDR_WIDTH(DMA_ADDR_WIDTH),
     .REQ_TAG_WIDTH(QUEUE_REQ_TAG_WIDTH),
     .OP_TABLE_SIZE(TX_QUEUE_OP_TABLE_SIZE),
@@ -1877,13 +1873,6 @@ tx_qm_inst (
     .s_axil_rresp(axil_tx_qm_rresp),
     .s_axil_rvalid(axil_tx_qm_rvalid),
     .s_axil_rready(axil_tx_qm_rready),
-
-    /*
-     * Transmit completion output to qm
-     */
-    .s_axis_tx_cpl_tag(eng_axis_tx_cpl_tag),
-    .s_axis_tx_cpl_valid(eng_axis_tx_cpl_valid),
-    .s_axis_tx_cpl_ready(eng_axis_tx_cpl_ready),
 
     /*
      * Configuration
@@ -2561,13 +2550,6 @@ interface_tx_inst (
     .s_axis_tx_cpl_ready(if_tx_cpl_ready),
 
     /*
-     * Transmit completion output to qm
-     */
-    .m_axis_tx_cpl_tag(eng_axis_tx_cpl_tag),
-    .m_axis_tx_cpl_valid(eng_axis_tx_cpl_valid),
-    .m_axis_tx_cpl_ready(eng_axis_tx_cpl_ready),
-
-    /*
      * Configuration
      */
     .mtu(tx_mtu_reg)
@@ -2896,7 +2878,7 @@ wire [PORTS-1:0] axis_if_tx_fifo_tvalid;
 wire [PORTS-1:0] axis_if_tx_fifo_tready;
 wire [PORTS-1:0] axis_if_tx_fifo_tlast;
 wire [PORTS*AXIS_IF_TX_ID_WIDTH-1:0] axis_if_tx_fifo_tid;
-wire [PORTS*AXIS_TX_USER_WIDTH-1:0] axis_if_tx_fifo_tuser;
+wire [PORTS*AXIS_IF_TX_USER_WIDTH-1:0] axis_if_tx_fifo_tuser;
 
 if (APP_AXIS_IF_ENABLE) begin
 
@@ -2955,7 +2937,7 @@ tx_fifo #(
     .S_DEST_WIDTH(AXIS_IF_TX_DEST_WIDTH),
     .M_DEST_WIDTH(AXIS_IF_TX_DEST_WIDTH),
     .USER_ENABLE(1),
-    .USER_WIDTH(AXIS_TX_USER_WIDTH),
+    .USER_WIDTH(AXIS_IF_TX_USER_WIDTH),
     .RAM_PIPELINE(AXIS_TX_FIFO_PIPELINE)
 )
 tx_fifo_inst (

@@ -1,0 +1,10 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1700723172" />
+    <testcase name="run_test_acc_001" classname="test_stats_counter" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.45186305046081543" sim_time_ns="14380.001" ratio_time="31823.80366205004" />
+    <testcase name="run_test_acc_002" classname="test_stats_counter" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.7466812133789062" sim_time_ns="14490.001" ratio_time="19405.87327010596" />
+    <testcase name="run_test_acc_003" classname="test_stats_counter" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.6210472583770752" sim_time_ns="14510.000999999997" ratio_time="23363.763070007954" />
+    <testcase name="run_test_acc_004" classname="test_stats_counter" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.9082076549530029" sim_time_ns="14530.001000000004" ratio_time="15998.544959139206" />
+    <testcase name="run_stress_test_001" classname="test_stats_counter" file="/home/caogang/corundum/.tox/py3/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="3.435706615447998" sim_time_ns="83860.001" ratio_time="24408.37079130667" />
+  </testsuite>
+</testsuites>

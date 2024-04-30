@@ -48,7 +48,7 @@ module mqnic_rx_queue_map #
     parameter AXIL_BASE_ADDR = 0
 )
 (
-    input  wire                          clk,
+        input  wire                          clk,
     input  wire                          rst,
 
     /*

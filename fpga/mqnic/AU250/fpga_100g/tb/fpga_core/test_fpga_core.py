@@ -747,8 +747,8 @@ def test_fpga_core(request):
     # Interface configuration
     parameters['PTP_TS_ENABLE'] = 1
     parameters['TX_CPL_FIFO_DEPTH'] = 32
-    parameters['TX_CHECKSUM_ENABLE'] = 1
-    parameters['RX_HASH_ENABLE'] = 1
+    parameters['TX_CHECKSUM_ENABLE'] = 0
+    parameters['RX_HASH_ENABLE'] = 0
     parameters['RX_CHECKSUM_ENABLE'] = 1
     parameters['TX_FIFO_DEPTH'] = 32768
     parameters['RX_FIFO_DEPTH'] = 131072
@@ -758,12 +758,12 @@ def test_fpga_core(request):
     parameters['RX_RAM_SIZE'] = 131072
 
     # Application block configuration
-    parameters['APP_ID'] = 0x00000000
-    parameters['APP_ENABLE'] = 0
+    parameters['APP_ID'] = 0x12340001
+    parameters['APP_ENABLE'] = 1
     parameters['APP_CTRL_ENABLE'] = 1
     parameters['APP_DMA_ENABLE'] = 1
-    parameters['APP_AXIS_DIRECT_ENABLE'] = 1
-    parameters['APP_AXIS_SYNC_ENABLE'] = 1
+    parameters['APP_AXIS_DIRECT_ENABLE'] = 0
+    parameters['APP_AXIS_SYNC_ENABLE'] = 0
     parameters['APP_AXIS_IF_ENABLE'] = 1
     parameters['APP_STAT_ENABLE'] = 1
 

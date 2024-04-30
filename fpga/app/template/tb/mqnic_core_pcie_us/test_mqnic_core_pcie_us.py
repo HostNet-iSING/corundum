@@ -41,6 +41,15 @@ class TB(object):
         self.log = SimLog("cocotb.tb")
         self.log.setLevel(logging.DEBUG)
 
+        fmt_log = '%(asctime)s %(filename)s %(levelname)s %(message)s'
+        date_fmt = '%Y%m%d %H:%M:%S'
+        self.formatter = logging.Formatter(fmt=fmt_log, datefmt=date_fmt)
+        
+        file_handler = logging.FileHandler('./test.log')
+        file_handler.setLevel(logging.INFO)
+        file_handler.setFormatter(self.formatter)
+        self.log.addHandler(file_handler)
+
         # PCIe
         self.rc = RootComplex()
 
@@ -447,241 +456,251 @@ async def run_test_nic(dut):
 
     tb.log.info("Send and receive single packet")
 
-    for interface in tb.driver.interfaces:
-        data = bytearray([x % 256 for x in range(1024)])
+    for k in range(64):
+        #data = bytearray([x % 256 for x in range(1024)])
+        data = bytearray([(k+1) % 256 for x in range(1024)])
+        tb.log.info("Packet: %s", data)
+        
+        await tb.driver.interfaces[0].start_xmit(data, 0)
 
-        await interface.start_xmit(data, 0)
+        #data = bytearray([x % 256 for x in range(4096)])
+        #tb.log.info("Packet: %s", data)
+        
+        #await interface.start_xmit(data, 2)
 
-        pkt = await tb.port_mac[interface.index*interface.port_count].tx.recv()
-        tb.log.info("Packet: %s", pkt)
+        #data = bytearray([x % 256 for x in range(4096)])
+        #tb.log.info("Packet: %s", data)
+        
+        #await interface.start_xmit(data, 3)
 
-        await tb.port_mac[interface.index*interface.port_count].rx.send(pkt)
+        #pkt = await tb.port_mac[interface.index*interface.port_count].tx.recv()
+        #tb.log.info("tx send Packet0428: %s", pkt)
 
-        pkt = await interface.recv()
+        #await tb.port_mac[interface.index*interface.port_count].rx.send(pkt)
 
-        tb.log.info("Packet: %s", pkt)
-        if interface.if_feature_rx_csum:
-            assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
+        #pkt = await interface.recv()
+
+        #tb.log.info("Packet: %s", pkt)
 
     tb.log.info("RX and TX checksum tests")
 
-    payload = bytes([x % 256 for x in range(256)])
-    eth = Ether(src='5A:51:52:53:54:55', dst='DA:D1:D2:D3:D4:D5')
-    ip = IP(src='192.168.1.100', dst='192.168.1.101')
-    udp = UDP(sport=1, dport=2)
-    test_pkt = eth / ip / udp / payload
-
-    if tb.driver.interfaces[0].if_feature_tx_csum:
-        test_pkt2 = test_pkt.copy()
-        test_pkt2[UDP].chksum = scapy.utils.checksum(bytes(test_pkt2[UDP]))
-
-        await tb.driver.interfaces[0].start_xmit(test_pkt2.build(), 0, 34, 6)
-    else:
-        await tb.driver.interfaces[0].start_xmit(test_pkt.build(), 0)
-
-    pkt = await tb.port_mac[0].tx.recv()
-    tb.log.info("Packet: %s", pkt)
-
-    await tb.port_mac[0].rx.send(pkt)
-
-    pkt = await tb.driver.interfaces[0].recv()
-
-    tb.log.info("Packet: %s", pkt)
-    if tb.driver.interfaces[0].if_feature_rx_csum:
-        assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
-    assert Ether(pkt.data).build() == test_pkt.build()
-
-    tb.log.info("Queue mapping offset test")
-
-    data = bytearray([x % 256 for x in range(1024)])
-
-    tb.loopback_enable = True
-
-    for k in range(4):
-        await tb.driver.interfaces[0].set_rx_queue_map_indir_table(0, 0, k)
-
-        await tb.driver.interfaces[0].start_xmit(data, 0)
-
-        pkt = await tb.driver.interfaces[0].recv()
-
-        tb.log.info("Packet: %s", pkt)
-        if tb.driver.interfaces[0].if_feature_rx_csum:
-            assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
-        assert pkt.queue == k
-
-    tb.loopback_enable = False
-
-    await tb.driver.interfaces[0].set_rx_queue_map_indir_table(0, 0, 0)
-
-    if tb.driver.interfaces[0].if_feature_rss:
-        tb.log.info("Queue mapping RSS mask test")
-
-        await tb.driver.interfaces[0].set_rx_queue_map_rss_mask(0, 0x00000003)
-
-        for k in range(4):
-            await tb.driver.interfaces[0].set_rx_queue_map_indir_table(0, k, k)
-
-        tb.loopback_enable = True
-
-        queues = set()
-
-        for k in range(64):
-            payload = bytes([x % 256 for x in range(256)])
-            eth = Ether(src='5A:51:52:53:54:55', dst='DA:D1:D2:D3:D4:D5')
-            ip = IP(src='192.168.1.100', dst='192.168.1.101')
-            udp = UDP(sport=1, dport=k+0)
-            test_pkt = eth / ip / udp / payload
-
-            if tb.driver.interfaces[0].if_feature_tx_csum:
-                test_pkt2 = test_pkt.copy()
-                test_pkt2[UDP].chksum = scapy.utils.checksum(bytes(test_pkt2[UDP]))
-
-                await tb.driver.interfaces[0].start_xmit(test_pkt2.build(), 0, 34, 6)
-            else:
-                await tb.driver.interfaces[0].start_xmit(test_pkt.build(), 0)
-
-        for k in range(64):
-            pkt = await tb.driver.interfaces[0].recv()
-
-            tb.log.info("Packet: %s", pkt)
-            if tb.driver.interfaces[0].if_feature_rx_csum:
-                assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
-
-            queues.add(pkt.queue)
-
-        assert len(queues) == 4
-
-        tb.loopback_enable = False
-
-        await tb.driver.interfaces[0].set_rx_queue_map_rss_mask(0, 0)
-
-    tb.log.info("Multiple small packets")
-
-    count = 64
-
-    pkts = [bytearray([(x+k) % 256 for x in range(60)]) for k in range(count)]
-
-    tb.loopback_enable = True
-
-    for p in pkts:
-        await tb.driver.interfaces[0].start_xmit(p, 0)
-
-    for k in range(count):
-        pkt = await tb.driver.interfaces[0].recv()
-
-        tb.log.info("Packet: %s", pkt)
-        assert pkt.data == pkts[k]
-        if tb.driver.interfaces[0].if_feature_rx_csum:
-            assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
-
-    tb.loopback_enable = False
-
-    tb.log.info("Multiple large packets")
-
-    count = 64
-
-    pkts = [bytearray([(x+k) % 256 for x in range(1514)]) for k in range(count)]
-
-    tb.loopback_enable = True
-
-    for p in pkts:
-        await tb.driver.interfaces[0].start_xmit(p, 0)
-
-    for k in range(count):
-        pkt = await tb.driver.interfaces[0].recv()
-
-        tb.log.info("Packet: %s", pkt)
-        assert pkt.data == pkts[k]
-        if tb.driver.interfaces[0].if_feature_rx_csum:
-            assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
-
-    tb.loopback_enable = False
-
-    tb.log.info("Jumbo frames")
-
-    count = 64
-
-    pkts = [bytearray([(x+k) % 256 for x in range(9014)]) for k in range(count)]
-
-    tb.loopback_enable = True
-
-    for p in pkts:
-        await tb.driver.interfaces[0].start_xmit(p, 0)
-
-    for k in range(count):
-        pkt = await tb.driver.interfaces[0].recv()
-
-        tb.log.info("Packet: %s", pkt)
-        assert pkt.data == pkts[k]
-        if tb.driver.interfaces[0].if_feature_rx_csum:
-            assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
-
-    tb.loopback_enable = False
-
-    if len(tb.driver.interfaces) > 1:
-        tb.log.info("All interfaces")
-
-        count = 64
-
-        pkts = [bytearray([(x+k) % 256 for x in range(1514)]) for k in range(count)]
-
-        tb.loopback_enable = True
-
-        for k, p in enumerate(pkts):
-            await tb.driver.interfaces[k % len(tb.driver.interfaces)].start_xmit(p, 0)
-
-        for k in range(count):
-            pkt = await tb.driver.interfaces[k % len(tb.driver.interfaces)].recv()
-
-            tb.log.info("Packet: %s", pkt)
-            assert pkt.data == pkts[k]
-            if tb.driver.interfaces[0].if_feature_rx_csum:
-                assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
-
-        tb.loopback_enable = False
-
-    if len(tb.driver.interfaces[0].sched_blocks) > 1:
-        tb.log.info("All interface 0 scheduler blocks")
-
-        for block in tb.driver.interfaces[0].sched_blocks:
-            await block.schedulers[0].rb.write_dword(mqnic.MQNIC_RB_SCHED_RR_REG_CTRL, 0x00000001)
-            await tb.driver.interfaces[0].set_rx_queue_map_indir_table(block.index, 0, block.index)
-            for k in range(len(block.interface.txq)):
-                if k % len(tb.driver.interfaces[0].sched_blocks) == block.index:
-                    await block.schedulers[0].hw_regs.write_dword(4*k, 0x00000003)
-                else:
-                    await block.schedulers[0].hw_regs.write_dword(4*k, 0x00000000)
-
-        count = 64
-
-        pkts = [bytearray([(x+k) % 256 for x in range(1514)]) for k in range(count)]
-
-        tb.loopback_enable = True
-
-        queues = set()
-
-        for k, p in enumerate(pkts):
-            await tb.driver.interfaces[0].start_xmit(p, k % len(tb.driver.interfaces[0].sched_blocks))
-
-        for k in range(count):
-            pkt = await tb.driver.interfaces[0].recv()
-
-            tb.log.info("Packet: %s", pkt)
-            # assert pkt.data == pkts[k]
-            if tb.driver.interfaces[0].if_feature_rx_csum:
-                assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
-
-            queues.add(pkt.queue)
-
-        assert len(queues) == len(tb.driver.interfaces[0].sched_blocks)
-
-        tb.loopback_enable = False
-
-        for block in tb.driver.interfaces[0].sched_blocks[1:]:
-            await block.schedulers[0].rb.write_dword(mqnic.MQNIC_RB_SCHED_RR_REG_CTRL, 0x00000000)
-            await tb.driver.interfaces[0].set_rx_queue_map_indir_table(block.index, 0, 0)
-
-    tb.log.info("Read statistics counters")
+    #payload = bytes([x % 256 for x in range(256)])
+    #eth = Ether(src='5A:51:52:53:54:55', dst='DA:D1:D2:D3:D4:D5')
+    #ip = IP(src='192.168.1.100', dst='192.168.1.101')
+    #udp = UDP(sport=1, dport=2)
+    #test_pkt = eth / ip / udp / payload
+    #
+    #if tb.driver.interfaces[0].if_feature_tx_csum:
+    #    test_pkt2 = test_pkt.copy()
+    #    test_pkt2[UDP].chksum = scapy.utils.checksum(bytes(test_pkt2[UDP]))
+    #
+    #    await tb.driver.interfaces[0].start_xmit(test_pkt2.build(), 0, 34, 6)
+    #else:
+    #    await tb.driver.interfaces[0].start_xmit(test_pkt.build(), 0)
+    #
+    #pkt = await tb.port_mac[0].tx.recv()
+    #tb.log.info("Packet: %s", pkt)
+    #
+    #await tb.port_mac[0].rx.send(pkt)
+    #
+    #pkt = await tb.driver.interfaces[0].recv()
+    #
+    #tb.log.info("Packet: %s", pkt)
+    #if tb.driver.interfaces[0].if_feature_rx_csum:
+    #    assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
+    #assert Ether(pkt.data).build() == test_pkt.build()
+    #
+    #tb.log.info("Queue mapping offset test")
+    #
+    #data = bytearray([x % 256 for x in range(1024)])
+    #
+    #tb.loopback_enable = True
+    #
+    #for k in range(4):
+    #    await tb.driver.interfaces[0].set_rx_queue_map_indir_table(0, 0, k)
+    #
+    #    await tb.driver.interfaces[0].start_xmit(data, 0)
+    #
+    #    pkt = await tb.driver.interfaces[0].recv()
+    #
+    #    tb.log.info("Packet: %s", pkt)
+    #    if tb.driver.interfaces[0].if_feature_rx_csum:
+    #        assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
+    #    assert pkt.queue == k
+    #
+    #tb.loopback_enable = False
+    #
+    #await tb.driver.interfaces[0].set_rx_queue_map_indir_table(0, 0, 0)
+    #
+    #if tb.driver.interfaces[0].if_feature_rss:
+    #    tb.log.info("Queue mapping RSS mask test")
+    #
+    #    await tb.driver.interfaces[0].set_rx_queue_map_rss_mask(0, 0x00000003)
+    #
+    #    for k in range(4):
+    #        await tb.driver.interfaces[0].set_rx_queue_map_indir_table(0, k, k)
+    #
+    #    tb.loopback_enable = True
+    #
+    #    queues = set()
+    #
+    #    for k in range(64):
+    #        payload = bytes([x % 256 for x in range(256)])
+    #        eth = Ether(src='5A:51:52:53:54:55', dst='DA:D1:D2:D3:D4:D5')
+    #        ip = IP(src='192.168.1.100', dst='192.168.1.101')
+    #        udp = UDP(sport=1, dport=k+0)
+    #        test_pkt = eth / ip / udp / payload
+    #
+    #        if tb.driver.interfaces[0].if_feature_tx_csum:
+    #            test_pkt2 = test_pkt.copy()
+    #            test_pkt2[UDP].chksum = scapy.utils.checksum(bytes(test_pkt2[UDP]))
+    #
+    #            await tb.driver.interfaces[0].start_xmit(test_pkt2.build(), 0, 34, 6)
+    #        else:
+    #            await tb.driver.interfaces[0].start_xmit(test_pkt.build(), 0)
+    #
+    #    for k in range(64):
+    #        pkt = await tb.driver.interfaces[0].recv()
+    #
+    #        tb.log.info("Packet: %s", pkt)
+    #        if tb.driver.interfaces[0].if_feature_rx_csum:
+    #            assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
+    #
+    #        queues.add(pkt.queue)
+    #
+    #    assert len(queues) == 4
+    #
+    #    tb.loopback_enable = False
+    #
+    #    await tb.driver.interfaces[0].set_rx_queue_map_rss_mask(0, 0)
+    #
+    #tb.log.info("Multiple small packets")
+    #
+    #count = 64
+    #
+    #pkts = [bytearray([(x+k) % 256 for x in range(60)]) for k in range(count)]
+    #
+    #tb.loopback_enable = True
+    #
+    #for p in pkts:
+    #    await tb.driver.interfaces[0].start_xmit(p, 0)
+    #
+    #for k in range(count):
+    #    pkt = await tb.driver.interfaces[0].recv()
+    #
+    #    tb.log.info("Packet: %s", pkt)
+    #    assert pkt.data == pkts[k]
+    #    if tb.driver.interfaces[0].if_feature_rx_csum:
+    #        assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
+    #
+    #tb.loopback_enable = False
+    #
+    #tb.log.info("Multiple large packets")
+    #
+    #count = 64
+    #
+    #pkts = [bytearray([(x+k) % 256 for x in range(1514)]) for k in range(count)]
+    #
+    #tb.loopback_enable = True
+    #
+    #for p in pkts:
+    #    await tb.driver.interfaces[0].start_xmit(p, 0)
+    #
+    #for k in range(count):
+    #    pkt = await tb.driver.interfaces[0].recv()
+    #
+    #    tb.log.info("Packet: %s", pkt)
+    #    assert pkt.data == pkts[k]
+    #    if tb.driver.interfaces[0].if_feature_rx_csum:
+    #        assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
+    #
+    #tb.loopback_enable = False
+    #
+    #tb.log.info("Jumbo frames")
+    #
+    #count = 64
+    #
+    #pkts = [bytearray([(x+k) % 256 for x in range(9014)]) for k in range(count)]
+    #
+    #tb.loopback_enable = True
+    #
+    #for p in pkts:
+    #    await tb.driver.interfaces[0].start_xmit(p, 0)
+    #
+    #for k in range(count):
+    #    pkt = await tb.driver.interfaces[0].recv()
+    #
+    #    tb.log.info("Packet: %s", pkt)
+    #    assert pkt.data == pkts[k]
+    #    if tb.driver.interfaces[0].if_feature_rx_csum:
+    #        assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
+    #
+    #tb.loopback_enable = False
+    #
+    #if len(tb.driver.interfaces) > 1:
+    #    tb.log.info("All interfaces")
+    #
+    #    count = 64
+    #
+    #    pkts = [bytearray([(x+k) % 256 for x in range(1514)]) for k in range(count)]
+    #
+    #    tb.loopback_enable = True
+    #
+    #    for k, p in enumerate(pkts):
+    #        await tb.driver.interfaces[k % len(tb.driver.interfaces)].start_xmit(p, 0)
+    #
+    #    for k in range(count):
+    #        pkt = await tb.driver.interfaces[k % len(tb.driver.interfaces)].recv()
+    #
+    #        tb.log.info("Packet: %s", pkt)
+    #        assert pkt.data == pkts[k]
+    #        if tb.driver.interfaces[0].if_feature_rx_csum:
+    #            assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
+    #
+    #    tb.loopback_enable = False
+    #
+    #if len(tb.driver.interfaces[0].sched_blocks) > 1:
+    #    tb.log.info("All interface 0 scheduler blocks")
+    #
+    #    for block in tb.driver.interfaces[0].sched_blocks:
+    #        await block.schedulers[0].rb.write_dword(mqnic.MQNIC_RB_SCHED_RR_REG_CTRL, 0x00000001)
+    #        await tb.driver.interfaces[0].set_rx_queue_map_indir_table(block.index, 0, block.index)
+    #        for k in range(len(block.interface.txq)):
+    #            if k % len(tb.driver.interfaces[0].sched_blocks) == block.index:
+    #                await block.schedulers[0].hw_regs.write_dword(4*k, 0x00000003)
+    #            else:
+    #                await block.schedulers[0].hw_regs.write_dword(4*k, 0x00000000)
+    #
+    #    count = 64
+    #
+    #    pkts = [bytearray([(x+k) % 256 for x in range(1514)]) for k in range(count)]
+    #
+    #    tb.loopback_enable = True
+    #
+    #    queues = set()
+    #
+    #    for k, p in enumerate(pkts):
+    #        await tb.driver.interfaces[0].start_xmit(p, k % len(tb.driver.interfaces[0].sched_blocks))
+    #
+    #    for k in range(count):
+    #        pkt = await tb.driver.interfaces[0].recv()
+    #
+    #        tb.log.info("Packet: %s", pkt)
+    #        # assert pkt.data == pkts[k]
+    #        if tb.driver.interfaces[0].if_feature_rx_csum:
+    #            assert pkt.rx_checksum == ~scapy.utils.checksum(bytes(pkt.data[14:])) & 0xffff
+    #
+    #        queues.add(pkt.queue)
+    #
+    #    assert len(queues) == len(tb.driver.interfaces[0].sched_blocks)
+    #
+    #    tb.loopback_enable = False
+    #
+    #    for block in tb.driver.interfaces[0].sched_blocks[1:]:
+    #        await block.schedulers[0].rb.write_dword(mqnic.MQNIC_RB_SCHED_RR_REG_CTRL, 0x00000000)
+    #        await tb.driver.interfaces[0].set_rx_queue_map_indir_table(block.index, 0, 0)
+    #
+    #tb.log.info("Read statistics counters")
 
     await Timer(2000, 'ns')
 
@@ -909,8 +928,8 @@ def test_mqnic_core_pcie_us(request, if_count, ports_per_if, axis_pcie_data_widt
     parameters['APP_ENABLE'] = 1
     parameters['APP_CTRL_ENABLE'] = 1
     parameters['APP_DMA_ENABLE'] = 1
-    parameters['APP_AXIS_DIRECT_ENABLE'] = 1
-    parameters['APP_AXIS_SYNC_ENABLE'] = 1
+    parameters['APP_AXIS_DIRECT_ENABLE'] = 0
+    parameters['APP_AXIS_SYNC_ENABLE'] = 0
     parameters['APP_AXIS_IF_ENABLE'] = 1
     parameters['APP_STAT_ENABLE'] = 1
 

@@ -301,6 +301,12 @@ MQNIC_DESC_SIZE = 16
 MQNIC_CPL_SIZE = 32
 MQNIC_EVENT_SIZE = 32
 
+opcode        = 0x00000000
+laddr         = 0x123456789abcdef0
+dst_qpn       = 0x00000001
+src_port_rmac = 0x123456789abcdef0
+rip           = 0x12345678
+raddr         = 0x123456789abcdef0	
 
 class Resource:
     def __init__(self, count, parent, stride):
@@ -1425,20 +1431,34 @@ class Interface:
 
         csum_cmd = 0
 
+
         if csum_start is not None and csum_offset is not None:
             csum_cmd = 0x8000 | (csum_offset << 8) | csum_start
-
+        
+        			
+        
         length = len(data)
         ptr = pkt.get_absolute_address(0)+10
         offset = 0
 
+        self.log.info("xmit_data: %s OVER", data)
+        #WQE	= opcode | (length << 32) | (laddr << 64) | (dst_qpn << 128) | (src_port << 160) | (rmac << 176) | (rip << 224) | (raddr << 256)
+        #self.log.info("WQE: %x", WQE)
+
         # write descriptors
-        seg = min(length-offset, 42) if ring.desc_block_size > 1 else length-offset
-        struct.pack_into("<HHLQ", ring.buf, index*ring.stride, 0, csum_cmd, seg, ptr+offset if seg else 0)
+        seg = min(length-offset, 64) if ring.desc_block_size > 1 else length-offset
+        self.log.info("index:%d, ring.stride: %d, seg: %d, offset: %d, length: %d, ptr: %d",index, ring.stride, seg, offset, length, ptr)
+        #struct.pack_into("<HHLQ", ring.buf, index*ring.stride, 0, csum_cmd, seg, ptr+offset if seg else 0)
+        #struct.pack_into("<LLQLQLQ", ring.buf, index*ring.stride, opcode, length, ptr+offset, dst_qpn, src_port_rmac, rip, raddr if length else 0)
         offset += seg
+        self.log.info("ring.desc_block_size: %d", ring.desc_block_size)
+        #for k in range(1, 1):
         for k in range(1, ring.desc_block_size):
-            seg = min(length-offset, 4096) if k < ring.desc_block_size-1 else length-offset
-            struct.pack_into("<4xLQ", ring.buf, index*ring.stride+k*MQNIC_DESC_SIZE, seg, ptr+offset if seg else 0)
+            #seg = min(length-offset, 4096) if k < ring.desc_block_size-1 else length-offset
+            seg=0
+            self.log.info("seg2: %d, offset2: %d", seg, offset)
+            #struct.pack_into("<LLQLQLQ", ring.buf, index*ring.stride, opcode, length, ptr+offset, dst_qpn, src_port_rmac, rip, raddr if length else 0)
+            #struct.pack_into("<4xLQ", ring.buf, index*ring.stride+k*MQNIC_DESC_SIZE, seg, ptr+offset if seg else 0)
             offset += seg
 
         ring.prod_ptr += 1

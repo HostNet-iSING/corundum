@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="bd_43c9_dlmb_0_synth_1" LaunchPart="xcu250-figd2104-2-e" LaunchTime="1702971085">
+  <File Type="REPORTS-TCL" Name="bd_43c9_dlmb_0_reports.tcl"/>
+  <File Type="PA-TCL" Name="bd_43c9_dlmb_0.tcl"/>
+  <File Type="RDS-DCP" Name="bd_43c9_dlmb_0.dcp"/>
+  <File Type="RDS-RDS" Name="bd_43c9_dlmb_0.vds"/>
+  <File Type="RDS-UTIL" Name="bd_43c9_dlmb_0_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="bd_43c9_dlmb_0_utilization_synth.pb"/>
+  <FileSet Name="sources" Type="BlockSrcs" RelSrcDir="$PSRCDIR/bd_43c9_dlmb_0">
+    <File Path="$PGENDIR/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_29/bd_43c9_dlmb_0.xci">
+      <FileInfo>
+        <Attr Name="Library" Val="xil_defaultlib"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="TopModule" Val="bd_43c9_dlmb_0"/>
+      <Option Name="UseBlackboxStub" Val="1"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="BlockSrcs" RelSrcDir="$PSRCDIR/bd_43c9_dlmb_0">
+    <File Path="$PGENDIR/sources_1/bd/cms/ip/cms_cms_subsystem_0_0/bd_1/ip/ip_29/bd_43c9_dlmb_0.xci">
+      <FileInfo>
+        <Attr Name="Library" Val="xil_defaultlib"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="TopModule" Val="bd_43c9_dlmb_0"/>
+      <Option Name="UseBlackboxStub" Val="1"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1">
+    <Filter Type="Utils"/>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2021"/>
+    <Step Id="synth_design"/>
+  </Strategy>
+</GenRun>
