@@ -152,6 +152,7 @@ static int send_message_with_ring(struct mqnic_ring *ring, struct user_mem mem)
 	// get descriptor to be written to
 	u32 index = ring->prod_ptr & ring->size_mask;
 	struct mqnic_desc *tx_desc = (struct mqnic_desc *)(ring->buf + index * ring->stride);
+	//printk(KERN_INFO "stride: %d\n", ring->stride);
 	struct mqnic_tx_info *tx_info = &ring->tx_info[index];
 
 	// 关掉硬件checksum和timestamp
@@ -162,6 +163,8 @@ static int send_message_with_ring(struct mqnic_ring *ring, struct user_mem mem)
 	tx_desc->addr = cpu_to_le64(mem.dma_addr);
 	tx_desc->raddr = cpu_to_le64(mem.remote_addr);
 	tx_desc->udp_dst_port = cpu_to_le16(4791);
+
+	//printk(KERN_INFO "len: %d, addr: 0x%llx, remote: 0x%llx\n", mem.length, mem.dma_addr, mem.remote_addr);
 
 	tx_info->frag_count = 1;
 	tx_info->frags->len = mem.length;

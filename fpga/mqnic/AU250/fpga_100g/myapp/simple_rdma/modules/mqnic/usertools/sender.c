@@ -174,6 +174,8 @@ int main(int argc, char *argv[])
 
 	mems = calloc(packet_num, sizeof(struct user_mem));
 
+	printf("content: 0x%x\n", packets[0].content[0]);
+
 	// DMA map
 	for (int i = 0; i < packet_num; i++)
 	{
@@ -190,6 +192,11 @@ int main(int argc, char *argv[])
 	}
 
 	signal(SIGINT, handler);
+	signal(SIGTERM, handler);
+	signal(SIGKILL, handler);
+	signal(SIGHUP, handler);
+	signal(SIGABRT, handler);
+	signal(SIGSTOP, handler);
 
 	// Send packets
 	for (int i = 0; i < loop_times; i++)
@@ -211,7 +218,7 @@ int main(int argc, char *argv[])
 	}
 end:
 	// in case NIC is using these buffers
-	sleep(100);
+	sleep(1);
 	// DMA Unmap
 	for (int i = 0; i < packet_num; i++)
 	{
