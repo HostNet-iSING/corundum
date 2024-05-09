@@ -76,33 +76,7 @@ int parse_packets_file(FILE *packets_file, struct Packet **out_packets, int *loo
 		sscanf(readline(packets_file), "%llx", &remote_addr);
 		// read content
 		char *content = alloc_hugepage();
-		char *line_buffer;
-		int buffer_idx = 0, buffer_length = 0;
-		for (int i = 0; i < packet_length; i++)
-		{
-			if (buffer_idx >= buffer_length)
-			{
-				// 读取新一行
-				buffer_idx = 0;
-				line_buffer = readline(packets_file);
-				buffer_length = strlen(line_buffer);
-			}
-			char upper_half = line_buffer[buffer_idx];
-			buffer_idx++;
-			if (buffer_idx >= buffer_length)
-			{
-				// 读取新一行
-				buffer_idx = 0;
-				line_buffer = readline(packets_file);
-				buffer_length = strlen(line_buffer);
-			}
-			char bottom_half = line_buffer[buffer_idx];
-			buffer_idx++;
-			char cur_byte[5] = {'0', 'x', upper_half, bottom_half, '\0'};
-			char real_value;
-			sscanf(cur_byte, "%c", &real_value);
-			content[i] = real_value;
-		}
+		memset(content, 0xFF, 2 * 1024 * 1024);
 		// generate struct Packet
 		struct Packet *packet = &packets[packet_num];
 		packet->length = packet_length;
