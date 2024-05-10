@@ -1,4 +1,5 @@
 #include <asm-generic/errno-base.h>
+#include <ctype.h>
 #include <errno.h>
 #include <signal.h>
 #include <stdio.h>
@@ -23,9 +24,27 @@ struct Packet
 	char *content;
 };
 
+void strip_whitespace(FILE *fp)
+{
+	while (!feof(fp))
+	{
+		int c = fgetc(fp);
+		if (!isspace(c))
+		{
+			ungetc(c, fp);
+			break;
+		}
+	}
+}
+
 // 读取一行，清除尾部\n，一行不得超过32k字符
 char *readline(FILE *fp)
 {
+	if (feof(fp))
+	{
+		printf("tring to read beyond file end!\n");
+		return NULL;
+	}
 	char *line = malloc(sizeof(char) * 32768);
 	fgets(line, 32768, fp);
 	// 忽略#开头的注释行
@@ -62,6 +81,7 @@ int parse_packets_file(FILE *packets_file, struct Packet **out_packets, int *loo
 	printf("loop times: %d\n", *loop_times);
 	struct Packet *packets = malloc(sizeof(struct Packet) * MAX_PACKETS_NUM);
 	int packet_num = 0;
+	strip_whitespace(packets_file);
 	while (!feof(packets_file))
 	{
 		// read packet length
@@ -84,6 +104,8 @@ int parse_packets_file(FILE *packets_file, struct Packet **out_packets, int *loo
 		packet->content = content;
 		packet_num++;
 		printf("Read packet: length: %d remote addr: 0x%llx\n", packet->length, packet->remote_addr);
+		
+		strip_whitespace(packets_file);
 	}
 	*out_packets = packets;
 	return packet_num;
