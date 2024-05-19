@@ -1,5 +1,5 @@
 all: sender.c receiver.c ../mqnic_ioctl.h
-	gcc sender.c -O2 -o sender
+	gcc sender.c -o sender
 	gcc receiver.c -o receiver
 
 .PHONY: clean

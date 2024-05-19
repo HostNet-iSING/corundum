@@ -252,7 +252,8 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		{
 			if (interface->ring[i] == NULL)
 			{
-				printk(KERN_WARNING "NULL ring ptr detected, ring_num maybe corrupted.\n");
+				printk(KERN_WARNING "NULL ring ptr detected, ring_num(%d) maybe corrupted.\n",
+                    interface->ring_num);
 				continue;
 			}
 			// check队列是否满了

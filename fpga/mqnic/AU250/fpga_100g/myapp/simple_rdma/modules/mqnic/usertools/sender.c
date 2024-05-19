@@ -67,9 +67,9 @@ void *alloc_hugepage()
 		PROT_READ | PROT_WRITE, 
 		MAP_PRIVATE | MAP_ANONYMOUS | MAP_HUGETLB,
 		-1, 0);
-	if (buf == NULL)
+	if (buf == NULL || buf == (void *)-1)
 	{
-		printf("fail to alloc buffer\n");
+		perror("fail to alloc buffer");
 		exit(-1);
 	}
 	return buf;
