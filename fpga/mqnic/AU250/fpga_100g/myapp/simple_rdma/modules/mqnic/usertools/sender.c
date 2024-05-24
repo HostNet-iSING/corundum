@@ -75,10 +75,16 @@ void *alloc_hugepage()
 	return buf;
 }
 
-int parse_packets_file(FILE *packets_file, struct Packet **out_packets, int *loop_times)
-{
+int parse_packets_file(
+    FILE *packets_file, 
+    struct Packet **out_packets, 
+    int *loop_times,
+    int *ring_num
+){
 	*loop_times = atoi(readline(packets_file));
 	printf("loop times: %d\n", *loop_times);
+    *ring_num = atoi(readline(packets_file));
+    printf("Use %d QP\n", *ring_num);
 	struct Packet *packets = malloc(sizeof(struct Packet) * MAX_PACKETS_NUM);
 	int packet_num = 0;
 	strip_whitespace(packets_file);
@@ -152,8 +158,8 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 	struct Packet *packets;
-	int loop_times = 0;
-	packet_num = parse_packets_file(packets_file, &packets, &loop_times);
+	int loop_times = 0, ring_num = 0;
+	packet_num = parse_packets_file(packets_file, &packets, &loop_times, &ring_num);
 	if (packet_num < 0)
 	{
 		printf("Error occured during parsing packets file.\n");
@@ -178,6 +184,7 @@ int main(int argc, char *argv[])
 		mems[i].start = (unsigned long)packets[i].content;
 		mems[i].length = packets[i].length;
 		mems[i].remote_addr = packets[i].remote_addr;
+        mems[i].ring_no = i % ring_num;
 		int ret = ioctl(fd, MQNIC_IOCTL_DMA_MAP, &mems[i]);
 		if (ret < 0)
 		{

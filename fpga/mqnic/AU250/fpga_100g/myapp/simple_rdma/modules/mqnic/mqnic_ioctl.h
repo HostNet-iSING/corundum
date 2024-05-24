@@ -68,6 +68,7 @@ struct user_mem
 	int length;
 	unsigned long long remote_addr;
 	unsigned long long dma_addr;
+    int ring_no;
 };
 
 #endif /* MQNIC_IOCTL_H */
