@@ -1,4 +1,5 @@
 #include <asm-generic/errno-base.h>
+#include <time.h>
 #include <ctype.h>
 #include <errno.h>
 #include <signal.h>
@@ -7,6 +8,7 @@
 #include <string.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
+#include <time.h>
 #include <unistd.h>
 #include <stdbool.h>
 
@@ -146,7 +148,7 @@ void handler(int signal)
 
 int main(int argc, char *argv[])
 {
-	if (argc != 2)
+	if (argc != 2 && argc != 3)
 	{
 		printf("unexpected arg num: %d\n", argc - 1);
 		return -1;
@@ -157,6 +159,11 @@ int main(int argc, char *argv[])
 		printf("Failed to open packets file %s\n", argv[1]);
 		return -1;
 	}
+    bool timeit = false;
+    if (0 == strcmp(argv[2], "--time") || 0 == strcmp(argv[2], "-time"))
+    {
+        timeit = true;
+    }
 	struct Packet *packets;
 	int loop_times = 0, ring_num = 0;
 	packet_num = parse_packets_file(packets_file, &packets, &loop_times, &ring_num);
@@ -174,25 +181,33 @@ int main(int argc, char *argv[])
     }
     fd = fileno(mqnic);
 
-	mems = calloc(packet_num, sizeof(struct user_mem));
+	mems = calloc(packet_num * loop_times, sizeof(struct user_mem));
 
 	printf("content: 0x%x\n", packets[0].content[0]);
 
 	// DMA map
-	for (int i = 0; i < packet_num; i++)
-	{
-		mems[i].start = (unsigned long)packets[i].content;
-		mems[i].length = packets[i].length;
-		mems[i].remote_addr = packets[i].remote_addr;
-        mems[i].ring_no = i % ring_num;
-		int ret = ioctl(fd, MQNIC_IOCTL_DMA_MAP, &mems[i]);
-		if (ret < 0)
-		{
-			printf("DMA MAP:ioctl error:%d\n", errno);
-			return -1;
-		}
-		printf("dma addr: %llx\n", mems[i].dma_addr);
-	}
+	for (int i = 0; i < loop_times; i++)
+    {
+        for (int j = 0; j < packet_num; j++)
+        {   
+            int index = i * packet_num + j;
+            mems[index].start = (unsigned long)packets[j].content;
+            mems[index].length = packets[j].length;
+            mems[index].remote_addr = packets[j].remote_addr;
+            mems[index].ring_no = index % ring_num;
+            if (i == 0)
+            {
+                int ret = ioctl(fd, MQNIC_IOCTL_DMA_MAP, &mems[j]);
+                if (ret < 0)
+                {
+                    printf("DMA MAP:ioctl error:%d\n", errno);
+                    return -1;
+                }
+                printf("dma addr: %llx\n", mems[j].dma_addr);
+            }
+            
+	    }
+    }
 
 	signal(SIGINT, handler);
 	signal(SIGTERM, handler);
@@ -201,27 +216,42 @@ int main(int argc, char *argv[])
 	signal(SIGABRT, handler);
 	signal(SIGSTOP, handler);
 
+    time_t start = clock();
+
+    struct
+    {
+        struct user_mem *mems;
+        int length;
+    } batch;
+    batch.mems = mems;
+    batch.length = packet_num * loop_times;
+
 	// Send packets
-	for (int i = 0; i < loop_times; i++)
-	{
-		for (int j = 0; j < packet_num; j++)
-		{
-			int ret = 0;
-			do 
-			{
-				ret = ioctl(fd, MQNIC_IOCTL_SEND, &mems[j]);
-			} while (ret < 0 && errno == EBUSY);
-			
-			if (ret < 0)
-			{
-				printf("SEND:ioctl error:%d\n", errno);
-				goto end;
-			}
-		}
-	}
+    int ret = ioctl(fd, MQNIC_IOCTL_SEND_BATCH, &batch);
+    
+    if (ret < 0)
+    {
+        perror("SEND:ioctl error:%d");
+        goto end;
+    }
+	
 end:
+    // measure throughput
+    if (timeit)
+    {   
+        time_t end = clock();
+        float seconds = (end - start) / (float)CLOCKS_PER_SEC;
+        printf("time: %.3fs\n", seconds);
+        unsigned total_size = 0;
+        for (int i = 0; i < packet_num; i++)
+        {
+            total_size += packets[i].length;
+        }
+        total_size *= loop_times;
+        printf("throughput: %.3f MB/s\n", total_size / seconds / 1024 / 1024);
+    }
 	// in case NIC is using these buffers
-	sleep(1);
+	//sleep(1);
 	// DMA Unmap
 	for (int i = 0; i < packet_num; i++)
 	{

@@ -141,10 +141,10 @@ static int send_message_with_ring(struct mqnic_ring *ring, struct user_mem mem)
 {
 	mqnic_tx_read_cons_ptr(ring);
 	
-	if (ring->cons_ptr != ring->prod_ptr)
+	/* if (ring->cons_ptr != ring->prod_ptr)
 	{
 		return -EBUSY;
-	}
+	} */
 
 	printk(KERN_INFO "current consumer ptr: %d producer ptr: %d\n", 
 		ring->cons_ptr, ring->prod_ptr);
@@ -252,10 +252,11 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
         {
             printk(KERN_WARNING "NULL ring ptr detected, ring_num(%d) maybe corrupted.\n",
                 interface->ring_num);
-        } 
+        }
+        // check队列是否满了
         else if(mqnic_is_tx_ring_full(interface->ring[ring_no]))
         {
-            // check队列是否满了
+            retval = -EBUSY;
         }
         else
         {
@@ -273,7 +274,97 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		mutex_unlock(&mqnic_lock);
 		return retval;
 
-	}
+	} else if (cmd == MQNIC_IOCTL_SEND_BATCH)
+    {
+        struct mqnic_if *interface = mqnic->interface[0];
+		if (!interface)
+		{
+			printk(KERN_ERR "cannot get interface\n");
+			return -1;
+		}
+
+        struct
+        {
+            struct user_mem *mems;
+            int length;
+        } batch;
+
+		// 解析用户参数
+		if (copy_from_user(&batch, (void *)arg, sizeof(batch)))
+		{
+			return -EFAULT;
+		}
+		/* int npages = (mem.length + PAGE_SIZE - 1) / PAGE_SIZE;
+		//printk(KERN_INFO "accept user mem: addr: %lx, length: %d, npages: %d\n"
+		//	, mem.start, mem.length, npages);
+		if (npages <= 0 || npages > 512)
+		{
+			printk(KERN_WARNING "unacceptable buffer length: %d, quit.\n", mem.length);
+			return -EINVAL;
+		}
+		// check if buffer is DMA mapped
+		if (mem.dma_addr == (dma_addr_t)NULL)
+		{
+			printk(KERN_WARNING "buffer %lx is not dma mapped.\n", mem.start);
+			return -EINVAL;
+		} */
+
+		// 上锁
+		if (mutex_lock_interruptible(&mqnic_lock))
+		{
+			printk(KERN_ERR "Failed to aquire device lock, exiting...\n");
+			return -EAGAIN;
+		}
+
+        int max_ring_no = -1;
+
+        for (int i = 0; i < batch.length; i++)
+        {
+            if (copy_from_user(&mem, &batch.mems[i], sizeof(struct user_mem)))
+            {
+                retval = -EFAULT;
+                break;
+            }
+            int ring_no = mem.ring_no;
+            if (interface->ring[ring_no] == NULL)
+            {
+                printk(KERN_WARNING "NULL ring ptr detected, ring_num(%d) maybe corrupted.\n",
+                    interface->ring_num);
+                retval = -EFAULT;
+                break;
+            }
+            // check队列是否满了
+            else if(mqnic_is_tx_ring_full(interface->ring[ring_no]))
+            {
+                retval = -EBUSY;
+                break;
+            }
+            else
+            {
+                retval = send_message_with_ring(interface->ring[ring_no], mem);
+                if (retval == 0)
+                {
+                    printk(KERN_INFO "Message sended at ring %d\n", ring_no);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            max_ring_no = max_ring_no > ring_no ? max_ring_no : ring_no;
+        }
+
+        // 等待队列清空
+        /*for (int ring_no = 0; ring_no <= max_ring_no; ring_no++)
+        {
+            while (!mqnic_is_tx_ring_empty(interface->ring[ring_no]))
+            {
+            }
+        }*/
+
+		mutex_unlock(&mqnic_lock);
+		return retval;
+    }
 	else if (cmd == MQNIC_IOCTL_DMA_MAP)
 	{		
 		if (copy_from_user(&mem, (void *)arg, sizeof(struct user_mem)))
