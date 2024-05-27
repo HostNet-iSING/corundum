@@ -160,7 +160,8 @@ int main(int argc, char *argv[])
 		return -1;
 	}
     bool timeit = false;
-    if (0 == strcmp(argv[2], "--time") || 0 == strcmp(argv[2], "-time"))
+    if ((argc == 3) &&
+        (0 == strcmp(argv[2], "--time") || 0 == strcmp(argv[2], "-time")))
     {
         timeit = true;
     }
@@ -222,18 +223,32 @@ int main(int argc, char *argv[])
     {
         struct user_mem *mems;
         int length;
+        int start;
+        int next_start;
     } batch;
     batch.mems = mems;
     batch.length = packet_num * loop_times;
+    batch.start = 0;
+    batch.next_start = 0;
+
 
 	// Send packets
-    int ret = ioctl(fd, MQNIC_IOCTL_SEND_BATCH, &batch);
+    int ret = 0;
+    do {
+        batch.start = batch.next_start;
+        ret = ioctl(fd, MQNIC_IOCTL_SEND_BATCH, &batch);
+    } while (batch.next_start < batch.length);
     
     if (ret < 0)
     {
-        perror("SEND:ioctl error:%d");
+        perror("SEND:ioctl error");
         goto end;
     }
+
+    do
+    {
+        ret = ioctl(fd, MQNIC_IOCTL_CHECK_RING_EMPTY, ring_num);
+    } while (ret != 0);
 	
 end:
     // measure throughput
@@ -242,6 +257,7 @@ end:
         time_t end = clock();
         float seconds = (end - start) / (float)CLOCKS_PER_SEC;
         printf("time: %.3fs\n", seconds);
+        printf("pps: %.3fK\n", packet_num * loop_times / seconds / 1024);
         unsigned total_size = 0;
         for (int i = 0; i < packet_num; i++)
         {

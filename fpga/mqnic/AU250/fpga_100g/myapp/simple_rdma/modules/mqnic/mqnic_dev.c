@@ -137,7 +137,7 @@ free_page_list:
 	return retval;
 }
 
-static int send_message_with_ring(struct mqnic_ring *ring, struct user_mem mem)
+static int send_message_with_ring(struct mqnic_ring *ring, struct user_mem mem, bool force_flush)
 {
 	mqnic_tx_read_cons_ptr(ring);
 	
@@ -185,10 +185,13 @@ static int send_message_with_ring(struct mqnic_ring *ring, struct user_mem mem)
 	ring->prod_ptr++;
 
 	//printk(KERN_INFO "write produce ptr %d\n", ring->prod_ptr);
-	dma_wmb();
+	
 	// 写硬件寄存器
-	// 当前tx_ring producer只有这里，所以不用二次检查队列是不是满了
-	mqnic_tx_write_prod_ptr(ring);
+    if (force_flush || (ring->prod_ptr - ring->cons_ptr >= 8) || mqnic_is_tx_ring_full(ring))
+    {
+        dma_wmb();
+        mqnic_tx_write_prod_ptr(ring);
+    }
 
 	/*printk(KERN_INFO "descriptor:\n");
 	for (int i = 0; i < 4; i++)
@@ -260,7 +263,7 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
         }
         else
         {
-            retval = send_message_with_ring(interface->ring[ring_no], mem);
+            retval = send_message_with_ring(interface->ring[ring_no], mem, true);
             if (retval == 0)
             {
                 printk(KERN_INFO "Message sended at ring %d\n", ring_no);
@@ -287,6 +290,8 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
         {
             struct user_mem *mems;
             int length;
+            int start;
+            int next_start;
         } batch;
 
 		// 解析用户参数
@@ -294,38 +299,28 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		{
 			return -EFAULT;
 		}
-		/* int npages = (mem.length + PAGE_SIZE - 1) / PAGE_SIZE;
-		//printk(KERN_INFO "accept user mem: addr: %lx, length: %d, npages: %d\n"
-		//	, mem.start, mem.length, npages);
-		if (npages <= 0 || npages > 512)
-		{
-			printk(KERN_WARNING "unacceptable buffer length: %d, quit.\n", mem.length);
-			return -EINVAL;
-		}
-		// check if buffer is DMA mapped
-		if (mem.dma_addr == (dma_addr_t)NULL)
-		{
-			printk(KERN_WARNING "buffer %lx is not dma mapped.\n", mem.start);
-			return -EINVAL;
-		} */
+		
+        struct user_mem *mems = vmalloc(sizeof(struct user_mem) * batch.length);
+        if (copy_from_user(mems, batch.mems, sizeof(struct user_mem) * batch.length))
+        {
+            retval = -EFAULT;
+            goto free;
+        }
 
 		// 上锁
 		if (mutex_lock_interruptible(&mqnic_lock))
 		{
 			printk(KERN_ERR "Failed to aquire device lock, exiting...\n");
-			return -EAGAIN;
+			retval = -EAGAIN;
+            goto free;
 		}
 
         int max_ring_no = -1;
+        int i;
 
-        for (int i = 0; i < batch.length; i++)
+        for (i = batch.start; i < batch.length; i++)
         {
-            if (copy_from_user(&mem, &batch.mems[i], sizeof(struct user_mem)))
-            {
-                retval = -EFAULT;
-                break;
-            }
-            int ring_no = mem.ring_no;
+            int ring_no = mems[i].ring_no;
             if (interface->ring[ring_no] == NULL)
             {
                 printk(KERN_WARNING "NULL ring ptr detected, ring_num(%d) maybe corrupted.\n",
@@ -333,37 +328,58 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
                 retval = -EFAULT;
                 break;
             }
+            mqnic_tx_read_cons_ptr(interface->ring[ring_no]);
             // check队列是否满了
-            else if(mqnic_is_tx_ring_full(interface->ring[ring_no]))
+            if(mqnic_is_tx_ring_full(interface->ring[ring_no]))
             {
-                retval = -EBUSY;
                 break;
+            }
+            
+            retval = send_message_with_ring(interface->ring[ring_no], mems[i], false);
+            if (retval == 0)
+            {
+                printk(KERN_INFO "Message sended at ring %d\n", ring_no);
             }
             else
             {
-                retval = send_message_with_ring(interface->ring[ring_no], mem);
-                if (retval == 0)
-                {
-                    printk(KERN_INFO "Message sended at ring %d\n", ring_no);
-                }
-                else
-                {
-                    break;
-                }
+                break;
             }
+            
             max_ring_no = max_ring_no > ring_no ? max_ring_no : ring_no;
         }
 
-        // 等待队列清空
-        /*for (int ring_no = 0; ring_no <= max_ring_no; ring_no++)
-        {
-            while (!mqnic_is_tx_ring_empty(interface->ring[ring_no]))
-            {
-            }
-        }*/
+        batch.next_start = i;
 
 		mutex_unlock(&mqnic_lock);
+
+        if (copy_to_user((void *)arg, &batch, sizeof(batch)))
+		{
+			printk(KERN_ERR "failed to copy to user.\n");
+			retval = -EFAULT;
+            goto free;
+		}
+free:
+        vfree(mems);
+
 		return retval;
+    } else if (cmd == MQNIC_IOCTL_CHECK_RING_EMPTY)
+    {
+        struct mqnic_if *interface = mqnic->interface[0];
+		if (!interface)
+		{
+			printk(KERN_ERR "cannot get interface\n");
+			return -1;
+		}
+
+        for (int ring_no = 0; ring_no < arg; ring_no++)
+        {
+            mqnic_tx_read_cons_ptr(interface->ring[ring_no]);
+            if (!mqnic_is_tx_ring_empty(interface->ring[ring_no]))
+            {
+                return -EAGAIN;
+            }
+        }
+        return 0;
     }
 	else if (cmd == MQNIC_IOCTL_DMA_MAP)
 	{		
