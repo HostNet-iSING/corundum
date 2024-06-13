@@ -1,0 +1,12 @@
+*.cmd
+*.mod
+*.mod.c
+*.o
+*.ko
+usertools/*.out
+usertools/sender
+usertools/receiver
+
+.tmp_versions/
+modules.order
+Module.symvers
