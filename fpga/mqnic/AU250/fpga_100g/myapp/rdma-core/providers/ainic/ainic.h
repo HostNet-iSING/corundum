@@ -1,10 +1,9 @@
-#ifndef ainic_H
-#define ainic_H
+#ifndef AINIC_H
+#define AINIC_H
 
 #include <infiniband/driver.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <rdma/rdma_user_ainic.h>
 #include "ainic-abi.h"
 
 struct ainic_device {
@@ -16,11 +15,12 @@ struct ainic_context {
 	struct verbs_context	ibv_ctx;
 };
 
+
 /* common between cq and cq_ex */
 struct ainic_cq {
 	struct verbs_cq		vcq;
 	struct mminfo		mmap_info;
-	struct ainic_queue_buf	*queue;
+	u8 *buf;
 	pthread_spinlock_t	lock;
 
 	/* new API support */
@@ -29,17 +29,14 @@ struct ainic_cq {
 	uint32_t		cur_index;
 };
 
-struct ainic_ah {
-	struct ibv_ah		ibv_ah;
-	struct ainic_av		av;
-	int			ah_num;
-};
-
 struct ainic_wq {
-	struct ainic_queue_buf	*queue;
+	uint8_t *buf;  //ring buf
+	u32 prod_ptr;
+	u32 cons_ptr ____cacheline_aligned_in_smp;
 	pthread_spinlock_t	lock;
 	unsigned int		max_sge;
 	unsigned int		max_inline;
+	uint8_t *desc; //send/recv reg
 };
 
 struct ainic_qp {
@@ -53,15 +50,6 @@ struct ainic_qp {
 	uint32_t		cur_index;
 	int			err;
 };
-
-struct ainic_srq {
-	struct verbs_srq	vsrq;
-	struct mminfo		mmap_info;
-	struct ainic_wq		rq;
-	uint32_t		srq_num;
-};
-
-#define to_rxxx(xxx, type) container_of(ib##xxx, struct ainic_##type, ibv_##xxx)
 
 static inline struct ainic_context *to_rctx(struct ibv_context *ibctx)
 {
@@ -83,19 +71,9 @@ static inline struct ainic_qp *to_rqp(struct ibv_qp *ibqp)
 	return container_of(ibqp, struct ainic_qp, vqp.qp);
 }
 
-static inline struct ainic_srq *to_rsrq(struct ibv_srq *ibsrq)
-{
-	return container_of(ibsrq, struct ainic_srq, vsrq.srq);
-}
-
-static inline struct ainic_ah *to_rah(struct ibv_ah *ibah)
-{
-	return to_rxxx(ah, ah);
-}
-
 static inline enum ibv_qp_type qp_type(struct ainic_qp *qp)
 {
 	return qp->vqp.qp.qp_type;
 }
 
-#endif /* ainic_H */
+#endif /* AINIC_H */
