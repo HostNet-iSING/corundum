@@ -130,30 +130,12 @@ static int map_queue_pair(int cmd_fd, struct ainic_qp *qp,
 			  struct ibv_qp_init_attr *attr,
 			  struct ainic_create_qp_resp *resp)
 {
-	if (attr->srq) {
-		qp->rq.max_sge = 0;
-		qp->rq.queue = NULL;
-		qp->rq_mmap_info.size = 0;
-	} else {
-		qp->rq.max_sge = attr->cap.max_recv_sge;
-		qp->rq.queue = mmap(NULL, resp->rq_mi.size, PROT_READ | PROT_WRITE,
-				    MAP_SHARED,
-				    cmd_fd, resp->rq_mi.offset);
-		if ((void *)qp->rq.queue == MAP_FAILED)
-			return errno;
-
-		qp->rq_mmap_info = resp->rq_mi;
-		pthread_spin_init(&qp->rq.lock, PTHREAD_PROCESS_PRIVATE);
-	}
-
 	qp->sq.max_sge = attr->cap.max_send_sge;
 	qp->sq.max_inline = attr->cap.max_inline_data;
-	qp->sq.queue = mmap(NULL, resp->sq_mi.size, PROT_READ | PROT_WRITE,
+	qp->sq.buf = mmap(NULL, resp->sq_mi.size, PROT_READ | PROT_WRITE,
 			    MAP_SHARED,
 			    cmd_fd, resp->sq_mi.offset);
 	if ((void *)qp->sq.queue == MAP_FAILED) {
-		if (qp->rq_mmap_info.size)
-			munmap(qp->rq.queue, qp->rq_mmap_info.size);
 		return errno;
 	}
 
@@ -186,13 +168,10 @@ static struct ibv_qp *ainic_create_qp(struct ibv_pd *ibpd,
 	if (ret)
 		goto err_destroy;
     
-	sq->desc = mmap(NULL, sq->desc_ring_mmap_size, PROT_WRITE,
+	qp->sq->desc = mmap(NULL, sq->desc_ring_mmap_size, PROT_WRITE,
 			MAP_SHARED, qp->verbs_qp.qp.context->cmd_fd,
-			resp->llq_desc_mmap_key);
+			resp->send_reg_mmap.offset);
 	
-	qp->sq_mmap_info = resp.sq_mi;
-	pthread_spin_init(&qp->sq.lock, PTHREAD_PROCESS_PRIVATE);
-
 	return &qp->vqp.qp;
 
 err_destroy:

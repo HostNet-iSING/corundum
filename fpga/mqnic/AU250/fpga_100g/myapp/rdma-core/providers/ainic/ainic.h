@@ -20,7 +20,7 @@ struct ainic_context {
 struct ainic_cq {
 	struct verbs_cq		vcq;
 	struct mminfo		mmap_info;
-	u8 *buf;
+	uint8_t *buf;
 	pthread_spinlock_t	lock;
 
 	/* new API support */
