@@ -1,6 +1,7 @@
 #include <config.h>
 
 #include <endian.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -16,6 +17,9 @@
 
 #include <infiniband/driver.h>
 #include <infiniband/verbs.h>
+
+#include <util/udma_barrier.h>
+#include <util/mmio.h>
 
 #include "ainic-abi.h"
 #include "ainic.h"
@@ -198,6 +202,67 @@ static int ainic_destroy_qp(struct ibv_qp *ibqp)
 	}
 
 	return ret;
+}
+
+static int ainic_post_send(struct ibv_qp *ibvqp, struct ibv_send_wr *wr,
+		  struct ibv_send_wr **bad)
+{
+	struct ainic_qp *qp = to_rqp(ibvqp);
+	struct ainic_wq *wq = &qp->sq;
+    struct ainic_io_tx_wqe tx_wqe;
+	uint32_t sq_desc_offset;
+	int err = 0;
+	
+
+	mmio_wc_spinlock(&wq->lock);
+	while (wr) {
+        // 暂时不管
+		// err = efa_post_send_validate_wr(qp, wr);
+		// if (err) {
+		// 	*bad = wr;
+		// 	goto ring_db;
+		// }
+		
+        memset(&tx_wqe, 0, sizeof(tx_wqe));
+        
+        //TODO: wr.wr中采用哪个union成员，希望使用wr.wr.rdma
+        //假设buffer物理连续，使用sgl首块地址作为buffer首地址
+        tx_wqe.local_addr = wr->sg_list[0].addr;
+        //理论上num_sge应该为1
+        for (int i = 0; i < wr->num_sge; i++)
+        {
+            tx_wqe.length += wr->sg_list[i].length;
+        }
+        tx_wqe.dst_qpn = wr->wr.ud.remote_qpn;
+        tx_wqe.src_port = 4791;
+        //对端信息暂时不知道怎么填
+
+        /* Copy descriptor */
+		sq_desc_offset = (wq->prod_ptr & wq->size_mask) * sizeof(tx_wqe);
+		mmio_memcpy_x64(wq->buf + sq_desc_offset, &tx_wqe,
+				sizeof(tx_wqe));
+        
+        /* advance index and change phase */
+		wq->prod_ptr++;
+        mmio_flush_writes();
+        ainic_tx_write_prod_ptr(wq);
+        mmio_wc_start();
+		wr = wr->next;
+	}
+
+	/*
+	 * Not using mmio_wc_spinunlock as the doorbell write should be done
+	 * inside the lock.
+	 */
+	pthread_spin_unlock(&wq->lock);
+	return err;
+}
+
+static int ainic_post_recv(struct ibv_qp *ibvqp, struct ibv_recv_wr *wr,
+		  struct ibv_recv_wr **bad)
+{
+    //TODO
+    return 0;
 }
 
 static const struct verbs_context_ops ainic_ctx_ops = {
