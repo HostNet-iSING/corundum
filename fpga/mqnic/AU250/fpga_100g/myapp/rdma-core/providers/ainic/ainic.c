@@ -77,7 +77,7 @@ static int ainic_destroy_cq(struct ibv_cq *ibcq)
 		return ret;
 
 	if (cq->mmap_info.size)
-		munmap(cq->queue, cq->mmap_info.size);
+		munmap(cq->buf, cq->mmap_info.size);
 	free(cq);
 
 	return 0;
@@ -103,15 +103,15 @@ static struct ibv_cq *ainic_create_cq(struct ibv_context *context, int cqe,
 		return NULL;
 	}
 
-	cq->queue = mmap(NULL, resp.mi.size, PROT_READ | PROT_WRITE, MAP_SHARED,
+	cq->buf = mmap(NULL, resp.mi.size, PROT_READ | PROT_WRITE, MAP_SHARED,
 			 context->cmd_fd, resp.mi.offset);
-	if ((void *)cq->queue == MAP_FAILED) {
+	if ((void *)cq->buf == MAP_FAILED) {
 		ibv_cmd_destroy_cq(&cq->vcq.cq);
 		free(cq);
 		return NULL;
 	}
 
-	cq->wc_size = 1ULL << cq->queue->log2_elem_size;
+	cq->wc_size = 1ULL << cq->size;
 
 	if (cq->wc_size < sizeof(struct ib_uverbs_wc)) {
 		ainic_destroy_cq(&cq->vcq.cq);
@@ -127,6 +127,7 @@ static struct ibv_cq *ainic_create_cq(struct ibv_context *context, int cqe,
 static int ainic_poll_cq(struct ibv_cq *ibcq, int ne, struct ibv_wc *wc)
 {
 	struct ainic_cq *cq = to_rcq(ibcq);
+	*cq = *cq;
 	return 0;
 }
 
@@ -139,7 +140,7 @@ static int map_queue_pair(int cmd_fd, struct ainic_qp *qp,
 	qp->sq.buf = mmap(NULL, resp->sq_mi.size, PROT_READ | PROT_WRITE,
 			    MAP_SHARED,
 			    cmd_fd, resp->sq_mi.offset);
-	if ((void *)qp->sq.queue == MAP_FAILED) {
+	if ((void *)qp->sq.buf == MAP_FAILED) {
 		return errno;
 	}
 
@@ -172,9 +173,9 @@ static struct ibv_qp *ainic_create_qp(struct ibv_pd *ibpd,
 	if (ret)
 		goto err_destroy;
     
-	qp->sq->desc = mmap(NULL, sq->desc_ring_mmap_size, PROT_WRITE,
-			MAP_SHARED, qp->verbs_qp.qp.context->cmd_fd,
-			resp->send_reg_mmap.offset);
+	qp->sq.desc = mmap(NULL, resp.send_reg_mmap.size, PROT_WRITE,
+			MAP_SHARED, qp->vqp.qp.context->cmd_fd,
+			resp.send_reg_mmap.offset);
 	
 	return &qp->vqp.qp;
 
@@ -194,9 +195,9 @@ static int ainic_destroy_qp(struct ibv_qp *ibqp)
 	ret = ibv_cmd_destroy_qp(ibqp);
 	if (!ret) {
 		if (qp->rq_mmap_info.size)
-			munmap(qp->rq.queue, qp->rq_mmap_info.size);
+			munmap(qp->rq.buf, qp->rq_mmap_info.size);
 		if (qp->sq_mmap_info.size)
-			munmap(qp->sq.queue, qp->sq_mmap_info.size);
+			munmap(qp->sq.buf, qp->sq_mmap_info.size);
 
 		free(qp);
 	}
@@ -286,7 +287,7 @@ static struct verbs_context *ainic_alloc_context(struct ibv_device *ibdev,
 	struct ib_uverbs_get_context_resp resp;
 
 	context = verbs_init_and_alloc_context(ibdev, cmd_fd, context, ibv_ctx,
-					       RDMA_DRIVER_ainic);
+					       RDMA_DRIVER_AINIC);
 	if (!context)
 		return NULL;
 

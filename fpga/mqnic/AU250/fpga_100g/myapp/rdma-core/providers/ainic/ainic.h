@@ -23,6 +23,7 @@ struct ainic_cq {
 	struct verbs_cq		vcq;
 	struct mminfo		mmap_info;
 	uint8_t *buf;
+	size_t   size;
 	pthread_spinlock_t	lock;
 
 	/* new API support */
@@ -33,12 +34,12 @@ struct ainic_cq {
 
 struct ainic_wq {
 	uint8_t *buf;  //ring buf
-	u32 prod_ptr;
-	u32 cons_ptr ____cacheline_aligned_in_smp;
+	uint32_t prod_ptr;
+	uint32_t cons_ptr;
 	pthread_spinlock_t	lock;
 	unsigned int		max_sge;
 	unsigned int		max_inline;
-    unsigned int        size_mask;
+	unsigned int        size_mask;
 	uint8_t *desc; //send/recv reg
 };
 
