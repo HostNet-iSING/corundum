@@ -249,7 +249,7 @@ static int ainic_post_send(struct ibv_qp *ibvqp, struct ibv_send_wr *wr,
         //对端信息暂时不知道怎么填
 
         /* Copy descriptor */
-		sq_desc_offset = (wq->prod_ptr & wq->size_mask) * sizeof(tx_wqe);
+		sq_desc_offset = (*wq->prod_ptr & wq->size_mask) * sizeof(tx_wqe);
 		mmio_memcpy_x64(wq->buf + sq_desc_offset, &tx_wqe,
 				sizeof(tx_wqe));
         
