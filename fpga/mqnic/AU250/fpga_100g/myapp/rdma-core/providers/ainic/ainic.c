@@ -127,8 +127,10 @@ static struct ibv_cq *ainic_create_cq(struct ibv_context *context, int cqe,
 static int ainic_poll_cq(struct ibv_cq *ibcq, int ne, struct ibv_wc *wc)
 {
 	struct ainic_cq *cq = to_rcq(ibcq);
-	int nfinished =  *cq->cons_ptr - cq->last_cons_ptr;
-    cq->last_cons_ptr = *cq->cons_ptr;
+	cq->last_cons_ptr = cq->cons_ptr;
+	ainic_tx_read_cons_ptr(cq->sq);
+	cq->cons_ptr = cq->sq->cons_ptr;
+	int nfinished =  cq->cons_ptr - cq->last_cons_ptr;
 	return nfinished;
 }
 
@@ -181,14 +183,9 @@ static struct ibv_qp *ainic_create_qp(struct ibv_pd *ibpd,
 	return &qp->vqp.qp;
 	//cq
     struct ainic_cq *cq = to_rcq(attr->send_cq);
-	cq->cons_ptr = mmap(NULL, resp.sq_consumer_mi.size, PROT_WRITE,
-			MAP_SHARED, qp->vqp.qp.context->cmd_fd,
-			resp.sq_consumer_mi.offset);
-
-	qp->sq.prod_ptr = mmap(NULL, resp.sq_producer_mi.size, PROT_WRITE,
-			MAP_SHARED, qp->vqp.qp.context->cmd_fd,
-			resp.sq_producer_mi.offset);
-
+	*cq->sq = qp->sq;
+	ainic_tx_read_cons_ptr(&qp->sq);
+    cq->cons_ptr = qp->sq.cons_ptr;
 err_destroy:
 	ibv_cmd_destroy_qp(&qp->vqp.qp);
 err_free:
@@ -249,7 +246,7 @@ static int ainic_post_send(struct ibv_qp *ibvqp, struct ibv_send_wr *wr,
         //对端信息暂时不知道怎么填
 
         /* Copy descriptor */
-		sq_desc_offset = (*wq->prod_ptr & wq->size_mask) * sizeof(tx_wqe);
+		sq_desc_offset = (wq->prod_ptr & wq->size_mask) * sizeof(tx_wqe);
 		mmio_memcpy_x64(wq->buf + sq_desc_offset, &tx_wqe,
 				sizeof(tx_wqe));
         
