@@ -120,15 +120,16 @@ static struct ibv_cq *ainic_create_cq(struct ibv_context *context, int cqe,
 
 	cq->mmap_info = resp.mi;
 	pthread_spin_init(&cq->lock, PTHREAD_PROCESS_PRIVATE);
-
+    cq->last_cons_ptr = 0;
 	return &cq->vcq.cq;
 }
 
 static int ainic_poll_cq(struct ibv_cq *ibcq, int ne, struct ibv_wc *wc)
 {
 	struct ainic_cq *cq = to_rcq(ibcq);
-	*cq = *cq;
-	return 0;
+	int nfinished =  *cq->cons_ptr - cq->last_cons_ptr;
+    cq->last_cons_ptr = *cq->cons_ptr;
+	return nfinished;
 }
 
 static int map_queue_pair(int cmd_fd, struct ainic_qp *qp,
