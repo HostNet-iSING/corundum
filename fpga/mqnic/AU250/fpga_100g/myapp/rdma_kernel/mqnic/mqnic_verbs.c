@@ -227,7 +227,25 @@ int ainic_create_qp(struct ib_qp *ibqp, struct ib_qp_init_attr *init_attr,
 	if (err) {
 		return -1;
 	}
-    mqnic_enable_tx_ring(q);
+	int err = do_mmap_info(mqnic_rdma, &uresp->sq_producer_mi, udata,
+			   &qp->sq.queue->prod_ptr, sizeof(uint32_t),
+			   &qp->sq.sq_producer);
+	if (err) {
+		return -1;
+	}
+	int err = do_mmap_info(mqnic_rdma, &uresp->sq_producer_mi, udata,
+			   &qp->sq.queue->cons_ptr, sizeof(uint32_t),
+			   &qp->sq.sq_consumer);
+	if (err) {
+		return -1;
+	}
+    int err = do_mmap_info(mqnic_rdma, &uresp->send_reg_mmap, udata,
+			   qp->sq.queue->hw_addr, sizeof(uint32_t),
+			   &qp->sq.sq_reg_desc);
+	if (err) {
+		return -1;
+	}
+	mqnic_enable_tx_ring(q);
 	return 0;
 }
 

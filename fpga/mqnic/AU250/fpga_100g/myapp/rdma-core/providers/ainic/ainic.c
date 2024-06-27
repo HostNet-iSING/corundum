@@ -178,6 +178,15 @@ static struct ibv_qp *ainic_create_qp(struct ibv_pd *ibpd,
 			resp.send_reg_mmap.offset);
 	
 	return &qp->vqp.qp;
+	//cq
+    struct ainic_cq *cq = to_rcq(attr->send_cq);
+	cq->cons_ptr = mmap(NULL, resp.sq_consumer_mi.size, PROT_WRITE,
+			MAP_SHARED, qp->vqp.qp.context->cmd_fd,
+			resp.sq_consumer_mi.offset);
+
+	qp->sq.prod_ptr = mmap(NULL, resp.sq_producer_mi.size, PROT_WRITE,
+			MAP_SHARED, qp->vqp.qp.context->cmd_fd,
+			resp.sq_producer_mi.offset);
 
 err_destroy:
 	ibv_cmd_destroy_qp(&qp->vqp.qp);

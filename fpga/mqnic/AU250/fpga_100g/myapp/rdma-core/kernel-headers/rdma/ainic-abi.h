@@ -153,6 +153,8 @@ struct ainic_create_cq_resp {
 struct ainic_create_qp_resp {
 	struct mminfo rq_mi;
 	struct mminfo sq_mi;
-	struct mminfo send_reg_mmap;
+	struct mminfo sq_consumer_mi;
+	struct mminfo sq_producer_mi;
+    struct mminfo send_reg_mmap;
 };
 #endif /* RDMA_USER_AINIC_H */

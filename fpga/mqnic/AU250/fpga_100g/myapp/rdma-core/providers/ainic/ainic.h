@@ -25,17 +25,18 @@ struct ainic_cq {
 	uint8_t *buf;
 	size_t   size;
 	pthread_spinlock_t	lock;
-
+	
 	/* new API support */
 	struct ib_uverbs_wc	*wc;
 	size_t			wc_size;
 	uint32_t		cur_index;
+	uint32_t *cons_ptr;
 };
 
 struct ainic_wq {
 	uint8_t *buf;  //ring buf
-	uint32_t prod_ptr;
-	uint32_t cons_ptr;
+	uint32_t *prod_ptr;
+	uint32_t *cons_ptr;
 	pthread_spinlock_t	lock;
 	unsigned int		max_sge;
 	unsigned int		max_inline;
