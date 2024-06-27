@@ -430,10 +430,10 @@ mqnic->mqnic_rdma = ib_alloc_device(mqnic_rdma, ibdev);
 mqnic->mqnic_rdma->ibdev.node_type = RDMA_NODE_RNIC;
 mqnic->mqnic_rdma->ibdev.phys_port_cnt = 1;
 mqnic->mqnic_rdma->ibdev.num_comp_vectors = 1;
-mqnic->mqnic_rdma->ibdev.dev.parent = &mqnic->pdev->dev;
+mqnic->mqnic_rdma->ibdev.dev.parent = &mqnic->pfdev->dev;
 mqnic->mqnic_rdma->mqnic_dev = mqnic;
 ib_set_device_ops(&mqnic->mqnic_rdma->ibdev, &mqnic_rdma_ops);
-ib_register_device(&mqnic->mqnic_rdma->ibdev, "mqnic_rdma", &mqnic->pdev->dev);
+ib_register_device(&mqnic->mqnic_rdma->ibdev, "mqnic_rdma", &mqnic->pfdev->dev);
 
 spin_lock_init(&mqnic->mqnic_rdma->mmap_offset_lock);
 spin_lock_init(&mqnic->mqnic_rdma->pending_lock);

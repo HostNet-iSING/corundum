@@ -221,25 +221,13 @@ int ainic_create_qp(struct ib_qp *ibqp, struct ib_qp_init_attr *init_attr,
 		return -1;
 	}
 	qp->sq.queue = q;
-    int err = do_mmap_info(mqnic_rdma, &uresp->sq_mi, udata,
+        int err = do_mmap_info(mqnic_rdma, &uresp->sq_mi, udata,
 			   qp->sq.queue->buf, qp->sq.queue->buf_size,
 			   &qp->sq.ip);
 	if (err) {
 		return -1;
 	}
-	int err = do_mmap_info(mqnic_rdma, &uresp->sq_producer_mi, udata,
-			   &qp->sq.queue->prod_ptr, sizeof(uint32_t),
-			   &qp->sq.sq_producer);
-	if (err) {
-		return -1;
-	}
-	int err = do_mmap_info(mqnic_rdma, &uresp->sq_producer_mi, udata,
-			   &qp->sq.queue->cons_ptr, sizeof(uint32_t),
-			   &qp->sq.sq_consumer);
-	if (err) {
-		return -1;
-	}
-    int err = do_mmap_info(mqnic_rdma, &uresp->send_reg_mmap, udata,
+        err = do_mmap_info(mqnic_rdma, &uresp->send_reg_mmap, udata,
 			   qp->sq.queue->hw_addr, sizeof(uint32_t),
 			   &qp->sq.sq_reg_desc);
 	if (err) {
