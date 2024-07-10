@@ -253,8 +253,6 @@ int ainic_poll_cq(struct ib_cq *ibcq, int num_entries, struct ib_wc *wc)
 	return 0;
 }
 
-
-
 static bool is_pmem_page(struct page *pg)
 {
 	unsigned long paddr = page_to_phys(pg);
@@ -336,6 +334,94 @@ int ainic_dereg_mr(struct ib_mr *ibmr, struct ib_udata *udata)
 	
 	ib_umem_release(mr->umem);
 	kfree(mr);
+
+	return 0;
+}
+
+
+/* uc */
+static int ainic_alloc_ucontext(struct ib_ucontext *ibuc, struct ib_udata *udata)
+{
+	struct mqnic_rdma *ainic = container_of(ibuc->device, struct mqnic_rdma, ibdev);
+	struct ainic_ucontext *uc = container_of(ibuc, struct ainic_ucontect, ibuc);
+	int err = 0;
+	return err;
+}
+
+static void ainic_dealloc_ucontext(struct ib_ucontext *ibuc)
+{
+	struct ainic_ucontext *uc = container_of(ibuc, struct ainic_ucontect, ibuc);
+	int err;
+
+	//err = ainic_cleanup(uc);
+	//if (err)
+	//	ainic_err_uc(uc, "cleanup failed, err = %d\n", err);
+}
+
+static int ainic_query_device(struct ib_device *ibdev,
+			    struct ib_device_attr *attr,
+			    struct ib_udata *udata)
+{
+	struct mqnic_rdma *ainic = container_of(ibqp->device, struct mqnic_rdma, ibdev);
+	int err;
+
+	if (udata->inlen || udata->outlen) {
+		err = -EINVAL;
+		goto err_out;
+	}
+
+	memcpy(attr, &ainic->attr, sizeof(*attr));
+
+	return 0;
+
+err_out:
+	return err;
+}
+
+static int ainic_query_port(struct ib_device *ibdev,
+			  u32 port, struct ib_port_attr *props)
+{
+	struct mqnic_rdma *dev = container_of(ibqp->device, struct mqnic_rdma, ibdev);
+
+	props->lmc = 1;
+
+	props->state = IB_PORT_ACTIVE;
+	props->phys_state = IB_PORT_PHYS_STATE_LINK_UP;
+	props->gid_tbl_len = 1;
+	props->pkey_tbl_len = 1;
+	props->active_speed = IB_SPEED_EDR;
+	props->active_width = IB_WIDTH_4X;
+	props->max_mtu = ib_mtu_int_to_enum(dev->dev_attr.mtu);
+	props->active_mtu = ib_mtu_int_to_enum(dev->dev_attr.mtu);
+	props->max_msg_sz = dev->dev_attr.mtu;
+	props->max_vl_num = 1;
+
+	return 0;
+}
+
+int ainic_get_port_immutable(struct ib_device *ibdev, u32 port_num,
+			   struct ib_port_immutable *immutable)
+{
+	struct ib_port_attr attr;
+	int err;
+
+	err = ib_query_port(ibdev, port_num, &attr);
+	if (err) {
+		return err;
+	}
+
+	immutable->pkey_tbl_len = attr.pkey_tbl_len;
+	immutable->gid_tbl_len = attr.gid_tbl_len;
+
+	return 0;
+}
+
+int ainic_query_gid(struct ib_device *ibdev, u32 port, int index,
+		  union ib_gid *gid)
+{
+	struct mqnic_rdma *dev = container_of(ibqp->device, struct mqnic_rdma, ibdev);
+
+	memcpy(gid->raw, dev->attr.addr, sizeof(dev->attr.addr));
 
 	return 0;
 }

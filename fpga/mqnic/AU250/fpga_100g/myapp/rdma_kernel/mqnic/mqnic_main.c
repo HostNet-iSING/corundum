@@ -249,7 +249,12 @@ static const struct ib_device_ops mqnic_rdma_ops = {
 	.destroy_qp = ainic_destroy_qp,
 	.mmap = ainic_mmap,
 	.reg_user_mr = ainic_reg_mr,
-
+    .alloc_ucontext = ainic_alloc_ucontext,
+	.dealloc_ucontext = ainic_dealloc_ucontext,
+	.get_port_immutable = ainic_get_port_immutable,
+	.query_device = ainic_query_device,
+	.query_gid = ainic_query_gid, 
+	.query_port = ainic_query_port,
 	INIT_RDMA_OBJ_SIZE(ib_cq, ainic_cq, ibcq),
 	INIT_RDMA_OBJ_SIZE(ib_qp, ainic_qp, ibqp),
 	INIT_RDMA_OBJ_SIZE(ib_ucontext, ainic_ucontext, ibucontext),
@@ -433,7 +438,10 @@ mqnic->mqnic_rdma->ibdev.num_comp_vectors = 1;
 mqnic->mqnic_rdma->ibdev.dev.parent = &mqnic->pfdev->dev;
 mqnic->mqnic_rdma->mqnic_dev = mqnic;
 ib_set_device_ops(&mqnic->mqnic_rdma->ibdev, &mqnic_rdma_ops);
-ib_register_device(&mqnic->mqnic_rdma->ibdev, "mqnic_rdma", &mqnic->pfdev->dev);
+struct mqnic_if  *interface = mqnic->interface[0];
+struct net_device *ndev = interface->ndev[0];
+ret = ib_device_set_netdev(&mqnic->mqnic_rdma->ibdev, ndev, 1);
+ib_register_device(&mqnic->mqnic_rdma->ibdev, "mqnic_rdma_%d", NULL);
 
 spin_lock_init(&mqnic->mqnic_rdma->mmap_offset_lock);
 spin_lock_init(&mqnic->mqnic_rdma->pending_lock);

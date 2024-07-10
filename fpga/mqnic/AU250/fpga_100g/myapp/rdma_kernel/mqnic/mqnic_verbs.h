@@ -25,7 +25,7 @@ struct mqnic_mmap_info {
 	struct mminfo info;
 };
 struct ainic_ucontext {
-	struct ib_ucontext ibucontext;
+	struct ib_ucontext ibuc;
 };
 
 struct ainic_pd {

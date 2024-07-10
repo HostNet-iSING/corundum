@@ -108,6 +108,7 @@ struct mqnic_adev {
 
 struct mqnic_rdma {
 	struct ib_device ibdev;
+	struct ib_device_attr	attr;
 	struct mqnic_dev *mqnic_dev;
 	spinlock_t		pending_lock; /* guard pending_mmaps */
 	struct list_head	pending_mmaps;
