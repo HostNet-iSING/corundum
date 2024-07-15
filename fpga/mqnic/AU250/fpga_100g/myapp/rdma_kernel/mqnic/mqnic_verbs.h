@@ -90,5 +90,19 @@ int ainic_alloc_ucontext(struct ib_ucontext *ibucontext, struct ib_udata *udata)
 void ainic_dealloc_ucontext(struct ib_ucontext *ibucontext);
 int ainic_mmap(struct ib_ucontext *ibucontext,
 	     struct vm_area_struct *vma);
+		 
+int ainic_query_device(struct ib_device *ibdev,
+			    struct ib_device_attr *attr,
+			    struct ib_udata *udata);
 
+int ainic_query_port(struct ib_device *ibdev,
+			  u32 port, struct ib_port_attr *props);
+
+int ainic_get_port_immutable(struct ib_device *ibdev, u32 port_num,
+			   struct ib_port_immutable *immutable);
+
+int ainic_query_gid(struct ib_device *ibdev, u32 port, int index,
+		  union ib_gid *gid);
+int ainic_query_pkey(struct ib_device *ibdev,
+                          u32 port_num, u16 index, u16 *pkey);
 #endif

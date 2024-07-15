@@ -340,17 +340,17 @@ int ainic_dereg_mr(struct ib_mr *ibmr, struct ib_udata *udata)
 
 
 /* uc */
-static int ainic_alloc_ucontext(struct ib_ucontext *ibuc, struct ib_udata *udata)
+int ainic_alloc_ucontext(struct ib_ucontext *ibuc, struct ib_udata *udata)
 {
 	struct mqnic_rdma *ainic = container_of(ibuc->device, struct mqnic_rdma, ibdev);
-	struct ainic_ucontext *uc = container_of(ibuc, struct ainic_ucontect, ibuc);
+	struct ainic_ucontext *uc = container_of(ibuc, struct ainic_ucontext, ibuc);
 	int err = 0;
 	return err;
 }
 
-static void ainic_dealloc_ucontext(struct ib_ucontext *ibuc)
+void ainic_dealloc_ucontext(struct ib_ucontext *ibuc)
 {
-	struct ainic_ucontext *uc = container_of(ibuc, struct ainic_ucontect, ibuc);
+	struct ainic_ucontext *uc = container_of(ibuc, struct ainic_ucontext, ibuc);
 	int err;
 
 	//err = ainic_cleanup(uc);
@@ -358,11 +358,11 @@ static void ainic_dealloc_ucontext(struct ib_ucontext *ibuc)
 	//	ainic_err_uc(uc, "cleanup failed, err = %d\n", err);
 }
 
-static int ainic_query_device(struct ib_device *ibdev,
+int ainic_query_device(struct ib_device *ibdev,
 			    struct ib_device_attr *attr,
 			    struct ib_udata *udata)
 {
-	struct mqnic_rdma *ainic = container_of(ibqp->device, struct mqnic_rdma, ibdev);
+	struct mqnic_rdma *ainic = container_of(ibdev, struct mqnic_rdma, ibdev);
 	int err;
 
 	if (udata->inlen || udata->outlen) {
@@ -378,10 +378,10 @@ err_out:
 	return err;
 }
 
-static int ainic_query_port(struct ib_device *ibdev,
+int ainic_query_port(struct ib_device *ibdev,
 			  u32 port, struct ib_port_attr *props)
 {
-	struct mqnic_rdma *dev = container_of(ibqp->device, struct mqnic_rdma, ibdev);
+	struct mqnic_rdma *mqnic_rdma = container_of(ibdev, struct mqnic_rdma, ibdev);
 
 	props->lmc = 1;
 
@@ -391,9 +391,9 @@ static int ainic_query_port(struct ib_device *ibdev,
 	props->pkey_tbl_len = 1;
 	props->active_speed = IB_SPEED_EDR;
 	props->active_width = IB_WIDTH_4X;
-	props->max_mtu = ib_mtu_int_to_enum(dev->dev_attr.mtu);
-	props->active_mtu = ib_mtu_int_to_enum(dev->dev_attr.mtu);
-	props->max_msg_sz = dev->dev_attr.mtu;
+	props->max_mtu = ib_mtu_int_to_enum(mqnic_rdma->mqnic_dev->interface[0]->ndev[0]->mtu);
+	props->active_mtu = ib_mtu_int_to_enum(mqnic_rdma->mqnic_dev->interface[0]->ndev[0]->mtu);
+	props->max_msg_sz = mqnic_rdma->mqnic_dev->interface[0]->ndev[0]->mtu;
 	props->max_vl_num = 1;
 
 	return 0;
@@ -419,9 +419,27 @@ int ainic_get_port_immutable(struct ib_device *ibdev, u32 port_num,
 int ainic_query_gid(struct ib_device *ibdev, u32 port, int index,
 		  union ib_gid *gid)
 {
-	struct mqnic_rdma *dev = container_of(ibqp->device, struct mqnic_rdma, ibdev);
+	struct mqnic_rdma *dev = container_of(ibdev, struct mqnic_rdma, ibdev);
 
-	memcpy(gid->raw, dev->attr.addr, sizeof(dev->attr.addr));
+//	memcpy(gid->raw, dev->attr.addr, sizeof(dev->attr.addr));
 
 	return 0;
 }
+
+int ainic_query_pkey(struct ib_device *ibdev,
+			  u32 port_num, u16 index, u16 *pkey)
+{
+	int err;
+
+	if (index != 0) {
+		err = -EINVAL;
+		goto err_out;
+	}
+
+	*pkey = 0xffff;
+	return 0;
+
+err_out:
+	return err;
+}
+

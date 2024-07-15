@@ -255,9 +255,10 @@ static const struct ib_device_ops mqnic_rdma_ops = {
 	.query_device = ainic_query_device,
 	.query_gid = ainic_query_gid, 
 	.query_port = ainic_query_port,
+	.query_pkey = ainic_query_pkey,
 	INIT_RDMA_OBJ_SIZE(ib_cq, ainic_cq, ibcq),
 	INIT_RDMA_OBJ_SIZE(ib_qp, ainic_qp, ibqp),
-	INIT_RDMA_OBJ_SIZE(ib_ucontext, ainic_ucontext, ibucontext),
+	INIT_RDMA_OBJ_SIZE(ib_ucontext, ainic_ucontext, ibuc),
 };
 static int mqnic_common_probe(struct mqnic_dev *mqnic)
 {
@@ -435,11 +436,17 @@ mqnic->mqnic_rdma = ib_alloc_device(mqnic_rdma, ibdev);
 mqnic->mqnic_rdma->ibdev.node_type = RDMA_NODE_RNIC;
 mqnic->mqnic_rdma->ibdev.phys_port_cnt = 1;
 mqnic->mqnic_rdma->ibdev.num_comp_vectors = 1;
-mqnic->mqnic_rdma->ibdev.dev.parent = &mqnic->pfdev->dev;
+//mqnic->mqnic_rdma->ibdev.dev.parent = &mqnic->pfdev->dev;
 mqnic->mqnic_rdma->mqnic_dev = mqnic;
 ib_set_device_ops(&mqnic->mqnic_rdma->ibdev, &mqnic_rdma_ops);
 struct mqnic_if  *interface = mqnic->interface[0];
 struct net_device *ndev = interface->ndev[0];
+struct device *testdev = get_device(&mqnic->mqnic_rdma->ibdev.dev);
+if (!testdev)
+  dev_info(dev, "device %s get fail", mqnic->name);
+int ret1 = device_add(&mqnic->mqnic_rdma->ibdev.dev);
+if (ret1)
+  dev_info(dev, "device %s add fail", mqnic->name);  
 ret = ib_device_set_netdev(&mqnic->mqnic_rdma->ibdev, ndev, 1);
 ib_register_device(&mqnic->mqnic_rdma->ibdev, "mqnic_rdma_%d", NULL);
 
@@ -501,6 +508,8 @@ fail_rb_init:
 static void mqnic_common_remove(struct mqnic_dev *mqnic)
 {
 	int k = 0;
+	ib_unregister_device(&mqnic->mqnic_rdma->ibdev);
+	ib_dealloc_device(&mqnic->mqnic_rdma->ibdev);
 
 #ifdef CONFIG_AUXILIARY_BUS
 	if (mqnic->app_adev) {

@@ -122,7 +122,7 @@ struct mqnic_dev {
 	struct pci_dev *pdev;
 #endif
 	struct platform_device *pfdev;
-
+        struct pci_dev *prdev;
 	resource_size_t hw_regs_size;
 	phys_addr_t hw_regs_phys;
 	u8 __iomem *hw_addr;
