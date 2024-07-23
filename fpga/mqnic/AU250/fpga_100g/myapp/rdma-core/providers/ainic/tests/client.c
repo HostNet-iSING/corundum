@@ -125,8 +125,6 @@ int main(int argc, char   *argv[ ])
 			n = getaddrinfo(argv[1], "20079", &hints, &res);
 			if (n < 0)
 					return   1;
-            
-            printf("%d\n", n);
 
 			/* Resolve server address and route */
 			for (t = res; t; t = t->ai_next) {
@@ -136,7 +134,6 @@ int main(int argc, char   *argv[ ])
 			}
 			if (err)
             {
-                printf("%d\n", err);
                 return err;
             }
 
@@ -170,7 +167,6 @@ int main(int argc, char   *argv[ ])
 			if (ibv_req_notify_cq(cq,  0)) 
 					return 1; 
             
-            // 要不要页对齐?
 			buf = calloc(2, sizeof (uint32_t)); 
 			if (!buf) 
 					return 1; 
@@ -191,12 +187,6 @@ int main(int argc, char   *argv[ ])
 			conn_param.retry_count = 7;
             conn_param.rnr_retry_count = 7;
 
-            server_pdata.buf_va = htonll((uintptr_t) buf);
-            server_pdata.buf_rkey = htonl(mr->rkey);
-            conn_param.responder_resources = 1;
-            conn_param.private_data          = &server_pdata;
-            conn_param.private_data_len = sizeof(server_pdata);
-
 /***************************************************************************************/
 
 			/* Connect to server */
@@ -213,7 +203,7 @@ int main(int argc, char   *argv[ ])
 /***************************************************************************************/
 			/* Prepost receive */
             uintptr_t buf_phys = rte_mem_virt2phy(buf);
-            uintptr_t buf_addr = (argc > 4 && strcmp(argv[4], "-paddr") == 0) ? buf_phys : (uintptr_t) buf;
+            uintptr_t buf_addr = (argc > 3 && strcmp(argv[3], "-paddr") == 0) ? buf_phys : (uintptr_t) buf;
             printf("virt addr: %p, phys addr: %p, used addr: %p\n", buf, (void *)buf_phys, (void *)buf_addr);
             if (buf_addr == -1 || buf_addr == 0)
             {
@@ -231,10 +221,8 @@ int main(int argc, char   *argv[ ])
 
 			/* Write/send two integers to be added */
 			buf[0] = strtoul(argv[2], NULL, 0);
-			buf[1] = strtoul(argv[3], NULL, 0);
-			printf("%d + %d = ", buf[0], buf[1]);
+			printf("Send val: %d\n", buf[0]);
 			buf[0]  = htonl(buf[0]);
-			buf[1]  = htonl(buf[1]);
 
 // 			sge.addr    = buf_addr;
 // 			sge.length  = sizeof (uint32_t);
@@ -249,10 +237,10 @@ int main(int argc, char   *argv[ ])
 // 			if (ibv_post_send(cm_id->qp, &send_wr,  &bad_send_wr))
 // 					return 1;
 			sge.addr    = buf_addr;
-			sge.length  = sizeof (uint32_t) * 2;
+			sge.length  = sizeof (uint32_t);
 			sge.lkey    = mr->lkey;
 			send_wr.wr_id                = 1;
-            send_wr.opcode  = IBV_WR_RDMA_WRITE_WITH_IMM;
+            send_wr.opcode  = IBV_WR_RDMA_WRITE;
 			//send_wr.opcode                = IBV_WR_SEND;
 			//send_wr.send_flags            = IBV_SEND_SIGNALED;
 			send_wr.sg_list               =&sge;
@@ -265,21 +253,21 @@ int main(int argc, char   *argv[ ])
                 return 1;
             }
 
-/***************************************************************************************/
-			/* Wait for receive completion */
-			while (1) {           
-				if (ibv_get_cq_event(comp_chan,&evt_cq, &cq_context)) // 调用ibv_get_cq_event查询该完成事件通道，没有新的CQE时阻塞，有新的CQE时返回
-						return 1;
-				if (ibv_req_notify_cq(cq, 0)) // 调用ibv_req_notify_cq来告诉CQ当有新的CQE产生时从完成事件通道来通知用户程序
-						return 1;
-				if (ibv_poll_cq(cq, 1, &wc) != 1) // 调用ibv_poll_cq从CQ里读取新的CQE，此时调用ibv_poll_cq一次就好，不需要轮询
-						return 1;
-				if (wc.status != IBV_WC_SUCCESS)
-						return 1;
-				if (wc.wr_id == 0) {
-						printf("%d\n", ntohl(buf[0]));
-						return 0;
-				}
-    }
+// /***************************************************************************************/
+// 			/* Wait for receive completion */
+// 			while (1) {           
+// 				if (ibv_get_cq_event(comp_chan,&evt_cq, &cq_context)) // 调用ibv_get_cq_event查询该完成事件通道，没有新的CQE时阻塞，有新的CQE时返回
+// 						return 1;
+// 				if (ibv_req_notify_cq(cq, 0)) // 调用ibv_req_notify_cq来告诉CQ当有新的CQE产生时从完成事件通道来通知用户程序
+// 						return 1;
+// 				if (ibv_poll_cq(cq, 1, &wc) != 1) // 调用ibv_poll_cq从CQ里读取新的CQE，此时调用ibv_poll_cq一次就好，不需要轮询
+// 						return 1;
+// 				if (wc.status != IBV_WC_SUCCESS)
+// 						return 1;
+// 				if (wc.wr_id == 0) {
+// 						printf("%d\n", ntohl(buf[0]));
+// 						return 0;
+// 				}
+//     }
     return 0;
 }

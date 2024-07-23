@@ -21,7 +21,7 @@ uint64_t htonll(uint64_t val) {
 
 int main(int argc, char   *argv[ ])
 {
-    struct pdata				rep_pdata;
+    struct pdata				server_pdata;
     struct rdma_event_channel			*cm_channel;
     struct rdma_cm_id			        *listen_id;
     struct rdma_cm_id   			*cm_id;
@@ -104,20 +104,21 @@ int main(int argc, char   *argv[ ])
     if (err)
         return err;
 
-    /* Post receive before accepting connection */
-    sge.addr    = (uintptr_t) buf;
-    sge.length  = sizeof (uint32_t) * 2;
-    sge.lkey    = mr->lkey;
+    // /* Post receive before accepting connection */
+    // sge.addr    = (uintptr_t) buf;
+    // sge.length  = sizeof (uint32_t) * 2;
+    // sge.lkey    = mr->lkey;
   
-    recv_wr.sg_list =  &sge;
-    recv_wr.num_sge = 1;
-    if (ibv_post_recv(cm_id->qp, &recv_wr,  &bad_recv_wr))
-        return 1;
-    rep_pdata.buf_va = htonll((uintptr_t) buf);
-    rep_pdata.buf_rkey = htonl(mr->rkey);
+    // recv_wr.sg_list =  &sge;
+    // recv_wr.num_sge = 1;
+    // if (ibv_post_recv(cm_id->qp, &recv_wr,  &bad_recv_wr))
+    //     return 1;
+
+    server_pdata.buf_va = htonll((uintptr_t) buf);
+    server_pdata.buf_rkey = htonl(mr->rkey);
     conn_param.responder_resources = 1;
-    conn_param.private_data          = &rep_pdata;
-    conn_param.private_data_len = sizeof(rep_pdata);
+    conn_param.private_data          = &server_pdata;
+    conn_param.private_data_len = sizeof(server_pdata);
 
     /* Accept connection */
     err = rdma_accept(cm_id, &conn_param);
@@ -130,36 +131,42 @@ int main(int argc, char   *argv[ ])
         return 1;
     rdma_ack_cm_event(event);
 
-    /* Wait for receive completion */
-    if (ibv_get_cq_event(comp_chan,  &evt_cq, &cq_context))
-        return 1;
-    if (ibv_req_notify_cq(cq,  0))
-        return 1;
-    if (ibv_poll_cq(cq, 1, &wc)    < 1)
-        return 1;
-    if (wc.status != IBV_WC_SUCCESS)
-        return 1;
+    // /* Wait for receive completion */
+    // if (ibv_get_cq_event(comp_chan,  &evt_cq, &cq_context))
+    //     return 1;
+    // if (ibv_req_notify_cq(cq,  0))
+    //     return 1;
+    // if (ibv_poll_cq(cq, 1, &wc)    < 1)
+    //     return 1;
+    // if (wc.status != IBV_WC_SUCCESS)
+    //     return 1;
+    /* Wait for client write */
+    while (buf[0] == 0)
+    {
+    }
 
-    /* Add two integers and send reply back */
-    buf[0]  = htonl(ntohl(buf[0])  +  ntohl(buf[1]));
-    sge.addr    = (uintptr_t) buf;
-    sge.length  = sizeof (uint32_t);
-    sge.lkey    = mr->lkey;
 
-    send_wr.opcode = IBV_WR_SEND;
-    send_wr.send_flags = IBV_SEND_SIGNALED;
-    send_wr.sg_list    = &sge;
-    send_wr.num_sge = 1;
-    if (ibv_post_send(cm_id->qp, &send_wr, &bad_send_wr))
-        return 1;
+    printf("Received val: %d\n", ntohl(buf[0]));
+    // /* Add two integers and send reply back */
+    // buf[0]  = htonl(ntohl(buf[0])  +  ntohl(buf[1]));
+    // sge.addr    = (uintptr_t) buf;
+    // sge.length  = sizeof (uint32_t);
+    // sge.lkey    = mr->lkey;
 
-    /* Wait for send completion */
-    if (ibv_get_cq_event(comp_chan,     &evt_cq, &cq_context))
-        return 1;
-    if (ibv_poll_cq(cq, 1, &wc)    < 1)
-        return 1;
-    if (wc.status != IBV_WC_SUCCESS)
-        return 1;
-    ibv_ack_cq_events(cq,   2);
+    // send_wr.opcode = IBV_WR_SEND;
+    // send_wr.send_flags = IBV_SEND_SIGNALED;
+    // send_wr.sg_list    = &sge;
+    // send_wr.num_sge = 1;
+    // if (ibv_post_send(cm_id->qp, &send_wr, &bad_send_wr))
+    //     return 1;
+
+    // /* Wait for send completion */
+    // if (ibv_get_cq_event(comp_chan,     &evt_cq, &cq_context))
+    //     return 1;
+    // if (ibv_poll_cq(cq, 1, &wc)    < 1)
+    //     return 1;
+    // if (wc.status != IBV_WC_SUCCESS)
+    //     return 1;
+    // ibv_ack_cq_events(cq,   2);
     return  0;
 }
