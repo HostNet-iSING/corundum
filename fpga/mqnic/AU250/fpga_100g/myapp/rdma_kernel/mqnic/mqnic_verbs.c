@@ -5,23 +5,49 @@
 #include <rdma/uverbs_ioctl.h>
 #define UVERBS_MODULE_NAME ainic_ib
 #include <rdma/uverbs_named_ioctl.h>
+#include <linux/dma-map-ops.h>
 
 int ainic_create_cq(struct ib_cq *ibcq, const struct ib_cq_init_attr *attr,
 		  struct ib_udata *udata)
 {
 	struct ainic_cq *cq;
-	cq = kmalloc(sizeof(*cq), GFP_KERNEL);
+	printk("cq");
+        printk ("1");
+	printk ("1");
+	printk ("1");
+
+	printk ("1");
+	//cq = kmalloc(sizeof(*cq), GFP_KERNEL);
+	printk("cq malloc");
+	printk ("1");
+	printk ("1");
+	printk ("1");
+	printk ("1");
 	return 0;
 }
 
 int ainic_destroy_cq(struct ib_cq *ibcq, struct ib_udata *udata)
 {
 	struct ainic_cq *cq = container_of(ibcq, struct ainic_cq, ibcq);
-	kfree(cq);
-    return 0;
+//	kfree(cq);
+        printk("cq destroy");
+       	return 0;
 }
 
+/* pd */
+int ainic_alloc_pd(struct ib_pd *ibpd, struct ib_udata *udata)
+{
+//        printk("alloc pd\n\n\n\n");
+	return 0;
 
+}
+
+int ainic_dealloc_pd(struct ib_pd *ibpd, struct ib_udata *udata)
+	
+{
+
+	return 0;
+}
 void ainic_mmap_release(struct kref *ref)
 {
 	struct mqnic_mmap_info *ip = container_of(ref,
@@ -75,7 +101,7 @@ int ainic_mmap(struct ib_ucontext *context, struct vm_area_struct *vma)
 	unsigned long size = vma->vm_end - vma->vm_start;
 	struct mqnic_mmap_info *ip, *pp;
 	int ret;
-
+        printk("start mmap");
 	/*
 	 * Search the device's list of objects waiting for a mmap call.
 	 * Normally, this list is very short since a call to create a
@@ -83,10 +109,13 @@ int ainic_mmap(struct ib_ucontext *context, struct vm_area_struct *vma)
 	 */
 	spin_lock_bh(&mqnic_rdma->pending_lock);
 	list_for_each_entry_safe(ip, pp, &mqnic_rdma->pending_mmaps, pending_mmaps) {
-		if (context != ip->context || (__u64)offset != ip->info.offset)
+		printk("offset %d %d size %d %d",offset, ip->info.offset, size, ip->info.size);
+		if ((__u64)offset != ip->info.offset || context != ip->context)
+		{
+			printk("jump offset %d %d",offset, ip->info.offset);
 			continue;
-
-		/* Don't allow a mmap larger than the object. */
+		}
+			/* Don't allow a mmap larger than the object. */
 		if (size > ip->info.size) {
 			spin_unlock_bh(&mqnic_rdma->pending_lock);
 			ret = -EINVAL;
@@ -102,16 +131,35 @@ int ainic_mmap(struct ib_ucontext *context, struct vm_area_struct *vma)
 found_it:
 	list_del_init(&ip->pending_mmaps);
 	spin_unlock_bh(&mqnic_rdma->pending_lock);
-
-	ret = remap_vmalloc_range(vma, ip->obj, 0);
+	printk("found it");	
+	if (ip->dma_addr)
+	{
+	printk ("dma");
+	printk ("ip cpu addr %p, phy addr %llx", ip->obj, ip->dma_addr);
+        const struct dma_map_ops *ops = get_dma_ops(ip->ring->dev);
+	if(ops) printk("have ops");
+	if (!ops->mmap) printk ("no mmap");
+	int pgoff = vma->vm_pgoff;
+	vma->vm_pgoff = 0;
+	ret = dma_mmap_coherent(ip->ring->dev, vma, ip->obj, ip->dma_addr, vma->vm_end - vma->vm_start);
+	vma->vm_pgoff = pgoff;
+//	ret = remap_pfn_range(vma, vma->vm_start,
+//		ip->dma_addr >> PAGE_SHIFT,
+//		vma->vm_end - vma->vm_start,pgprot_noncached(vma->vm_page_prot));
+	}
+	else
+	ret = io_remap_pfn_range(vma, vma->vm_start,
+		mqnic_rdma->mqnic_dev->hw_regs_phys >> PAGE_SHIFT,
+		vma->vm_end - vma->vm_start, pgprot_noncached(vma->vm_page_prot));
+//	ret = remap_vmalloc_range(vma, ip->obj, 0);
 	if (ret) {
 		goto done;
 	}
-
 	vma->vm_ops = &mqnic_vm_ops;
 	vma->vm_private_data = ip;
 	mqnic_vma_open(vma);
-done:
+done:   
+	printk("ret mmap %d",ret);
 	return ret;
 }
 
@@ -119,7 +167,7 @@ done:
  * Allocate information for mqnic_mmap
  */
 struct mqnic_mmap_info *mqnic_create_mmap_info(struct mqnic_rdma *mqnic_rdma, u32 size,
-					   struct ib_udata *udata, void *obj)
+					   struct ib_udata *udata, struct mqnic_ring *q)
 {
 	struct mqnic_mmap_info *ip;
 
@@ -147,7 +195,10 @@ struct mqnic_mmap_info *mqnic_create_mmap_info(struct mqnic_rdma *mqnic_rdma, u3
 	ip->context =
 		container_of(udata, struct uverbs_attr_bundle, driver_udata)
 			->context;
-	ip->obj = obj;
+	ip->obj = q->buf;
+	ip->dma_addr = q->buf_dma_addr;
+	ip->ring = q;
+	printk ("cpu addr %p, phy addr %llx", q->buf, q->buf_dma_addr);
 	kref_init(&ip->ref);
 
 	return ip;
@@ -155,14 +206,14 @@ struct mqnic_mmap_info *mqnic_create_mmap_info(struct mqnic_rdma *mqnic_rdma, u3
 
 
 int do_mmap_info(struct mqnic_rdma *mqnic_rdma, struct mminfo __user *outbuf,
-		 struct ib_udata *udata, u8 *buf,
+		 struct ib_udata *udata, struct mqnic_ring *q,
 		 size_t buf_size, struct mqnic_mmap_info **ip_p)
 {
 	int err;
 	struct mqnic_mmap_info *ip = NULL;
 
 	if (outbuf) {
-		ip = mqnic_create_mmap_info(mqnic_rdma, buf_size, udata, buf);
+		ip = mqnic_create_mmap_info(mqnic_rdma, buf_size, udata, q);
 		if (IS_ERR(ip)) {
 			err = PTR_ERR(ip);
 			goto err1;
@@ -188,51 +239,147 @@ err1:
 	return err;
 }
 
+struct mqnic_mmap_info *mqnic_create_mmap_info_reg(struct mqnic_rdma *mqnic_rdma, u32 size,
+					   struct ib_udata *udata, struct mqnic_ring *q)
+{
+	struct mqnic_mmap_info *ip;
+
+	if (!udata)
+		return ERR_PTR(-EINVAL);
+
+	ip = kmalloc(sizeof(*ip), GFP_KERNEL);
+	if (!ip)
+		return ERR_PTR(-ENOMEM);
+
+	size = PAGE_ALIGN(size);
+
+	spin_lock_bh(&mqnic_rdma->mmap_offset_lock);
+
+	if (mqnic_rdma->mmap_offset == 0)
+		mqnic_rdma->mmap_offset = ALIGN(PAGE_SIZE, SHMLBA);
+
+	ip->info.offset = mqnic_rdma->mmap_offset;
+	mqnic_rdma->mmap_offset += ALIGN(size, SHMLBA);
+
+	spin_unlock_bh(&mqnic_rdma->mmap_offset_lock);
+
+	INIT_LIST_HEAD(&ip->pending_mmaps);
+	ip->info.size = size;
+	ip->context =
+		container_of(udata, struct uverbs_attr_bundle, driver_udata)
+			->context;
+	ip->obj = q->hw_addr;
+	ip->dma_addr = NULL;
+	kref_init(&ip->ref);
+
+	return ip;
+}
+
+
+int do_mmap_info_reg(struct mqnic_rdma *mqnic_rdma, struct mminfo __user *outbuf,
+		 struct ib_udata *udata, struct mqnic_ring *q,
+		 size_t buf_size, struct mqnic_mmap_info **ip_p)
+{
+	int err;
+	struct mqnic_mmap_info *ip = NULL;
+
+	if (outbuf) {
+		ip = mqnic_create_mmap_info_reg(mqnic_rdma, buf_size, udata, q);
+		if (IS_ERR(ip)) {
+			err = PTR_ERR(ip);
+			goto err1;
+		}
+
+		if (copy_to_user(outbuf, &ip->info, sizeof(ip->info))) {
+			err = -EFAULT;
+			goto err2;
+		}
+
+		spin_lock_bh(&mqnic_rdma->pending_lock);
+		list_add(&ip->pending_mmaps, &mqnic_rdma->pending_mmaps);
+		spin_unlock_bh(&mqnic_rdma->pending_lock);
+	}
+
+	*ip_p = ip;
+
+	return 0;
+
+err2:
+	kfree(ip);
+err1:
+	return err;
+}
+
+int qnum = 0;
 
 int ainic_create_qp(struct ib_qp *ibqp, struct ib_qp_init_attr *init_attr,
 		  struct ib_udata *udata)
 {
 // create send queue, for now, we only use sq
+   printk("qp");
+   printk("qp1");
+   printk("qp2");
+   printk("qp3");
+   printk("qp4");
     struct ainic_qp *qp = container_of(ibqp, struct ainic_qp, ibqp);
-	struct ainic_create_qp_resp __user *uresp = NULL;
+	struct ainic_create_qp_resp __user *uresp = udata->outbuf;
     int ret;
     struct mqnic_rdma *mqnic_rdma = container_of(ibqp->device, struct mqnic_rdma, ibdev);
     struct mqnic_dev *mqnic_dev = mqnic_rdma->mqnic_dev;
+    dev_info(mqnic_dev->dev, "create_qp");
 	struct mqnic_if  *interface = mqnic_dev->interface[0];
 	struct net_device *ndev = interface->ndev[0];
 	struct mqnic_priv *priv = netdev_priv(ndev);
-    struct mqnic_ring *q;
+        struct mqnic_ring *q;
 	u32 desc_block_size = min_t(u32, priv->interface->max_desc_block_size, 4);
 	q = mqnic_create_tx_ring(interface);
+        dev_info(mqnic_dev->dev, "create_qp, create_tx_ring");
 	if (IS_ERR_OR_NULL(q)) {
 		ret = PTR_ERR(q);
 	}
-	q->tx_queue = netdev_get_tx_queue(ndev, 1);
+	q->tx_queue = netdev_get_tx_queue(ndev, qnum);
 	ret = mqnic_open_tx_ring(q, priv, NULL, priv->tx_ring_size, desc_block_size);
+	dev_info(mqnic_dev->dev, "create_qp, open_tx_ring ret %d", ret);
 	if (ret) {
 		mqnic_destroy_tx_ring(q);
 		return -1;
 	}
 	down_write(&priv->txq_table_sem);
-	ret = radix_tree_insert(&priv->txq_table, 1, q);
+	ret = radix_tree_insert(&priv->txq_table, qnum, q);
 	up_write(&priv->txq_table_sem);
+	dev_info(mqnic_dev->dev, "create_qp, up write");
 	if (ret) {
 		mqnic_destroy_tx_ring(q);
 		return -1;
 	}
 	qp->sq.queue = q;
         int err = do_mmap_info(mqnic_rdma, &uresp->sq_mi, udata,
-			   qp->sq.queue->buf, qp->sq.queue->buf_size,
+			   qp->sq.queue, qp->sq.queue->buf_size,
 			   &qp->sq.ip);
-	if (err) {
+	dev_info(mqnic_dev->dev, "create_qp, do mmap err %d", err);
+        	if (err) {
 		return -1;
 	}
-        err = do_mmap_info(mqnic_rdma, &uresp->send_reg_mmap, udata,
-			   qp->sq.queue->hw_addr, sizeof(uint32_t),
+    err = do_mmap_info_reg(mqnic_rdma, &uresp->reg_bar, udata,
+			   qp->sq.queue, mqnic_rdma->mqnic_dev->hw_regs_size,
 			   &qp->sq.sq_reg_desc);
 	if (err) {
 		return -1;
 	}
+
+	if (copy_to_user(&uresp->hw_offset, &q->hw_offset, sizeof(u32))) {
+		return -1;
+	}
+
+	if (copy_to_user(&uresp->size_mask, &q->size_mask, sizeof(u32))) {
+                return -1;
+        }
+	
+	if (copy_to_user(&uresp->stride, &q->stride, sizeof(u32))) {
+	                return -1;
+	}
+        struct mqnic_desc *tx_desc = (struct mqnic_desc *)(q->buf);
+	tx_desc->len = 12345;
 	mqnic_enable_tx_ring(q);
 	return 0;
 }
@@ -345,6 +492,7 @@ int ainic_alloc_ucontext(struct ib_ucontext *ibuc, struct ib_udata *udata)
 	struct mqnic_rdma *ainic = container_of(ibuc->device, struct mqnic_rdma, ibdev);
 	struct ainic_ucontext *uc = container_of(ibuc, struct ainic_ucontext, ibuc);
 	int err = 0;
+	printk ("alloc uc");
 	return err;
 }
 

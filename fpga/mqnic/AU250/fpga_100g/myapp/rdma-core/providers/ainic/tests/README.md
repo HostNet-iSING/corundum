@@ -9,19 +9,14 @@ make
 1. 在一台机器上启动server
 
 ```bash
-./server
+./server n
 ```
 
-2. 在另一台机器上启动client
+2. 在另一台机器上启动client (ibv_rcpingpong的同级目录)
 
 ```bash
-client <serverIP> <val>
+ibv_client
 ```
 
 连接到server，使用RDMA write 发送 val
 
-```bash
-sudo client <serverIP> <val> -paddr
-```
-
-在WQE中使用物理地址，需要root

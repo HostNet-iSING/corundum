@@ -1,6 +1,5 @@
 all:
-	gcc -o server server.c -lrdmacm -libverbs
-	gcc -o client client.c -lrdmacm -libverbs
+	gcc -o server server.c -libverbs
 
 clean:
-	rm client server
+	rm server

@@ -1,172 +1,199 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
+#include <string.h>
+#include <unistd.h>
 #include <arpa/inet.h>
-#include <rdma/rdma_cma.h>
-enum   {
-    RESOLVE_TIMEOUT_MS         = 5000,
-};
+#include <infiniband/verbs.h>
 
-struct pdata {
-    uint64_t         buf_va;
-    uint32_t         buf_rkey;
-};
+#define PORT 12345
+#define BUFFER_SIZE 1024
 
-uint64_t ntohll(uint64_t val) {
-    return (((uint64_t) ntohl(val)) << 32) + ntohl(val >> 32);
-}
-uint64_t htonll(uint64_t val) {
-	    return (((uint64_t) htonl(val)) << 32) + htonl(val >> 32);
-}
+#include <errno.h>
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/ioctl.h>
+#include <sys/mman.h>
+#include <unistd.h>
 
-int main(int argc, char   *argv[ ])
+#include "mqnic_ioctl.h"
+
+// buffer长度
+#define LENGTH (2*1024*1024)
+
+#define min(a,b) (((a) < (b)) ? (a) : (b))
+
+int fd;
+struct user_mem mem;
+
+void handler(int signal)
 {
-    struct pdata				server_pdata;
-    struct rdma_event_channel			*cm_channel;
-    struct rdma_cm_id			        *listen_id;
-    struct rdma_cm_id   			*cm_id;
-    struct rdma_cm_event			*event;
-    struct rdma_conn_param			conn_param = { };
-    struct ibv_pd				*pd;
-    struct ibv_comp_channel			*comp_chan;
-    struct ibv_cq				*cq;
-    struct ibv_cq				*evt_cq;
-    struct ibv_mr				*mr;
-    struct ibv_qp_init_attr			qp_attr = { };
-    struct ibv_sge				sge;
-    struct ibv_send_wr				send_wr = { };
-    struct ibv_send_wr				*bad_send_wr;
-    struct ibv_recv_wr				recv_wr = { };
-    struct ibv_recv_wr				*bad_recv_wr;
-    struct ibv_wc				wc;
-    void 					*cq_context;
-    struct sockaddr_in				sin;
-    uint32_t					*buf;
-    int						err;
+	printf("exiting with signal %d\n", signal);
+	if (mem.dma_addr != 0)
+	{
+		int ret = ioctl(fd, MQNIC_IOCTL_DMA_UNMAP, &mem);
+		if (ret < 0)
+		{
+			printf("ioctl error:%d\n", errno);
+		}
+	}
+	
+	exit(0);
+}
 
-    /* Set up RDMA CM structures */
-    cm_channel = rdma_create_event_channel();
-    if (!cm_channel)
-        return 1;
-    err = rdma_create_id(cm_channel,&listen_id, NULL, RDMA_PS_TCP);
-    if (err)
-        return err;
-    sin.sin_family = AF_INET;
-    sin.sin_port     = htons(20079);
-    sin.sin_addr.s_addr = INADDR_ANY;
+void check_buffer(char *buffer, char *ref, int length)
+{
+	for (int i = 0; i < length; i++)
+	{
+		if (buffer[i] != ref[i])
+		{
+			printf("buffer changed, new buffer(total length %d):\n", length);
+			for (int j = 0; j < (length + 15) / 16; j++)
+			{
+				printf("%04x: ", j * 16);
+				for (int k = 0; k < min(16, length - j * 16); k++)
+				{
+					printf("%02x ", (unsigned char)buffer[j * 16 + k]);
+				}
+				printf("\n");
+				
+			}
+			memcpy(buffer, ref, length);
+			printf("buffer reseted.\n");
+			return;
+		}
+	}
+}
 
-    /* Bind to local port and listen for connection request */
-    err = rdma_bind_addr(listen_id, (struct sockaddr*) &sin);
-    if (err)
-        return 1;
-    err = rdma_listen(listen_id,  1);
-    if (err)
-        return 1;
-    err = rdma_get_cm_event(cm_channel, &event);
-    if (err)
-        return err;
-    if (event->event != RDMA_CM_EVENT_CONNECT_REQUEST)
-        return 1;
-    cm_id = event->id;
-    rdma_ack_cm_event(event);
+void die(const char *reason) {
+    perror(reason);
+    exit(EXIT_FAILURE);
+}
 
-    /* Create verbs objects now that we know which device to use */
-    pd = ibv_alloc_pd(cm_id->verbs);
-    if (!pd)
-        return 1;
-    comp_chan = ibv_create_comp_channel(cm_id->verbs);
-    if (!comp_chan)
-        return 1;
-    cq = ibv_create_cq(cm_id->verbs,   2,    NULL, comp_chan, 0);
-    if (!cq)
-        return 1;
-    if (ibv_req_notify_cq(cq, 0))
-        return 1;
-    buf = calloc(2, sizeof (uint32_t));
-    if (!buf)
-        return 1;
-    mr = ibv_reg_mr(pd, buf, 2 * sizeof (uint32_t),
-                    IBV_ACCESS_LOCAL_WRITE |
-                    IBV_ACCESS_REMOTE_READ |
-                    IBV_ACCESS_REMOTE_WRITE);
-    if (!mr)
-        return 1;
-
-    qp_attr.cap.max_send_wr = 1;
-    qp_attr.cap.max_send_sge = 1;
-    qp_attr.cap.max_recv_wr = 1;
-    qp_attr.cap.max_recv_sge = 1;
-    qp_attr.send_cq = cq;
-    qp_attr.recv_cq = cq;
-    qp_attr.qp_type = IBV_QPT_RC;
-
-    err = rdma_create_qp(cm_id, pd, &qp_attr);
-    if (err)
-        return err;
-
-    // /* Post receive before accepting connection */
-    // sge.addr    = (uintptr_t) buf;
-    // sge.length  = sizeof (uint32_t) * 2;
-    // sge.lkey    = mr->lkey;
-  
-    // recv_wr.sg_list =  &sge;
-    // recv_wr.num_sge = 1;
-    // if (ibv_post_recv(cm_id->qp, &recv_wr,  &bad_recv_wr))
-    //     return 1;
-
-    server_pdata.buf_va = htonll((uintptr_t) buf);
-    server_pdata.buf_rkey = htonl(mr->rkey);
-    conn_param.responder_resources = 1;
-    conn_param.private_data          = &server_pdata;
-    conn_param.private_data_len = sizeof(server_pdata);
-
-    /* Accept connection */
-    err = rdma_accept(cm_id, &conn_param);
-    if (err)
-        return 1;
-    err = rdma_get_cm_event(cm_channel, &event);
-    if (err)
-        return err;
-    if (event->event != RDMA_CM_EVENT_ESTABLISHED)
-        return 1;
-    rdma_ack_cm_event(event);
-
-    // /* Wait for receive completion */
-    // if (ibv_get_cq_event(comp_chan,  &evt_cq, &cq_context))
-    //     return 1;
-    // if (ibv_req_notify_cq(cq,  0))
-    //     return 1;
-    // if (ibv_poll_cq(cq, 1, &wc)    < 1)
-    //     return 1;
-    // if (wc.status != IBV_WC_SUCCESS)
-    //     return 1;
-    /* Wait for client write */
-    while (buf[0] == 0)
+int main(int argc, char *argv[]) {
+    	if (argc != 2)
+	{
+		printf("unexpected arg num: %d\n", argc - 1);
+		return -1;
+	}
+	int buffer_length = atoi(argv[1]);
+	if (buffer_length < 0 || buffer_length > LENGTH)
+	{
+		printf("Unexpected buffer length: %d\n", buffer_length);
+		return -1;
+	}
+    // 准备buffer
+    void *buffer = mmap(
+        NULL, LENGTH, 
+        PROT_READ | PROT_WRITE, 
+        MAP_PRIVATE | MAP_ANONYMOUS | MAP_HUGETLB,
+        -1, 0);
+    if (buffer == NULL)
     {
+        printf("fail to alloc buffer\n");
+        return -1;
+    }
+    memset(buffer, 0x0, LENGTH);
+    FILE *mqnic = fopen("/dev/mqnic0", "rw");
+    if (mqnic == NULL)
+    {
+        printf("Failed to open device file, please check driver status.\n");
+        return -1;
+    }
+    fd = fileno(mqnic);
+
+    mem.start = (unsigned long)buffer;
+    mem.length = buffer_length;
+
+    int ret = ioctl(fd, MQNIC_IOCTL_DMA_MAP, &mem);
+    if (ret < 0)
+    {
+        printf("ioctl error:%d\n", errno);
+		return -1;
     }
 
+	printf("map success, buffer dma addr: 0x%llx\n", mem.dma_addr);
 
-    printf("Received val: %d\n", ntohl(buf[0]));
-    // /* Add two integers and send reply back */
-    // buf[0]  = htonl(ntohl(buf[0])  +  ntohl(buf[1]));
-    // sge.addr    = (uintptr_t) buf;
-    // sge.length  = sizeof (uint32_t);
-    // sge.lkey    = mr->lkey;
+	void *ref = malloc(buffer_length);
+	if (ref == NULL)
+	{
+		printf("failed to alloc reference buffer.\n");
+		return -1;
+	}
+	memcpy(ref, buffer, buffer_length);
 
-    // send_wr.opcode = IBV_WR_SEND;
-    // send_wr.send_flags = IBV_SEND_SIGNALED;
-    // send_wr.sg_list    = &sge;
-    // send_wr.num_sge = 1;
-    // if (ibv_post_send(cm_id->qp, &send_wr, &bad_send_wr))
-    //     return 1;
+	signal(SIGINT, handler);
+    unsigned long long raddr = mem.dma_addr;
 
-    // /* Wait for send completion */
-    // if (ibv_get_cq_event(comp_chan,     &evt_cq, &cq_context))
-    //     return 1;
-    // if (ibv_poll_cq(cq, 1, &wc)    < 1)
-    //     return 1;
-    // if (wc.status != IBV_WC_SUCCESS)
-    //     return 1;
-    // ibv_ack_cq_events(cq,   2);
-    return  0;
+    // 通过套接字将LID和GID发送给客户端
+    int listen_fd, conn_fd;
+    struct sockaddr_in servaddr;
+    
+    listen_fd = socket(AF_INET, SOCK_STREAM, 0);
+    if (listen_fd < 0) die("socket");
+
+    memset(&servaddr, 0, sizeof(servaddr));
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    servaddr.sin_port = htons(PORT);
+
+    if (bind(listen_fd, (struct sockaddr*)&servaddr, sizeof(servaddr)) < 0) die("bind");
+    if (listen(listen_fd, 1) < 0) die("listen");
+
+    conn_fd = accept(listen_fd, (struct sockaddr*)NULL, NULL);
+    if (conn_fd < 0) die("accept");
+ 
+    if (write(conn_fd, &raddr, sizeof(raddr)) != sizeof(raddr)) die("write raddr");
+
+    close(conn_fd);
+    close(listen_fd);
+
+    
+    while(1)
+	{
+		check_buffer(buffer, ref, buffer_length);
+		sleep(1);
+	}
+	/*
+    // 初始化数据缓冲区和内存注册
+    char *buffer = (char *)malloc(BUFFER_SIZE);
+    if (!buffer) die("malloc");
+
+    struct ibv_mr *mr = ibv_reg_mr(pd, buffer, BUFFER_SIZE, IBV_ACCESS_LOCAL_WRITE);
+    if (!mr) die("ibv_reg_mr");
+
+    struct ibv_recv_wr recv_wr = {
+        .wr_id = 0,
+        .sg_list = (struct ibv_sge[]){
+            {
+                .addr = (uintptr_t)buffer,
+                .length = BUFFER_SIZE,
+                .lkey = mr->lkey,
+            },
+        },
+        .num_sge = 1,
+    };
+
+    struct ibv_recv_wr *bad_wr;
+    if (ibv_post_recv(qp, &recv_wr, &bad_wr)) die("ibv_post_recv");
+
+    printf("Waiting for data...\n");
+    while (1) {
+        struct ibv_wc wc;
+        if (ibv_poll_cq(cq, 1, &wc) < 1) continue;
+        if (wc.status != IBV_WC_SUCCESS) die("wc.status != IBV_WC_SUCCESS");
+
+        printf("Received data: %s\n", buffer);
+    }
+
+    ibv_dereg_mr(mr);
+    free(buffer);
+    ibv_destroy_qp(qp);
+    ibv_destroy_cq(cq);
+    ibv_dealloc_pd(pd);
+    ibv_close_device(ctx);
+    ibv_free_device_list(dev_list);
+*/
+    return 0;
 }

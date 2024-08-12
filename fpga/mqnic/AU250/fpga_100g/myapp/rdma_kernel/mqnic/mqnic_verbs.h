@@ -21,6 +21,8 @@ struct mqnic_mmap_info {
 	struct ib_ucontext	*context;
 	struct kref		ref;
 	void			*obj;
+	dma_addr_t  dma_addr;
+	struct mqnic_ring  *ring;
 
 	struct mminfo info;
 };
@@ -73,7 +75,11 @@ struct ainic_create_qp_resp {
 	struct mminfo sq_mi;
 	struct mminfo sq_consumer_mi;
 	struct mminfo sq_producer_mi;
-	struct mminfo send_reg_mmap;
+	struct mminfo reg_bar;
+	u_int32_t hw_offset;
+	u_int32_t size_mask;
+	u_int32_t stride;
+	u_int64_t pa_offset;
 };
 
 int ainic_destroy_qp(struct ib_qp *ibqp, struct ib_udata *udata);
@@ -105,4 +111,6 @@ int ainic_query_gid(struct ib_device *ibdev, u32 port, int index,
 		  union ib_gid *gid);
 int ainic_query_pkey(struct ib_device *ibdev,
                           u32 port_num, u16 index, u16 *pkey);
+int ainic_alloc_pd(struct ib_pd *ibpd, struct ib_udata *udata);
+int ainic_dealloc_pd(struct ib_pd *ibpd, struct ib_udata *udata);
 #endif

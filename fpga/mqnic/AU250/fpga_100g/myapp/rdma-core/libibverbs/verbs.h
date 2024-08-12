@@ -2254,7 +2254,7 @@ struct ibv_device **ibv_get_device_list(int *num_devices);
 		&verbs_provider_##_14, &verbs_provider_##_15,                  \
 		&verbs_provider_##_16, &verbs_provider_##_17,                  \
 		&verbs_provider_##_18, &verbs_provider_##_19,                  \
-                &verbs_provider_##_19
+        &verbs_provider_##_20
 #define _RDMA_STATIC_PREFIX(arg)                                               \
 	_RDMA_STATIC_PREFIX_(arg, none, none, none, none, none, none, none,    \
 			     none, none, none, none, none, none, none, none,   \

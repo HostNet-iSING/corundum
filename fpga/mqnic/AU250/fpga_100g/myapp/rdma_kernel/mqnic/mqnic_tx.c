@@ -43,7 +43,7 @@ int mqnic_open_tx_ring(struct mqnic_ring *ring, struct mqnic_priv *priv,
 {
 	int ret = 0;
 
-	if (ring->enabled || ring->hw_addr || ring->buf || !priv || !cq)
+	if (ring->enabled || ring->hw_addr || ring->buf || !priv)
 		return -EINVAL;
 
 	ring->index = mqnic_res_alloc(ring->interface->txq_res);
@@ -57,31 +57,28 @@ int mqnic_open_tx_ring(struct mqnic_ring *ring, struct mqnic_priv *priv,
 	ring->full_size = ring->size >> 1;
 	ring->size_mask = ring->size - 1;
 	ring->stride = roundup_pow_of_two(MQNIC_DESC_SIZE * ring->desc_block_size);
-
 	ring->tx_info = kvzalloc(sizeof(*ring->tx_info) * ring->size, GFP_KERNEL);
 	if (!ring->tx_info) {
 		ret = -ENOMEM;
 		goto fail;
 	}
-
 	ring->buf_size = ring->size * ring->stride;
 	ring->buf = dma_alloc_coherent(ring->dev, ring->buf_size, &ring->buf_dma_addr, GFP_KERNEL);
 	if (!ring->buf) {
 		ret = -ENOMEM;
 		goto fail;
 	}
-
 	ring->priv = priv;
-	ring->cq = cq;
-	cq->src_ring = ring;
+//	ring->cq = cq;
+//	cq->src_ring = ring;
 	//cq->handler = mqnic_tx_irq;
-	cq->handler = NULL;
-
+	//cq->handler = NULL;
+        printk("ring index %d",ring->index);
 	ring->hw_addr = mqnic_res_get_addr(ring->interface->txq_res, ring->index);
+	ring->hw_offset = ring->hw_addr - priv->mdev->hw_addr;
 
 	ring->prod_ptr = 0;
 	ring->cons_ptr = 0;
-
 	// deactivate queue
 	iowrite32(MQNIC_QUEUE_CMD_SET_ENABLE | 0,
 			ring->hw_addr + MQNIC_QUEUE_CTRL_STATUS_REG);
@@ -94,14 +91,17 @@ int mqnic_open_tx_ring(struct mqnic_ring *ring, struct mqnic_priv *priv,
 	iowrite32(MQNIC_QUEUE_CMD_SET_SIZE | ilog2(ring->size) | (ring->log_desc_block_size << 8),
 			ring->hw_addr + MQNIC_QUEUE_CTRL_STATUS_REG);
 	// set CQN
-	iowrite32(MQNIC_QUEUE_CMD_SET_CQN | ring->cq->cqn,
-			ring->hw_addr + MQNIC_QUEUE_CTRL_STATUS_REG);
+//	iowrite32(MQNIC_QUEUE_CMD_SET_CQN | ring->cq->cqn,
+//			ring->hw_addr + MQNIC_QUEUE_CTRL_STATUS_REG);
 	// set pointers
 	iowrite32(MQNIC_QUEUE_CMD_SET_PROD_PTR | (ring->prod_ptr & MQNIC_QUEUE_PTR_MASK),
 			ring->hw_addr + MQNIC_QUEUE_CTRL_STATUS_REG);
 	iowrite32(MQNIC_QUEUE_CMD_SET_CONS_PTR | (ring->cons_ptr & MQNIC_QUEUE_PTR_MASK),
 			ring->hw_addr + MQNIC_QUEUE_CTRL_STATUS_REG);
 
+	mqnic_tx_read_cons_ptr(ring);
+	printk(KERN_INFO "current consumer ptr: %d producer ptr: %d offset %d, hw_addr %p, %p, %llx\n",
+			                ring->cons_ptr, ring->prod_ptr, ring->hw_offset, ring->hw_addr, priv->mdev->hw_addr, priv->mdev->hw_regs_phys);
 	return 0;
 
 fail:

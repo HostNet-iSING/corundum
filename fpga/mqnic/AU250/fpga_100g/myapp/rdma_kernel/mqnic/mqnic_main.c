@@ -239,17 +239,19 @@ static void mqnic_adev_release(struct device *dev)
 
 static const struct ib_device_ops mqnic_rdma_ops = {
 	.owner = THIS_MODULE,
-	//.uverbs_abi_ver = AINIC_UVERBS_ABI_VERSION,
+	.driver_id = RDMA_DRIVER_MQNIC,
+	.uverbs_abi_ver = 1,
 
 	.create_cq = ainic_create_cq,
 	.create_qp = ainic_create_qp,
-
+        .alloc_pd = ainic_alloc_pd,
+	.dealloc_pd = ainic_dealloc_pd,
 	.dereg_mr = ainic_dereg_mr,
 	.destroy_cq = ainic_destroy_cq,
 	.destroy_qp = ainic_destroy_qp,
 	.mmap = ainic_mmap,
 	.reg_user_mr = ainic_reg_mr,
-    .alloc_ucontext = ainic_alloc_ucontext,
+        .alloc_ucontext = ainic_alloc_ucontext,
 	.dealloc_ucontext = ainic_dealloc_ucontext,
 	.get_port_immutable = ainic_get_port_immutable,
 	.query_device = ainic_query_device,
@@ -257,6 +259,7 @@ static const struct ib_device_ops mqnic_rdma_ops = {
 	.query_port = ainic_query_port,
 	.query_pkey = ainic_query_pkey,
 	INIT_RDMA_OBJ_SIZE(ib_cq, ainic_cq, ibcq),
+	INIT_RDMA_OBJ_SIZE(ib_pd, ainic_pd, ibpd),
 	INIT_RDMA_OBJ_SIZE(ib_qp, ainic_qp, ibqp),
 	INIT_RDMA_OBJ_SIZE(ib_ucontext, ainic_ucontext, ibuc),
 };
@@ -396,6 +399,7 @@ static int mqnic_common_probe(struct mqnic_dev *mqnic)
 	for (k = 0; k < mqnic->if_count; k++) {
 		struct mqnic_if *interface;
 		dev_info(dev, "Creating interface %d", k);
+		printk("mqnic create %p,%p\n", mqnic->hw_addr, 1 + mqnic->hw_addr );
 		interface = mqnic_create_interface(mqnic, k, mqnic->hw_addr + k * mqnic->if_stride);
 		if (IS_ERR_OR_NULL(interface)) {
 			dev_err(dev, "Failed to create interface: %d", ret);

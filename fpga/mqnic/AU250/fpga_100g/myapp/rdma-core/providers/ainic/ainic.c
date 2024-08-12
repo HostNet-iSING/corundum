@@ -27,7 +27,7 @@
 static void ainic_free_context(struct ibv_context *ibctx);
 
 static const struct verbs_match_ent ainic_table[] = {
-	VERBS_DRIVER_ID(RDMA_DRIVER_AINIC),
+	VERBS_DRIVER_ID(RDMA_DRIVER_MQNIC),
 	VERBS_PCI_MATCH(0x1234, 0x1001, NULL),
 	{},
 };
@@ -44,8 +44,9 @@ static struct ibv_mr *ainic_reg_mr(struct ibv_pd *pd, void *addr, size_t length,
 	if (!vmr)
 		return NULL;
 
-	ret = ibv_cmd_reg_mr(pd, addr, length, hca_va, access, vmr, &cmd,
-			     sizeof(cmd), &resp, sizeof(resp));
+//	ret = ibv_cmd_reg_mr(pd, addr, length, hca_va, access, vmr, &cmd,
+//			     sizeof(cmd), &resp, sizeof(resp));
+	ret = 0;
 	if (ret) {
 		free(vmr);
 		return NULL;
@@ -103,25 +104,50 @@ static struct ibv_cq *ainic_create_cq(struct ibv_context *context, int cqe,
 		return NULL;
 	}
 
-	cq->buf = mmap(NULL, resp.mi.size, PROT_READ | PROT_WRITE, MAP_SHARED,
-			 context->cmd_fd, resp.mi.offset);
-	if ((void *)cq->buf == MAP_FAILED) {
-		ibv_cmd_destroy_cq(&cq->vcq.cq);
-		free(cq);
-		return NULL;
-	}
+//	cq->buf = mmap(NULL, resp.mi.size, PROT_READ | PROT_WRITE, MAP_SHARED,
+//			 context->cmd_fd, resp.mi.offset);
+//	if ((void *)cq->buf == MAP_FAILED) {
+//		ibv_cmd_destroy_cq(&cq->vcq.cq);
+//		free(cq);
+//		return NULL;
+//	}
 
 	cq->wc_size = 1ULL << cq->size;
 
-	if (cq->wc_size < sizeof(struct ib_uverbs_wc)) {
-		ainic_destroy_cq(&cq->vcq.cq);
-		return NULL;
-	}
+//	if (cq->wc_size < sizeof(struct ib_uverbs_wc)) {
+//		ainic_destroy_cq(&cq->vcq.cq);
+//		return NULL;
+//	}
 
 	cq->mmap_info = resp.mi;
 	pthread_spin_init(&cq->lock, PTHREAD_PROCESS_PRIVATE);
     cq->last_cons_ptr = 0;
 	return &cq->vcq.cq;
+}
+
+static struct ibv_pd *ainic_alloc_pd(struct ibv_context *context)
+{
+	struct ibv_pd *pd;
+        struct ib_uverbs_alloc_pd_resp resp;
+	struct ibv_alloc_pd cmd;
+	pd = calloc(1, sizeof(*pd));
+	if (!pd)
+		return NULL;
+        
+	if (ibv_cmd_alloc_pd(context, pd, &cmd, sizeof(cmd), &resp, sizeof(resp))) {
+		free(pd);
+		return NULL;
+	}
+	return pd;
+}
+
+static int ainic_dealloc_pd(struct ibv_pd *pd)
+{
+	int ret;
+
+	free(pd);
+
+	return ret;
 }
 
 static int ainic_poll_cq(struct ibv_cq *ibcq, int ne, struct ibv_wc *wc)
@@ -176,16 +202,21 @@ static struct ibv_qp *ainic_create_qp(struct ibv_pd *ibpd,
 	if (ret)
 		goto err_destroy;
     
-	qp->sq.desc = mmap(NULL, resp.send_reg_mmap.size, PROT_WRITE,
+	qp->sq.desc = (uint8_t *)mmap(NULL, resp.reg_bar.size, PROT_READ|PROT_WRITE,
 			MAP_SHARED, qp->vqp.qp.context->cmd_fd,
-			resp.send_reg_mmap.offset);
-	
-	return &qp->vqp.qp;
+			resp.reg_bar.offset); 
+	printf("reg_bar %p\n", qp->sq.desc);
+	qp->sq.desc += resp.hw_offset;
+	printf("reg_bar %p, offset %d,  offset 1 %p\n", qp->sq.desc, resp.hw_offset, qp->sq.desc + 1);
+        qp->sq.size_mask = resp.size_mask;	
+        qp->sq.stride = resp.stride;
 	//cq
-    struct ainic_cq *cq = to_rcq(attr->send_cq);
-	*cq->sq = qp->sq;
+	printf("reg_bar %p, dma_addr %lx and  %lx\n", qp->sq.desc, mmio_read32(qp->sq.desc), mmio_read32(qp->sq.desc + 4));
+       struct ainic_cq *cq = to_rcq(attr->send_cq);
+	cq->sq = &qp->sq;
 	ainic_tx_read_cons_ptr(&qp->sq);
     cq->cons_ptr = qp->sq.cons_ptr;
+     return &qp->vqp.qp;
 err_destroy:
 	ibv_cmd_destroy_qp(&qp->vqp.qp);
 err_free:
@@ -217,12 +248,12 @@ static int ainic_post_send(struct ibv_qp *ibvqp, struct ibv_send_wr *wr,
 {
 	struct ainic_qp *qp = to_rqp(ibvqp);
 	struct ainic_wq *wq = &qp->sq;
-    struct ainic_io_tx_wqe tx_wqe;
-	uint32_t sq_desc_offset;
+	unsigned int index = wq->prod_ptr & wq->size_mask;
+        struct mqnic_desc *tx_wqe = (struct mqnic_desc *)(wq->buf + index * wq->stride);
+	printf ("length, %d\n\n",tx_wqe->len);
 	int err = 0;
 	
 
-	mmio_wc_spinlock(&wq->lock);
 	while (wr) {
         // 暂时不管
 		// err = efa_post_send_validate_wr(qp, wr);
@@ -231,11 +262,11 @@ static int ainic_post_send(struct ibv_qp *ibvqp, struct ibv_send_wr *wr,
 		// 	goto ring_db;
 		// }
 		
-        memset(&tx_wqe, 0, sizeof(tx_wqe));
+        //memset(&tx_wqe, 0, sizeof(tx_wqe));
         
         //TODO: wr.wr中采用哪个union成员，希望使用wr.wr.rdma
         //假设buffer物理连续，使用sgl首块地址作为buffer首地址
-        tx_wqe.local_addr = wr->sg_list[0].addr;
+      /*  tx_wqe.local_addr = wr->sg_list[0].addr;
         //理论上num_sge应该为1
         for (int i = 0; i < wr->num_sge; i++)
         {
@@ -244,17 +275,17 @@ static int ainic_post_send(struct ibv_qp *ibvqp, struct ibv_send_wr *wr,
         tx_wqe.dst_qpn = wr->wr.ud.remote_qpn;
         tx_wqe.src_port = 4791;
         //对端信息暂时不知道怎么填
+*/
+	tx_wqe->tx_csum_cmd = 0;
 
+	tx_wqe->len = wr->sg_list[0].length;
+	tx_wqe->addr = wr->sg_list[0].addr;
+	tx_wqe->raddr = wr->wr.rdma.remote_addr;
+	tx_wqe->udp_dst_port = 4791;
         /* Copy descriptor */
-		sq_desc_offset = (wq->prod_ptr & wq->size_mask) * sizeof(tx_wqe);
-		mmio_memcpy_x64(wq->buf + sq_desc_offset, &tx_wqe,
-				sizeof(tx_wqe));
-        
         /* advance index and change phase */
-		wq->prod_ptr++;
-        mmio_flush_writes();
+	wq->prod_ptr++;
         ainic_tx_write_prod_ptr(wq);
-        mmio_wc_start();
 		wr = wr->next;
 	}
 
@@ -283,6 +314,8 @@ static const struct verbs_context_ops ainic_ctx_ops = {
 	.destroy_qp = ainic_destroy_qp,
 	.post_send = ainic_post_send,
 	.post_recv = ainic_post_recv,
+	.alloc_pd = ainic_alloc_pd,
+	.dealloc_pd = ainic_dealloc_pd
 };
 
 static struct verbs_context *ainic_alloc_context(struct ibv_device *ibdev,
@@ -294,7 +327,7 @@ static struct verbs_context *ainic_alloc_context(struct ibv_device *ibdev,
 	struct ib_uverbs_get_context_resp resp;
 
 	context = verbs_init_and_alloc_context(ibdev, cmd_fd, context, ibv_ctx,
-					       RDMA_DRIVER_AINIC);
+					       RDMA_DRIVER_MQNIC);
 	if (!context)
 		return NULL;
 
@@ -348,6 +381,8 @@ static const struct verbs_device_ops ainic_dev_ops = {
 	 * kernel use the same ABI.
 	 */
 	.match_table = ainic_table,
+	.match_min_abi_version = 0,
+	.match_max_abi_version = INT_MAX,
 	.alloc_device = ainic_device_alloc,
 	.uninit_device = ainic_uninit_device,
 	.alloc_context = ainic_alloc_context,

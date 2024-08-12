@@ -238,11 +238,12 @@ struct mqnic_rx_info {
 struct mqnic_ring {
 	// written on enqueue (i.e. start_xmit)
 	u32 prod_ptr;
+	u32 hw_offset;
 	u64 bytes;
 	u64 packets;
 	u64 dropped_packets;
 	struct netdev_queue *tx_queue;
-
+     
 	// written from completion
 	u32 cons_ptr ____cacheline_aligned_in_smp;
 	u64 ts_s;

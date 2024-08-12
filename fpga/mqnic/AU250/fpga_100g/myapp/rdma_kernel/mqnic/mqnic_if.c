@@ -15,7 +15,7 @@ struct mqnic_if *mqnic_create_interface(struct mqnic_dev *mdev, int index, u8 __
 	u32 count, offset, stride;
 	u32 desc_block_size;
 	u32 val;
-
+        printk("mqnic create %p\n", hw_addr );
 	interface = kzalloc(sizeof(*interface), GFP_KERNEL);
 	if (!interface)
 		return ERR_PTR(-ENOMEM);
@@ -129,7 +129,8 @@ struct mqnic_if *mqnic_create_interface(struct mqnic_dev *mdev, int index, u8 __
 	dev_info(dev, "TXQ stride: 0x%08x", stride);
 
 	count = min_t(u32, count, MQNIC_MAX_TXQ);
-
+        
+        printk("mqnic create res %p, %d, %p\n", hw_addr, offset, offset + hw_addr );	
 	interface->txq_res = mqnic_create_res(count, hw_addr + offset, stride);
 
 	if (IS_ERR_OR_NULL(interface->txq_res)) {

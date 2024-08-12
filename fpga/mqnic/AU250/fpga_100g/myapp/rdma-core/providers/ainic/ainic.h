@@ -44,6 +44,7 @@ struct ainic_wq {
 	unsigned int		max_inline;
 	unsigned int        size_mask;
 	uint8_t *desc; //send/recv reg
+	unsigned int stride;
 };
 
 struct ainic_qp {
@@ -69,6 +70,17 @@ struct ainic_io_tx_wqe {
     uint64_t priority: 3;
     uint64_t fence: 1;
     uint64_t task_id: 20;
+};
+
+struct mqnic_desc {
+	__le16 rsvd0;
+	__le16 tx_csum_cmd;
+	__le32 len;
+	__le64 addr;
+	__le64 padding1;
+	__le64 padding2;
+	__le64 raddr;
+	__le16 udp_dst_port;
 };
 
 static inline struct ainic_context *to_rctx(struct ibv_context *ibctx)
@@ -98,17 +110,19 @@ static inline enum ibv_qp_type qp_type(struct ainic_qp *qp)
 
 #define MQNIC_QUEUE_CMD_SET_PROD_PTR  0x80800000
 #define MQNIC_QUEUE_PTR_MASK     0xFFFF
+#define MQNIC_QUEUE_PTR_REG           0x10
+#define MQNIC_QUEUE_CTRL_STATUS_REG   0x08
 
 static inline void ainic_tx_write_prod_ptr(struct ainic_wq *wq)
 {
-	mmio_write32(wq->desc,
+	mmio_write32(wq->desc + MQNIC_QUEUE_CTRL_STATUS_REG,
             MQNIC_QUEUE_CMD_SET_PROD_PTR | (wq->prod_ptr & MQNIC_QUEUE_PTR_MASK));
 }
 
 static inline void ainic_tx_read_cons_ptr(struct ainic_wq *wq)
 {
     // cons_ptr和prod_ptr共用一个32位寄存器
-	wq->cons_ptr += ((mmio_read32(wq->desc) >> 16) - wq->cons_ptr) & MQNIC_QUEUE_PTR_MASK;
+	wq->cons_ptr += ((mmio_read32(wq->desc + MQNIC_QUEUE_PTR_REG) >> 16) - wq->cons_ptr) & MQNIC_QUEUE_PTR_MASK;
 }
 
 #endif /* AINIC_H */
