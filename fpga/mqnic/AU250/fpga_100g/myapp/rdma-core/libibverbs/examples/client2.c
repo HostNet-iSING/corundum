@@ -197,29 +197,9 @@ int main() {
 
     struct ibv_send_wr *bad_wr;
     if (ibv_post_send(qp, &send_wr, &bad_wr)) die("ibv_post_send");
-     send_wr.sg_list[0].addr += 1;
-    if (ibv_post_send(qp, &send_wr, &bad_wr)) die("ibv_post_send");
-    send_wr.sg_list[0].addr += 1;
-    if (ibv_post_send(qp, &send_wr, &bad_wr)) die("ibv_post_send");
-    send_wr.sg_list[0].addr += 1;
-    if (ibv_post_send(qp, &send_wr, &bad_wr)) die("ibv_post_send");
-    send_wr.sg_list[0].addr += 1;
-    if (ibv_post_send(qp, &send_wr, &bad_wr)) die("ibv_post_send");
-    send_wr.sg_list[0].addr += 1;
-    if (ibv_post_send(qp, &send_wr, &bad_wr)) die("ibv_post_send");
-    send_wr.sg_list[0].addr += 1;
-    if (ibv_post_send(qp, &send_wr, &bad_wr)) die("ibv_post_send");
-    send_wr.sg_list[0].addr += 1;
-    if (ibv_post_send(qp, &send_wr, &bad_wr)) die("ibv_post_send");
-    send_wr.sg_list[0].addr += 1;
-    if (ibv_post_send(qp, &send_wr, &bad_wr)) die("ibv_post_send");
-        send_wr.sg_list[0].addr += 1;
-	    if (ibv_post_send(qp, &send_wr, &bad_wr)) die("ibv_post_send");
-	        send_wr.sg_list[0].addr += 1;
-		    if (ibv_post_send(qp, &send_wr, &bad_wr)) die("ibv_post_send");
-    
+    sleep(1);
     struct ibv_wc wc;
-    while (ibv_poll_cq(cq, 1, &wc) < 1) {}
+    while (ibv_poll_cq(cq, 1, &wc) < 1) {sleep(1);}
     if (wc.status != IBV_WC_SUCCESS) die("wc.status != IBV_WC_SUCCESS");
 
     printf("Data sent: %s\n", buffer);

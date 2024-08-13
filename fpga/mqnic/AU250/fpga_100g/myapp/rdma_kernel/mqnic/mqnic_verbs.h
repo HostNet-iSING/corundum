@@ -50,8 +50,7 @@ struct ainic_cq {
 struct ainic_sq {
 	struct mqnic_ring	*queue;
 	struct mqnic_mmap_info	*ip;
-	struct mqnic_mmap_info	*sq_producer;
-	struct mqnic_mmap_info	*sq_consumer;
+    struct mqnic_mmap_info	*buf_ip;
 	struct mqnic_mmap_info	*sq_reg_desc;
 };
 
@@ -71,15 +70,14 @@ struct ainic_qp {
 };
 
 struct ainic_create_qp_resp {
-	struct mminfo rq_mi;
 	struct mminfo sq_mi;
-	struct mminfo sq_consumer_mi;
-	struct mminfo sq_producer_mi;
+	struct mminfo buf_mi;
 	struct mminfo reg_bar;
 	u_int32_t hw_offset;
 	u_int32_t size_mask;
 	u_int32_t stride;
-	u_int64_t pa_offset;
+	u_int64_t dma_addr;
+	u_int32_t offset_offset;
 };
 
 int ainic_destroy_qp(struct ib_qp *ibqp, struct ib_udata *udata);

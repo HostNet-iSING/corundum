@@ -157,6 +157,7 @@ static int ainic_poll_cq(struct ibv_cq *ibcq, int ne, struct ibv_wc *wc)
 	ainic_tx_read_cons_ptr(cq->sq);
 	cq->cons_ptr = cq->sq->cons_ptr;
 	int nfinished =  cq->cons_ptr - cq->last_cons_ptr;
+	printf("consumer ptr %d producer ptr %d\n", cq->cons_ptr, cq->sq->prod_ptr);
 	return nfinished;
 }
 
@@ -202,17 +203,24 @@ static struct ibv_qp *ainic_create_qp(struct ibv_pd *ibpd,
 	if (ret)
 		goto err_destroy;
     
+	qp->sq.dma_buf = mmap(NULL, resp.buf_mi.size, PROT_READ|PROT_WRITE,
+			MAP_SHARED, qp->vqp.qp.context->cmd_fd,
+			resp.buf_mi.offset);
+	
 	qp->sq.desc = (uint8_t *)mmap(NULL, resp.reg_bar.size, PROT_READ|PROT_WRITE,
 			MAP_SHARED, qp->vqp.qp.context->cmd_fd,
 			resp.reg_bar.offset); 
 	printf("reg_bar %p\n", qp->sq.desc);
+	printf("m reg_bar %p, offset 0x%lx\n", qp->sq.desc, resp.offset_offset);
 	qp->sq.desc += resp.hw_offset;
-	printf("reg_bar %p, offset %d,  offset 1 %p\n", qp->sq.desc, resp.hw_offset, qp->sq.desc + 1);
-        qp->sq.size_mask = resp.size_mask;	
-        qp->sq.stride = resp.stride;
+	printf("reg_bar %p, offset %lx,  offset 1 %p\n", qp->sq.desc, resp.hw_offset, qp->sq.desc + 1);
+	qp->sq.size_mask = resp.size_mask;
+	qp->sq.stride = resp.stride;
+	qp->sq.dma_addr = resp.dma_addr;
+	printf("m reg_bar %p, offset 0x%lx\n", qp->sq.desc, mmio_read32(qp->sq.desc + resp.offset_offset - resp.hw_offset));
 	//cq
 	printf("reg_bar %p, dma_addr %lx and  %lx\n", qp->sq.desc, mmio_read32(qp->sq.desc), mmio_read32(qp->sq.desc + 4));
-       struct ainic_cq *cq = to_rcq(attr->send_cq);
+	struct ainic_cq *cq = to_rcq(attr->send_cq);
 	cq->sq = &qp->sq;
 	ainic_tx_read_cons_ptr(&qp->sq);
     cq->cons_ptr = qp->sq.cons_ptr;
@@ -252,8 +260,8 @@ static int ainic_post_send(struct ibv_qp *ibvqp, struct ibv_send_wr *wr,
         struct mqnic_desc *tx_wqe = (struct mqnic_desc *)(wq->buf + index * wq->stride);
 	printf ("length, %d\n\n",tx_wqe->len);
 	int err = 0;
-	
-
+	printf ("dma_buf %s\n", wq->dma_buf);
+        mmio_wc_spinlock(&wq->lock);
 	while (wr) {
         // 暂时不管
 		// err = efa_post_send_validate_wr(qp, wr);
@@ -278,21 +286,24 @@ static int ainic_post_send(struct ibv_qp *ibvqp, struct ibv_send_wr *wr,
 */
 	tx_wqe->tx_csum_cmd = 0;
 
-	tx_wqe->len = wr->sg_list[0].length;
-	tx_wqe->addr = wr->sg_list[0].addr;
+//	tx_wqe->len = wr->sg_list[0].length;
+//	tx_wqe->addr = wr->sg_list[0].addr;
+        tx_wqe->len = 2;
+	tx_wqe->addr = wq->dma_addr;
 	tx_wqe->raddr = wr->wr.rdma.remote_addr;
 	tx_wqe->udp_dst_port = 4791;
         /* Copy descriptor */
         /* advance index and change phase */
 	wq->prod_ptr++;
         ainic_tx_write_prod_ptr(wq);
-		wr = wr->next;
+	wr = wr->next;
 	}
 
 	/*
 	 * Not using mmio_wc_spinunlock as the doorbell write should be done
 	 * inside the lock.
 	 */
+	printf ("length, %d, remote dma addr%llx local dma addr%llx\n\n",tx_wqe->len, tx_wqe->raddr, tx_wqe->addr);
 	pthread_spin_unlock(&wq->lock);
 	return err;
 }

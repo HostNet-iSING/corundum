@@ -64,6 +64,7 @@ int mqnic_open_tx_ring(struct mqnic_ring *ring, struct mqnic_priv *priv,
 	}
 	ring->buf_size = ring->size * ring->stride;
 	ring->buf = dma_alloc_coherent(ring->dev, ring->buf_size, &ring->buf_dma_addr, GFP_KERNEL);
+	ring->dma_buf = dma_alloc_coherent(ring->dev, ring->buf_size, &ring->dma_buf_dma_addr, GFP_KERNEL);
 	if (!ring->buf) {
 		ret = -ENOMEM;
 		goto fail;
@@ -76,9 +77,10 @@ int mqnic_open_tx_ring(struct mqnic_ring *ring, struct mqnic_priv *priv,
         printk("ring index %d",ring->index);
 	ring->hw_addr = mqnic_res_get_addr(ring->interface->txq_res, ring->index);
 	ring->hw_offset = ring->hw_addr - priv->mdev->hw_addr;
-
+        
 	ring->prod_ptr = 0;
 	ring->cons_ptr = 0;
+	
 	// deactivate queue
 	iowrite32(MQNIC_QUEUE_CMD_SET_ENABLE | 0,
 			ring->hw_addr + MQNIC_QUEUE_CTRL_STATUS_REG);

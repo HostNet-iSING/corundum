@@ -247,28 +247,36 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			return -EAGAIN;
 		}
 
-        int ring_no = mem.ring_no;
-        if (interface->ring[ring_no] == NULL)
-        {
-            printk(KERN_WARNING "NULL ring ptr detected, ring_num(%d) maybe corrupted.\n",
-                interface->ring_num);
-        } 
-        else if(mqnic_is_tx_ring_full(interface->ring[ring_no]))
-        {
-            // check队列是否满了
-        }
-        else
-        {
-            retval = send_message_with_ring(interface->ring[ring_no], mem);
-            if (retval == 0)
-            {
-                printk(KERN_INFO "Message sended at ring %d\n", ring_no);
-            }
-            else
-            {
-                //printk(KERN_INFO "ring %d busy, current message is not sended.\n", ring_no);
-            }
-        }
+		int used_ring = -1;
+		for (int i = 0; i < 1; i++)
+		{
+			if (interface->ring[i] == NULL)
+			{
+				printk(KERN_WARNING "NULL ring ptr detected, ring_num maybe corrupted.\n");
+				continue;
+			}
+			// check队列是否满了
+			if(mqnic_is_tx_ring_full(interface->ring[i]))
+			{
+				continue;
+			}
+			retval = send_message_with_ring(interface->ring[i], mem);
+			if (retval == 0)
+			{
+				used_ring = i;
+				break;
+			}
+		}
+
+		if (used_ring == -1 && retval == 0)
+		{
+			printk(KERN_INFO "All tx_ring busy, current message is not sended.\n");
+			retval = -EAGAIN;
+		}
+		else if (used_ring != -1)
+		{
+			printk(KERN_INFO "Message sended at ring %d\n", used_ring);
+		}
 
 		mutex_unlock(&mqnic_lock);
 		return retval;
@@ -302,6 +310,7 @@ static long mqnic_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 		
 		return 0;
 	}
+	
 	else if (cmd == MQNIC_IOCTL_DMA_UNMAP)
 	{
 		if (copy_from_user(&mem, (void *)arg, sizeof(struct user_mem)))

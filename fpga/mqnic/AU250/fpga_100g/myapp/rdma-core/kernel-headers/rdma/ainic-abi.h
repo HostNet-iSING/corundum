@@ -151,14 +151,13 @@ struct ainic_create_cq_resp {
 };
 
 struct ainic_create_qp_resp {
-	struct mminfo rq_mi;
 	struct mminfo sq_mi;
-	struct mminfo sq_consumer_mi;
-	struct mminfo sq_producer_mi;
-        struct mminfo reg_bar;
+	struct mminfo buf_mi;
+	struct mminfo reg_bar;
 	__u32 hw_offset;
-	__u64 pa_offset;
 	__u32 size_mask;
 	__u32 stride;
+	__u64 dma_addr;
+	 __u32 offset_offset;
 };
 #endif /* RDMA_USER_AINIC_H */

@@ -37,6 +37,8 @@ struct ainic_cq {
 
 struct ainic_wq {
 	uint8_t *buf;  //ring buf
+	uint8_t *dma_buf;
+	uint64_t dma_addr;
 	uint32_t prod_ptr;
 	uint32_t cons_ptr;
 	pthread_spinlock_t	lock;
@@ -115,8 +117,10 @@ static inline enum ibv_qp_type qp_type(struct ainic_qp *qp)
 
 static inline void ainic_tx_write_prod_ptr(struct ainic_wq *wq)
 {
+        mmio_wc_start();
 	mmio_write32(wq->desc + MQNIC_QUEUE_CTRL_STATUS_REG,
             MQNIC_QUEUE_CMD_SET_PROD_PTR | (wq->prod_ptr & MQNIC_QUEUE_PTR_MASK));
+	mmio_flush_writes();
 }
 
 static inline void ainic_tx_read_cons_ptr(struct ainic_wq *wq)

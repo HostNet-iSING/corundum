@@ -266,7 +266,8 @@ struct mqnic_ring {
 	size_t buf_size;
 	u8 *buf;
 	dma_addr_t buf_dma_addr;
-
+    u8 *dma_buf;
+    dma_addr_t dma_buf_dma_addr;
 	union {
 		struct mqnic_tx_info *tx_info;
 		struct mqnic_rx_info *rx_info;
