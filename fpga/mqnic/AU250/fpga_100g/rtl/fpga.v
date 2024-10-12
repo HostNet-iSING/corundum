@@ -25,7 +25,7 @@ module fpga #
     parameter RELEASE_INFO = 32'h00000000,
 
     // Structural configuration
-    parameter IF_COUNT = 2,
+    parameter IF_COUNT = 1,
     parameter PORTS_PER_IF = 1,
     parameter SCHED_PER_IF = PORTS_PER_IF,
     parameter PORT_MASK = 0,
@@ -42,11 +42,11 @@ module fpga #
     parameter PTP_PEROUT_COUNT = 1,
 
     // Queue manager configuration
-    parameter EVENT_QUEUE_OP_TABLE_SIZE = 32,
-    parameter TX_QUEUE_OP_TABLE_SIZE = 32,
-    parameter RX_QUEUE_OP_TABLE_SIZE = 32,
-    parameter CQ_OP_TABLE_SIZE = 32,
-    parameter EQN_WIDTH = 5,
+    parameter EVENT_QUEUE_OP_TABLE_SIZE = 64,
+    parameter TX_QUEUE_OP_TABLE_SIZE = 64,
+    parameter RX_QUEUE_OP_TABLE_SIZE = 64,
+    parameter CQ_OP_TABLE_SIZE = 64,
+    parameter EQN_WIDTH = 6,
     parameter TX_QUEUE_INDEX_WIDTH = 13,
     parameter RX_QUEUE_INDEX_WIDTH = 8,
     parameter CQN_WIDTH = (TX_QUEUE_INDEX_WIDTH > RX_QUEUE_INDEX_WIDTH ? TX_QUEUE_INDEX_WIDTH : RX_QUEUE_INDEX_WIDTH) + 1,
@@ -68,9 +68,9 @@ module fpga #
     // Interface configuration
     parameter PTP_TS_ENABLE = 1,
     parameter TX_CPL_FIFO_DEPTH = 32,
-    parameter TX_CHECKSUM_ENABLE = 1,
-    parameter RX_HASH_ENABLE = 1,
-    parameter RX_CHECKSUM_ENABLE = 1,
+    parameter TX_CHECKSUM_ENABLE = 0,
+    parameter RX_HASH_ENABLE = 0,
+    parameter RX_CHECKSUM_ENABLE = 0,
     parameter TX_FIFO_DEPTH = 32768,
     parameter RX_FIFO_DEPTH = 131072,
     parameter MAX_TX_SIZE = 9214,
@@ -88,12 +88,12 @@ module fpga #
     parameter AXI_DDR_NARROW_BURST = 0,
 
     // Application block configuration
-    parameter APP_ID = 32'h00000000,
-    parameter APP_ENABLE = 0,
+    parameter APP_ID = 32'h12340001,
+    parameter APP_ENABLE = 1,
     parameter APP_CTRL_ENABLE = 1,
     parameter APP_DMA_ENABLE = 1,
-    parameter APP_AXIS_DIRECT_ENABLE = 1,
-    parameter APP_AXIS_SYNC_ENABLE = 1,
+    parameter APP_AXIS_DIRECT_ENABLE = 0,
+    parameter APP_AXIS_SYNC_ENABLE = 0,
     parameter APP_AXIS_IF_ENABLE = 1,
     parameter APP_STAT_ENABLE = 1,
 
@@ -1165,6 +1165,35 @@ BUFG_GT bufg_gt_qsfp0_mgt_refclk_1_inst (
 );
 
 wire qsfp0_rst;
+wire [3:0] temp_tx_qsfp0_p,temp_tx_qsfp0_n;
+//reg  [3:0] temp_rx_qsfp0_p,temp_rx_qsfp0_n;
+assign temp_tx_qsfp0_p = {qsfp0_tx4_p, qsfp0_tx3_p, qsfp0_tx2_p, qsfp0_tx1_p};
+assign temp_tx_qsfp0_n = {qsfp0_tx4_p, qsfp0_tx3_p, qsfp0_tx2_p, qsfp0_tx1_p};
+//always @(*)begin
+//    temp_rx_qsfp0_p = {qsfp0_rx4_p, qsfp0_rx3_p, qsfp0_rx2_p, qsfp0_rx1_p};
+//    temp_rx_qsfp0_n = {qsfp0_rx4_n, qsfp0_rx3_n, qsfp0_rx2_n, qsfp0_rx1_n};
+//end
+
+/*
+ila_6 u_ila_cmac_tx   (
+    .clk    ( qsfp0_tx_clk_int           ),
+    .probe0 ( qsfp0_tx_axis_tdata_int    ), //[511 :0]
+    .probe1 ( qsfp0_tx_axis_tvalid_int   ), //[0 :0]
+    .probe2 ( qsfp0_tx_axis_tlast_int    ) //[0 :0]
+    //.probe3 ( temp_tx_qsfp0_p            ), //[3 :0]     
+    //.probe4 ( temp_tx_qsfp0_n            )  //[3 :0]         
+
+);
+
+ila_7 u_ila_cmac_rx   (
+    .clk    ( qsfp0_rx_clk_int           ),
+    .probe0 ( qsfp0_rx_axis_tdata_int    ), //[511 :0]
+    .probe1 ( qsfp0_rx_axis_tvalid_int   ), //[0 :0]
+    .probe2 ( qsfp0_rx_axis_tlast_int    ) //[0 :0]
+    //.probe3 ( temp_tx_qsfp0_p            ), //[3 :0]     
+    //.probe4 ( temp_tx_qsfp0_n            )  //[3 :0]         
+
+);*/
 
 sync_reset #(
     .N(4)
