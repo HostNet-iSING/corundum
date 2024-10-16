@@ -629,6 +629,31 @@ wire                                         reg_rd_en          ;
 wire [DATA_WIDTH-1:0]                        reg_rd_data        ;
 wire                                         reg_rd_wait        ;
 wire                                         reg_rd_ack         ;
+
+wire [ADDR_WIDTH-1:0]                        reg_wr_addr_tx     ;
+wire [DATA_WIDTH-1:0]                        reg_wr_data_tx     ;
+wire [STRB_WIDTH-1:0]                        reg_wr_strb_tx     ;
+wire                                         reg_wr_en_tx       ;
+wire                                         reg_wr_wait_tx     ;
+wire                                         reg_wr_ack_tx      ;
+wire [ADDR_WIDTH-1:0]                        reg_rd_addr_tx     ;
+wire                                         reg_rd_en_tx       ;
+wire [DATA_WIDTH-1:0]                        reg_rd_data_tx     ;
+wire                                         reg_rd_wait_tx     ;
+wire                                         reg_rd_ack_tx      ;
+                
+wire [ADDR_WIDTH-1:0]                        reg_wr_addr_rx     ;
+wire [DATA_WIDTH-1:0]                        reg_wr_data_rx     ;
+wire [STRB_WIDTH-1:0]                        reg_wr_strb_rx     ;
+wire                                         reg_wr_en_rx       ;
+wire                                         reg_wr_wait_rx     ;
+wire                                         reg_wr_ack_rx      ;
+wire [ADDR_WIDTH-1:0]                        reg_rd_addr_rx     ;
+wire                                         reg_rd_en_rx       ;
+wire [DATA_WIDTH-1:0]                        reg_rd_data_rx     ;
+wire                                         reg_rd_wait_rx     ;
+wire                                         reg_rd_ack_rx      ;
+
     
 // check configuration
 initial begin
@@ -752,20 +777,9 @@ assign m_axis_data_dma_read_desc_ram_addr = 0;
 assign m_axis_data_dma_read_desc_len = 0;
 assign m_axis_data_dma_read_desc_tag = 0;
 assign m_axis_data_dma_read_desc_valid = 1'b0;
-// assign m_axis_data_dma_write_desc_dma_addr = 0;
-// assign m_axis_data_dma_write_desc_ram_sel = 0;
-// assign m_axis_data_dma_write_desc_ram_addr = 0;
-// assign m_axis_data_dma_write_desc_imm = 0;
-// assign m_axis_data_dma_write_desc_imm_en = 0;
-// assign m_axis_data_dma_write_desc_len = 0;
-// assign m_axis_data_dma_write_desc_tag = 0;
-// assign m_axis_data_dma_write_desc_valid = 1'b0;
 
 assign data_dma_ram_wr_cmd_ready = 1'b1;
 assign data_dma_ram_wr_done = data_dma_ram_wr_cmd_valid;
-// assign data_dma_ram_rd_cmd_ready = data_dma_ram_rd_resp_ready;
-// assign data_dma_ram_rd_resp_data = 0;
-// assign data_dma_ram_rd_resp_valid = data_dma_ram_rd_cmd_valid;
 
 /*
  * Ethernet (direct MAC interface - lowest latency raw traffic)
@@ -811,18 +825,33 @@ assign s_axis_sync_rx_tready = m_axis_sync_rx_tready;
 assign m_axis_sync_rx_tlast = s_axis_sync_rx_tlast;
 assign m_axis_sync_rx_tuser = s_axis_sync_rx_tuser;
 
+
+// REG_WR/RD mux
+assign reg_wr_addr_tx = (reg_wr_addr[8]    == 1'b0)?  reg_wr_addr : 0;
+assign reg_wr_data_tx = (reg_wr_addr[8]    == 1'b0)?  reg_wr_data : 0;
+assign reg_wr_strb_tx = (reg_wr_addr[8]    == 1'b0)?  reg_wr_strb : 0;
+assign reg_wr_en_tx   = (reg_wr_addr[8]    == 1'b0)?  reg_wr_en   : 0;
+assign reg_rd_addr_tx = (reg_rd_addr[8]    == 1'b0)?  reg_rd_addr : 0;
+assign reg_rd_en_tx   = (reg_rd_addr[8]    == 1'b0)?  reg_rd_en   : 0;
+
+assign reg_wr_addr_rx = (reg_wr_addr[8]    == 1'b0)?  reg_wr_addr : 0; 
+assign reg_wr_data_rx = (reg_wr_addr[8]    == 1'b0)?  reg_wr_data : 0; 
+assign reg_wr_strb_rx = (reg_wr_addr[8]    == 1'b0)?  reg_wr_strb : 0; 
+assign reg_wr_en_rx   = (reg_wr_addr[8]    == 1'b0)?  reg_wr_en   : 0; 
+assign reg_rd_addr_rx = (reg_rd_addr[8]    == 1'b0)?  reg_rd_addr : 0; 
+assign reg_rd_en_rx   = (reg_rd_addr[8]    == 1'b0)?  reg_rd_en   : 0; 
+ 
+
+assign reg_wr_wait = (reg_wr_addr[8]    == 1'b0)?  reg_wr_wait_tx : reg_wr_wait_rx;
+assign reg_wr_ack  = (reg_wr_addr[8]    == 1'b0)?  reg_wr_ack_tx  : reg_wr_ack_rx ;
+assign reg_rd_wait = (reg_rd_addr[8]    == 1'b0)?  reg_rd_wait_tx : reg_rd_wait_rx;
+assign reg_rd_ack  = (reg_rd_addr[8]    == 1'b0)?  reg_rd_ack_tx  : reg_rd_ack_rx ;
+assign reg_rd_data = (reg_rd_addr_1d[8] == 1'b0)?  reg_rd_data_tx : reg_rd_data_rx;
+
+
 /*
  * Ethernet (internal at interface module)
  */
-
-// assign m_axis_if_tx_tdata = s_axis_if_tx_tdata;
-// assign m_axis_if_tx_tkeep = s_axis_if_tx_tkeep;
-// assign m_axis_if_tx_tvalid = s_axis_if_tx_tvalid;
-// assign s_axis_if_tx_tready = m_axis_if_tx_tready;
-// assign m_axis_if_tx_tlast = s_axis_if_tx_tlast;
-// assign m_axis_if_tx_tid = s_axis_if_tx_tid;
-// assign m_axis_if_tx_tdest = s_axis_if_tx_tdest;
-// assign m_axis_if_tx_tuser = s_axis_if_tx_tuser;
 
 
 mqnic_app_if_tx_data_proc_v4 #
@@ -871,17 +900,17 @@ mqnic_app_if_tx_data_proc_v4 #
     .tx_config_ram_rdata    ( tx_config_ram_rdata   ),
     .tx_config_ram_wdata    ( tx_config_ram_wdata   ),
     
-    .reg_wr_addr            ( reg_wr_addr           ),
-    .reg_wr_data            ( reg_wr_data           ),
-    .reg_wr_strb            ( reg_wr_strb           ),
-    .reg_wr_en              ( reg_wr_en             ),
-    .reg_wr_wait            ( reg_wr_wait           ),
-    .reg_wr_ack             ( reg_wr_ack            ),
-    .reg_rd_addr            ( reg_rd_addr           ),
-    .reg_rd_en              ( reg_rd_en             ),
-    .reg_rd_data            ( reg_rd_data           ),
-    .reg_rd_wait            ( reg_rd_wait           ),
-    .reg_rd_ack             ( reg_rd_ack            )       
+    .reg_wr_addr            ( reg_wr_addr_tx        ),
+    .reg_wr_data            ( reg_wr_data_tx        ),
+    .reg_wr_strb            ( reg_wr_strb_tx        ),
+    .reg_wr_en              ( reg_wr_en_tx          ),
+    .reg_wr_wait            ( reg_wr_wait_tx        ),
+    .reg_wr_ack             ( reg_wr_ack_tx         ),
+    .reg_rd_addr            ( reg_rd_addr_tx        ),
+    .reg_rd_en              ( reg_rd_en_tx          ),
+    .reg_rd_data            ( reg_rd_data_tx        ),
+    .reg_rd_wait            ( reg_rd_wait_tx        ),
+    .reg_rd_ack             ( reg_rd_ack_tx         )       
 );
 
 //rx passthrough
@@ -899,7 +928,7 @@ wire                                        rx_axis_tready_int;
 wire                                        rx_axis_tlast_int;
 wire [AXIS_RX_ID_WIDTH-1:0]                 rx_axis_tid_int;
 wire [RX_QUEUE_INDEX_WIDTH:0]               rx_axis_tdest_int;
-wire [AXIS_RX_USER_WIDTH-1:0]               rx_axis_tuser_int;
+wire [AXIS_RX_USER_WIDTH-1:0]               rx_axis_tuser_int;          
 
 
 dma_psdpram #(
@@ -1008,29 +1037,29 @@ u_mqnic_app_if_rx_data_proc_v4 (
     .clk(clk),
     .rst(rst),
 
-    .reg_wr_addr                (reg_wr_addr        ),
-    .reg_wr_data                (reg_wr_data        ),
-    .reg_wr_strb                (reg_wr_strb        ),
-    .reg_wr_en                  (reg_wr_en          ),
-    .reg_wr_wait                (reg_wr_wait        ),
-    .reg_wr_ack                 (reg_wr_ack         ),
-    .reg_rd_addr                (reg_rd_addr        ),
-    .reg_rd_en                  (reg_rd_en          ),
-    .reg_rd_data                (reg_rd_data        ),
-    .reg_rd_wait                (reg_rd_wait        ),
-    .reg_rd_ack                 (reg_rd_ack         ),  
+    .reg_wr_addr                ( reg_wr_addr_rx ),
+    .reg_wr_data                ( reg_wr_data_rx ),
+    .reg_wr_strb                ( reg_wr_strb_rx ),
+    .reg_wr_en                  ( reg_wr_en_rx   ),
+    .reg_wr_wait                ( reg_wr_wait_rx ),
+    .reg_wr_ack                 ( reg_wr_ack_rx  ),
+    .reg_rd_addr                ( reg_rd_addr_rx ),
+    .reg_rd_en                  ( reg_rd_en_rx   ),
+    .reg_rd_data                ( reg_rd_data_rx ),
+    .reg_rd_wait                ( reg_rd_wait_rx ),
+    .reg_rd_ack                 ( reg_rd_ack_rx  ),  
 
     /*
      * AXI stream write data input
      */
-    .s_axis_write_data_tdata    (rx_axis_tdata_int),
-    .s_axis_write_data_tkeep    (rx_axis_tkeep_int),
-    .s_axis_write_data_tvalid   (rx_axis_tvalid_int),
-    .s_axis_write_data_tready   (rx_axis_tready_int),
-    .s_axis_write_data_tlast    (rx_axis_tlast_int),
-    .s_axis_write_data_tid      (rx_axis_tid_int),
-    .s_axis_write_data_tdest    (rx_axis_tdest_int),
-    .s_axis_write_data_tuser    (rx_axis_tuser_int),
+    .s_axis_write_data_tdata    ( rx_axis_tdata_int),
+    .s_axis_write_data_tkeep    ( rx_axis_tkeep_int),
+    .s_axis_write_data_tvalid   ( rx_axis_tvalid_int),
+    .s_axis_write_data_tready   ( rx_axis_tready_int),
+    .s_axis_write_data_tlast    ( rx_axis_tlast_int),
+    .s_axis_write_data_tid      ( rx_axis_tid_int),
+    .s_axis_write_data_tdest    ( rx_axis_tdest_int),
+    .s_axis_write_data_tuser    ( rx_axis_tuser_int),
 
     /*
      * RAM interface
@@ -1069,24 +1098,14 @@ u_mqnic_app_if_rx_data_proc_v4 (
     .abort(1'b0)
 );
 
-// assign m_axis_if_rx_tdata  = s_axis_if_rx_tdata;
-// assign m_axis_if_rx_tkeep  = s_axis_if_rx_tkeep;
-// assign m_axis_if_rx_tvalid = s_axis_if_rx_tvalid;
-// assign s_axis_if_rx_tready = m_axis_if_rx_tready;
-// assign m_axis_if_rx_tlast  = s_axis_if_rx_tlast;
-// assign m_axis_if_rx_tid    = s_axis_if_rx_tid;
-// assign m_axis_if_rx_tdest  = s_axis_if_rx_tdest;
-// assign m_axis_if_rx_tuser  = s_axis_if_rx_tuser;
-
-assign m_axis_if_rx_tdata = 0;
-assign m_axis_if_rx_tkeep = 0;
-assign m_axis_if_rx_tvalid = 0;
-// assign s_axis_if_rx_tready = m_axis_if_rx_tready;
-assign m_axis_if_rx_tlast = 0;
-assign m_axis_if_rx_tid = 0;
-assign m_axis_if_rx_tdest = 0;
-assign m_axis_if_rx_tuser = 0;
-
+assign m_axis_if_rx_tdata  = s_axis_if_rx_tdata;
+assign m_axis_if_rx_tkeep  = s_axis_if_rx_tkeep;
+assign m_axis_if_rx_tvalid = s_axis_if_rx_tvalid;
+assign s_axis_if_rx_tready = m_axis_if_rx_tready;
+assign m_axis_if_rx_tlast  = s_axis_if_rx_tlast;
+assign m_axis_if_rx_tid    = s_axis_if_rx_tid;
+assign m_axis_if_rx_tdest  = s_axis_if_rx_tdest;
+assign m_axis_if_rx_tuser  = s_axis_if_rx_tuser;
 
 assign rx_config_ram_ren   = 0;
 assign rx_config_ram_wen   = 0;
@@ -1182,19 +1201,6 @@ assign gpio_out = 0;
  */
 assign jtag_tdo = jtag_tdi;
 
-
-//ila_3 u_mqnic_app_block_inst (
-//	.clk(clk), // input wire clk
-
-
-//	.probe0(data_dma_ram_rd_cmd_sel), // input wire [1:0]  probe0  
-//	.probe1(data_dma_ram_rd_cmd_addr), // input wire [19:0]  probe1 
-//	.probe2(data_dma_ram_rd_cmd_valid), // input wire [1:0]  probe2 
-//	.probe3(data_dma_ram_rd_cmd_ready), // input wire [1:0]  probe3 
-//	.probe4(data_dma_ram_rd_resp_data), // input wire [1023:0]  probe4 
-//	.probe5(data_dma_ram_rd_resp_valid), // input wire [1:0]  probe5 
-//	.probe6(data_dma_ram_rd_resp_ready) // input wire [1:0]  probe6 
-//);
 
 endmodule
 
