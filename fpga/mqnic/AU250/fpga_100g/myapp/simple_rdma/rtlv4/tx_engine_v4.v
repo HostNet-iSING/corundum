@@ -34,11 +34,6 @@ module tx_engine_v4 #
     parameter DMA_TAG_WIDTH = WQE_INDEX_WIDTH,
     // DMA client tag field width
     parameter DMA_CLIENT_TAG_WIDTH = WQE_INDEX_WIDTH,   
-
-    // Width of AXI stream descriptor interfaces in bits
-    parameter AXIS_DESC_DATA_WIDTH = 512,
-    // AXI stream descriptor tkeep signal width (words per cycle)
-    parameter AXIS_DESC_KEEP_WIDTH = AXIS_DESC_DATA_WIDTH/8,
     
     // AXI stream tid signal width
     parameter AXIS_TX_ID_WIDTH = WQE_INDEX_WIDTH,
@@ -74,6 +69,7 @@ module tx_engine_v4 #
      * DMA read data status input
      */
     input  wire [DMA_TAG_WIDTH-1:0]         s_axis_dma_read_wqe_status_tag,
+    input  wire                             s_axis_dma_read_wqe_status_error,
     input  wire                             s_axis_dma_read_wqe_status_valid,
 
     /*

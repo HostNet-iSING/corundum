@@ -70,7 +70,7 @@ module re_trans_module #
     output wire                             s_axis_tx_ready ,
     
     /*
-     * tx flag input
+     * ack flag input
      */    
     input  wire [WQE_INDEX_WIDTH-1:0]       s_axis_ack_id    ,
     input  wire [24-1:0]                    s_axis_ack_psn   ,
@@ -91,6 +91,7 @@ module re_trans_module #
      * DMA read data status input
      */
     input  wire [DMA_TAG_WIDTH-1:0]         s_axis_dma_read_wqe_status_tag,
+    input  wire                             s_axis_dma_read_wqe_status_error,
     input  wire                             s_axis_dma_read_wqe_status_valid,
 
     /*
