@@ -79,7 +79,7 @@ syn_fifo #(
   .RAM_DEPTH   ( 32               ),
   .TH_AFULL    ( 28               ),
   .TH_AEMPTY   ( 4                )
-)u_Papply_FIFO
+)u_wqe_tag_fifo
 (
   .i_clk       ( clk              ),
   .i_rst       ( rst              ),

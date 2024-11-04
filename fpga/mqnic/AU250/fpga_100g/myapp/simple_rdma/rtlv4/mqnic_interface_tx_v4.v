@@ -14,186 +14,221 @@
  */
 module mqnic_interface_tx_v4 #
 (
-    // Structural configuration
+    // Number of ports
     parameter PORTS = 1,
+    
+    // WQE index width
+    parameter WQE_INDEX_WIDTH = 8,
+    // WQE data width
+    parameter AXIS_WQE_DATA_WIDTH = 256,
+    
+    // DMA address width
+    parameter DMA_ADDR_WIDTH = 64,
+    // DMA length field width
+    parameter DMA_LEN_WIDTH = 20,
+    // DMA client length field width
+    parameter DMA_CLIENT_LEN_WIDTH = 20,
+    // DMA tag field width
+    parameter DMA_TAG_WIDTH = WQE_INDEX_WIDTH,
+    // DMA client tag field width
+    parameter DMA_CLIENT_TAG_WIDTH = WQE_INDEX_WIDTH,   
 
-    // PTP configuration
-    parameter PTP_TS_WIDTH = 96,
-
-    // Queue manager configuration
-    parameter TX_QUEUE_INDEX_WIDTH = 13,
-    parameter QUEUE_INDEX_WIDTH = TX_QUEUE_INDEX_WIDTH,
-    parameter CQN_WIDTH = TX_QUEUE_INDEX_WIDTH,
-    parameter QUEUE_PTR_WIDTH = 16,
-    parameter LOG_QUEUE_SIZE_WIDTH = 4,
-    parameter LOG_BLOCK_SIZE_WIDTH = 2,
-
-    // Descriptor management
-    parameter TX_MAX_DESC_REQ = 16,
-    parameter TX_DESC_FIFO_SIZE = TX_MAX_DESC_REQ*8,
-    parameter DESC_SIZE = 16,
-    parameter CPL_SIZE = 32,
-    parameter AXIS_DESC_DATA_WIDTH = DESC_SIZE*8,
+    // Width of AXI stream descriptor interfaces in bits
+    parameter AXIS_DESC_DATA_WIDTH = 512,
+    // AXI stream descriptor tkeep signal width (words per cycle)
     parameter AXIS_DESC_KEEP_WIDTH = AXIS_DESC_DATA_WIDTH/8,
-    parameter REQ_TAG_WIDTH = 8,
-    parameter DESC_REQ_TAG_WIDTH = 8,
-    parameter CPL_REQ_TAG_WIDTH = 8,
-
-    // TX and RX engine configuration
-    parameter TX_DESC_TABLE_SIZE = 32,
-    parameter DESC_TABLE_DMA_OP_COUNT_WIDTH = 4,
+    
+    // Streaming interface configuration
+    parameter AXIS_DATA_WIDTH = 512*2**$clog2(PORTS),
+    parameter AXIS_KEEP_WIDTH = AXIS_DATA_WIDTH/8,
+    parameter AXIS_TX_ID_WIDTH = WQE_INDEX_WIDTH,
+    parameter AXIS_TX_DEST_WIDTH = $clog2(PORTS)+4,
+    parameter AXIS_TX_USER_WIDTH = 232,
 
     // Interface configuration
-    parameter PTP_TS_ENABLE = 1,
-    parameter TX_TAG_WIDTH = $clog2(TX_DESC_TABLE_SIZE)+1,
-    parameter TX_CHECKSUM_ENABLE = 1,
+    parameter TX_CHECKSUM_ENABLE = 0,
     parameter MAX_TX_SIZE = 9214,
     parameter TX_RAM_SIZE = 32768,
 
     // DMA interface configuration
-    parameter DMA_ADDR_WIDTH = 64,
-    parameter DMA_LEN_WIDTH = 16,
-    parameter DMA_TAG_WIDTH = 16,
+
     parameter RAM_ADDR_WIDTH = $clog2(TX_RAM_SIZE),
     parameter RAM_SEG_COUNT = 2,
     parameter RAM_SEG_DATA_WIDTH = 256*2/RAM_SEG_COUNT,
     parameter RAM_SEG_BE_WIDTH = RAM_SEG_DATA_WIDTH/8,
     parameter RAM_SEG_ADDR_WIDTH = RAM_ADDR_WIDTH-$clog2(RAM_SEG_COUNT*RAM_SEG_BE_WIDTH),
-    parameter RAM_PIPELINE = 2,
+    parameter RAM_PIPELINE = 2
 
-    // Streaming interface configuration
-    parameter AXIS_DATA_WIDTH = 512*2**$clog2(PORTS),
-    parameter AXIS_KEEP_WIDTH = AXIS_DATA_WIDTH/8,
-    parameter AXIS_TX_ID_WIDTH = TX_QUEUE_INDEX_WIDTH,
-    parameter AXIS_TX_DEST_WIDTH = $clog2(PORTS)+4,
-    parameter AXIS_TX_USER_WIDTH = TX_TAG_WIDTH + 1,
-    
-    parameter DMA_CLIENT_TAG_WIDTH = $clog2(TX_DESC_TABLE_SIZE),
-    parameter DMA_CLIENT_LEN_WIDTH = DMA_LEN_WIDTH
 )
 (
-    input  wire                                         clk,
-    input  wire                                         rst,
-
-    /*
-     * Descriptor data input
-     */
-    input  wire [AXIS_WQE_DATA_WIDTH-1:0]               s_axis_wqe_data,
-    input  wire [24-1:0]                                s_axis_wqe_qpn, 
-    input  wire [WQE_INDEX_WIDTH-1:0]                   s_axis_wqe_id,
-    input  wire                                         s_axis_wqe_valid,
-    output wire                                         s_axis_wqe_ready,
+    input  wire                                         clk                         ,
+    input  wire                                         rst                         ,
+                                                                                    
+    /*                                                                              
+     * Descriptor data input                                                        
+     */                                                                             
+    input  wire [AXIS_WQE_DATA_WIDTH-1:0]               s_axis_wqe_data             ,
+    input  wire [24-1:0]                                s_axis_wqe_qpn              , 
+    input  wire [WQE_INDEX_WIDTH-1:0]                   s_axis_wqe_id               ,
+    input  wire                                         s_axis_wqe_valid            ,
+    output wire                                         s_axis_wqe_ready            ,
                                                         
     /*                                                  
      * DMA read data output                             
      */                                                 
     output wire [DMA_ADDR_WIDTH-1:0]                    m_axis_dma_read_wqe_dma_addr,
     output wire [RAM_ADDR_WIDTH-1:0]                    m_axis_dma_read_wqe_ram_addr,
-    output wire [DMA_LEN_WIDTH-1:0]                     m_axis_dma_read_wqe_len,
-    output wire [DMA_TAG_WIDTH-1:0]                     m_axis_dma_read_wqe_tag,
-    output wire                                         m_axis_dma_read_wqe_valid,
-    input  wire                                         m_axis_dma_read_wqe_ready,
-                                                        
-    /*                                                  
-     * DMA read data status input                       
-     */                                                 
-    input  wire [DMA_TAG_WIDTH-1:0]                     s_axis_dma_read_wqe_status_tag,
-    input  wire                                         s_axis_dma_read_wqe_status_valid,
+    output wire [DMA_LEN_WIDTH-1:0]                     m_axis_dma_read_wqe_len     ,
+    output wire [DMA_TAG_WIDTH:0]                       m_axis_dma_read_wqe_tag     ,
+    output wire                                         m_axis_dma_read_wqe_valid   ,
+    input  wire                                         m_axis_dma_read_wqe_ready   ,                                                        
   
     /*
      * RAM interface (data)
      */
-    input  wire [RAM_SEG_COUNT*RAM_SEG_BE_WIDTH-1:0]    dma_ram_wr_cmd_be,
-    input  wire [RAM_SEG_COUNT*RAM_SEG_ADDR_WIDTH-1:0]  dma_ram_wr_cmd_addr,
-    input  wire [RAM_SEG_COUNT*RAM_SEG_DATA_WIDTH-1:0]  dma_ram_wr_cmd_data,
-    input  wire [RAM_SEG_COUNT-1:0]                     dma_ram_wr_cmd_valid,
-    output wire [RAM_SEG_COUNT-1:0]                     dma_ram_wr_cmd_ready,
-    output wire [RAM_SEG_COUNT-1:0]                     dma_ram_wr_done,
+    input  wire [RAM_SEG_COUNT*RAM_SEG_BE_WIDTH-1:0]    dma_ram_wr_cmd_be           ,
+    input  wire [RAM_SEG_COUNT*RAM_SEG_ADDR_WIDTH-1:0]  dma_ram_wr_cmd_addr         ,
+    input  wire [RAM_SEG_COUNT*RAM_SEG_DATA_WIDTH-1:0]  dma_ram_wr_cmd_data         ,
+    input  wire [RAM_SEG_COUNT-1:0]                     dma_ram_wr_cmd_valid        ,
+    output wire [RAM_SEG_COUNT-1:0]                     dma_ram_wr_cmd_ready        ,
+    output wire [RAM_SEG_COUNT-1:0]                     dma_ram_wr_done             ,
 
     /*
      * Transmit data output
      */
-    output wire [AXIS_DATA_WIDTH-1:0]                   m_axis_tx_tdata,
-    output wire [AXIS_KEEP_WIDTH-1:0]                   m_axis_tx_tkeep,
-    output wire                                         m_axis_tx_tvalid,
-    input  wire                                         m_axis_tx_tready,
-    output wire                                         m_axis_tx_tlast,
-    output wire [AXIS_TX_ID_WIDTH-1:0]                  m_axis_tx_tid,
-    output wire [AXIS_TX_DEST_WIDTH-1:0]                m_axis_tx_tdest,
-    output wire [AXIS_TX_USER_WIDTH-1:0]                m_axis_tx_tuser,
+    output wire [AXIS_DATA_WIDTH-1:0]                   m_axis_tx_tdata             ,
+    output wire [AXIS_KEEP_WIDTH-1:0]                   m_axis_tx_tkeep             ,
+    output wire                                         m_axis_tx_tvalid            ,
+    input  wire                                         m_axis_tx_tready            ,
+    output wire                                         m_axis_tx_tlast             ,
+    output wire [AXIS_TX_ID_WIDTH-1:0]                  m_axis_tx_tid               ,
+    output wire [AXIS_TX_DEST_WIDTH-1:0]                m_axis_tx_tdest             ,
+    output wire [AXIS_TX_USER_WIDTH-1:0]                m_axis_tx_tuser             ,
     
     /*
      * tx flag input
      */    
-    input  wire [WQE_INDEX_WIDTH-1:0]                   s_axis_ack_id    ,
-    input  wire [24-1:0]                                s_axis_ack_psn   ,
-    input  wire                                         s_axis_ack_valid ,
-    output wire                                         s_axis_ack_ready ,  
-                                                        
-    /*                                                  
-     * cpl interface                                    
-     */                                                 
-    output wire [WQE_INDEX_WIDTH-1:0]                   m_axis_cpl_id      ,
-    output wire                                         m_axis_cpl_valid   ,
-    input  wire                                         m_axis_cpl_ready
-
+    input  wire [WQE_INDEX_WIDTH-1:0]                   s_axis_tx_id                ,
+    input  wire [24-1:0]                                s_axis_tx_psn               ,
+    input  wire                                         s_axis_tx_valid             ,
+    output wire                                         s_axis_tx_ready             ,
+                                                                                    
+    /*                                                                              
+     * ack flag input                                                               
+     */                                                                             
+    input  wire [WQE_INDEX_WIDTH-1:0]                   s_axis_ack_id               ,
+    input  wire [24-1:0]                                s_axis_ack_psn              ,
+    input  wire                                         s_axis_ack_valid            ,
+    output wire                                         s_axis_ack_ready            , 
+                                                                                    
+    /*                                                                              
+     * cpl interface                                                                
+     */                                                                             
+    output wire [WQE_INDEX_WIDTH-1:0]                   m_axis_cpl_id               ,
+    output wire                                         m_axis_cpl_valid            ,
+    input  wire                                         m_axis_cpl_ready                 
+                                                                                         
 );
 
-wire                             s_axis_resource_ready;
+////////////////////////////////// WIRE & REG ///////////////////////////////////////////////////////
 
+wire [DMA_ADDR_WIDTH-1:0]                    m_axis_cu_dma_read_wqe_dma_addr;
+wire [RAM_ADDR_WIDTH-1:0]                    m_axis_cu_dma_read_wqe_ram_addr;
+wire [DMA_LEN_WIDTH-1:0]                     m_axis_cu_dma_read_wqe_len     ;
+wire [DMA_TAG_WIDTH-1:0]                     m_axis_cu_dma_read_wqe_tag     ;
+wire                                         m_axis_cu_dma_read_wqe_valid   ;
+wire                                         m_axis_cu_dma_read_wqe_ready   ;
+                                                                            
+wire [DMA_ADDR_WIDTH-1:0]                    m_axis_re_dma_read_wqe_dma_addr;
+wire [RAM_ADDR_WIDTH-1:0]                    m_axis_re_dma_read_wqe_ram_addr;
+wire [DMA_LEN_WIDTH-1:0]                     m_axis_re_dma_read_wqe_len     ;
+wire [DMA_TAG_WIDTH-1:0]                     m_axis_re_dma_read_wqe_tag     ;
+wire                                         m_axis_re_dma_read_wqe_valid   ;
+wire                                         m_axis_re_dma_read_wqe_ready   ;
+                                                                            
+wire [RAM_ADDR_WIDTH-1:0]                    m_axis_cu_tx_data_addr         ;
+wire [DMA_CLIENT_LEN_WIDTH-1:0]              m_axis_cu_tx_data_len          ;
+wire [DMA_CLIENT_TAG_WIDTH-1:0]              m_axis_cu_tx_data_tag          ;
+wire [AXIS_TX_ID_WIDTH-1:0]                  m_axis_cu_tx_data_id           ;
+wire [AXIS_TX_DEST_WIDTH-1:0]                m_axis_cu_tx_data_dest         ;
+wire [AXIS_TX_USER_WIDTH-1:0]                m_axis_cu_tx_data_user         ;
+wire                                         m_axis_cu_tx_data_valid        ;
+wire                                         m_axis_cu_tx_data_ready        ;
+                                                                            
+wire [RAM_ADDR_WIDTH-1:0]                    m_axis_re_tx_data_addr         ;
+wire [DMA_CLIENT_LEN_WIDTH-1:0]              m_axis_re_tx_data_len          ;
+wire [DMA_CLIENT_TAG_WIDTH-1:0]              m_axis_re_tx_data_tag          ;
+wire [AXIS_TX_ID_WIDTH-1:0]                  m_axis_re_tx_data_id           ;
+wire [AXIS_TX_DEST_WIDTH-1:0]                m_axis_re_tx_data_dest         ;
+wire [AXIS_TX_USER_WIDTH-1:0]                m_axis_re_tx_data_user         ;
+wire                                         m_axis_re_tx_data_valid        ;
+wire                                         m_axis_re_tx_data_ready        ;
 
-wire [AXIS_DESC_DATA_WIDTH-1:0]  tx_fifo_desc_tdata;
-wire [AXIS_DESC_KEEP_WIDTH-1:0]  tx_fifo_desc_tkeep;
-wire                             tx_fifo_desc_tvalid;
-wire                             tx_fifo_desc_tready;
-wire                             tx_fifo_desc_tlast;
-wire [DESC_REQ_TAG_WIDTH-1:0]    tx_fifo_desc_tid;
-wire                             tx_fifo_desc_tuser;
+wire [RAM_SEG_COUNT*RAM_SEG_BE_WIDTH-1:0]    cu_dma_ram_wr_cmd_be           ;
+wire [RAM_SEG_COUNT*RAM_SEG_ADDR_WIDTH-1:0]  cu_dma_ram_wr_cmd_addr         ;
+wire [RAM_SEG_COUNT*RAM_SEG_DATA_WIDTH-1:0]  cu_dma_ram_wr_cmd_data         ;
+wire [RAM_SEG_COUNT-1:0]                     cu_dma_ram_wr_cmd_valid        ;
+wire [RAM_SEG_COUNT-1:0]                     cu_dma_ram_wr_cmd_ready        ;
+wire [RAM_SEG_COUNT-1:0]                     cu_dma_ram_wr_done             ;
+wire [DMA_CLIENT_TAG_WIDTH-1:0]              cu_dma_tx_desc_status_tag      ;
+wire [DMA_CLIENT_TAG_WIDTH-1:0]              cu_dma_tx_desc_status_error    ;
+wire                                         cu_dma_tx_desc_status_valid    ;
+                                                                            
+wire [RAM_SEG_COUNT*RAM_SEG_BE_WIDTH-1:0]    re_dma_ram_wr_cmd_be           ;
+wire [RAM_SEG_COUNT*RAM_SEG_ADDR_WIDTH-1:0]  re_dma_ram_wr_cmd_addr         ;
+wire [RAM_SEG_COUNT*RAM_SEG_DATA_WIDTH-1:0]  re_dma_ram_wr_cmd_data         ;
+wire [RAM_SEG_COUNT-1:0]                     re_dma_ram_wr_cmd_valid        ;
+wire [RAM_SEG_COUNT-1:0]                     re_dma_ram_wr_cmd_ready        ;
+wire [RAM_SEG_COUNT-1:0]                     re_dma_ram_wr_done             ;
+wire [DMA_CLIENT_TAG_WIDTH-1:0]              re_dma_tx_desc_status_tag      ;
+wire [DMA_CLIENT_TAG_WIDTH-1:0]              re_dma_tx_desc_status_error    ;
+wire                                         re_dma_tx_desc_status_valid    ;
 
-wire [DMA_ADDR_WIDTH-1:0]        m_axis_cu_dma_read_wqe_dma_addr ;
-wire [RAM_ADDR_WIDTH-1:0]        m_axis_cu_dma_read_wqe_ram_addr ;
-wire [DMA_LEN_WIDTH-1:0]         m_axis_cu_dma_read_wqe_len      ;
-wire [DMA_TAG_WIDTH-1:0]         m_axis_cu_dma_read_wqe_tag      ;
-wire                             m_axis_cu_dma_read_wqe_valid    ;
-wire                             m_axis_cu_dma_read_wqe_ready    ;
-    
-wire [DMA_ADDR_WIDTH-1:0]        m_axis_re_dma_read_wqe_dma_addr ;
-wire [RAM_ADDR_WIDTH-1:0]        m_axis_re_dma_read_wqe_ram_addr ;
-wire [DMA_LEN_WIDTH-1:0]         m_axis_re_dma_read_wqe_len      ;
-wire [DMA_TAG_WIDTH-1:0]         m_axis_re_dma_read_wqe_tag      ;
-wire                             m_axis_re_dma_read_wqe_valid    ;
-wire                             m_axis_re_dma_read_wqe_ready    ;
-                         
-wire [RAM_ADDR_WIDTH-1:0]        m_axis_cu_tx_data_addr          ;
-wire [DMA_CLIENT_LEN_WIDTH-1:0]  m_axis_cu_tx_data_len           ;
-wire [DMA_CLIENT_TAG_WIDTH-1:0]  m_axis_cu_tx_data_tag           ;
-wire [AXIS_TX_ID_WIDTH-1:0]      m_axis_cu_tx_data_id            ;
-wire [AXIS_TX_DEST_WIDTH-1:0]    m_axis_cu_tx_data_dest          ;
-wire [AXIS_TX_USER_WIDTH-1:0]    m_axis_cu_tx_data_user          ;
-wire                             m_axis_cu_tx_data_valid         ;
-wire                             m_axis_cu_tx_data_ready         ;
+wire [AXIS_DATA_WIDTH-1:0]                   cu_tx_axis_tdata_int           ;
+wire [AXIS_KEEP_WIDTH-1:0]                   cu_tx_axis_tkeep_int           ;
+wire                                         cu_tx_axis_tvalid_int          ;
+wire                                         cu_tx_axis_tready_int          ;
+wire                                         cu_tx_axis_tlast_int           ;
+wire [AXIS_TX_ID_WIDTH-1:0]                  cu_tx_axis_tid_int             ;
+wire [AXIS_TX_DEST_WIDTH-1:0]                cu_tx_axis_tdest_int           ;
+wire [AXIS_TX_USER_WIDTH-1:0]                cu_tx_axis_tuser_int           ;
 
-wire [RAM_ADDR_WIDTH-1:0]        m_axis_re_tx_data_addr          ;
-wire [DMA_CLIENT_LEN_WIDTH-1:0]  m_axis_re_tx_data_len           ;
-wire [DMA_CLIENT_TAG_WIDTH-1:0]  m_axis_re_tx_data_tag           ;
-wire [AXIS_TX_ID_WIDTH-1:0]      m_axis_re_tx_data_id            ;
-wire [AXIS_TX_DEST_WIDTH-1:0]    m_axis_re_tx_data_dest          ;
-wire [AXIS_TX_USER_WIDTH-1:0]    m_axis_re_tx_data_user          ;
-wire                             m_axis_re_tx_data_valid         ;
-wire                             m_axis_re_tx_data_ready         ;
+wire [AXIS_DATA_WIDTH-1:0]                   re_tx_axis_tdata_int           ;
+wire [AXIS_KEEP_WIDTH-1:0]                   re_tx_axis_tkeep_int           ;
+wire                                         re_tx_axis_tvalid_int          ;
+wire                                         re_tx_axis_tready_int          ;
+wire                                         re_tx_axis_tlast_int           ;
+wire [AXIS_TX_ID_WIDTH-1:0]                  re_tx_axis_tid_int             ;
+wire [AXIS_TX_DEST_WIDTH-1:0]                re_tx_axis_tdest_int           ;
+wire [AXIS_TX_USER_WIDTH-1:0]                re_tx_axis_tuser_int           ;
+                                                                            
+wire [AXIS_DATA_WIDTH-1:0]                   tx_axis_tdata_int              ;
+wire [AXIS_KEEP_WIDTH-1:0]                   tx_axis_tkeep_int              ;
+wire                                         tx_axis_tvalid_int             ;
+wire                                         tx_axis_tready_int             ;
+wire                                         tx_axis_tlast_int              ;
+wire [AXIS_TX_ID_WIDTH-1:0]                  tx_axis_tid_int                ;
+wire [AXIS_TX_DEST_WIDTH-1:0]                tx_axis_tdest_int              ;
+wire [AXIS_TX_USER_WIDTH-1:0]                tx_axis_tuser_int              ;
+                                                                            
+wire [DMA_CLIENT_TAG_WIDTH-1:0]              dma_tx_desc_status_tag         ;
+wire [3:0]                                   dma_tx_desc_status_error       ;
+wire                                         dma_tx_desc_status_valid       ;
 
-wire [AXIS_DATA_WIDTH-1:0]       tx_axis_tdata_int;
-wire [AXIS_KEEP_WIDTH-1:0]       tx_axis_tkeep_int;
-wire                             tx_axis_tvalid_int;
-wire                             tx_axis_tready_int;
-wire                             tx_axis_tlast_int;
-wire [AXIS_TX_ID_WIDTH-1:0]      tx_axis_tid_int;
-wire [AXIS_TX_DEST_WIDTH-1:0]    tx_axis_tdest_int;
-wire [AXIS_TX_USER_WIDTH-1:0]    tx_axis_tuser_int;
+wire [RAM_SEG_COUNT*RAM_SEG_ADDR_WIDTH-1:0]  cu_dma_ram_rd_cmd_addr_int     ;
+wire [RAM_SEG_COUNT-1:0]                     cu_dma_ram_rd_cmd_valid_int    ;
+wire [RAM_SEG_COUNT-1:0]                     cu_dma_ram_rd_cmd_ready_int    ;
+wire [RAM_SEG_COUNT*RAM_SEG_DATA_WIDTH-1:0]  cu_dma_ram_rd_resp_data_int    ;
+wire [RAM_SEG_COUNT-1:0]                     cu_dma_ram_rd_resp_valid_int   ;
+wire [RAM_SEG_COUNT-1:0]                     cu_dma_ram_rd_resp_ready_int   ;
 
-wire [DMA_CLIENT_TAG_WIDTH-1:0]  dma_tx_desc_status_tag;
-wire [3:0]                       dma_tx_desc_status_error;
-wire                             dma_tx_desc_status_valid;
+wire [RAM_SEG_COUNT*RAM_SEG_ADDR_WIDTH-1:0]  re_dma_ram_rd_cmd_addr_int     ;
+wire [RAM_SEG_COUNT-1:0]                     re_dma_ram_rd_cmd_valid_int    ;
+wire [RAM_SEG_COUNT-1:0]                     re_dma_ram_rd_cmd_ready_int    ;
+wire [RAM_SEG_COUNT*RAM_SEG_DATA_WIDTH-1:0]  re_dma_ram_rd_resp_data_int    ;
+wire [RAM_SEG_COUNT-1:0]                     re_dma_ram_rd_resp_valid_int   ;
+wire [RAM_SEG_COUNT-1:0]                     re_dma_ram_rd_resp_ready_int   ;
+
 
 tx_engine_v4 #
 (
@@ -202,41 +237,34 @@ tx_engine_v4 #
    .AXIS_WQE_DATA_WIDTH    ( AXIS_WQE_DATA_WIDTH  ),
    .RAM_ADDR_WIDTH         ( RAM_ADDR_WIDTH       ),
    .DMA_ADDR_WIDTH         ( DMA_ADDR_WIDTH       ),
-   .DMA_LEN_WIDTH          ( DMA_LEN_WIDTH        ),
-   .DMA_CLIENT_LEN_WIDTH   ( DMA_CLIENT_LEN_WIDTH ),  
-   .AXIS_DESC_DATA_WIDTH   ( AXIS_DESC_DATA_WIDTH ),
+   .DMA_LEN_WIDTH          ( DMA_LEN_WIDTH        ), 
    .AXIS_TX_USER_WIDTH     ( AXIS_TX_USER_WIDTH   )
 )u_tx_engine_v4
 (
    .clk                              (  clk                               ),
    .rst                              (  rst                               ),
-   .s_axis_manager_id                (  s_axis_manager_id                 ),
-   .s_axis_manager_valid             (  s_axis_manager_valid              ),
-   .s_axis_manager_ready             (  s_axis_manager_ready              ),
-   .m_axis_wqe_req_id                (  m_axis_wqe_req_id                 ),
-   .m_axis_wqe_req_valid             (  m_axis_wqe_req_valid              ),
-   .m_axis_wqe_req_ready             (  m_axis_wqe_req_ready              ),
    .s_axis_wqe_data                  (  s_axis_wqe_data                   ),
    .s_axis_wqe_qpn                   (  s_axis_wqe_qpn                    ), 
    .s_axis_wqe_id                    (  s_axis_wqe_id                     ),
    .s_axis_wqe_valid                 (  s_axis_wqe_valid                  ),
    .s_axis_wqe_ready                 (                                    ),
-   .m_axis_dma_read_wqe_dma_addr     (  m_axis_dma_read_wqe_dma_addr      ),
-   .m_axis_dma_read_wqe_ram_addr     (  m_axis_dma_read_wqe_ram_addr      ),
-   .m_axis_dma_read_wqe_len          (  m_axis_dma_read_wqe_len           ),
-   .m_axis_dma_read_wqe_tag          (  m_axis_dma_read_wqe_tag           ),
-   .m_axis_dma_read_wqe_valid        (  m_axis_dma_read_wqe_valid         ),
-   .m_axis_dma_read_wqe_ready        (  m_axis_dma_read_wqe_ready         ),
-   .s_axis_dma_read_wqe_status_tag   (  s_axis_dma_read_wqe_status_tag    ),
-   .s_axis_dma_read_wqe_status_valid (  s_axis_dma_read_wqe_status_valid  ),
-   .m_axis_tx_data_addr              (  m_axis_tx_data_addr               ),
-   .m_axis_tx_data_len               (  m_axis_tx_data_len                ),
-   .m_axis_tx_data_tag               (  m_axis_tx_data_tag                ),
-   .m_axis_tx_data_id                (  m_axis_tx_data_id                 ),
-   .m_axis_tx_data_dest              (  m_axis_tx_data_dest               ),
-   .m_axis_tx_data_user              (  m_axis_tx_data_user               ),
-   .m_axis_tx_data_valid             (  m_axis_tx_data_valid              ),
-   .m_axis_tx_data_ready             (  m_axis_tx_data_ready              )
+   .m_axis_dma_read_wqe_dma_addr     (  m_axis_cu_dma_read_wqe_dma_addr   ),
+   .m_axis_dma_read_wqe_ram_addr     (  m_axis_cu_dma_read_wqe_ram_addr   ),
+   .m_axis_dma_read_wqe_len          (  m_axis_cu_dma_read_wqe_len        ),
+   .m_axis_dma_read_wqe_tag          (  m_axis_cu_dma_read_wqe_tag        ),
+   .m_axis_dma_read_wqe_valid        (  m_axis_cu_dma_read_wqe_valid      ),
+   .m_axis_dma_read_wqe_ready        (  m_axis_cu_dma_read_wqe_ready      ),
+   .s_axis_dma_read_wqe_status_tag   (  cu_dma_tx_desc_status_tag         ),
+   .s_axis_dma_read_wqe_status_error (  cu_dma_tx_desc_status_error       ),
+   .s_axis_dma_read_wqe_status_valid (  cu_dma_tx_desc_status_valid       ),
+   .m_axis_tx_data_addr              (  m_axis_cu_tx_data_addr            ),
+   .m_axis_tx_data_len               (  m_axis_cu_tx_data_len             ),
+   .m_axis_tx_data_tag               (  m_axis_cu_tx_data_tag             ),
+   .m_axis_tx_data_id                (  m_axis_cu_tx_data_id              ),
+   .m_axis_tx_data_dest              (  m_axis_cu_tx_data_dest            ),
+   .m_axis_tx_data_user              (  m_axis_cu_tx_data_user            ),
+   .m_axis_tx_data_valid             (  m_axis_cu_tx_data_valid           ),
+   .m_axis_tx_data_ready             (  m_axis_cu_tx_data_ready           )
 );
 
 
@@ -270,35 +298,32 @@ re_trans_module #
    .s_axis_ack_psn                   (  s_axis_ack_psn                    ),
    .s_axis_ack_valid                 (  s_axis_ack_valid                  ),
    .s_axis_ack_ready                 (  s_axis_ack_ready                  ),      
-   .m_axis_dma_read_wqe_dma_addr     (  m_axis_dma_read_wqe_dma_addr      ),
-   .m_axis_dma_read_wqe_ram_addr     (  m_axis_dma_read_wqe_ram_addr      ),
-   .m_axis_dma_read_wqe_len          (  m_axis_dma_read_wqe_len           ),
-   .m_axis_dma_read_wqe_tag          (  m_axis_dma_read_wqe_tag           ),
-   .m_axis_dma_read_wqe_valid        (  m_axis_dma_read_wqe_valid         ),
-   .m_axis_dma_read_wqe_ready        (  m_axis_dma_read_wqe_ready         ),
-   .s_axis_dma_read_wqe_status_tag   (  s_axis_dma_read_wqe_status_tag    ),
-   .s_axis_dma_read_wqe_status_valid (  s_axis_dma_read_wqe_status_valid  ),   
-   .m_axis_tx_data_addr              (  m_axis_tx_data_addr               ),
-   .m_axis_tx_data_len               (  m_axis_tx_data_len                ),
-   .m_axis_tx_data_tag               (  m_axis_tx_data_tag                ),
-   .m_axis_tx_data_id                (  m_axis_tx_data_id                 ),
-   .m_axis_tx_data_dest              (  m_axis_tx_data_dest               ),
-   .m_axis_tx_data_user              (  m_axis_tx_data_user               ),
-   .m_axis_tx_data_valid             (  m_axis_tx_data_valid              ),
-   .m_axis_tx_data_ready             (  m_axis_tx_data_ready              ), 
+   .m_axis_dma_read_wqe_dma_addr     (  m_axis_re_dma_read_wqe_dma_addr   ),
+   .m_axis_dma_read_wqe_ram_addr     (  m_axis_re_dma_read_wqe_ram_addr   ),
+   .m_axis_dma_read_wqe_len          (  m_axis_re_dma_read_wqe_len        ),
+   .m_axis_dma_read_wqe_tag          (  m_axis_re_dma_read_wqe_tag        ),
+   .m_axis_dma_read_wqe_valid        (  m_axis_re_dma_read_wqe_valid      ),
+   .m_axis_dma_read_wqe_ready        (  m_axis_re_dma_read_wqe_ready      ),
+   .s_axis_dma_read_wqe_status_tag   (  re_dma_tx_desc_status_tag         ),
+   .s_axis_dma_read_wqe_status_error (  re_dma_tx_desc_status_error       ),
+   .s_axis_dma_read_wqe_status_valid (  re_dma_tx_desc_status_valid       ),   
+   .m_axis_tx_data_addr              (  m_axis_re_tx_data_addr            ),
+   .m_axis_tx_data_len               (  m_axis_re_tx_data_len             ),
+   .m_axis_tx_data_tag               (  m_axis_re_tx_data_tag             ),
+   .m_axis_tx_data_id                (  m_axis_re_tx_data_id              ),
+   .m_axis_tx_data_dest              (  m_axis_re_tx_data_dest            ),
+   .m_axis_tx_data_user              (  m_axis_re_tx_data_user            ),
+   .m_axis_tx_data_valid             (  m_axis_re_tx_data_valid           ),
+   .m_axis_tx_data_ready             (  m_axis_re_tx_data_ready           ), 
    .m_axis_cpl_id                    (  m_axis_cpl_id                     ),
    .m_axis_cpl_valid                 (  m_axis_cpl_valid                  ),
    .m_axis_cpl_ready                 (  m_axis_cpl_ready                  )
 );
 
-axis_mux #(
+axis_dma_read_wqe_mux #(
     .RAM_ADDR_WIDTH       ( RAM_ADDR_WIDTH       ),
     .DMA_CLIENT_LEN_WIDTH ( DMA_CLIENT_LEN_WIDTH ),
-    .DMA_CLIENT_LEN_WIDTH ( DMA_CLIENT_LEN_WIDTH ),
-    .DMA_CLIENT_TAG_WIDTH ( DMA_CLIENT_TAG_WIDTH ),
-    .AXIS_TX_ID_WIDTH     ( AXIS_TX_ID_WIDTH     ),
-    .AXIS_TX_DEST_WIDTH   ( AXIS_TX_DEST_WIDTH   ),
-    .AXIS_TX_USER_WIDTH   ( AXIS_TX_USER_WIDTH   )
+    .DMA_CLIENT_TAG_WIDTH ( DMA_CLIENT_TAG_WIDTH )
 )u_m_axis_dma_read_wqe
 (
     .m_axis_cu_dma_read_wqe_dma_addr     (  m_axis_cu_dma_read_wqe_dma_addr     ),
@@ -307,33 +332,55 @@ axis_mux #(
     .m_axis_cu_dma_read_wqe_tag          (  m_axis_cu_dma_read_wqe_tag          ),
     .m_axis_cu_dma_read_wqe_valid        (  m_axis_cu_dma_read_wqe_valid        ),
     .m_axis_cu_dma_read_wqe_ready        (  m_axis_cu_dma_read_wqe_ready        ),
-    .s_axis_cu_dma_read_wqe_status_tag   (  s_axis_cu_dma_read_wqe_status_tag   ),
-    .s_axis_cu_dma_read_wqe_status_valid (  s_axis_cu_dma_read_wqe_status_valid ),
     .m_axis_re_dma_read_wqe_dma_addr     (  m_axis_re_dma_read_wqe_dma_addr     ),
     .m_axis_re_dma_read_wqe_ram_addr     (  m_axis_re_dma_read_wqe_ram_addr     ),
     .m_axis_re_dma_read_wqe_len          (  m_axis_re_dma_read_wqe_len          ),
     .m_axis_re_dma_read_wqe_tag          (  m_axis_re_dma_read_wqe_tag          ),
     .m_axis_re_dma_read_wqe_valid        (  m_axis_re_dma_read_wqe_valid        ),
     .m_axis_re_dma_read_wqe_ready        (  m_axis_re_dma_read_wqe_ready        ),
-    .s_axis_re_dma_read_wqe_status_tag   (  s_axis_re_dma_read_wqe_status_tag   ),
-    .s_axis_re_dma_read_wqe_status_valid (  s_axis_re_dma_read_wqe_status_valid ),
     .m_axis_dma_read_wqe_dma_addr        (  m_axis_dma_read_wqe_dma_addr        ),
     .m_axis_dma_read_wqe_ram_addr        (  m_axis_dma_read_wqe_ram_addr        ),
     .m_axis_dma_read_wqe_len             (  m_axis_dma_read_wqe_len             ),
     .m_axis_dma_read_wqe_tag             (  m_axis_dma_read_wqe_tag             ),
     .m_axis_dma_read_wqe_valid           (  m_axis_dma_read_wqe_valid           ),
-    .m_axis_dma_read_wqe_ready           (  m_axis_dma_read_wqe_ready           ),
-    .s_axis_dma_read_wqe_status_tag      (  s_axis_dma_read_wqe_status_tag      ),
-    .s_axis_dma_read_wqe_status_valid    (  s_axis_dma_read_wqe_status_valid    )
-)
+    .m_axis_dma_read_wqe_ready           (  m_axis_dma_read_wqe_ready           )
+);
 
+dma_wr_data_mux #
+(
+    .RAM_ADDR_WIDTH       ( RAM_ADDR_WIDTH     ),
+    .RAM_SEG_COUNT        ( RAM_SEG_COUNT      ),
+    .RAM_SEG_DATA_WIDTH   ( RAM_SEG_DATA_WIDTH ),
+    .RAM_SEG_BE_WIDTH     ( RAM_SEG_BE_WIDTH   ),
+    .RAM_SEG_ADDR_WIDTH   ( RAM_SEG_ADDR_WIDTH )
+    
+)u_dma_wr_data_mux
+(
+    .clk                         ( clk                                    ),
+    .rst                         ( rst                                    ),
+    .cu_dma_ram_wr_cmd_be        ( cu_dma_ram_wr_cmd_be                   ),
+    .cu_dma_ram_wr_cmd_addr      ( cu_dma_ram_wr_cmd_addr                 ),
+    .cu_dma_ram_wr_cmd_data      ( cu_dma_ram_wr_cmd_data                 ),
+    .cu_dma_ram_wr_cmd_valid     ( cu_dma_ram_wr_cmd_valid                ),
+    .cu_dma_ram_wr_cmd_ready     ( cu_dma_ram_wr_cmd_ready                ),
+    .cu_dma_ram_wr_done          ( cu_dma_ram_wr_done                     ),                                                                                
+    .re_dma_ram_wr_cmd_be        ( re_dma_ram_wr_cmd_be                   ),
+    .re_dma_ram_wr_cmd_addr      ( re_dma_ram_wr_cmd_addr                 ),
+    .re_dma_ram_wr_cmd_data      ( re_dma_ram_wr_cmd_data                 ),
+    .re_dma_ram_wr_cmd_valid     ( re_dma_ram_wr_cmd_valid                ),
+    .re_dma_ram_wr_cmd_ready     ( re_dma_ram_wr_cmd_ready                ),
+    .re_dma_ram_wr_done          ( re_dma_ram_wr_done                     ),                                                                       
+    .dma_ram_wr_cmd_be           ( dma_ram_wr_cmd_be                      ),
+    .dma_ram_wr_cmd_addr         ( dma_ram_wr_cmd_addr                    ),
+    .dma_ram_wr_cmd_data         ( dma_ram_wr_cmd_data                    ),
+    .dma_ram_wr_cmd_valid        ( dma_ram_wr_cmd_valid                   ),
+    .dma_ram_wr_cmd_ready        ( dma_ram_wr_cmd_ready                   ),
+    .dma_ram_wr_done             ( dma_ram_wr_done                        ),    
+    .m_axis_dma_read_wqe_tag     ( m_axis_dma_read_wqe_tag[DMA_TAG_WIDTH] ),
+    .m_axis_dma_read_wqe_valid   ( m_axis_dma_read_wqe_valid              ),
+    .m_axis_dma_read_wqe_ready   ( m_axis_dma_read_wqe_ready              )    
+);
 
-wire [RAM_SEG_COUNT*RAM_SEG_ADDR_WIDTH-1:0]  dma_ram_rd_cmd_addr_int;
-wire [RAM_SEG_COUNT-1:0]                     dma_ram_rd_cmd_valid_int;
-wire [RAM_SEG_COUNT-1:0]                     dma_ram_rd_cmd_ready_int;
-wire [RAM_SEG_COUNT*RAM_SEG_DATA_WIDTH-1:0]  dma_ram_rd_resp_data_int;
-wire [RAM_SEG_COUNT-1:0]                     dma_ram_rd_resp_valid_int;
-wire [RAM_SEG_COUNT-1:0]                     dma_ram_rd_resp_ready_int;
 
 dma_psdpram #(
     .SIZE(TX_RAM_SIZE),
@@ -541,6 +588,40 @@ dma_client_axis_source_re (
     .enable                        ( 1'b1                         )
 );
 
+tx_axis_tdata_mux #(
+    .AXIS_DATA_WIDTH    ( AXIS_DATA_WIDTH    ),
+    .AXIS_KEEP_WIDTH    ( AXIS_KEEP_WIDTH    ),
+    .AXIS_TX_ID_WIDTH   ( AXIS_TX_ID_WIDTH   ),
+    .AXIS_TX_DEST_WIDTH ( AXIS_TX_DEST_WIDTH ),
+    .AXIS_TX_USER_WIDTH ( AXIS_TX_USER_WIDTH )
+)u_tx_axis_tdata_mux
+(
+    .cu_tx_axis_tdata_int      (  cu_tx_axis_tdata_int      ),
+    .cu_tx_axis_tkeep_int      (  cu_tx_axis_tkeep_int      ),
+    .cu_tx_axis_tvalid_int     (  cu_tx_axis_tvalid_int     ),
+    .cu_tx_axis_tready_int     (  cu_tx_axis_tready_int     ),
+    .cu_tx_axis_tlast_int      (  cu_tx_axis_tlast_int      ),
+    .cu_tx_axis_tid_int        (  cu_tx_axis_tid_int        ),
+    .cu_tx_axis_tdest_int      (  cu_tx_axis_tdest_int      ),
+    .cu_tx_axis_tuser_int      (  cu_tx_axis_tuser_int      ),
+    .re_tx_axis_tdata_int      (  re_tx_axis_tdata_int      ),
+    .re_tx_axis_tkeep_int      (  re_tx_axis_tkeep_int      ),
+    .re_tx_axis_tvalid_int     (  re_tx_axis_tvalid_int     ),
+    .re_tx_axis_tready_int     (  re_tx_axis_tready_int     ),
+    .re_tx_axis_tlast_int      (  re_tx_axis_tlast_int      ),
+    .re_tx_axis_tid_int        (  re_tx_axis_tid_int        ),
+    .re_tx_axis_tdest_int      (  re_tx_axis_tdest_int      ),
+    .re_tx_axis_tuser_int      (  re_tx_axis_tuser_int      ),
+    .tx_axis_tdata_int         (  tx_axis_tdata_int         ),
+    .tx_axis_tkeep_int         (  tx_axis_tkeep_int         ),
+    .tx_axis_tvalid_int        (  tx_axis_tvalid_int        ),
+    .tx_axis_tready_int        (  tx_axis_tready_int        ),
+    .tx_axis_tlast_int         (  tx_axis_tlast_int         ),
+    .tx_axis_tid_int           (  tx_axis_tid_int           ),
+    .tx_axis_tdest_int         (  tx_axis_tdest_int         ),
+    .tx_axis_tuser_int         (  tx_axis_tuser_int         )
+);
+
 mqnic_egress #(
     .TX_CHECKSUM_ENABLE(TX_CHECKSUM_ENABLE),
     .AXIS_DATA_WIDTH(AXIS_DATA_WIDTH),
@@ -581,11 +662,11 @@ egress_inst (
     /*
      * Transmit checksum command
      */
-    .tx_csum_cmd_csum_enable(),
-    .tx_csum_cmd_csum_start(),
-    .tx_csum_cmd_csum_offset(),
-    .tx_csum_cmd_valid(),
-    .tx_csum_cmd_ready(1'b1)
+    .tx_csum_cmd_csum_enable(0),
+    .tx_csum_cmd_csum_start(0),
+    .tx_csum_cmd_csum_offset(0),
+    .tx_csum_cmd_valid(0),
+    .tx_csum_cmd_ready()
 );
 
 endmodule

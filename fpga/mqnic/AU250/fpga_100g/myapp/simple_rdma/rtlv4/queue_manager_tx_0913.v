@@ -70,12 +70,7 @@ module queue_manager_tx_0913 #
     output wire [AXIL_DATA_WIDTH-1:0]      s_axil_rdata,
     output wire [1:0]                      s_axil_rresp,
     output wire                            s_axil_rvalid,
-    input  wire                            s_axil_rready,
-
-    /*
-     * Configuration
-     */
-    input  wire                            enable
+    input  wire                            s_axil_rready
 );
 
 localparam QUEUE_RAM_BE_WIDTH = 34;

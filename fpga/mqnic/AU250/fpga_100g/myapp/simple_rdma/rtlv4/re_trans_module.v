@@ -70,7 +70,7 @@ module re_trans_module #
     output wire                             s_axis_tx_ready ,
     
     /*
-     * ack flag input
+     * tx flag input
      */    
     input  wire [WQE_INDEX_WIDTH-1:0]       s_axis_ack_id    ,
     input  wire [24-1:0]                    s_axis_ack_psn   ,
@@ -148,8 +148,8 @@ reg                       wqe_table_tx_finish_en     ;
 
 reg [WQE_INDEX_WIDTH-1:0] wqe_table_tx_start_ptr_reg;
 
-reg [WQE_INDEX_WIDTH-1:0] wqe_table_active = 0;
-reg [WQE_INDEX_WIDTH-1:0] wqe_table_data_fetched = 0;
+reg [WQE_TABLE_SIZE-1:0] wqe_table_active = 0;
+reg [WQE_TABLE_SIZE-1:0] wqe_table_data_fetched = 0;
 
 (* ram_style = "distributed", ramstyle = "no_rw_check, mlab" *)
 reg [32-1:0] wqe_table_tx_len[WQE_TABLE_SIZE-1:0];
@@ -274,25 +274,6 @@ assign m_axis_tx_data_user = m_axis_tx_data_user_reg;
 assign m_axis_tx_data_valid = m_axis_tx_data_valid_reg;
 
 integer i;
-
-initial begin
-    for (i = 0; i < WQE_TABLE_SIZE; i = i + 1) begin     
-        //wqe_table_dma_total_len[i]    = 0;
-        wqe_table_tx_len[i]           = 0;     
-        wqe_table_rip[i]              = 0;             
-        wqe_table_laddr[i]            = i;             
-        wqe_table_raddr[i]            = 0;               
-        wqe_table_dst_qpn[i]          = 0;
-        wqe_table_src_qpn[i]          = 0;        
-        wqe_table_src_port[i]         = 0;      
-        wqe_table_priority[i]         = 0;      
-        wqe_table_fence[i]            = 0;         
-        wqe_table_task_id[i]          = 0;         
-        wqe_table_data_fetched[i]     = 0;
-        //wqe_table_psn[i]              = 0; 
-        wqe_table_msn[i]              = 0;                           
-    end
-end
 
 always @* begin
     
@@ -528,6 +509,23 @@ always @(posedge clk) begin
         msn_cnt_reg_13             <= 0;   
         msn_cnt_reg_14             <= 0;   
         msn_cnt_reg_15             <= 0; 
+        
+    for (i = 0; i < WQE_TABLE_SIZE; i = i + 1) begin     
+        //wqe_table_dma_total_len[i]    = 0;
+        wqe_table_tx_len[i]           <= 0;     
+        wqe_table_rip[i]              <= 0;             
+        wqe_table_laddr[i]            <= 0;             
+        wqe_table_raddr[i]            <= 0;               
+        wqe_table_dst_qpn[i]          <= 0;
+        wqe_table_src_qpn[i]          <= 0;        
+        wqe_table_src_port[i]         <= 0;      
+        wqe_table_priority[i]         <= 0;      
+        wqe_table_fence[i]            <= 0;         
+        wqe_table_task_id[i]          <= 0;         
+        wqe_table_data_fetched[i]     <= 0;
+        //wqe_table_psn[i]             <= 0; 
+        wqe_table_msn[i]              <= 0;                           
+    end
     end
     else begin
         buf_wr_ptr_reg <= buf_wr_ptr_next;

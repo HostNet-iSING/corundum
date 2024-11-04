@@ -18,9 +18,9 @@ module tx_axis_tdata_mux #
     parameter PORTS = 1,
     
     // Streaming interface configuration
-    parameter AXIS_DATA_WIDTH = 512*2**$clog2(PORTS),
-    parameter AXIS_KEEP_WIDTH = AXIS_DATA_WIDTH/8,
-    parameter AXIS_TX_ID_WIDTH = 10,
+    parameter AXIS_DATA_WIDTH    = 512*2**$clog2(PORTS),
+    parameter AXIS_KEEP_WIDTH    = AXIS_DATA_WIDTH/8,
+    parameter AXIS_TX_ID_WIDTH   = 10,
     parameter AXIS_TX_DEST_WIDTH = $clog2(PORTS)+4,
     parameter AXIS_TX_USER_WIDTH = 232
     
@@ -59,13 +59,13 @@ module tx_axis_tdata_mux #
 );
 
 
-assign tx_axis_tdata_int    = (re_tx_axis_tvalid_int)? re_tx_axis_tdata_int  : cu_tx_axis_tdata_int ;
-assign tx_axis_tkeep_int    = (re_tx_axis_tvalid_int)? re_tx_axis_tkeep_int  : cu_tx_axis_tkeep_int ;
-assign tx_axis_tvalid_int   = (re_tx_axis_tvalid_int)? re_tx_axis_tvalid_int : cu_tx_axis_tvalid_int;
-assign re_tx_axis_tlast_int = (re_tx_axis_tvalid_int)? re_tx_axis_tlast_int  : cu_tx_axis_tlast_int ;
-assign re_tx_axis_tid_int   = (re_tx_axis_tvalid_int)? re_tx_axis_tid_int    : cu_tx_axis_tid_int   ;
-assign re_tx_axis_tdest_int = (re_tx_axis_tvalid_int)? re_tx_axis_tdest_int  : cu_tx_axis_tdest_int ;
-assign re_tx_axis_tuser_int = (re_tx_axis_tvalid_int)? re_tx_axis_tuser_int  : cu_tx_axis_tuser_int ;
+assign tx_axis_tdata_int  = (re_tx_axis_tvalid_int)? re_tx_axis_tdata_int  : cu_tx_axis_tdata_int ;
+assign tx_axis_tkeep_int  = (re_tx_axis_tvalid_int)? re_tx_axis_tkeep_int  : cu_tx_axis_tkeep_int ;
+assign tx_axis_tvalid_int = (re_tx_axis_tvalid_int)? re_tx_axis_tvalid_int : cu_tx_axis_tvalid_int;
+assign tx_axis_tlast_int  = (re_tx_axis_tvalid_int)? re_tx_axis_tlast_int  : cu_tx_axis_tlast_int ;
+assign tx_axis_tid_int    = (re_tx_axis_tvalid_int)? re_tx_axis_tid_int    : cu_tx_axis_tid_int   ;
+assign tx_axis_tdest_int  = (re_tx_axis_tvalid_int)? re_tx_axis_tdest_int  : cu_tx_axis_tdest_int ;
+assign tx_axis_tuser_int  = (re_tx_axis_tvalid_int)? re_tx_axis_tuser_int  : cu_tx_axis_tuser_int ;
 
 assign re_tx_axis_tready_int  =  tx_axis_tready_int;
 assign cu_tx_axis_tready_int  =  (re_tx_axis_tvalid_int==1'b0)? tx_axis_tready_int : 1'b0;

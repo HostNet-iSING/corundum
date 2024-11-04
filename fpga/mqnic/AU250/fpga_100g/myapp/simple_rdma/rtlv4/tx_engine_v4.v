@@ -82,12 +82,7 @@ module tx_engine_v4 #
     output wire [AXIS_TX_DEST_WIDTH-1:0]    m_axis_tx_data_dest,
     output wire [AXIS_TX_USER_WIDTH-1:0]    m_axis_tx_data_user,
     output wire                             m_axis_tx_data_valid,
-    input  wire                             m_axis_tx_data_ready,
-
-    /*
-     * Configuration
-     */
-    input  wire                             enable
+    input  wire                             m_axis_tx_data_ready
 );
 
 localparam WQE_TABLE_SIZE = WQE_INDEX_WIDTH;
