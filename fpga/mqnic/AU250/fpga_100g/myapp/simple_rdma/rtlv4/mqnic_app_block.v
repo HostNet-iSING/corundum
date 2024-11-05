@@ -472,6 +472,15 @@ module mqnic_app_block #
     output wire [IF_COUNT*AXIS_IF_RX_ID_WIDTH-1:0]        m_axis_if_rx_tid,
     output wire [IF_COUNT*AXIS_IF_RX_DEST_WIDTH-1:0]      m_axis_if_rx_tdest,
     output wire [IF_COUNT*AXIS_IF_RX_USER_WIDTH-1:0]      m_axis_if_rx_tuser,
+    
+    /*                                                                        
+     * tx flag output                                                         
+     */                                                                       
+    output wire [IF_COUNT*WQE_INDEX_WIDTH-1:0]            m_axis_tx_id      , 
+    output wire [IF_COUNT*24-1:0]                         m_axis_tx_psn     , 
+    output wire [IF_COUNT-1:0]                            m_axis_tx_valid   , 
+    input  wire [IF_COUNT-1:0]                            m_axis_tx_ready   , 
+
 
     /*
      * DDR
@@ -892,7 +901,12 @@ mqnic_app_if_tx_data_proc_v4 #
     .m_axis_if_tx_tlast     ( m_axis_if_tx_tlast    ),
     .m_axis_if_tx_tid       ( m_axis_if_tx_tid      ),
     .m_axis_if_tx_tdest     ( m_axis_if_tx_tdest    ),
-    .m_axis_if_tx_tuser     ( m_axis_if_tx_tuser    ),
+    .m_axis_if_tx_tuser     ( m_axis_if_tx_tuser    ),    
+    
+    .m_axis_tx_id           ( m_axis_tx_id          ),
+    .m_axis_tx_psn          ( m_axis_tx_psn         ),
+    .m_axis_tx_valid        ( m_axis_tx_valid       ),
+    .m_axis_tx_ready        ( m_axis_tx_ready       ),   
  
     .tx_config_ram_ren      ( tx_config_ram_ren     ),
     .tx_config_ram_wen      ( tx_config_ram_wen     ),

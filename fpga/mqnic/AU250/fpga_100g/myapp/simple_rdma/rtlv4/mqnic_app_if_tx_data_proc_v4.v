@@ -73,6 +73,14 @@ module mqnic_app_if_tx_data_proc_v4 #
     output wire [IF_COUNT*AXIS_IF_TX_DEST_WIDTH-1:0]      m_axis_if_tx_tdest,
     output wire [IF_COUNT*AXIS_TX_USER_WIDTH-1:0]         m_axis_if_tx_tuser,
     
+    /*                                                                                    
+     * tx flag output                                                                      
+     */                                                                                   
+    output wire [IF_COUNT*WQE_INDEX_WIDTH-1:0]            m_axis_tx_id      , 
+    output wire [IF_COUNT*24-1:0]                         m_axis_tx_psn     , 
+    output wire [IF_COUNT-1:0]                            m_axis_tx_valid   , 
+    input  wire [IF_COUNT-1:0]                            m_axis_tx_ready   , 
+    
     /*
      * Config ram interface (w/r from data proc)
      */  
@@ -296,7 +304,11 @@ begin: if_data_proc
     assign m_axis_if_tx_tdest[(i+1)*AXIS_IF_TX_DEST_WIDTH-1-:AXIS_IF_TX_DEST_WIDTH] = (first_flag)? s_axis_if_tx_tdest[(i+1)*AXIS_IF_TX_DEST_WIDTH-1-:AXIS_IF_TX_DEST_WIDTH]           : (r_if_tx_cnt[(i+1)*16-1-:16] == 16'd1)? r_axis_if_tx_tdest[(i+1)*AXIS_IF_TX_DEST_WIDTH-1-:AXIS_IF_TX_DEST_WIDTH]                                   : (r1_axis_if_tx_tlast[i])? r1_axis_if_tx_tdest[(i+1)*AXIS_IF_TX_DEST_WIDTH-1-:AXIS_IF_TX_DEST_WIDTH]            : r_axis_if_tx_tdest[(i+1)*AXIS_IF_TX_DEST_WIDTH-1-:AXIS_IF_TX_DEST_WIDTH]                                                        ;
     assign m_axis_if_tx_tuser[(i+1)*AXIS_TX_USER_WIDTH-1-:AXIS_TX_USER_WIDTH]       = {AXIS_TX_USER_WIDTH{1'b0}};
 
-    assign pipeline_busy[i] = (r_if_tx_cnt_1d[(i+1)*16-1-:16] == PACK_LEN-1 || r_if_tx_cnt_2d[(i+1)*16-1-:16] == PACK_LEN-1)?1'b1:1'b0;
+    assign pipeline_busy[i] = (r_if_tx_cnt_1d[(i+1)*16-1-:16] == PACK_LEN-1 || r_if_tx_cnt_2d[(i+1)*16-1-:16] == PACK_LEN-1)?1'b1:1'b0;     
+    
+    assign m_axis_tx_id[(i+1)*WQE_INDEX_WIDTH-1-:WQE_INDEX_WIDTH] = m_axis_if_tx_tid[(i+1)*AXIS_IF_TX_ID_WIDTH-1-:AXIS_IF_TX_ID_WIDTH];  
+    assign m_axis_tx_psn[(i+1)*24-1-:24]                          = r_tx_header[(i+1)*624-128-1-:24]; 
+    assign m_axis_tx_valid[i]                                     = m_axis_tx_ready[i] && m_axis_if_tx_tlast[i];
 
 end
 endgenerate

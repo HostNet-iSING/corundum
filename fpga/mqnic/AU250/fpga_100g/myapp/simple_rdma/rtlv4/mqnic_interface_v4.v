@@ -420,6 +420,14 @@ module mqnic_interface_v4 #
     output wire [PORTS-1:0]                             s_axis_app_direct_rx_tready,
     input  wire [PORTS-1:0]                             s_axis_app_direct_rx_tlast,
     input  wire [PORTS*AXIS_RX_USER_WIDTH-1:0]          s_axis_app_direct_rx_tuser,
+    
+    /*                                                                                    
+     * tx flag input                                                                      
+     */                                                                                   
+    input  wire [WQE_INDEX_WIDTH-1:0]                   s_axis_tx_id   , 
+    input  wire [24-1:0]                                s_axis_tx_psn  , 
+    input  wire                                         s_axis_tx_valid, 
+    output wire                                         s_axis_tx_ready, 
 
     /*
      * Transmit data output
@@ -908,14 +916,6 @@ wire [QUEUE_INDEX_WIDTH-1:0]        m_axis_wqe_qpn  ;
 wire [WQE_INDEX_WIDTH-1:0]          m_axis_wqe_id   ;
 wire                                m_axis_wqe_valid;
 wire                                m_axis_wqe_ready;
-                                    
-/*                                                                                    
- * tx flag input                                                                      
- */                                                                                   
-wire [WQE_INDEX_WIDTH-1:0]          s_axis_tx_id    ; 
-wire [24-1:0]                       s_axis_tx_psn   ; 
-wire                                s_axis_tx_valid ; 
-wire                                s_axis_tx_ready ; 
                                     
 /*                                  
  * ack flag input                   
