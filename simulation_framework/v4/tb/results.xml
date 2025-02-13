@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1732073556" />
+    <testcase name="run_test_nic" classname="test_mqnic_core_pcie_us" file="C:\Users\PC\Desktop\simulation_framework\v3\tb\test_mqnic_core_pcie_us.py" lineno="434" time="29.75598382949829" sim_time_ns="55844.001" ratio_time="1876.731796871042" />
+  </testsuite>
+</testsuites>
